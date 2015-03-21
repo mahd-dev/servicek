@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <!-- 
-Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.2
+Template Name: app - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.2
 Version: 3.6.3
 Author: KeenThemes
 Website: http://www.keenthemes.com/
 Contact: support@keenthemes.com
 Follow: www.twitter.com/keenthemes
 Like: www.facebook.com/keenthemes
-Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+Purchase: http://themeforest.net/item/app-responsive-admin-dashboard-template/4021469?ref=keenthemes
 License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
 -->
-<!--[if IE 8]> <html lang="en" class="ie8 no-js" data-ng-app="MetronicApp"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js" data-ng-app="MetronicApp"> <![endif]-->
+<!--[if IE 8]> <html lang="en" class="ie8 no-js" data-ng-app="appApp"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js" data-ng-app="appApp"> <![endif]-->
 <!--[if !IE]><!-->
-<html lang="en" data-ng-app="MetronicApp">
+<html lang="en" data-ng-app="appApp">
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
-<title data-ng-bind="'Metronic AngularJS | ' + $state.current.data.pageTitle"></title>
+<title data-ng-bind="'app AngularJS | ' + $state.current.data.pageTitle"></title>
 
 <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,10 +27,10 @@ License: You must have a valid license purchased only from themeforest(the above
 
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
-<link href="../assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-<link href="../assets/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
-<link href="../assets/plugins/bootstrap/css/bootstrap-rtl.min.css" rel="stylesheet" type="text/css"/>
-<link href="../assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+<link href="../../assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="../../assets/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+<link href="../../assets/plugins/bootstrap/css/bootstrap-rtl.min.css" rel="stylesheet" type="text/css"/>
+<link href="../../assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 <!-- END GLOBAL MANDATORY STYLES -->
 
 <!-- BEGIN DYMANICLY LOADED CSS FILES(all plugin and page related styles must be loaded between GLOBAL and THEME css files ) -->
@@ -39,14 +39,14 @@ License: You must have a valid license purchased only from themeforest(the above
 
 <!-- BEGIN THEME STYLES -->
 <!-- DOC: To use 'rounded corners' style just load 'components-rounded.css' stylesheet instead of 'components.css' in the below style tag -->
-<link href="../assets/css/components-rounded-rtl.css" id="style_components" rel="stylesheet" type="text/css"/>
-<link href="../assets/css/plugins-rtl.css" rel="stylesheet" type="text/css"/>
-<link href="../assets/css/layout-rtl.css" rel="stylesheet" type="text/css"/>
-<link href="../assets/css/themes/default-rtl.css" rel="stylesheet" type="text/css" id="style_color"/>
-<link href="../assets/css/custom-rtl.css" rel="stylesheet" type="text/css"/>
+<link href="../../assets/css/components-rounded-rtl.css" id="style_components" rel="stylesheet" type="text/css"/>
+<link href="../../assets/css/plugins-rtl.css" rel="stylesheet" type="text/css"/>
+<link href="../../assets/css/layout-rtl.css" rel="stylesheet" type="text/css"/>
+<link href="../../assets/css/themes/default-rtl.css" rel="stylesheet" type="text/css" id="style_color"/>
+<link href="../../assets/css/custom-rtl.css" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 
-<link rel="shortcut icon" href="http://www.keenthemes.com/preview/metronic/theme_rtl/templates/admin4/angularjs/favicon.ico"/>
+<link rel="shortcut icon" href="http://www.keenthemes.com/preview/app/theme_rtl/templates/admin4/angularjs/favicon.ico"/>
 </head>
 <!-- END HEAD -->
 
@@ -108,44 +108,44 @@ License: You must have a valid license purchased only from themeforest(the above
 
 	<!-- BEGIN CORE JQUERY PLUGINS -->
 	<!--[if lt IE 9]>
-	<script src="../assets/plugins/respond.min.js"></script>
-	<script src="../assets/plugins/excanvas.min.js"></script> 
+	<script src="../../assets/plugins/respond.min.js"></script>
+	<script src="../../assets/plugins/excanvas.min.js"></script> 
 	<![endif]-->
-	<script src="../assets/plugins/jquery.min.js" type="text/javascript"></script>
-	<script src="../assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
-	<script src="../assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="../assets/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
-	<script src="../assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-	<script src="../assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-	<script src="../assets/plugins/jquery.cokie.min.js" type="text/javascript"></script>
-	<script src="../assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+	<script src="../../assets/plugins/jquery.min.js" type="text/javascript"></script>
+	<script src="../../assets/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+	<script src="../../assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../../assets/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+	<script src="../../assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+	<script src="../../assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+	<script src="../../assets/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+	<script src="../../assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
 	<!-- END CORE JQUERY PLUGINS -->
 
 	<!-- BEGIN CORE ANGULARJS PLUGINS -->
-	<script src="../assets/plugins/angularjs/angular.min.js" type="text/javascript"></script>	
-	<script src="../assets/plugins/angularjs/angular-sanitize.min.js" type="text/javascript"></script>
-	<script src="../assets/plugins/angularjs/angular-touch.min.js" type="text/javascript"></script>	
-	<script src="../assets/plugins/angularjs/plugins/angular-ui-router.min.js" type="text/javascript"></script>
-	<script src="../assets/plugins/angularjs/plugins/ocLazyLoad.min.js" type="text/javascript"></script>
-	<script src="../assets/plugins/angularjs/plugins/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
+	<script src="../../assets/plugins/angularjs/angular.min.js" type="text/javascript"></script>	
+	<script src="../../assets/plugins/angularjs/angular-sanitize.min.js" type="text/javascript"></script>
+	<script src="../../assets/plugins/angularjs/angular-touch.min.js" type="text/javascript"></script>	
+	<script src="../../assets/plugins/angularjs/plugins/angular-ui-router.min.js" type="text/javascript"></script>
+	<script src="../../assets/plugins/angularjs/plugins/ocLazyLoad.min.js" type="text/javascript"></script>
+	<script src="../../assets/plugins/angularjs/plugins/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
 	<!-- END CORE ANGULARJS PLUGINS -->
 	
 	<!-- BEGIN APP LEVEL ANGULARJS SCRIPTS -->
-	<script src="http://www.keenthemes.com/preview/metronic/theme_rtl/templates/admin4/angularjs/js/app.js" type="text/javascript"></script>
-	<script src="http://www.keenthemes.com/preview/metronic/theme_rtl/templates/admin4/angularjs/js/directives.js" type="text/javascript"></script>
+	<script src="http://www.keenthemes.com/preview/app/theme_rtl/templates/admin4/angularjs/js/app.js" type="text/javascript"></script>
+	<script src="http://www.keenthemes.com/preview/app/theme_rtl/templates/admin4/angularjs/js/directives.js" type="text/javascript"></script>
 	<!-- END APP LEVEL ANGULARJS SCRIPTS -->
 
 	<!-- BEGIN APP LEVEL JQUERY SCRIPTS -->
-	<script src="../assets/scripts/metronic.js" type="text/javascript"></script>
-	<script src="../assets/scripts/layout.js" type="text/javascript"></script>
-	<script src="../assets/scripts/demo.js" type="text/javascript"></script>  
+	<script src="../../assets/scripts/app.js" type="text/javascript"></script>
+	<script src="../../assets/scripts/layout.js" type="text/javascript"></script>
+	<script src="../../assets/scripts/demo.js" type="text/javascript"></script>  
 	<!-- END APP LEVEL JQUERY SCRIPTS -->
 
 	<script type="text/javascript">
-		/* Init Metronic's core jquery plugins and layout scripts */
+		/* Init app's core jquery plugins and layout scripts */
 		$(document).ready(function() {   
-			Metronic.init(); // Run metronic theme
-			Metronic.setAssetsPath('../assets/'); // Set the assets folder path			
+			app.init(); // Run app theme
+			app.setAssetsPath('../../assets/'); // Set the assets folder path			
 		});
 	</script>
 	<!-- END JAVASCRIPTS -->
