@@ -2,7 +2,7 @@
 
 	// global init
 
-    session_start();
+	session_start();
 
     define("cdn","http".(!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "off"?"s":"")."://".$_SERVER["HTTP_HOST"]."/assets");
     define("url_root","http".(!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "off"?"s":"")."://".$_SERVER["HTTP_HOST"]);

@@ -196,6 +196,15 @@ Page Header
   /* Language */
   /* Dark version */
 }
+.page-header.navbar .top-menu .navbar-nav > li.btn{
+  padding : 0 10px 0 0;
+}
+.page-header.navbar .top-menu .navbar-nav > li.btn > a{
+  padding : 28px 12px 27px 12px;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+}
 .page-header.navbar .top-menu .navbar-nav > li.dropdown {
   margin: 0px;
   padding: 0px;
@@ -673,6 +682,9 @@ Page Header
     margin: 1px 0 0 0;
     padding: 0;
     float: left;
+  }
+  .page-header.navbar .top-menu .navbar-nav > li.btn > a {
+    padding: 28px 12px 26px 12px;
   }
   .page-header.navbar .top-menu .navbar-nav > li.dropdown > .dropdown-toggle {
     padding: 29px 8px 25px 8px;
@@ -1651,7 +1663,7 @@ Page footer
 }
 .scroll-to-top > i {
   display: inline-block;
-  color: #687991;
+  color: #7D6891;
   font-size: 32px;
   opacity: 0.7;
   filter: alpha(opacity=70);

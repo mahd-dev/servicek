@@ -3,7 +3,6 @@ DirectoryIndex router.php
 
 # Rewrite all virtual and php queries to router
 RewriteEngine on
-
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f [or]
 RewriteCond %{REQUEST_FILENAME} \.php$
@@ -36,4 +35,4 @@ ErrorDocument 500 /router.php?page=500
 </Files>
 
 # Prevent directory listings
-Options All -Indexes
+#Options All -Indexes

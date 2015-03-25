@@ -32,6 +32,13 @@ Page Header
   /* Language */
   /* Dark version */
 }
+.page-header.navbar .top-menu .navbar-nav > li.btn > a {
+  color: #b9a2d0;
+  background-color: rgba(0,0,0,0);
+}
+.page-header.navbar .top-menu .navbar-nav > li.btn > a:hover {
+  background-color: #463057;
+}
 .page-header.navbar .top-menu .navbar-nav > li.dropdown .dropdown-toggle:hover {
   background-color: #463057;
 }
@@ -429,14 +436,17 @@ Page Footer
 @media (max-width: 767px) {
   /* 767px */
   .page-header.navbar {
-    background: #4a2d5f;
+    background: #3a1f4d;
     border-bottom: 1px solid #523269;
     /* Top menu */
   }
   .page-header.navbar .page-top {
-    background: #4a2d5f;
+    background: #3a1f4d;
   }
   .page-header.navbar .top-menu .navbar-nav > li.dropdown > .dropdown-toggle:hover {
+    background-color: #472b5c;
+  }
+  .page-header.navbar .top-menu .navbar-nav > li.btn > a:hover {
     background-color: #472b5c;
   }
 }

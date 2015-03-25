@@ -1,5 +1,5 @@
 page_script({
 	init: function () {
-		console.log("home page init");
+		console.log("404 page init");
 	}
 });
