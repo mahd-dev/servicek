@@ -45,7 +45,7 @@
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 
-<body class="page-header-fixed page-sidebar-closed-hide-logo">
+<body class="page-header-fixed">
 	<!-- BEGIN HEADER -->
 	<div class="page-header navbar navbar-fixed-top">
 		<!-- BEGIN HEADER INNER -->
@@ -107,6 +107,11 @@
 	<div class="page-container">
 		<!-- BEGIN SIDEBAR -->
 		<div class="page-sidebar-wrapper">
+			<!--
+			<div class="page-sidebar">
+				aaa
+			</div>
+			-->
 			<div class="page-sidebar navbar-collapse collapse">
 				<!-- BEGIN SIDEBAR MENU -->
 				<ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
@@ -118,6 +123,9 @@
 					</li>
 				</ul>
 				<!-- END SIDEBAR MENU -->
+			</div>
+			<div class="page-sidebar">
+				aaa
 			</div>
 		</div>
 		<!-- END SIDEBAR -->
@@ -162,7 +170,6 @@
 	<!-- END CORE PLUGINS -->
 	<script src="<?php echo cdn;?>/scripts/app.js" type="text/javascript"></script>
 	<script src="<?php echo cdn;?>/scripts/layout.js" type="text/javascript"></script>
-	<script src="<?php echo cdn;?>/scripts/demo.js" type="text/javascript"></script>
 
 	<script src="<?php echo url_root;?>/master/script_1.js" type="text/javascript"></script>
 	<script>

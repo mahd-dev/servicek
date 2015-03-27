@@ -9,15 +9,15 @@
 			<h3>Oops! You're lost.</h3>
 			<p>
 				We can not find the page you're looking for.<br/>
-				<a href="index.html">
+				<a href="<?php echo url_root;?>" class="ajaxify">
 				Return home </a>
 				or try the search bar below.
 			</p>
-			<form action="extra_404_option1.html#">
+			<form id="search_form">
 				<div class="input-group input-medium">
-					<input type="text" class="form-control" placeholder="keyword...">
+					<input type="text" class="form-control query" placeholder="keyword...">
 					<span class="input-group-btn">
-					<button type="submit" class="btn blue"><i class="fa fa-search"></i></button>
+					<button type="submit" class="btn btn-default"><i class="icon-magnifier"></i></button>
 					</span>
 				</div>
 				<!-- /input-group -->

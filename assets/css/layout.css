@@ -1043,10 +1043,11 @@ Page sidebar
 
 @media (min-width: 992px) {
   /* 992px */
+  .page-sidebar-wrapper{
+    position: absolute;
+  }
   .page-sidebar {
     width: 235px;
-    float: left;
-    position: absolute;
     margin-right: -100%;
     margin-bottom: 10px;
   }
@@ -1421,6 +1422,11 @@ Page content
   margin-top: 0px;
   padding: 0px;
   font-size: 110% !important;
+  transition: all 0.08s;
+}
+.page-content.animate {
+  opacity: 0.25;
+  transform: scale(0.98,0.985);
 }
 .page-full-width .page-content {
   margin-left: 0px !important;
@@ -1431,10 +1437,9 @@ Page content
   /* Page content */
   .page-content-wrapper {
     float: left;
-    width: 100%;
+    margin-left: 235px;
   }
   .page-content-wrapper .page-content {
-    margin-left: 235px;
     margin-top: 0px;
     min-height: 600px;
     padding: 10px 0 0 20px;

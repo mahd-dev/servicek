@@ -1,5 +1,9 @@
 page_script({
 	init: function () {
-		console.log("404 page init");
+		// process search form submit event
+		$("#search_form").submit(function (e) {
+			e.preventDefault();
+			Layout.ajaxify(location.origin + "/search/" + $(this).find("input.query").val());
+		});
 	}
 });

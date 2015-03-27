@@ -17,3 +17,54 @@ Rounded Portlets
 	border-radius: 0px 0px 4px 4px !important;
 }
 */
+
+/***
+Masonry
+***/
+.masonry-container {
+    margin: 15px 0;
+    padding: 0;
+    -moz-column-gap: 25px;
+    -webkit-column-gap: 25px;
+    column-gap: 25px;
+}
+
+.masonry-item {
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+@media only screen and (min-width: 300px) {
+    .masonry-container {
+        -moz-column-count: 1;
+        -webkit-column-count: 1;
+        column-count: 1;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .masonry-container {
+        -moz-column-count: 2;
+        -webkit-column-count: 2;
+        column-count: 2;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .masonry-container {
+        -moz-column-count: 3;
+        -webkit-column-count: 3;
+        column-count: 3;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .masonry-container {
+        -moz-column-count: 4;
+        -webkit-column-count: 4;
+        column-count: 4;
+    }
+}

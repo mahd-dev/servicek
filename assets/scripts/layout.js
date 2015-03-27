@@ -445,10 +445,14 @@ var Layout = function () {
 				data: params,
 				dataType: "html",
 				success: function (res) {
-					if(prevent_history_state != true) history.pushState({href:href,method:method,params:params,container:container.selector}, document.title, href);
-					container.html(res);
-					Layout.fixContentHeight(); // fix content height
-					app.initAjax(); // initialize core stuff
+					container.addClass("animate");
+					setTimeout(function(){
+						container.html(res);
+						container.removeClass("animate");
+						if(prevent_history_state != true) history.pushState({href:href,method:method,params:params,container:container.selector}, document.title, href);
+						Layout.fixContentHeight(); // fix content height
+						app.initAjax(); // initialize core stuff
+					},50);
 				},
 				error: function (xhr, ajaxOptions, thrownError) {}
 			});
