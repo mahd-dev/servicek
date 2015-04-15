@@ -1,5 +1,5 @@
 <!-- custom page styles -->
-<link href="<?php echo url_root;?>/pages/home/style_1.css" rel="stylesheet" type="text/css">
+<link href="<?php echo url_root;?>/pages/home/style.css" rel="stylesheet" type="text/css">
 
 <div class="row">
 	<div class="col-md-12">
@@ -27,11 +27,6 @@
 							Tools <?php echo $i;?> </span>
 							<span class="caption-helper">more samples...</span>
 						</div>
-						<div class="tools">
-							<a href="portlet_general2.html#portlet-config" data-toggle="modal" class="config"></a>
-							<a href="javascript:;" class="fullscreen"></a>
-							<a href="portlet_general2.html" class="remove"></a>
-						</div>
 					</div>
 					<div class="portlet-body">
 						<h4>Heading text goes here...</h4>
@@ -51,7 +46,8 @@
 		</div>
 	</div>
 </div>
+<!-- plugins -->
+<script type="text/javascript" src="<?php echo cdn;?>/plugins/salvattore.min.js"></script>
 
-<script src="<?php echo cdn;?>/plugins/salvattore.min.js" type="text/javascript"></script>
 <!-- custom page scripts -->
 <script src="<?php echo url_root;?>/pages/home/script_1.js" type="text/javascript"></script>

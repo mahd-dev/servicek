@@ -4,5 +4,5 @@
 
 	// select and display right view
 	// ...
-	include "view_1.php";
+	include "view_2.php";
 ?>

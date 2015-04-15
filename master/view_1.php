@@ -171,6 +171,10 @@
 	<script src="<?php echo cdn;?>/scripts/app.js" type="text/javascript"></script>
 	<script src="<?php echo cdn;?>/scripts/layout.js" type="text/javascript"></script>
 
+	<!-- BEGIN PLUGINS -->
+	<script type="text/javascript" src="<?php echo cdn;?>/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
+	<!-- END PLUGINS -->
+	
 	<script src="<?php echo url_root;?>/master/script_1.js" type="text/javascript"></script>
 	<script>
 		jQuery(document).ready(function () {
