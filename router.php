@@ -21,12 +21,32 @@
 
 		case "":
 			$req_page = "pages/home/controller.php";break;
-
+        case "search":
+			$req_page = "pages/search/controller.php";break;
+        case "login":
+			$req_page = "pages/login/controller.php";break;
+        case "register":
+			$req_page = "pages/register/controller.php";break;
+        case "account":
+			$req_page = "pages/account/controller.php";break;
+        case "job":
+			$req_page = "pages/job/controller.php";break;
+        case "company":
+			$req_page = "pages/company/controller.php";break;
+        case "product":
+			$req_page = "pages/product/controller.php";break;
+        case "service":
+			$req_page = "pages/service/controller.php";break;
+        case "post":
+			$req_page = "pages/post/controller.php";break;
+        
+        /*
 		case "page_requires_parameters": // like http://loop.tn/post/123456789/897654321
 			if(isset($fullpage[1])) $_GET["param_1"]=$url[1];
 			if(isset($fullpage[2])) $_GET["param_2"]=$url[2];
 			$req_page = "pages/page/controller.php";break;
-
+        */
+        
 		case "sitemap.xml":
 			die(include"seo/sitemap.php");break;
 

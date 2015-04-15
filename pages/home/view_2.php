@@ -46,25 +46,23 @@
 						<div class="caption">
 							<i class="icon-puzzle font-grey-gallery"></i>
 							<span class="caption-subject bold font-grey-gallery uppercase">
-							Tools <?php echo $i;?> </span>
-							<span class="caption-helper">more samples...</span>
+							Offer <?php echo $i;?> </span>
+							<span class="caption-helper">Company name</span>
 						</div>
 						<div class="tools">
-							<a href="portlet_general2.html#portlet-config" data-toggle="modal" class="config"></a>
-							<a href="javascript:;" class="fullscreen"></a>
-							<a href="portlet_general2.html" class="remove"></a>
+							<a class="config"></a>
 						</div>
 					</div>
 					<div class="portlet-body">
-						<h4>Heading text goes here...</h4>
 						<p>
 							 <?php
-								$max = rand(20,70);
+								$max = rand(10,40);
 								for($j=0;$j<$max;$j++){
-									echo "text ";
+									echo "offer text ";
 								}
 							 ?>
 						</p>
+                        <img src="http://placehold.it/300x200" width="100%" style="max-height:300px;"/>
 					</div>
 				</div>
 
