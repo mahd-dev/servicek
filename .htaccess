@@ -6,7 +6,7 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f [or]
 RewriteCond %{REQUEST_FILENAME} \.php$
-RewriteRule ^(.*)$ router\.php [L,QSA,NE]
+RewriteRule ^(.*)$ main\.php [L,QSA,NE]
 
 # Caching schema
 #<FilesMatch "\.(jpg|jpeg|png|js|css)$">
