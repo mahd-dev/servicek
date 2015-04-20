@@ -68,7 +68,7 @@ $(document).ready(function(){
 
         $('#watch').countDown({
             targetDate: {
-                'day': 		1,
+                'day': 		10,
                 'month': 	5,
                 'year': 	2015,
                 'hour': 	0,
