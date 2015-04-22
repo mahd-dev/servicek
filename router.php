@@ -1,5 +1,26 @@
 <?php
 
+<<<<<<< HEAD
+	// global init
+
+	session_start();
+
+    define("cdn","http".(!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "off"?"s":"")."://".$_SERVER["HTTP_HOST"]."/assets");
+    define("url_root","http".(!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "off"?"s":"")."://".$_SERVER["HTTP_HOST"]);
+	define("srv_root",$_SERVER['DOCUMENT_ROOT']);
+
+	define("lang",(isset($_COOKIE["lang"]) && $_COOKIE["lang"]!=""?$_COOKIE["lang"]:"fr"));
+	define("rtl",(lang=="ar"?TRUE:FALSE));
+
+	// Router
+
+=======
+	// preparing url
+>>>>>>> loop.tn/master
+	$url=explode("/",reset(explode("?",strtolower($_SERVER["REQUEST_URI"]))));
+	array_shift($url);
+
+	// selecting page based on url
 	switch($url[0]){
         
 		case "":
