@@ -63,16 +63,13 @@
 
         public static function login($login,$password){
             global $db;
+            
+            // required login code
+            /*
+            on login success return logged in user object
+            else return string error message
+            */
         }
-        /*
-        public function fnct($param){
-            global $db;
-
-        }
-        public static function static_fnct($param){
-            global $db;
-
-        }
-        */
+        
     }
 ?>
