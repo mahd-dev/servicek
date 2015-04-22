@@ -13,7 +13,7 @@
 	<meta content="" name="description" />
 	<meta content="" name="author" />
 	<!-- pace -->
-	<script data-pace-options='{ "ajax": true }' src="<?php echo cdn;?>/plugins/pace/pace.min.js"></script>
+	<script src="<?php echo cdn;?>/plugins/pace/pace.min.js"></script>
 	<link href="<?php echo cdn;?>/plugins/pace/themes/pace-theme-minimal<?php echo(rtl?"-rtl":"");?>.css" rel="stylesheet" />
 
 	<!-- BEGIN GLOBAL MANDATORY STYLES -->
