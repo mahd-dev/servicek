@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<!-- custom page styles -->
-=======
->>>>>>> loop.tn/master
 <link href="<?php echo url_root;?>/pages/service/style.css" rel="stylesheet" type="text/css">
 
 <div class="row">
@@ -10,9 +6,5 @@
 	</div>
 </div>
 
-<<<<<<< HEAD
-<!-- custom page scripts -->
-=======
 <!-- custom page script -->
->>>>>>> loop.tn/master
 <script src="<?php echo url_root;?>/pages/service/script_1.js" type="text/javascript"></script>

@@ -1,7 +1,12 @@
 <?php
 
+	// preparing url
+	$url=explode("/",reset(explode("?",strtolower($_SERVER["REQUEST_URI"]))));
+	array_shift($url);
+
+	// selecting page based on url
 	switch($url[0]){
-        
+
 		case "":
 			$req_page = "pages/home/controller.php";break;
         case "search":
@@ -38,7 +43,7 @@
         
 		case "sitemap.xml":
 			die(include"seo/sitemap.php");break;
-        
+
 		default:
 			$req_page="pages/404/controller.php"; break;
 	}
