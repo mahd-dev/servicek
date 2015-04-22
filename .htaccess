@@ -1,5 +1,5 @@
 # Defining directory index
-DirectoryIndex router.php
+DirectoryIndex main.php
 
 # Rewrite all virtual and php queries to router
 RewriteEngine on
