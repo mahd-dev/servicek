@@ -101,13 +101,13 @@ DROP TABLE IF EXISTS `company_seat`;
 CREATE TABLE `company_seat` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_company` bigint(20) DEFAULT NULL,
+  `name` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `type` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
   `geolocation` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
   `address` varchar(1023) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `city` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tel` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
   `mobile` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `timing` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
   `creation_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -132,14 +132,13 @@ DROP TABLE IF EXISTS `job`;
 CREATE TABLE `job` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` varchar(4095) COLLATE utf8_unicode_ci DEFAULT NULL,
   `geolocation` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
   `address` varchar(1023) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `city` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tel` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
   `mobile` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `timing` varchar(511) COLLATE utf8_unicode_ci DEFAULT NULL,
   `creation_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -299,4 +298,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-22 15:32:03
+-- Dump completed on 2015-04-23  2:11:15
