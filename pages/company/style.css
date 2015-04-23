@@ -1,1 +1,11 @@
 /** view_1 **/
+ html, body, #map-canvas {
+        height: 300px;
+        margin: 0px;
+        padding: 0px;
+        width:100%;
+      }
+
+      .portlet.light{
+      	padding-bottom: 30px!important;
+      }

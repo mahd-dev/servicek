@@ -64,11 +64,18 @@
         public static function login($login,$password){
             global $db;
             
-            // required login code
-            /*
-            on login success return logged in user object
-            else return string error message
-            */
+           $q=$con->query("select id,password from users where (login = '".$login."')");
+            if($q->num_rows==0){
+                return "login_error";
+            }else{
+                $r=$q->fetch_row();
+                if ($password != $r['password']) {
+                    return "password_error";
+                }
+                else{
+                    return $r['id']
+                }
+            }
         }
         
     }
