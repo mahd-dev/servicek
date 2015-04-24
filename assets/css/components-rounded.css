@@ -3767,7 +3767,7 @@ Portlets
 .portlet > .portlet-title > .nav-tabs {
   background: none;
   margin: 0;
-  float: right;
+  float: left;
   display: inline-block;
   border: 0;
 }
