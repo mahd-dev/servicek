@@ -283,64 +283,86 @@
 													<!--BEGIN TABS-->
 															<div class="tab-content">
 																<div class="tab-pane active" id="tab_2_3">
-																	<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 320px;"><div class="scroller" style="height: 320px; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2" data-initialized="1">
-																		<ul class="feeds">
-																			<li>
-																				<div class="col1">
-																					<div class="cont">
-																						<div class="cont-col1">
-																							<div class="label label-sm label-success">
-																								<i class="fa fa-bell-o"></i>
-																							</div>
-																						</div>
-																						<div class="cont-col2">
-																							<div class="desc">
-																								 You have 4 pending tasks. <span class="label label-sm label-info">
-																								Take action <i class="fa fa-share"></i>
-																								</span>
-																							</div>
-																						</div>
+																	<div  style="position: relative; overflow: hidden; width: auto; height: 320px;"><div style="height: 320px; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2" data-initialized="1">
+																		<form role="form" class="col-md-6">
+																			<div class="form-body">
+																				<div class="form-group">
+																					<label>Nom complet</label>
+																					<div class="input-group">
+																						<span class="input-group-addon input-left">
+																						<i class="fa fa-user"></i>
+																						</span>
+																						<input type="text" class="form-control" placeholder="Nom complet" name="displayname">
 																					</div>
 																				</div>
-																				<div class="col2">
-																					<div class="date">
-																						 Just now
+																				<div class="form-group">
+																					<label>Adresse Email</label>
+																					<div class="input-group">
+																						<span class="input-group-addon">
+																						<i class="fa fa-envelope"></i>
+																						</span>
+																						<input type="text" class="form-control" placeholder="Adresse Email" name="email">
 																					</div>
 																				</div>
-																			</li>
-																		
-																		</ul>
+																				
+																				<div class="form-group">
+																					<label>Téléphone</label>
+																					<div class="input-group">
+																						<span class="input-group-addon input-left">
+																						<i class="fa fa-phone"></i>
+																						</span>
+																						<input type="text" class="form-control" placeholder="Téléphone" name="mobile">
+																					</div>
+																				</div>
+																				
+																			</div>
+																			<div class="form-actions">
+																				<button type="submit" class="btn blue">Submit</button>
+																				<button type="button" class="btn default">Cancel</button>
+																			</div>
+																		</form>
 																	</div>
 																	<div class="slimScrollBar" style="width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; height: 159.750390015601px; background: rgb(215, 220, 226);"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(234, 234, 234);"></div></div>
 																</div>
 																<div class="tab-pane" id="tab_2_4">
 																	<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 320px;"><div class="scroller" style="height: 320px; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2" data-initialized="1">
-																		<ul class="feeds">
-																			<li>
-																				<div class="col1">
-																					<div class="cont">
-																						<div class="cont-col1">
-																							<div class="label label-sm label-success">
-																								<i class="fa fa-bell-o"></i>
-																							</div>
-																						</div>
-																						<div class="cont-col2">
-																							<div class="desc">
-																								 You have 4 pending tasks. <span class="label label-sm label-info">
-																								Take action <i class="fa fa-share"></i>
-																								</span>
-																							</div>
-																						</div>
+																		<form role="form" class="col-md-6">
+																			<div class="form-body">
+																				<div class="form-group">
+																					<label>Ancien mot de passe</label>
+																					<div class="input-group">
+																						<span class="input-group-addon input-left">
+																						<i class="fa fa-user"></i>
+																						</span>
+																						<input type="text" class="form-control" placeholder="Ancien mot de passe" name="old_password">
 																					</div>
 																				</div>
-																				<div class="col2">
-																					<div class="date">
-																						 Just now
+																				<div class="form-group">
+																					<label>Nouveau mot de passe</label>
+																					<div class="input-group">
+																						<span class="input-group-addon">
+																						<i class="fa fa-envelope"></i>
+																						</span>
+																						<input type="text" class="form-control" placeholder="Nouveau mot de passe" name="new_password">
 																					</div>
 																				</div>
-																			</li>
-																		
-																		</ul>
+																				
+																				<div class="form-group">
+																					<label>Confirmé le nouveau mot de passe</label>
+																					<div class="input-group">
+																						<span class="input-group-addon input-left">
+																						<i class="fa fa-phone"></i>
+																						</span>
+																						<input type="text" class="form-control" placeholder="Confirmé le nouveau mot de passe" name="cconfirme_password">
+																					</div>
+																				</div>
+																				
+																			</div>
+																			<div class="form-actions">
+																				<button type="submit" class="btn blue">Submit</button>
+																				<button type="button" class="btn default">Cancel</button>
+																			</div>
+																		</form>
 																	</div>
 																	<div class="slimScrollBar" style="width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; height: 159.750390015601px; background: rgb(215, 220, 226);"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(234, 234, 234);"></div></div>
 																</div>
