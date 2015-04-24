@@ -1,4 +1,5 @@
 <?php
+
 	session_start();
 
 	// autoload required core classes
@@ -20,7 +21,7 @@
 	$db = mysqli_connect($db_server, $db_user, $db_password, $db_name);
 
 	// check login
-	$user = (isset($_SESSION["user"]) ? unserialize($_SESSION["user"]) : null;
+	$user = (isset($_SESSION["user"]) ? unserialize($_SESSION["user"]) : null);
 
 	// routing url
 	include "router.php";

@@ -1,6 +1,8 @@
 page_script({
 	init: function () {
 
+        // posts plugin init
+
 		salvattore.rescanMediaQueries();
 
 		// add news items sample

@@ -71,8 +71,13 @@
 		</div>
 	</div>
 </div>
+
 <!-- plugins -->
 <script type="text/javascript" src="<?php echo cdn;?>/plugins/salvattore.min.js"></script>
 
 <!-- custom page script -->
 <script src="<?php echo url_root;?>/pages/home/script_2.js" type="text/javascript"></script>
+
+<?php if($logout){?>
+<script src="<?php echo url_root;?>/pages/home/logout.js" type="text/javascript"></script>
+<?php }?>

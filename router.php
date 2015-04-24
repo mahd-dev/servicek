@@ -14,6 +14,9 @@
 			$req_page = "pages/search/controller.php";break;
         case "login":
 			$req_page = "pages/login/controller.php";break;
+        case "logout":
+            $logout=true;
+			$req_page = "pages/home/controller.php";break;
         case "register":
 			$req_page = "pages/register/controller.php";break;
         case "account":

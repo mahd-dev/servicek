@@ -447,9 +447,9 @@ var Layout = function () {
 				success: function (res) {
 					container.addClass("animate");
 					setTimeout(function(){
+                        if(prevent_history_state != true) history.pushState({href:href,method:method,params:params,container:container.selector}, document.title, href);
 						container.html(res);
 						container.removeClass("animate");
-						if(prevent_history_state != true) history.pushState({href:href,method:method,params:params,container:container.selector}, document.title, href);
 						Layout.fixContentHeight(); // fix content height
 						app.initAjax(); // initialize core stuff
 					},50);
