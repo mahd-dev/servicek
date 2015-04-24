@@ -60,15 +60,14 @@
 								<span>Se connecter</span>
 							</a>
 						</li>
-						<li class="user-btn dropdown dropdown-user dropdown-dark"<?php if($user==null) echo ' style="display:none;"';?>>
+						<li class="user-btn dropdown btn dropdown-dark"<?php if($user==null) echo ' style="display:none;"';?>>
 							<a href="layout_blank_page.html#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
-								<span class="username username-hide-on-mobile"><?php echo $user->displayname;?> </span>
-
+								<span class="username"><?php echo $user->displayname;?> <i class="icon-user"></i></span>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-default">
 								<li>
 									<a href="<?php echo url_root;?>/account" class="ajaxify">
-										<i class="icon-user"></i> Mon compte </a>
+										<i class="icon-settings"></i> Mon compte </a>
 								</li>
 								<li>
 									<a href="<?php echo url_root;?>/logout" class="ajaxify">

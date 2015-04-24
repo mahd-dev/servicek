@@ -1,5 +1,7 @@
 page_script({
 	init: function () {
+        $("#login_form input[name=username]").focus();
+        
         var clear_alerts = function () {
             $(".username_error").hide();
             $(".password_error").hide();
