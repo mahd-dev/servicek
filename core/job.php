@@ -11,6 +11,8 @@
             global $db;
             if ($this->id != NULL) {
                 switch($name){
+                    case "admin":
+                        $this->id_admin=$value->id;
                     default :
                         $db->query("update job set ".$name."='".$db->real_escape_string($value)."' where (id='".$this->id."')");
                     break;
@@ -25,12 +27,8 @@
                     case "id":
                         return $this->id;
                     break;
-                    /*
-                    case "property":
-                        $q=$db->query("select property from job where (id='".$this->id."')");
-			            $r=$q->fetch_row();
-                        return $r[0];
-                    */
+                    case "admin":
+                        return new user($this->id_admin);
                     default:
                         $q=$db->query("select ".$name." from job where (id='".$this->id."')");
 			            $r=$q->fetch_row();
@@ -42,16 +40,37 @@
             }
         }
 
-        public static function create($param){
+        public static function create($user){
             global $db;
-            $nid=newguid();
-            $db->query("insert into job (col) values('".$db->real_escape_string($param)."')");
-            return new user($nid);
+            $db->query("insert into job values()");
+            return new job($db->insert_id);
         }
 
         public function delete(){
             global $db;
-            $db->query("delete from job where id='".$this->id."'");
+            $db->query("delete from category_children where (id_children='".$this->id."' and children_type='job')");
+            $db->query("delete from user_admin where (id_page='".$this->id."')");
+            $db->query("delete from job where (id='".$this->id."')");
+        }
+
+        public static function get_all(){
+            global $db;
+            $list = array();
+            $q = $db->query("select id from job");
+            while($r = $q->fetch_row()){
+                $list[] = new job($r[0]);
+            }
+            return $list;
+        }
+
+        public function assign_to_category($category){
+            global $db;
+            $db->query("replace into category_children (id_category, id_children, children_type) values('".$category->id."', '".$this->id."', 'job')");
+        }
+
+        public function unassign_from_category($category){
+            global $db;
+            $db->query("delete from category_children where (id_category='".$category->id."' and id_children='".$this->id."' and children_type='job')");
         }
 
     }

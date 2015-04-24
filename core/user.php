@@ -25,12 +25,18 @@
                     case "id":
                         return $this->id;
                     break;
-                    /*
-                    case "property":
-                        $q=$db->query("select property from users where (id='".$this->id."')");
-			            $r=$q->fetch_row();
-                        return $r[0];
-                    */
+                    case "pages":
+                        return array_merge($this->companies, $this->jobs);
+                    case "companies":
+                        $list = array();
+                        $q=$db->query("select id_company from user_admin where (id_user='".$this->id."')");
+                        while($r=$q->fetch_row()) $list[] = new company($r[0]);
+                        return $list;
+                    case "jobs":
+                        $list = array();
+                        $q=$db->query("select id from job where (id_admin='".$this->id."')");
+                        while($r=$q->fetch_row()) $list[] = new job($r[0]);
+                        return $list;
                     default:
                         $q=$db->query("select ".$name." from users where (id='".$this->id."')");
 			            $r=$q->fetch_row();
@@ -51,30 +57,30 @@
 
         public static function create($username,$password){
             global $db;
-            $nid=newguid();
+            if(user::username_exists($username)) return "username_exists";
             $db->query("insert into users (username,passowrd) values('".$db->real_escape_string($username)."','".$db->real_escape_string($password)."')");
-            return new user($nid);
+            return new user($db->insert_id);
         }
 
         public function delete(){
             global $db;
-            $db->query("delete from users where id='".$this->id."'");
+            foreach($this->jobs as $j) $j->delete();
+            foreach($this->companies as $c){
+                if($c->count_admins==1) $c->delete();
+            }
+            $db->query("delete from users where (id='".$this->id."')");
         }
 
         public static function login($login,$password){
             global $db;
             
-           $q=$con->query("select id,password from users where (login = '".$login."')");
+           $q=$con->query("select id,password from users where (login='".$login."')");
             if($q->num_rows==0){
                 return "login_error";
             }else{
                 $r=$q->fetch_row();
-                if ($password != $r['password']) {
-                    return "password_error";
-                }
-                else{
-                    return $r['id']
-                }
+                if ($password != $r[1]) return "password_error";
+                else return new user($r[0]);
             }
         }
         

@@ -274,8 +274,8 @@ DROP TABLE IF EXISTS `user_admin`;
 CREATE TABLE `user_admin` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_user` bigint(20) DEFAULT NULL,
-  `id_job_company` bigint(20) DEFAULT NULL,
-  `type` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id_page` bigint(20) DEFAULT NULL,
+  `page_type` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -298,4 +298,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-23  2:11:15
+-- Dump completed on 2015-04-24 12:39:56

@@ -25,12 +25,8 @@
                     case "id":
                         return $this->id;
                     break;
-                    /*
-                    case "property":
-                        $q=$db->query("select property from offer where (id='".$this->id."')");
-			            $r=$q->fetch_row();
-                        return $r[0];
-                    */
+                    case "company":
+                        return new company($this->id_company);
                     default:
                         $q=$db->query("select ".$name." from offer where (id='".$this->id."')");
 			            $r=$q->fetch_row();
@@ -42,16 +38,15 @@
             }
         }
 
-        public static function create($param){
+        public static function create($company){
             global $db;
-            $nid=newguid();
-            $db->query("insert into offer (col) values('".$db->real_escape_string($param)."')");
-            return new user($nid);
+            $db->query("insert into offer (id_company) values('".$company->id."')");
+            return new offer($db->insert_id);
         }
 
         public function delete(){
             global $db;
-            $db->query("delete from offer where id='".$this->id."'");
+            $db->query("delete from offer where (id='".$this->id."')");
         }
 
     }

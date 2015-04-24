@@ -25,12 +25,8 @@
                     case "id":
                         return $this->id;
                     break;
-                    /*
-                    case "property":
-                        $q=$db->query("select property from service where (id='".$this->id."')");
-			            $r=$q->fetch_row();
-                        return $r[0];
-                    */
+                    case "company":
+                        return new company($this->id_company);
                     default:
                         $q=$db->query("select ".$name." from service where (id='".$this->id."')");
 			            $r=$q->fetch_row();
@@ -42,16 +38,16 @@
             }
         }
 
-        public static function create($param){
+        public static function create($company){
             global $db;
-            $nid=newguid();
-            $db->query("insert into service (col) values('".$db->real_escape_string($param)."')");
-            return new user($nid);
+            $db->query("insert into service (id_company) values('".$company->id."')");
+            return new service($db->insert_id);
         }
 
         public function delete(){
             global $db;
-            $db->query("delete from service where id='".$this->id."'");
+            $db->query("delete from category_children where (id='".$this->id."' and children_type='service')");
+            $db->query("delete from service where (id='".$this->id."')");
         }
 
     }

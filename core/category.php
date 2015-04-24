@@ -25,12 +25,47 @@
                     case "id":
                         return $this->id;
                     break;
-                    /*
-                    case "property":
-                        $q=$db->query("select property from category where (id='".$this->id."')");
-			            $r=$q->fetch_row();
-                        return $r[0];
-                    */
+                    case "childrens":
+                        return array_merge($this->companies, $this->jobs, $this->products, $this->services);
+                    case "subcategories_list":
+                        return $this->subcategories_list();
+                    case "subcategories_tree":
+                        return $this->subcategories_tree();
+                    case "parents":
+                        $list = array();
+                        $q=$db->query("select id_category from category_children where (id_children='".$this->id."' and children_type='category')");
+                        while($r=$q->fetch_row()) $list[] = new company($r[0]);
+                        return $list;
+                    case "first_level_categories":
+                        $list = array();
+                        $q=$db->query("select id_children from category_children where (id_category='".$this->id."' and children_type='category')");
+                        while($r=$q->fetch_row()) $list[] = new company($r[0]);
+                        return $list;
+                    break;
+                    case "companies":
+                        $list = array();
+                        $q=$db->query("select id_children from category_children where (id_category='".$this->id."' and children_type='company')");
+                        while($r=$q->fetch_row()) $list[] = new company($r[0]);
+                        return $list;
+                    break;
+                    case "jobs":
+                        $list = array();
+                        $q=$db->query("select id_children from category_children where (id_category='".$this->id."' and children_type='job')");
+                        while($r=$q->fetch_row()) $list[] = new job($r[0]);
+                        return $list;
+                    break;
+                    case "products":
+                        $list = array();
+                        $q=$db->query("select id_children from category_children where (id_category='".$this->id."' and children_type='product')");
+                        while($r=$q->fetch_row()) $list[] = new product($r[0]);
+                        return $list;
+                    break;
+                    case "services":
+                        $list = array();
+                        $q=$db->query("select id_children from category_children where (id_category='".$this->id."' and children_type='service')");
+                        while($r=$q->fetch_row()) $list[] = new service($r[0]);
+                        return $list;
+                    break;
                     default:
                         $q=$db->query("select ".$name." from category where (id='".$this->id."')");
 			            $r=$q->fetch_row();
@@ -42,17 +77,43 @@
             }
         }
 
-        public static function create($param){
+        public static function create(){
             global $db;
-            $nid=newguid();
-            $db->query("insert into category (col) values('".$db->real_escape_string($param)."')");
-            return new user($nid);
+            $db->query("insert into category values()");
+            return new user($db->insert_id);
         }
 
         public function delete(){
             global $db;
-            $db->query("delete from category where id='".$this->id."'");
-            $db->query("delete from category_children where id_category='".$this->id."'");
+            $db->query("delete from category where (id='".$this->id."')");
+            $db->query("delete from category_children where (id_category='".$this->id."')");
+        }
+
+        public function assign_to_category($category){
+            global $db;
+            if($category == $this || in_array($category, $this->subcategories_list())) return "unallowed_loopback_hierarchy";
+            $db->query("replace into category_children (id_category, id_children, children_type) values('".$category->id."', '".$this->id."', 'category')");
+        }
+
+        public function unassign_from_category($category){
+            global $db;
+            $db->query("delete from category_children where (id_category='".$category->id."' and id_children='".$this->id."' and children_type='category')");
+        }
+
+        private function subcategories_tree(){
+            $list=array();
+            foreach($this->first_level_categories as $sc){
+                $list[]=array("category" => $sc, "subcategories" => $sc->subcategories_tree());
+            }
+            return $list;
+        }
+        private function subcategories_list(){
+            $list=array();
+            foreach($this->first_level_categories as $sc){
+                $list[]=$sc;
+                $list=array_merge($list, $sc->subcategories_list());
+            }
+            return $list;
         }
 
     }
