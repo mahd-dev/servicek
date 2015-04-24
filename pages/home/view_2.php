@@ -78,6 +78,6 @@
 <!-- custom page script -->
 <script src="<?php echo url_root;?>/pages/home/script_2.js" type="text/javascript"></script>
 
-<?php if($logout){?>
+<?php if(isset($logout) && $logout){?>
 <script src="<?php echo url_root;?>/pages/home/logout.js" type="text/javascript"></script>
 <?php }?>
