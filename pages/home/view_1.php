@@ -53,5 +53,5 @@
 <!-- custom page scripts -->
 <script src="<?php echo url_root;?>/pages/home/script_1.js" type="text/javascript"></script>
 <?php if(isset($logout) && $logout){?>
-<script src="<?php echo url_root;?>/pages/home/logout.js" type="text/javascript"></script>
+<script src="<?php echo url_root;?>/pages/login/logout.js" type="text/javascript"></script>
 <?php }?>

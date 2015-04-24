@@ -15,6 +15,8 @@
         case "login":
 			$req_page = "pages/login/controller.php";break;
         case "logout":
+            session_unset();
+            $user=null;
             $logout=true;
 			$req_page = "pages/home/controller.php";break;
         case "register":

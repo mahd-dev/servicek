@@ -6,14 +6,23 @@
 </div>
 <div class="row">
 	<div class="col-md-7">
-		<form class="form">
+        <div class="alert alert-danger username_error" style="display:none;">
+            Nom d'utilisateur incorrect !
+        </div>
+        <div class="alert alert-danger password_error" style="display:none;">
+            Mot de passe incorrect !
+        </div>
+        <div class="alert alert-danger unhandled_error" style="display:none;">
+            <strong>Désolé!</strong> une erreur inattendue s'est intervenue :(
+        </div>
+		<form id="login_form" method="post">
 			<div class="form-group">
 				<label for="username" class="control-label">Nom d'utilisateur</label>
-				<input type="email" class="form-control" id="username" name="username" placeholder="Entrer votre nom d'utilisateur">
+				<input type="text" class="form-control" name="username" placeholder="Entrer votre nom d'utilisateur" required>
 			</div>
 			<div class="form-group">
 				<label for="password" class="control-label">Mot de passe</label>
-				<input type="password" class="form-control" id="password" name="password" placeholder="Entrer votre mot de passe">
+				<input type="password" class="form-control" name="password" placeholder="Entrer votre mot de passe" required>
 			</div>
 			<div class="form-group">
 				<div class="checkbox"><label><input type="checkbox"> Se souvenir de moi</label></div>
@@ -24,7 +33,10 @@
 		</form>
 	</div>
     <div class="col-md-5">
-        <blockquote>Vous ne disposez pas de compte ? <br><br><a href="<?php echo url_root;?>/register" class="btn btn green">Créer mon compte</a></blockquote>
+        <div class="note note-info">
+            <h4 class="block">Vous ne disposez pas de compte ?</h4>
+            <a href="<?php echo url_root;?>/register" class="btn btn green">Créer mon compte</a>
+        </div>
     </div>
 </div>
 

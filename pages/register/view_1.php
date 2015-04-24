@@ -8,14 +8,16 @@
 	<div class="col-md-7">
         <form role="form">
             <div class="form-body margin-bottom-20">
+                <label class="control-label">Votre nom complet</label>
+                <input type="text" class="form-control" placeholder="Nom et prénom" name="displayname" required>
                 <label class="control-label">Nom d'utilisateur</label>
-                <input type="text" class="form-control" placeholder="Nom d'utilisateur" name="username">
+                <input type="text" class="form-control" placeholder="Nom d'utilisateur" name="username" required>
                 <label class="control-label">Mot de passe</label>
-                <input type="text" class="form-control" placeholder="Mot de passe" name="password">
+                <input type="text" class="form-control" placeholder="Mot de passe" name="password" required>
                 <label class="control-label">E-mail</label>
-                <input type="email" class="form-control" placeholder="E-mail" name="email">
+                <input type="email" class="form-control" placeholder="E-mail" name="email" required>
                 <label class="control-label">Téléphone</label>
-                <input type="text" class="form-control" placeholder="Téléphone" name="phone">
+                <input type="text" class="form-control" placeholder="Téléphone" name="phone" required>
             </div>
             <div class="form-actions">
                 <button type="submit" class="btn purple pull-right"><i class="icon-check"></i> S'inscrire</button>
@@ -23,7 +25,10 @@
         </form>
 	</div>
     <div class="col-md-5">
-        <blockquote>Vous avez déja un compte ? <br><br><a href="<?php echo url_root;?>/login" class="btn btn green">Se connecter</a></blockquote>
+        <div class="note note-info">
+            <h4 class="block">Vous avez déja un compte ?</h4>
+            <a href="<?php echo url_root;?>/login" class="btn btn green">Se connecter</a>
+        </div>
     </div>
 </div>
 
