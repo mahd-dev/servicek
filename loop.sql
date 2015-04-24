@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.19, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.24, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: loop
 -- ------------------------------------------------------
--- Server version	5.6.19-1~exp1ubuntu2
+-- Server version	5.6.24-0ubuntu2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -47,10 +47,10 @@ DROP TABLE IF EXISTS `category_children`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `category_children` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `id_category` bigint(20) DEFAULT NULL,
-  `id_children` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id_category` bigint(20) NOT NULL DEFAULT '0',
+  `id_children` bigint(20) NOT NULL DEFAULT '0',
+  `children_type` varchar(15) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id_category`,`id_children`,`children_type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -131,6 +131,7 @@ DROP TABLE IF EXISTS `job`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `job` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_admin` bigint(20) DEFAULT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` varchar(4095) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -252,7 +253,7 @@ CREATE TABLE `user` (
   `mobile` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
   `creation_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -261,6 +262,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (2,NULL,'user','test','123','Test user','test@server.com','123456789','2015-04-24 19:46:41');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -272,11 +274,9 @@ DROP TABLE IF EXISTS `user_admin`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_admin` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `id_user` bigint(20) DEFAULT NULL,
-  `id_page` bigint(20) DEFAULT NULL,
-  `page_type` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id_user` bigint(20) NOT NULL DEFAULT '0',
+  `id_company` bigint(20) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_user`,`id_company`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -298,4 +298,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-24 12:39:56
+-- Dump completed on 2015-04-24 20:47:40
