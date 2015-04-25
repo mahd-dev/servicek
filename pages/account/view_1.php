@@ -5,6 +5,7 @@
 
 <div class="row">
 	<div class="col-md-12">
+	
 <div class="page-content-wrapper">
 		<div>
 			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
