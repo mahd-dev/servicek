@@ -5,7 +5,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-7">
+	<div class="col-md-offset-1 col-md-3">
         <div class="alert alert-danger username_error" style="display:none;">
             Nom d'utilisateur incorrect !
         </div>
@@ -32,7 +32,7 @@
 			</div>
 		</form>
 	</div>
-    <div class="col-md-5">
+    <div class="col-md-3">
         <div class="note note-info">
             <h4 class="block">Vous ne disposez pas de compte ?</h4>
             <a href="<?php echo url_root;?>/register" class="btn btn green">Créer mon compte</a>

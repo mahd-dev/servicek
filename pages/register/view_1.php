@@ -5,7 +5,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-7">
+	<div class="col-md-offset-1 col-md-3">
         <form role="form">
             <div class="form-body margin-bottom-20">
                 <label class="control-label">Votre nom complet</label>
@@ -24,7 +24,7 @@
             </div>
         </form>
 	</div>
-    <div class="col-md-5">
+    <div class="col-md-3">
         <div class="note note-info">
             <h4 class="block">Vous avez déja un compte ?</h4>
             <a href="<?php echo url_root;?>/login" class="btn btn green">Se connecter</a>

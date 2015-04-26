@@ -55,14 +55,14 @@
 				<div class="top-menu">
 					<ul class="nav navbar-nav pull-right">
 						<li class="login-btn dropdown-user btn"<?php if($user!=null) echo ' style="display:none;"';?>>
-							<a href="<?php echo url_root;?>/login" class="ajaxify">
+							<a href="<?php echo url_root;?>/login" class="ajaxify dropdown-toggle">
 								<i class="icon-login"></i>
 								<span>Se connecter</span>
 							</a>
 						</li>
 						<li class="user-btn dropdown dropdown-user btn dropdown-dark"<?php if($user==null) echo ' style="display:none;"';?>>
-							<a href="layout_blank_page.html#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
-								<span class="username"><?php echo $user->displayname;?> <i class="icon-user"></i></span>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+								<span class="username"><?php echo $user->displayname;?></span>&nbsp;&nbsp;<i class="icon-user"></i>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-default">
 								<li>
