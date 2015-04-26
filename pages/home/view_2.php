@@ -18,7 +18,7 @@
 			</div>
 		</div>
 		<div class="row home-news" data-columns>
-			<div class="item portlet light new_post">
+			<div class="item portlet light bordered new_post">
 				<form id="new_post_form" class="form">
 					<textarea class="form-control" name="text" rows="3" maxlength="1023"></textarea>
 					<div class="fileinput fileinput-new" data-provides="fileinput">
@@ -35,13 +35,13 @@
 						&nbsp;<a href="components_form_tools.html#" class="close fileinput-exists" data-dismiss="fileinput"></a>
 					</div>
 					<div class="form-actions right">
-						<button type="submit" class="btn purple pull-right" disabled="disabled"><i class="icon-check"></i> Post</button>
+						<button type="submit" class="btn btn-primary pull-right" disabled="disabled"><i class="icon-check"></i> Post</button>
 					</div>
 				</form>
 			</div>
 			<?php for($i=0;$i<20;$i++){?>
 
-				<div class="item portlet light">
+				<div class="item portlet light bordered">
 					<div class="portlet-title">
 						<div class="caption">
 							<i class="icon-puzzle font-grey-gallery"></i>

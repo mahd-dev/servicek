@@ -4,6 +4,7 @@
 <!--[if !IE]><!-->
 <html lang="en" dir="<?php echo(rtl?"rtl":"ltr");?>">
 <!--<![endif]-->
+
 <head>
 	<meta charset="utf-8" />
 	<title>loop</title>
@@ -32,89 +33,145 @@
 	<link rel="shortcut icon" href="<?php echo cdn;?>/img/favicons/favicon.png" />
 
 	<script>
-		function page_script(sc){
-			if(document.readyState == "complete") sc.init();
+		function page_script(sc) {
+			if (document.readyState == "complete") sc.init();
 			else document.addEventListener('DOMContentLoaded', sc.init, false);
 		}
 	</script>
 
 </head>
 
-<body class="page-header-fixed">
-	<div class="page-header navbar navbar-fixed-top">
-		<div class="page-header-inner">
-			<div class="page-logo">
-				<a href="<?php echo url_root;?>" class="ajaxify">
+<body>
+	<div class="page-header">
+		<div class="page-header-top">
+			<div class="container">
+
+				<div class="page-logo">
+					<a href="<?php echo url_root;?>" class="ajaxify">
 					<img src="<?php echo cdn;?>/img/logo<?php echo(rtl?"-rtl":"");?>.svg" alt="loop" class="logo-default">
 				</a>
-			</div>
+				</div>
 
-			<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"></a>
+				<a href="javascript:;" class="menu-toggler"></a>
 
-			<div class="page-top">
 				<div class="top-menu">
 					<ul class="nav navbar-nav pull-right">
-						<li class="login-btn dropdown-user btn"<?php if($user!=null) echo ' style="display:none;"';?>>
-							<a href="<?php echo url_root;?>/login" class="ajaxify dropdown-toggle">
-								<i class="icon-login"></i>
-								<span>Se connecter</span>
+
+						<li class="login-btn dropdown dropdown-user dropdown-dark" <?php if($user!=null) echo ' style="display:none;"';?>>
+							<a href="<?php echo url_root;?>/login" class="dropdown-toggle ajaxify">
+								<i class="icon-key"></i>&nbsp;&nbsp;<span class="username">Se connecter</span>
 							</a>
 						</li>
-						<li class="user-btn dropdown dropdown-user btn dropdown-dark"<?php if($user==null) echo ' style="display:none;"';?>>
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+						<li class="user-btn dropdown dropdown-user dropdown-dark" <?php if($user==null) echo ' style="display:none;"';?>>
+							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
 								<span class="username"><?php echo $user->displayname;?></span>&nbsp;&nbsp;<i class="icon-user"></i>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-default">
 								<li>
 									<a href="<?php echo url_root;?>/account" class="ajaxify">
-										<i class="icon-settings"></i> Mon compte </a>
+										<i class="icon-settings"></i> Mon compte</a>
 								</li>
 								<li>
 									<a href="<?php echo url_root;?>/logout" class="ajaxify">
-										<i class="icon-logout"></i> Se déconnecter </a>
+										<i class="icon-key"></i> Se déconnecter</a>
+								</li>
+							</ul>
+						</li>
+						<!-- END USER LOGIN DROPDOWN -->
+					</ul>
+				</div>
+				<!-- END TOP NAVIGATION MENU -->
+			</div>
+		</div>
+		<!-- END HEADER TOP -->
+		<!-- BEGIN HEADER MENU -->
+		<div class="page-header-menu">
+			<div class="container">
+				<!-- BEGIN HEADER SEARCH BOX -->
+				<form class="search-form" action="search" method="GET">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search" name="query">
+						<span class="input-group-btn">
+					<a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+					</span>
+					</div>
+				</form>
+				<!-- END HEADER SEARCH BOX -->
+				<!-- BEGIN MEGA MENU -->
+				<!-- DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background -->
+				<!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
+				<div class="hor-menu ">
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="index.html">Dashboard</a>
+						</li>
+						<li class="menu-dropdown mega-menu-dropdown active">
+							<a data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">
+						Features <i class="fa fa-angle-down"></i>
+						</a>
+							<ul class="dropdown-menu" style="min-width: 710px">
+								<li>
+									<div class="mega-menu-content">
+										<div class="row">
+											<div class="col-md-4">
+												<ul class="mega-menu-submenu">
+													<li>
+														<h3>eCommerce</h3>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</li>
+
+						<li class="menu-dropdown classic-menu-dropdown ">
+							<a data-close-others="true" data-toggle="dropdown" href="javascript:;">
+						Extra <i class="fa fa-angle-down"></i>
+						</a>
+							<ul class="dropdown-menu pull-left">
+								<li class=" dropdown-submenu">
+									<a href=javascript:;>
+										<i class="icon-briefcase"></i> Data Tables </a>
+									<ul class="dropdown-menu">
+										<li class=" ">
+											<a href="table_basic.html">
+										Basic Datatables </a>
+										</li>
+									</ul>
 								</li>
 							</ul>
 						</li>
 					</ul>
 				</div>
+				<!-- END MEGA MENU -->
 			</div>
 		</div>
-
+		<!-- END HEADER MENU -->
 	</div>
-	<div class="clearfix"></div>
+	<!-- END HEADER -->
+	<!-- BEGIN PAGE CONTAINER -->
 	<div class="page-container">
-		<div class="page-sidebar-wrapper">
-			<!--
-			<div class="page-sidebar">
-				aaa
-			</div>
-			-->
-			<div class="page-sidebar navbar-collapse collapse">
-				<ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-					<li class="start ">
-						<a href="<?php echo url_root;?>" class="ajaxify">
-							<i class="icon-home"></i>
-							<span class="title">Home</span>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div class="page-content-wrapper">
-			<div class="page-content">
+		<div class="page-content">
+			<div class="container">
 				<?php echo $content; // inserting requested page content ?>
 			</div>
 		</div>
+		<!-- END PAGE CONTENT -->
 	</div>
 
 	<div class="page-footer">
-		<div class="page-footer-inner">
-			2015 &copy; loop company.
-		</div>
-		<div class="scroll-to-top">
-			<i class="icon-arrow-up"></i>
+		<div class="container">
+			<?php echo date( 'Y');?> &copy; loop company.
 		</div>
 	</div>
+	<div class="scroll-to-top">
+		<i class="icon-arrow-up"></i>
+	</div>
+
+
+
 
 	<!--[if lt IE 9]>
 	<script src="<?php echo cdn;?>/plugins/respond.min.js"></script>
@@ -129,14 +186,14 @@
 	<script src="<?php echo cdn;?>/plugins/jquery.blockui.min.js" type="text/javascript"></script>
 	<script src="<?php echo cdn;?>/plugins/jquery.cokie.min.js" type="text/javascript"></script>
 	<script src="<?php echo cdn;?>/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
-    <script src="<?php echo cdn;?>/plugins/jquery.form.js" type="text/javascript"></script>
+	<script src="<?php echo cdn;?>/plugins/jquery.form.js" type="text/javascript"></script>
 	<script src="<?php echo cdn;?>/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 
 	<script src="<?php echo cdn;?>/scripts/app.js" type="text/javascript"></script>
 	<script src="<?php echo cdn;?>/scripts/layout.js" type="text/javascript"></script>
 
 	<script type="text/javascript" src="<?php echo cdn;?>/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
-	
+
 	<script src="<?php echo url_root;?>/master/script_1.js" type="text/javascript"></script>
 	<script>
 		jQuery(document).ready(function () {
@@ -145,4 +202,5 @@
 		});
 	</script>
 </body>
+
 </html>

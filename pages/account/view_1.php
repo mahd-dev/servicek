@@ -1,13 +1,7 @@
 <link href="<?php echo cdn;?>/pages/css/tasks.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo url_root;?>/pages/account/style.css" rel="stylesheet" type="text/css">
-
 <div class="row">
 	<div class="col-md-12">
-		<div class="page-head margin-bottom-20">
-			<div class="page-title">
-				<h1>New User Profile <small>user profile page sample</small></h1>
-			</div>
-		</div>
 		<div class="row">
 			<div class="profile-sidebar col-md-3">
 				<div class="portlet light profile-sidebar-portlet">

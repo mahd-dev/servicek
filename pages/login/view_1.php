@@ -1,11 +1,17 @@
 <link href="<?php echo url_root;?>/pages/login/style.css" rel="stylesheet" type="text/css">
-<div class="page-head margin-bottom-20">
-	<div class="page-title">
-		<h1>Se connecter&nbsp;&nbsp;&nbsp;&nbsp;<small>Connectez à votre compte et gérer vos entreprises</small></h1>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-head">
+			<div class="page-title">
+				<h1>Se connecter&nbsp;&nbsp;&nbsp;&nbsp;<small>Connectez à votre compte et gérer vos entreprises</small></h1>
+			</div>
+		</div>
 	</div>
 </div>
+
 <div class="row">
-	<div class="col-md-offset-1 col-md-3">
+	<div class="col-md-offset-1 col-md-3 col-sm-7">
         <div class="alert alert-danger username_error" style="display:none;">
             Nom d'utilisateur incorrect !
         </div>
@@ -28,14 +34,14 @@
 				<div class="checkbox"><label><input type="checkbox"> Se souvenir de moi</label></div>
 			</div>
 			<div class="form-group">
-				<button type="submit" class="btn purple pull-right"><i class="icon-check"></i> Se connecter</button>
+				<button type="submit" class="btn btn-primary pull-right"><i class="icon-check"></i> Se connecter</button>
 			</div>
 		</form>
 	</div>
-    <div class="col-md-3">
+    <div class="col-md-3 col-sm-5">
         <div class="note note-info">
             <h4 class="block">Vous ne disposez pas de compte ?</h4>
-            <a href="<?php echo url_root;?>/register" class="btn btn green">Créer mon compte</a>
+            <a href="<?php echo url_root;?>/register" class="btn green ajaxify">Créer mon compte</a>
         </div>
     </div>
 </div>

@@ -130,58 +130,6 @@ var app = function() {
             }
         });
 
-        $('body').on('click', '.portlet > .portlet-title > .tools > a.reload', function(e) {
-            e.preventDefault();
-            var el = $(this).closest(".portlet").children(".portlet-body");
-            var url = $(this).attr("data-url");
-            var error = $(this).attr("data-error-display");
-            if (url) {
-                app.blockUI({
-                    target: el,
-                    animate: true,
-                    overlayColor: 'none'
-                });
-                $.ajax({
-                    type: "GET",
-                    cache: false,
-                    url: url,
-                    dataType: "html",
-                    success: function(res) {
-                        app.unblockUI(el);
-                        el.html(res);
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {
-                        app.unblockUI(el);
-                        var msg = 'Error on reloading the content. Please check your connection and try again.';
-                        if (error == "toastr" && toastr) {
-                            toastr.error(msg);
-                        } else if (error == "notific8" && $.notific8) {
-                            $.notific8('zindex', 11500);
-                            $.notific8(msg, {
-                                theme: 'ruby',
-                                life: 3000
-                            });
-                        } else {
-                            alert(msg);
-                        }
-                    }
-                });
-            } else {
-                // for demo purpose
-                app.blockUI({
-                    target: el,
-                    animate: true,
-                    overlayColor: 'none'
-                });
-                window.setTimeout(function() {
-                    app.unblockUI(el);
-                }, 1000);
-            }
-        });
-
-        // load ajax data on page init
-        $('.portlet .portlet-title a.reload[data-load="true"]').click();
-
         $('body').on('click', '.portlet > .portlet-title > .tools > .collapse, .portlet .portlet-title > .tools > .expand', function(e) {
             e.preventDefault();
             var el = $(this).closest(".portlet").children(".portlet-body");

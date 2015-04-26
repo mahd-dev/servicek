@@ -1,7 +1,11 @@
 <link href="<?php echo url_root;?>/pages/register/style.css" rel="stylesheet" type="text/css">
-<div class="page-head margin-bottom-20">
-	<div class="page-title">
-		<h1>Créer un compte&nbsp;&nbsp;&nbsp;&nbsp;<small>Créer votre compte et publiez vos entreprises</small></h1>
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-head margin-bottom-20">
+			<div class="page-title">
+				<h1>Créer un compte&nbsp;&nbsp;&nbsp;&nbsp;<small>Créer votre compte et publiez vos entreprises</small></h1>
+			</div>
+		</div>
 	</div>
 </div>
 <div class="row">
@@ -20,14 +24,14 @@
                 <input type="text" class="form-control" placeholder="Téléphone" name="phone" required>
             </div>
             <div class="form-actions">
-                <button type="submit" class="btn purple pull-right"><i class="icon-check"></i> S'inscrire</button>
+                <button type="submit" class="btn btn-primary pull-right"><i class="icon-check"></i> S'inscrire</button>
             </div>
         </form>
 	</div>
     <div class="col-md-3">
         <div class="note note-info">
             <h4 class="block">Vous avez déja un compte ?</h4>
-            <a href="<?php echo url_root;?>/login" class="btn btn green">Se connecter</a>
+            <a href="<?php echo url_root;?>/login" class="btn green ajaxify">Se connecter</a>
         </div>
     </div>
 </div>

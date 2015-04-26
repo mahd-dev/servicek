@@ -1,5 +1,5 @@
 /******************************
- 3RD PARTY PLUGIN CUSTOMIZATION
+ 3RD PARTY PLUGIN CUSTOMIZATION 
 ******************************/
 /***
 Bootstrap Colorpicker
@@ -388,7 +388,7 @@ Bootstrap Select
 }
 
 /***
-Bootstrap Switch
+Bootstrap Switch 
 ***/
 .bootstrap-switch {
   border-color: #e5e5e5;
@@ -511,18 +511,12 @@ Toastr Notifications
   left: 50%;
   margin-left: -150px;
 }
-.toast-top-center .toast {
-  margin: 0 !important;
-}
 
 .toast-bottom-center {
   bottom: 12px;
   margin: 0 auto;
   left: 50%;
   margin-left: -150px;
-}
-.toast-bottom-center .toast {
-  margin: 0 !important;
 }
 
 /***
@@ -606,30 +600,6 @@ Bootstrap Wizard
     text-align: left;
   }
 }
-/*!
- * Tab drop for Bootstrap
- */
-.tabbable-tabdrop .nav-tabs,
-.tabbable-tabdrop .nav-pills {
-  position: relative;
-}
-.tabbable-tabdrop .nav-tabs .caret,
-.tabbable-tabdrop .nav-pills .caret {
-  display: none;
-}
-.tabbable-tabdrop .nav-tabs .tabdrop .dropdown-toggle i,
-.tabbable-tabdrop .nav-pills .tabdrop .dropdown-toggle i {
-  font-size: 14px;
-}
-.tabbable-tabdrop .dropdown-menu:after {
-  right: 10px;
-  left: auto;
-}
-.tabbable-tabdrop .dropdown-menu:before {
-  right: 9px;
-  left: auto;
-}
-
 /***
 wysihtml5
 ***/
@@ -717,28 +687,6 @@ Error state for WYSIWYG Editors
 
 .has-warning .note-editor {
   border: 1px solid #faebcc !important;
-}
-
-/***
-Bootstrap GtreeTable
-***/
-.gtreetable .dropdown-menu {
-  margin-top: 0px;
-}
-.gtreetable .dropdown-menu:after, .gtreetable .dropdown-menu:before {
-  display: none !important;
-}
-.gtreetable .node-action .form-control {
-  position: relative;
-  top: 2px;
-  display: inline-block;
-}
-.gtreetable .node-icon-selected,
-.gtreetable .node-icon-handle,
-.gtreetable .node-icon-ce,
-.gtreetable .node-icon-type {
-  opacity: 0.6;
-  filter: alpha(opacity=60);
 }
 
 /***
@@ -1145,22 +1093,6 @@ Scroller Extension
 
 .dataTables_scrollBody {
   border-bottom: 1px solid #ddd !important;
-}
-
-.DTTT_Print_Info {
-  width: 300px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -50px;
-  margin-left: -150px;
-  background: #eee;
-  padding: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-.DTTT_Print_Info > h6 {
-  font-size: 16px;
-  font-weight: 400;
 }
 
 /***
@@ -2232,17 +2164,6 @@ Bootstrap input sizes
 
 .select2-container.input-sm .select2-choice .select2-arrow b {
   background-position: 0 0px;
-}
-
-/* Portlet full screen mode */
-.modal-open.page-portlet-fullscreen .select2-drop-mask {
-  z-index: 10081;
-}
-.modal-open.page-portlet-fullscreen .select2-drop {
-  z-index: 10082;
-}
-.modal-open.page-portlet-fullscreen .select2-search {
-  z-index: 10083;
 }
 
 /***

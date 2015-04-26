@@ -78,6 +78,77 @@ var Layout = function () {
 		}
 	};
 
+	// Handles main menu
+    var handleMainMenu = function () {
+
+        // handle menu toggler icon click
+        $(".page-header .menu-toggler").on("click", function(event) {
+            if (app.getViewPort().width < resBreakpointMd) {
+                var menu = $(".page-header .page-header-menu");
+                if (menu.hasClass("page-header-menu-opened")) {
+                    menu.slideUp(300);
+                    menu.removeClass("page-header-menu-opened");
+                } else {
+                    menu.slideDown(300);
+                    menu.addClass("page-header-menu-opened");
+                }
+
+                if ($('body').hasClass('page-header-top-fixed')) {
+                    app.scrollTop();
+                }
+            }
+        });
+
+        // handle sub dropdown menu click for mobile devices only
+        $(".dropdown-submenu > a").on("click", function(e) {
+            if (app.getViewPort().width < resBreakpointMd) {
+                if ($(this).next().hasClass('dropdown-menu')) {
+                    e.stopPropagation();
+
+                    if ($(this).parent().hasClass("open")) {
+                        $(this).parent().removeClass("open");
+                        $(this).next().hide();
+                    } else {
+                        $(this).parent().addClass("open");
+                        $(this).next().show();
+                    }
+                }
+            }
+        });
+
+        // handle hover dropdown menu for desktop devices only
+        if (app.getViewPort().width >= resBreakpointMd) {
+            $('[data-hover="megamenu-dropdown"]').not('.hover-initialized').each(function() {   
+                $(this).dropdownHover(); 
+                $(this).addClass('hover-initialized'); 
+            });
+        }
+        
+        $(document).on('click', '.mega-menu-dropdown .dropdown-menu', function (e) {
+            e.stopPropagation();
+        });
+
+        // handle fixed mega menu(minimized) 
+        $(window).scroll(function() {                
+            var offset = 75;
+            if ($('body').hasClass('page-header-menu-fixed')) {
+                if ($(window).scrollTop() > offset){
+                    $(".page-header-menu").addClass("fixed");
+                } else {
+                    $(".page-header-menu").removeClass("fixed");  
+                }
+            }
+
+            if ($('body').hasClass('page-header-top-fixed')) {
+                if ($(window).scrollTop() > offset){
+                    $(".page-header-top").addClass("fixed");
+                } else {
+                    $(".page-header-top").removeClass("fixed");  
+                }
+            }
+        });
+    };
+	
 	// Handle sidebar menu
 	var handleSidebarMenu = function () {
 		$('.page-sidebar').on('click', 'li > a', function (e) {
@@ -372,7 +443,11 @@ var Layout = function () {
 		initHeader: function () {
 			handleHeader(); // handles horizontal menu
 		},
-
+		
+		initMainMenu: function () {
+			handleMainMenu();
+		},
+		
 		setSidebarMenuActiveLink: function (mode, el) {
 			handleSidebarMenuActiveLink(mode, el);
 		},
@@ -401,9 +476,9 @@ var Layout = function () {
 		initAjaxify: function () {
 			handleAjaxify();
 		},
-
 		init: function () {
 			this.initHeader();
+			this.initMainMenu();
 			this.initSidebar();
 			this.initContent();
 			this.initFooter();
@@ -433,11 +508,7 @@ var Layout = function () {
 		ajaxify: function (href, method, params, container, prevent_history_state) {
 			var method = (method === undefined ? "GET" : method);
 			var params = (params === undefined ? null : params);
-			var container = (container === undefined ? $('.page-content') : $(container));
-
-			if (app.getViewPort().width < resBreakpointMd && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page
-				$('.page-header .responsive-toggler').click();
-			}
+			var container = (container === undefined ? $('.page-content .container') : $(container));
 
 			$.ajax({
 				type: method,

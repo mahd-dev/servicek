@@ -19,7 +19,7 @@
 
 			<?php for($i=0;$i<20;$i++){?>
 
-				<div class="item portlet light">
+				<div class="item portlet light bordered">
 					<div class="portlet-title">
 						<div class="caption">
 							<i class="icon-puzzle font-grey-gallery"></i>

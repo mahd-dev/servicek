@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-md-offset-1 col-md-4">
+	<div class="col-md-offset-1 col-md-6">
 		<div class="note note-warning">
 			<h4 class="block">Vous êtes déja connecté en tant que <?php echo $user->displayname;?></h4>
 			<p>
