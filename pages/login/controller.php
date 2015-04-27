@@ -8,8 +8,8 @@
     // Handling query
     
     if(isset($_POST["username"]) && isset($_POST["password"])){
-        
-        $login_resp=user::login($_POST["username"], $_POST["password"]); // checking login parameters
+
+        $login_resp=user::login($_POST["username"], $_POST["password"], gf::getClientIP()); // checking login parameters
         
         if ($login_resp instanceof user){ // login parameters are valid
             
@@ -21,6 +21,22 @@
                     "displayname" => $login_resp->displayname
                 )
             )));
+        }elseif (is_array($login_resp)) {
+            if($login_resp["status"] == "waiting_restriction_time"){
+                die(json_encode(array(
+                    "resp_msg" => "waiting_restriction_time",
+                    "params" => array(
+                        "remaining_time" => $login_resp["remaining_time"]
+                    )
+                )));
+            }elseif($login_resp["status"] == "password_error"){
+                die(json_encode(array(
+                    "resp_msg" => "password_error",
+                    "params" => array(
+                        "remaining_attempts" => $login_resp["remaining_attempts"]
+                    )
+                )));
+            }else die("unknown_error");
         }else die($login_resp); // username_error || password_error
     }
     

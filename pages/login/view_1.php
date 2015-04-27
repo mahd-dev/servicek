@@ -16,7 +16,13 @@
             Nom d'utilisateur incorrect !
         </div>
         <div class="alert alert-danger password_error" style="display:none;">
-            Mot de passe incorrect !
+            Mot de passe incorrect, vous avez encore <span class="remaining_attempts"></span> tentatives
+        </div>
+        <div class="alert alert-danger restricted_host" style="display:none;">
+            Vous n'êtes pas autorisé à se connecter a partir de cet appareil
+        </div>
+        <div class="alert alert-danger waiting_restriction_time" style="display:none;">
+            Vous avez encore <span class="remaining_time"></span> minutes pour pouvoir se connecter à cet utilisateur à partir de cet appareil
         </div>
         <div class="alert alert-danger unhandled_error" style="display:none;">
             <strong>Désolé!</strong> une erreur inattendue s'est intervenue :(
