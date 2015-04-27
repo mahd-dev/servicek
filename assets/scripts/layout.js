@@ -79,76 +79,76 @@ var Layout = function () {
 	};
 
 	// Handles main menu
-    var handleMainMenu = function () {
+	var handleMainMenu = function () {
 
-        // handle menu toggler icon click
-        $(".page-header .menu-toggler").on("click", function(event) {
-            if (app.getViewPort().width < resBreakpointMd) {
-                var menu = $(".page-header .page-header-menu");
-                if (menu.hasClass("page-header-menu-opened")) {
-                    menu.slideUp(300);
-                    menu.removeClass("page-header-menu-opened");
-                } else {
-                    menu.slideDown(300);
-                    menu.addClass("page-header-menu-opened");
-                }
+		// handle menu toggler icon click
+		$(".page-header .menu-toggler").on("click", function (event) {
+			if (app.getViewPort().width < resBreakpointMd) {
+				var menu = $(".page-header .page-header-menu");
+				if (menu.hasClass("page-header-menu-opened")) {
+					menu.slideUp(300);
+					menu.removeClass("page-header-menu-opened");
+				} else {
+					menu.slideDown(300);
+					menu.addClass("page-header-menu-opened");
+				}
 
-                if ($('body').hasClass('page-header-top-fixed')) {
-                    app.scrollTop();
-                }
-            }
-        });
+				if ($('body').hasClass('page-header-top-fixed')) {
+					app.scrollTop();
+				}
+			}
+		});
 
-        // handle sub dropdown menu click for mobile devices only
-        $(".dropdown-submenu > a").on("click", function(e) {
-            if (app.getViewPort().width < resBreakpointMd) {
-                if ($(this).next().hasClass('dropdown-menu')) {
-                    e.stopPropagation();
+		// handle sub dropdown menu click for mobile devices only
+		$(".dropdown-submenu > a").on("click", function (e) {
+			if (app.getViewPort().width < resBreakpointMd) {
+				if ($(this).next().hasClass('dropdown-menu')) {
+					e.stopPropagation();
 
-                    if ($(this).parent().hasClass("open")) {
-                        $(this).parent().removeClass("open");
-                        $(this).next().hide();
-                    } else {
-                        $(this).parent().addClass("open");
-                        $(this).next().show();
-                    }
-                }
-            }
-        });
+					if ($(this).parent().hasClass("open")) {
+						$(this).parent().removeClass("open");
+						$(this).next().hide();
+					} else {
+						$(this).parent().addClass("open");
+						$(this).next().show();
+					}
+				}
+			}
+		});
 
-        // handle hover dropdown menu for desktop devices only
-        if (app.getViewPort().width >= resBreakpointMd) {
-            $('[data-hover="megamenu-dropdown"]').not('.hover-initialized').each(function() {   
-                $(this).dropdownHover(); 
-                $(this).addClass('hover-initialized'); 
-            });
-        }
-        
-        $(document).on('click', '.mega-menu-dropdown .dropdown-menu', function (e) {
-            e.stopPropagation();
-        });
+		// handle hover dropdown menu for desktop devices only
+		if (app.getViewPort().width >= resBreakpointMd) {
+			$('[data-hover="megamenu-dropdown"]').not('.hover-initialized').each(function () {
+				$(this).dropdownHover();
+				$(this).addClass('hover-initialized');
+			});
+		}
 
-        // handle fixed mega menu(minimized) 
-        $(window).scroll(function() {                
-            var offset = 75;
-            if ($('body').hasClass('page-header-menu-fixed')) {
-                if ($(window).scrollTop() > offset){
-                    $(".page-header-menu").addClass("fixed");
-                } else {
-                    $(".page-header-menu").removeClass("fixed");  
-                }
-            }
+		$(document).on('click', '.mega-menu-dropdown .dropdown-menu', function (e) {
+			e.stopPropagation();
+		});
 
-            if ($('body').hasClass('page-header-top-fixed')) {
-                if ($(window).scrollTop() > offset){
-                    $(".page-header-top").addClass("fixed");
-                } else {
-                    $(".page-header-top").removeClass("fixed");  
-                }
-            }
-        });
-    };
-	
+		// handle fixed mega menu(minimized) 
+		$(window).scroll(function () {
+			var offset = 75;
+			if ($('body').hasClass('page-header-menu-fixed')) {
+				if ($(window).scrollTop() > offset) {
+					$(".page-header-menu").addClass("fixed");
+				} else {
+					$(".page-header-menu").removeClass("fixed");
+				}
+			}
+
+			if ($('body').hasClass('page-header-top-fixed')) {
+				if ($(window).scrollTop() > offset) {
+					$(".page-header-top").addClass("fixed");
+				} else {
+					$(".page-header-top").removeClass("fixed");
+				}
+			}
+		});
+	};
+
 	// Handle sidebar menu
 	var handleSidebarMenu = function () {
 		$('.page-sidebar').on('click', 'li > a', function (e) {
@@ -372,6 +372,20 @@ var Layout = function () {
 			$(this).closest('.search-form').submit();
 		});
 	};
+	
+	var handleContentHeight = function () {
+		var height;
+
+		if ($('body').height() < app.getViewPort().height) {
+			height = app.getViewPort().height -
+				$('.page-header').outerHeight() -
+				($('.page-container').outerHeight() - $('.page-content').outerHeight()) -
+				$('.page-prefooter').outerHeight() -
+				$('.page-footer').outerHeight();
+
+			$('.page-content').css('min-height', height);
+		}
+	};
 
 	// Handles the go to top button at the footer
 	var handleGoTop = function () {
@@ -407,33 +421,33 @@ var Layout = function () {
 
 	var handleAjaxify = function () {
 
-		// handle ajax link within main content
-		$(document).on('click', '.ajaxify', function (e) { // required : href; optional : data-method, data-params, data-container
-			e.preventDefault();
-			app.scrollTop();
+			// handle ajax link within main content
+			$(document).on('click', '.ajaxify', function (e) { // required : href; optional : data-method, data-params, data-container
+				e.preventDefault();
+				app.scrollTop();
 
-			var url = $(this).attr("href");
+				var url = $(this).attr("href");
 
-			var method = $(this).attr("data-method");
-			var params = $(this).attr("data-params");
-			var container = $(this).attr("data-container");
-			var prevent_history_state = ($(this).attr("data-prevent_history_state")=="true"?true:false);
-			Layout.ajaxify(url, method, params, container, prevent_history_state);
-		});
+				var method = $(this).attr("data-method");
+				var params = $(this).attr("data-params");
+				var container = $(this).attr("data-container");
+				var prevent_history_state = ($(this).attr("data-prevent_history_state") == "true" ? true : false);
+				Layout.ajaxify(url, method, params, container, prevent_history_state);
+			});
 
-		// handle scrolling to top on responsive menu toggler click when header is fixed for mobile view
-		$(document).on('click', '.page-header-fixed-mobile .responsive-toggler', function () {
-			app.scrollTop();
-		});
+			// handle scrolling to top on responsive menu toggler click when header is fixed for mobile view
+			$(document).on('click', '.page-header-fixed-mobile .responsive-toggler', function () {
+				app.scrollTop();
+			});
 
-		// handle history popstate event
-		$(window).bind("popstate", function(e) {
-			var s = e.originalEvent.state;
-			if(s) Layout.ajaxify(s.href,s.method,s.params,s.container,true);
-			else Layout.ajaxify(location.href,undefined,undefined,undefined,true);
-		});
-	}
-	//* END:CORE HANDLERS *//
+			// handle history popstate event
+			$(window).bind("popstate", function (e) {
+				var s = e.originalEvent.state;
+				if (s) Layout.ajaxify(s.href, s.method, s.params, s.container, true);
+				else Layout.ajaxify(location.href, undefined, undefined, undefined, true);
+			});
+		}
+		//* END:CORE HANDLERS *//
 
 	return {
 
@@ -443,11 +457,11 @@ var Layout = function () {
 		initHeader: function () {
 			handleHeader(); // handles horizontal menu
 		},
-		
+
 		initMainMenu: function () {
 			handleMainMenu();
 		},
-		
+
 		setSidebarMenuActiveLink: function (mode, el) {
 			handleSidebarMenuActiveLink(mode, el);
 		},
@@ -481,13 +495,14 @@ var Layout = function () {
 			this.initMainMenu();
 			this.initSidebar();
 			this.initContent();
+			this.fixContentHeight();
 			this.initFooter();
 			this.initAjaxify();
 		},
 
 		//public function to fix the sidebar and content height accordingly
 		fixContentHeight: function () {
-			return;
+			handleContentHeight();
 		},
 
 		initFixedSidebarHoverEffect: function () {
@@ -517,13 +532,18 @@ var Layout = function () {
 				dataType: "html",
 				success: function (res) {
 					container.addClass("animate");
-					setTimeout(function(){
-                        if(prevent_history_state != true) history.pushState({href:href,method:method,params:params,container:container.selector}, document.title, href);
+					setTimeout(function () {
+						if (prevent_history_state != true) history.pushState({
+							href: href,
+							method: method,
+							params: params,
+							container: container.selector
+						}, document.title, href);
 						container.html(res);
 						container.removeClass("animate");
 						Layout.fixContentHeight(); // fix content height
 						app.initAjax(); // initialize core stuff
-					},50);
+					}, 50);
 				},
 				error: function (xhr, ajaxOptions, thrownError) {}
 			});

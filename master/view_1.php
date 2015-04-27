@@ -103,12 +103,12 @@
 				<div class="hor-menu ">
 					<ul class="nav navbar-nav">
 						<li>
-							<a href="index.html">Dashboard</a>
+							<a href="<?php echo url_root;?>" class="ajaxify">Actualités</a>
 						</li>
 						<li class="menu-dropdown mega-menu-dropdown active">
 							<a data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">
-						Features <i class="fa fa-angle-down"></i>
-						</a>
+								Features <i class="fa fa-angle-down"></i>
+							</a>
 							<ul class="dropdown-menu" style="min-width: 710px">
 								<li>
 									<div class="mega-menu-content">
