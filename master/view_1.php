@@ -52,7 +52,7 @@
 				</a>
 				</div>
 
-				<a href="javascript:;" class="menu-toggler"></a>
+				<a href="javascript:;" class="menu-toggler"><i class="fa fa-bars"></i></a>
 
 				<div class="top-menu">
 					<ul class="nav navbar-nav pull-right">

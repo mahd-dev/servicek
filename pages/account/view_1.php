@@ -35,7 +35,7 @@
 									<div class="tab-pane active" id="companies_tab">
 										<div class="portlet light">
 											<div class="portlet-title tabbable-line">
-												<ul class="nav nav-tabs">
+												<ul class="nav nav-tabs pull-left">
 													<li class="active">
 														<a href="#" data-toggle="tab" aria-expanded="true">
 															Sociétés

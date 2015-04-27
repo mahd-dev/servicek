@@ -1083,6 +1083,13 @@ Page Header
   opacity: 1;
   filter: alpha(opacity=100);
 }
+.page-header .page-header-top .menu-toggler i {
+  position: absolute;
+  left: 25px;
+  top: 25px;
+  font-size: 25px;
+  color: #fff;
+}
 .page-header .page-header-menu {
   display: block;
   height: 51px;
