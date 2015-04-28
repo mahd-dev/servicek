@@ -209,6 +209,31 @@ LOCK TABLES `product` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `restricted_user_ip`
+--
+
+DROP TABLE IF EXISTS `restricted_user_ip`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `restricted_user_ip` (
+  `ip_address` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
+  `id_user` bigint(20) NOT NULL,
+  `attempts` int(11) DEFAULT '1',
+  `restriction_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ip_address`,`id_user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `restricted_user_ip`
+--
+
+LOCK TABLES `restricted_user_ip` WRITE;
+/*!40000 ALTER TABLE `restricted_user_ip` DISABLE KEYS */;
+/*!40000 ALTER TABLE `restricted_user_ip` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `service`
 --
 
@@ -298,4 +323,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-24 20:47:40
+-- Dump completed on 2015-04-28 12:45:24
