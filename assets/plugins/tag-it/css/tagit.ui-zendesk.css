@@ -1,0 +1,42 @@
+
+/* Optional scoped theme for tag-it which mimics the zendesk widget. */
+
+
+
+ul.tagit li.tagit-choice {
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	
+	background-color: #eee;
+
+}
+ul.tagit li.tagit-choice .tagit-label:not(a) {
+	color: #555;
+}
+ul.tagit li.tagit-choice a.tagit-close {
+	text-decoration: none;
+}
+
+ul.tagit li.tagit-choice .tagit-close .text-icon {
+	display: none;
+}
+ul.tagit li.tagit-choice .tagit-close .icon-close {
+	top:-3px;
+	left: -2px;
+}
+ul.tagit li.tagit-choice:hover, ul.tagit li.tagit-choice.remove {
+	background-color: #ddd;
+}
+
+ul.tagit input[type="text"] {
+	background: none;
+}
+.ui-widget {
+	font-size: 1.1em;
+}
+
+* html .tagit-autocomplete.ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
+
+.tagit-autocomplete .ui-state-hover, .tagit-autocomplete .ui-state-focus { background: #eee; }
+.tagit-autocomplete .ui-menu-item {padding: 5px;}
