@@ -1,5 +1,9 @@
 page_script({
 	init: function () {
-		console.log("master page init");
+
+		$("#master_search_form").submit(function (e) {
+			e.preventDefault();
+			Layout.ajaxify(location.origin + "/search?q=" + $(this).find("input[name=q]").val());
+		});
 	}
 });

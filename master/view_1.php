@@ -22,6 +22,7 @@
 	<link href="<?php echo cdn;?>/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css">
 	<link href="<?php echo cdn;?>/plugins/bootstrap/css/bootstrap<?php echo(rtl?"-rtl":"");?>.min.css" rel="stylesheet" type="text/css">
 	<link href="<?php echo cdn;?>/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css">
+
 	<link href="<?php echo cdn;?>/plugins/bootstrap-switch/css/bootstrap-switch<?php echo(rtl?"-rtl":"");?>.min.css" rel="stylesheet" type="text/css" />
 
 	<link href="<?php echo cdn;?>/css/components-rounded<?php echo(rtl?"-rtl":"");?>.css" id="style_components" rel="stylesheet" type="text/css" />
@@ -29,6 +30,9 @@
 	<link href="<?php echo cdn;?>/css/layout<?php echo(rtl?"-rtl":"");?>.css" rel="stylesheet" type="text/css" />
 	<link href="<?php echo cdn;?>/css/themes/default<?php echo(rtl?"-rtl":"");?>.css" rel="stylesheet" type="text/css" />
 	<link href="<?php echo cdn;?>/css/custom<?php echo(rtl?"-rtl":"");?>.css" rel="stylesheet" type="text/css" />
+
+	<link href="<?php echo cdn;?>/plugins/tag-it/css/jquery.tagit.css" rel="stylesheet" type="text/css" />
+	<link href="<?php echo cdn;?>/plugins/tag-it/css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css" />
 
 	<link rel="shortcut icon" href="<?php echo cdn;?>/img/favicons/favicon.png" />
 
@@ -88,11 +92,11 @@
 		<div class="page-header-menu">
 			<div class="container">
 				<!-- BEGIN HEADER SEARCH BOX -->
-				<form class="search-form" action="search" method="GET">
+				<form id="master_search_form" class="search-form">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search" name="query">
+						<input type="text" class="form-control" placeholder="Search" name="q">
 						<span class="input-group-btn">
-					<a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+						<a class="btn submit"><i class="icon-magnifier"></i></a>
 					</span>
 					</div>
 				</form>
@@ -186,9 +190,12 @@
 	<script src="<?php echo cdn;?>/plugins/jquery.blockui.min.js" type="text/javascript"></script>
 	<script src="<?php echo cdn;?>/plugins/jquery.cokie.min.js" type="text/javascript"></script>
 	<script src="<?php echo cdn;?>/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+	
 	<script src="<?php echo cdn;?>/plugins/jquery.form.js" type="text/javascript"></script>
 	<script src="<?php echo cdn;?>/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
-
+	
+	<script src="<?php echo cdn;?>/plugins/tag-it/js/tag-it.min.js" type="text/javascript"></script>
+	
 	<script src="<?php echo cdn;?>/scripts/app.js" type="text/javascript"></script>
 	<script src="<?php echo cdn;?>/scripts/layout.js" type="text/javascript"></script>
 

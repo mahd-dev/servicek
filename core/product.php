@@ -27,6 +27,13 @@
                     break;
                     case "company":
                         return new company($this->id_company);
+                    break;
+                    case "categories":
+                        $list = array();
+                        $q=$db->query("select id_category from category_children where (id_children='".$this->id."' and children_type='product')");
+                        while($r=$q->fetch_row()) $list[] = new category($r[0]);
+                        return $list;
+                    break;
                     default:
                         $q=$db->query("select ".$name." from product where (id='".$this->id."')");
 			            $r=$q->fetch_row();

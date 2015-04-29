@@ -1,5 +1,5 @@
 <?php
-
+	
 	session_start();
 
 	// autoload required core classes
@@ -23,6 +23,8 @@
 	// check login
 	$user = (isset($_SESSION["user"]) ? unserialize($_SESSION["user"]) : null);
 
+	// var_dump(gf::search("aa bb"));
+	
 	// routing url
 	include "router.php";
 ?>

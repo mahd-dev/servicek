@@ -10,7 +10,7 @@
 		case "":
 			$req_page = "pages/home/controller.php";break;
         case "search":
-			if(isset($url[1])) $_GET["q"]=$url[1];
+			if(isset($url[1]) && $url[1]!="autocomplete") $_GET["q"]=$url[1];
 			$req_page = "pages/search/controller.php";break;
         case "login":
 			$req_page = "pages/login/controller.php";break;
