@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.24, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.14  Distrib 5.5.41-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: loop
 -- ------------------------------------------------------
--- Server version	5.6.24-0ubuntu2
+-- Server version	5.5.41-MariaDB-1ubuntu0.14.10.1-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,8 +26,9 @@ CREATE TABLE `category` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL,
   `icon` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`id`),
+  FULLTEXT(`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,8 +36,7 @@ CREATE TABLE `category` (
 --
 
 LOCK TABLES `category` WRITE;
-/*!40000 ALTER TABLE `category` DISABLE KEYS */;
-/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+ALTER TABLE `category` ENABLE KEYS;
 UNLOCK TABLES;
 
 --
@@ -51,7 +51,7 @@ CREATE TABLE `category_children` (
   `id_children` bigint(20) NOT NULL DEFAULT '0',
   `children_type` varchar(15) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id_category`,`id_children`,`children_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,8 +59,7 @@ CREATE TABLE `category_children` (
 --
 
 LOCK TABLES `category_children` WRITE;
-/*!40000 ALTER TABLE `category_children` DISABLE KEYS */;
-/*!40000 ALTER TABLE `category_children` ENABLE KEYS */;
+ALTER TABLE `category_children` ENABLE KEYS;
 UNLOCK TABLES;
 
 --
@@ -78,8 +77,11 @@ CREATE TABLE `company` (
   `logo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `cover` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `creation_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`id`),
+  FULLTEXT(`name`),
+  FULLTEXT(`slogan`,`description`),
+  FULLTEXT(`name`,`slogan`,`description`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,8 +89,7 @@ CREATE TABLE `company` (
 --
 
 LOCK TABLES `company` WRITE;
-/*!40000 ALTER TABLE `company` DISABLE KEYS */;
-/*!40000 ALTER TABLE `company` ENABLE KEYS */;
+ALTER TABLE `company` ENABLE KEYS;
 UNLOCK TABLES;
 
 --
@@ -109,8 +110,9 @@ CREATE TABLE `company_seat` (
   `mobile` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL,
   `creation_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`id`),
+  FULLTEXT(`name`,`address`,`tel`,`mobile`,`email`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,8 +120,7 @@ CREATE TABLE `company_seat` (
 --
 
 LOCK TABLES `company_seat` WRITE;
-/*!40000 ALTER TABLE `company_seat` DISABLE KEYS */;
-/*!40000 ALTER TABLE `company_seat` ENABLE KEYS */;
+ALTER TABLE `company_seat` ENABLE KEYS;
 UNLOCK TABLES;
 
 --
@@ -141,8 +142,11 @@ CREATE TABLE `job` (
   `mobile` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL,
   `creation_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`id`),
+  FULLTEXT(`name`),
+  FULLTEXT(`description`, `address`, `tel`, `mobile`, `email`),
+  FULLTEXT(`name`,`description`,`address`,`tel`,`mobile`,`email`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,8 +154,7 @@ CREATE TABLE `job` (
 --
 
 LOCK TABLES `job` WRITE;
-/*!40000 ALTER TABLE `job` DISABLE KEYS */;
-/*!40000 ALTER TABLE `job` ENABLE KEYS */;
+ALTER TABLE `job` ENABLE KEYS;
 UNLOCK TABLES;
 
 --
@@ -168,7 +171,7 @@ CREATE TABLE `offer` (
   `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `creation_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -176,8 +179,7 @@ CREATE TABLE `offer` (
 --
 
 LOCK TABLES `offer` WRITE;
-/*!40000 ALTER TABLE `offer` DISABLE KEYS */;
-/*!40000 ALTER TABLE `offer` ENABLE KEYS */;
+ALTER TABLE `offer` ENABLE KEYS;
 UNLOCK TABLES;
 
 --
@@ -195,8 +197,9 @@ CREATE TABLE `product` (
   `price` float DEFAULT NULL,
   `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `creation_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`id`),
+  FULLTEXT(`name`,`description`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -204,33 +207,7 @@ CREATE TABLE `product` (
 --
 
 LOCK TABLES `product` WRITE;
-/*!40000 ALTER TABLE `product` DISABLE KEYS */;
-/*!40000 ALTER TABLE `product` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `restricted_user_ip`
---
-
-DROP TABLE IF EXISTS `restricted_user_ip`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `restricted_user_ip` (
-  `ip_address` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
-  `id_user` bigint(20) NOT NULL,
-  `attempts` int(11) DEFAULT '1',
-  `restriction_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`ip_address`,`id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `restricted_user_ip`
---
-
-LOCK TABLES `restricted_user_ip` WRITE;
-/*!40000 ALTER TABLE `restricted_user_ip` DISABLE KEYS */;
-/*!40000 ALTER TABLE `restricted_user_ip` ENABLE KEYS */;
+ALTER TABLE `product` ENABLE KEYS;
 UNLOCK TABLES;
 
 --
@@ -247,8 +224,9 @@ CREATE TABLE `service` (
   `description` varchar(4095) COLLATE utf8_unicode_ci DEFAULT NULL,
   `price` float DEFAULT NULL,
   `creation_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`id`),
+  FULLTEXT(`name`,`description`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -256,8 +234,7 @@ CREATE TABLE `service` (
 --
 
 LOCK TABLES `service` WRITE;
-/*!40000 ALTER TABLE `service` DISABLE KEYS */;
-/*!40000 ALTER TABLE `service` ENABLE KEYS */;
+ALTER TABLE `service` ENABLE KEYS;
 UNLOCK TABLES;
 
 --
@@ -278,7 +255,7 @@ CREATE TABLE `user` (
   `mobile` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
   `creation_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -286,9 +263,8 @@ CREATE TABLE `user` (
 --
 
 LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` VALUES (2,NULL,'user','test','123','Test user','test@server.com','123456789','2015-04-24 19:46:41');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+ALTER TABLE `user` ENABLE KEYS;
 UNLOCK TABLES;
 
 --
@@ -302,7 +278,7 @@ CREATE TABLE `user_admin` (
   `id_user` bigint(20) NOT NULL DEFAULT '0',
   `id_company` bigint(20) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_user`,`id_company`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -310,8 +286,7 @@ CREATE TABLE `user_admin` (
 --
 
 LOCK TABLES `user_admin` WRITE;
-/*!40000 ALTER TABLE `user_admin` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user_admin` ENABLE KEYS */;
+ALTER TABLE `user_admin` ENABLE KEYS;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -323,4 +298,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-28 12:45:24
+-- Dump completed on 2015-04-29 22:35:41

@@ -8,14 +8,28 @@
 			$q = $db->real_escape_string($q);
 			
 			$rslt = array();
-
+			
 			$q_company=$db->query("
-				SELECT company.id, 
-				(((MATCH (company.name) AGAINST ('$q')) + (MATCH (company.slogan, company.description, company_seat.name, company_seat.address, company_seat.tel, company_seat.mobile, company_seat.email) AGAINST ('$q'))) / 2)
+				SELECT id, 
+				(((MATCH (name) AGAINST ('$q')) + (MATCH (slogan, description) AGAINST ('$q'))) / 2)
 				AS score
-    			FROM company, company_seat WHERE MATCH (company.name, company.slogan, company.description, company_seat.name, company_seat.address, company_seat.tel, company_seat.mobile, company_seat.email) AGAINST ('$q')
+    			FROM company WHERE (MATCH (name, slogan, description) AGAINST ('$q'))
     		") or die("q_company : ".$db->error);
 			while ($r=$q_company->fetch_row()) $rslt[] = array("obj" => new company($r[0]), "score" => $r[1]);
+
+			$q_company_seat=$db->query("
+				SELECT id_company, MATCH (name, address, tel, mobile, email) AGAINST ('$q') AS score
+    			FROM company_seat WHERE MATCH (name, address, tel, mobile, email) AGAINST ('$q')
+			") or die("q_category : ".$db->error);
+			while ($r=$q_company_seat->fetch_row()) {
+				$c = new company($r[0]);
+				$ex = array_search($c, array_column($rslt, 'obj'));
+				if($ex) $rslt[$ex]["score"] += $r[1];
+				else $rslt[] = array("obj" => $c, "score" => $r[1]);
+			}
+
+			// 
+
 
 			$q_job=$db->query("
 				SELECT id,
@@ -44,7 +58,7 @@
 			while ($r=$q_category->fetch_row()) {
 				$c = new category($r[0]);
 				foreach($c->childrens as $child){
-					$ex = array_search($obj, array_column($rslt, 'obj'));
+					$ex = array_search($child, array_column($rslt, 'obj'));
 					if($ex) $rslt[$ex]["score"] += $r[1];
 					else $rslt[] = array("obj" => $child, "score" => $r[1]);
 				}
