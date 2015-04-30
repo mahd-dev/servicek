@@ -2,7 +2,12 @@
 .profile-sidebar-portlet{
 	padding: 12px 0px 15px 0px !important;
 }
-
+#new_company_modal .form-group .col-sm-10{
+margin-bottom: 10px!important;
+}
+#new_job_modal .form-group .col-sm-10{
+margin-bottom: 10px!important;
+}
 .profile-userpic img {
   float: none;
   margin: 0 auto;

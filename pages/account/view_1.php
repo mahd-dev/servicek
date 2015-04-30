@@ -44,7 +44,7 @@
 												</ul>
 												<div class="btn-group btn-group-solid pull-right">
 													<a type="button" class="btn  green-haze " data-toggle="modal" href="#new_company_modal">Créer une Société</a>
-													<a type="button" class="btn  blue-madison" data-toggle="modal" href="#new_job_modal">Créer une travail</a>&nbsp; &nbsp;
+													<a type="button" class="btn  blue-madison" data-toggle="modal" href="#new_job_modal">Créer un travail</a>&nbsp; &nbsp;
 												</div>
 											</div>
 											<div class="portlet-body">
@@ -192,13 +192,53 @@
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 				<h4 class="modal-title">Modal Title</h4>
 			</div>
+			<form>
 			<div class="modal-body">
-				Modal body goes here
-			</div>
+			
+				 <div class="form-group">
+				    <label for="inputNom3" class="col-sm-2 control-label">Nom</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="inputEmail3" placeholder="Nom">
+				    </div>
+				    
+				  </div>
+				  <div class="form-group">
+				    <label for="inputNom3" class="col-sm-2 control-label">Slogan</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="inputEmail3" placeholder="Slogan">
+				    </div>
+				    
+				  </div>
+				  <div class="form-group">
+				    <label for="inputDesc3" class="col-sm-2 control-label">Déscription</label>
+				    <div class="col-sm-10">
+				    	<textarea class="form-control" rows="3" placeholder="Déscription"></textarea>
+				    </div>
+				    
+				  </div>
+				 
+				  <div class="form-group">
+				    <label for="exampleInputFile" class="col-sm-2 control-label">Logo</label>
+				    <div class="col-sm-10">
+				    <input type="file" id="InputFile">				    	
+				    </div>
+				    <p class="help-block">&nbsp;</p>
+				    
+				  </div>
+				   <div class="form-group">
+				    <label for="exampleInputFile" class="col-sm-2 control-label">Cover</label>
+				    <div class="col-sm-10">
+				    <input type="file" id="InputFile">				    	
+				    </div>
+				    <p class="help-block">&nbsp;</p>
+				    
+				  </div>
+				</div>
 			<div class="modal-footer">
-				<button type="button" class="btn default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn blue">Save changes</button>
+					<button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+				<button type="button" class="btn blue">Ajouter</button>
 			</div>
+			</form>
 		</div>
 	</div>
 </div>
@@ -210,13 +250,67 @@
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 				<h4 class="modal-title">Modal Title</h4>
 			</div>
+			<form>
 			<div class="modal-body">
-				Modal body goes here
-			</div>
+			
+				 <div class="form-group">
+				    <label for="inputNom3" class="col-sm-2 control-label">Nom</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="inputEmail3" placeholder="Nom">
+				    </div>
+				    
+				  </div>
+				  <div class="form-group">
+				    <label for="inputDesc3" class="col-sm-2 control-label">Adresse</label>
+				    <div class="col-sm-10">
+				    	<textarea class="form-control" rows="3" placeholder="Adresse"></textarea>
+				    </div>
+				    
+				  </div>
+				  <div class="form-group">
+				    <label for="inputNom3" class="col-sm-2 control-label">E-mail</label>
+				    <div class="col-sm-10">
+				      <input type="email" class="form-control" id="inputEmail3" placeholder="Slogan">
+				    </div>
+				    
+				  </div>
+				  <div class="form-group">
+				    <label for="inputNom3" class="col-sm-2 control-label">Téléphone</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="inputEmail3" placeholder="Téléphone">
+				    </div>
+				    
+				  </div>
+				  <div class="form-group">
+				    <label for="inputNom3" class="col-sm-2 control-label">Portable</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="inputEmail3" placeholder="Portable">
+				    </div>
+				    
+				  </div>
+				  <div class="form-group">
+				    <label for="inputDesc3" class="col-sm-2 control-label">Déscription</label>
+				    <div class="col-sm-10">
+				    	<textarea class="form-control" rows="3" placeholder="Déscription"></textarea>
+				    </div>
+				    
+				  </div>
+				 
+				  <div class="form-group">
+				    <label for="exampleInputFile" class="col-sm-2 control-label">image</label>
+				    <div class="col-sm-10">
+				    <input type="file" id="InputFile">				    	
+				    </div>
+				    <p class="help-block">&nbsp;</p>
+				    
+				  </div>
+				   
+				</div>
 			<div class="modal-footer">
-				<button type="button" class="btn default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn blue">Save changes</button>
+					<button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+				<button type="button" class="btn blue">Ajouter</button>
 			</div>
+			</form>
 		</div>
 	</div>
 </div>

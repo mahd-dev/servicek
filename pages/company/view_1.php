@@ -15,9 +15,7 @@
 					Developer
 				</div>
 			</div>
-			<div class="profile-userbuttons">
-				<button type="button" class="btn btn-circle btn-danger btn-sm">Message</button>
-			</div>
+			
 
 		</div>
 		<div class="portlet light">
@@ -100,6 +98,10 @@
 							<li class="active"><a href="#services" data-toggle="tab" aria-expanded="true">Services</a></li>
 							<li><a href="#prods" data-toggle="tab" aria-expanded="false">Produits</a></li>
 						</ul>
+						<div class="btn-group btn-group-solid pull-right">
+													<a type="button" class="btn  green-haze " data-toggle="modal" href="#new_service_modal">Ajouter un Services</a>
+													<a type="button" class="btn  blue-madison" data-toggle="modal" href="#new_produit_modal">Ajouter un Produits</a>&nbsp; &nbsp;
+						</div>
 					</div>
 					<div class="portlet-body">
 						<div class="tab-content">
@@ -180,7 +182,99 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="new_service_modal" role="basic" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+				<h4 class="modal-title">Ajouter un Service</h4>
+			</div>
+			<form>
+			<div class="modal-body">
+				 <div class="form-group">
+				    <label for="inputNom3" class="col-sm-2 control-label">Nom</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="inputEmail3" placeholder="Nom">
+				    </div>
+				    
+				  </div>
+				  <div class="form-group">
+				    <label for="inputDesc3" class="col-sm-2 control-label" placeholder="Déscription">Déscription</label>
+				    <div class="col-sm-10">
+				    	<textarea class="form-control" rows="3"></textarea>
+				    </div>
+				    
+				  </div>
+				  <div class="form-group">
+				   <label for="exampleInputAmount" class="col-sm-2 control-label">Prix</label>
+				  	<div class="col-sm-10">
+				    <div class="input-group ">
+				      <div class="input-group-addon">DNT</div>
+				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Prix">
+				    </div>
+				  	</div>
+				  </div>
+				 <p class="help-block">&nbsp;</p>
+			</div>
+			<div class="modal-footer">
+					<button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+				<button type="button" class="btn blue">Ajouter</button>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
 
+<div class="modal fade" id="new_produit_modal" role="basic" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+				<h4 class="modal-title">Ajouter un Produit</h4>
+			</div>
+			<form>
+			<div class="modal-body">
+			
+				 <div class="form-group">
+				    <label for="inputNom3" class="col-sm-2 control-label">Nom</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" id="inputEmail3" placeholder="Nom">
+				    </div>
+				    
+				  </div>
+				  <div class="form-group">
+				    <label for="inputDesc3" class="col-sm-2 control-label" placeholder="Déscription">Déscription</label>
+				    <div class="col-sm-10">
+				    	<textarea class="form-control" rows="3"></textarea>
+				    </div>
+				    
+				  </div>
+				  <div class="form-group">
+				   <label for="exampleInputAmount" class="col-sm-2 control-label">Prix</label>
+				  	<div class="col-sm-10">
+				    <div class="input-group ">
+				      <div class="input-group-addon">DNT</div>
+				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Prix">
+				    </div>
+				  	</div>
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputFile" class="col-sm-2 control-label">Image</label>
+				    <div class="col-sm-10">
+				    <input type="file" id="InputFile">				    	
+				    </div>
+				    <p class="help-block">&nbsp;</p>
+				    
+				  </div>
+				</div>
+			<div class="modal-footer">
+					<button type="button" class="btn default" data-dismiss="modal">Fermer</button>
+				<button type="button" class="btn blue">Ajouter</button>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
 <!-- custom page script -->
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 <script src="<?php echo url_root;?>/pages/company/script_1.js" type="text/javascript"></script>

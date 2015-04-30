@@ -8,7 +8,12 @@ body,
 	padding: 0px;
 	width: 100%;
 }
-
+#new_produit_modal .form-group .col-sm-10{
+margin-bottom: 10px!important;
+}
+#new_service_modal .form-group .col-sm-10{
+margin-bottom: 10px!important;
+}
 .profile-sidebar-portlet {
 	padding: 12px 0px 15px 0px !important;
 }
