@@ -2,7 +2,7 @@
 	
     if($user!=null) { // already logged in
         include"view_2.php";
-        goto logged_in;
+        goto skip_this_page;
     }
     
     // Handling query
@@ -36,8 +36,8 @@
                         "remaining_attempts" => $login_resp["remaining_attempts"]
                     )
                 )));
-            }else die("unknown_error");
-        }else die($login_resp); // username_error || password_error
+            }else die("unhandled_error");
+        }else die($login_resp); // username_error
     }
     
     // definig page SEO parameters
@@ -48,5 +48,5 @@
 	
 	include "view_1.php";
 
-    logged_in: // jump to end for already logged in
+    skip_this_page: // jump to end for already logged in
 ?>

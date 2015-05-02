@@ -15,14 +15,29 @@
         case "login":
 			$req_page = "pages/login/controller.php";break;
         case "logout":
-            session_unset();
+            session_destroy();
             $user=null;
             $logout=true;
 			$req_page = "pages/home/controller.php";break;
         case "register":
 			$req_page = "pages/register/controller.php";break;
         case "account":
+        	if(isset($url[1]) && $url[1]=="set_user_attrib") $set_user_attrib=true;
 			$req_page = "pages/account/controller.php";break;
+		case "new":
+			if(!isset($url[1])){
+				$req_page="pages/404/controller.php";break;
+			}else{
+				switch ($url[1]) {
+					case "company":
+						$req_page = "pages/newcompany/controller.php";break;
+					case "job":
+						$req_page = "pages/newjob/controller.php";break;
+					default:
+						$req_page="pages/404/controller.php";break;
+				}
+				break;
+			}
         case "job":
 			if(isset($url[1])) $_GET["id"]=$url[1];
 			$req_page = "pages/job/controller.php";break;
@@ -50,7 +65,7 @@
 			die(include"seo/sitemap.php");break;
 
 		default:
-			$req_page="pages/404/controller.php"; break;
+			$req_page="pages/404/controller.php";break;
 	}
 
 	// running selected page

@@ -223,6 +223,7 @@ CREATE TABLE `service` (
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` varchar(4095) COLLATE utf8_unicode_ci DEFAULT NULL,
   `price` float DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `creation_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   FULLTEXT(`name`,`description`)
@@ -287,6 +288,30 @@ CREATE TABLE `user_admin` (
 
 LOCK TABLES `user_admin` WRITE;
 ALTER TABLE `user_admin` ENABLE KEYS;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `restricted_user_ip`
+--
+
+DROP TABLE IF EXISTS `restricted_user_ip`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `restricted_user_ip` (
+  `ip_address` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
+  `id_user` bigint(20) NOT NULL,
+  `attempts` int(11) DEFAULT '1',
+  `restriction_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ip_address`,`id_user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `restricted_user_ip`
+--
+
+LOCK TABLES `restricted_user_ip` WRITE;
+ALTER TABLE `restricted_user_ip` ENABLE KEYS;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

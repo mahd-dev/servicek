@@ -1,12 +1,24 @@
-<link href="<?php echo cdn;?>/pages/css/tasks.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="<?php echo cdn;?>/plugins/bootstrap-editable/bootstrap-editable/css/bootstrap-editable.css"/>
+
 <link href="<?php echo url_root;?>/pages/account/style.css" rel="stylesheet" type="text/css">
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-head">
+			<div class="page-title">
+				<h1>Mon compte&nbsp;&nbsp;<small>Gérer vos sociétés, modifier vos attributs...</small></h1>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div class="row">
 	<div class="col-md-12">
 		<div class="row">
 			<div class="profile-sidebar col-md-3">
 				<div class="portlet light profile-sidebar-portlet">
 					<div class="profile-usertitle">
-						<div class="profile-usertitle-name">Marcus Doe</div>
+						<div class="profile-usertitle-name"><?php echo $user->displayname;?></div>
 					</div>
 					<div class="profile-usermenu">
 						<ul class="nav">
@@ -27,153 +39,109 @@
 				</div>
 			</div>
 			<div class="profile-content col-md-9">
-				<div class="row">
-					<div class="col-md-12">
+				<div class="tab-content">
+					<div class="tab-pane active" id="companies_tab">
+						<?php if($num_pages==0){?>
+
+							<div class="note note-info">
+								<h3 class="block">Démarrez ici ..</h3>
+								<p>
+									 <div class="btn-group btn-group-solid margin-bottom-20">
+										<a type="button" class="btn btn-lg green-haze ajaxify" href="<?php echo url_root;?>/new/company"><i class="icon-flag"></i> Publier ma Société</a>
+										<a type="button" class="btn btn-lg blue-madison ajaxify" href="<?php echo url_root;?>/new/job"><i class="icon-pointer"></i> Publier mon travail</a>
+									</div>
+								</p>
+							</div>
+
+						<?php }else{?>
+							<div class="portlet light">
+								<div class="portlet-title tabbable-line">
+									<ul class="nav nav-tabs pull-left">
+										<li class="active">
+											<a data-toggle="tab" aria-expanded="true">
+												Sociétés
+											</a>
+										</li>
+									</ul>
+									<div class="btn-group btn-group-solid pull-right">
+										<a type="button" class="btn green-haze " href="<?php echo url_root;?>/new/company"><i class="icon-flag"></i> Publier ma Société</a>
+										<a type="button" class="btn blue-madison" href="<?php echo url_root;?>/new/job"><i class="icon-pointer"></i> Publier mon travail</a>
+									</div>
+								</div>
+								<div class="portlet-body">
+									<ul class="feeds">
+										<?php foreach($pages as $p){?>
+											<li><i class="icon-<?php echo($p["type"]=="company" ? "flag" : "pointer");?>"></i> <a href="<?php echo $p["url"];?>" class="ajaxify"><?php echo $p["name"];?></a></li>
+										<?php }?>
+									</ul>
+								</div>
+							</div>
+
+						<?php }?>
+
+					</div>
+					<div class="tab-pane" id="settings">
 						<div class="portlet light">
+							<div class="portlet-title tabbable-line">
+								<ul class="nav nav-tabs pull-left">
+									<li class="active">
+										<a href="#personal_data" data-toggle="tab" aria-expanded="true">Données personnelles</a>
+									</li>
+									<li>
+										<a href="#passoword_tab" data-toggle="tab" aria-expanded="false">Mot de passe</a>
+									</li>
+								</ul>
+							</div>
 							<div class="portlet-body">
 								<div class="tab-content">
-									<div class="tab-pane active" id="companies_tab">
-										<div class="portlet light">
-											<div class="portlet-title tabbable-line">
-												<ul class="nav nav-tabs pull-left">
-													<li class="active">
-														<a href="#" data-toggle="tab" aria-expanded="true">
-															Sociétés
-														</a>
-													</li>
-												</ul>
-												<div class="btn-group btn-group-solid pull-right">
-													<a type="button" class="btn  green-haze " data-toggle="modal" href="#new_company_modal">Créer une Société</a>
-													<a type="button" class="btn  blue-madison" data-toggle="modal" href="#new_job_modal">Créer un travail</a>&nbsp; &nbsp;
-												</div>
-											</div>
-											<div class="portlet-body">
-												<div class="tab-content">
-													<div class="tab-pane active">
-														<ul class="feeds">
-															<li>
-																<div class="col1">
-																	<div class="cont">
-																		<div class="cont-col1">
-																			<div class="label label-sm label-success">
-																				<i class="fa fa-bell-o"></i>
-																			</div>
-																		</div>
-																		<div class="cont-col2">
-																			<div class="desc">
-																				You have 4 pending tasks.
-																				<span class="label label-sm label-info">
-																					Take action <i class="fa fa-share"></i>
-																				</span>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-																<div class="col2">
-																	<div class="date">
-																		Just now
-																	</div>
-																</div>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-										</div>
+									<div class="tab-pane margin-bottom-30 active" id="personal_data">
+									<p class="margin-bottom-30">
+										<strong><h5>Nom complet</h5></strong>
+										<a href="javascript:;" id="displayname" data-type="text" data-original-title="Entrer votre nom complet"><?php echo $user->displayname;?></a>
+									</p>
+									<p class="margin-bottom-30">
+										<strong><h5>E-mail</h5></strong>
+										<a href="javascript:;" id="email" data-type="email" data-original-title="Entrer adresse électronique"><?php echo $user->email;?></a>
+									</p>
+									<p class="margin-bottom-30">
+										<strong><h5>Téléphone</h5></strong>
+										<a href="javascript:;" id="mobile" data-type="tel" data-original-title="Entrer votre numéro de téléphone"><?php echo $user->mobile;?></a>
+									</p>
 									</div>
-									<div class="tab-pane" id="settings">
-										<div class="portlet light">
-											<div class="portlet-title tabbable-line">
-												<ul class="nav nav-tabs">
-													<li class="active">
-														<a href="#personal_data" data-toggle="tab" aria-expanded="true">Données personnelles</a>
-													</li>
-													<li>
-														<a href="#passoword_tab" data-toggle="tab" aria-expanded="false">Mot de passe</a>
-													</li>
-												</ul>
-											</div>
-											<div class="portlet-body">
-												<div class="tab-content">
-													<div class="tab-pane active" id="personal_data" style="height:250px;">
-														<form role="form" class="col-md-6">
-															<div class="form-body">
-																<div class="form-group">
-																	<label>Nom complet</label>
-																	<div class="input-group">
-																		<span class="input-group-addon input-left">
-																				<i class="fa fa-user"></i>
-																				</span>
-																		<input type="text" class="form-control" placeholder="Nom complet" name="displayname">
-																	</div>
-																</div>
-																<div class="form-group">
-																	<label>E-mail</label>
-																	<div class="input-group">
-																		<span class="input-group-addon">
-																				<i class="fa fa-envelope"></i>
-																				</span>
-																		<input type="text" class="form-control" placeholder="Adresse Email" name="email">
-																	</div>
-																</div>
-
-																<div class="form-group">
-																	<label>Téléphone</label>
-																	<div class="input-group">
-																		<span class="input-group-addon input-left">
-																				<i class="fa fa-phone"></i>
-																				</span>
-																		<input type="text" class="form-control" placeholder="Téléphone" name="mobile">
-																	</div>
-																</div>
-
-															</div>
-															<div class="form-actions">
-																<button type="submit" class="btn blue pull-right">Enregistrer</button>
-															</div>
-														</form>
-													</div>
-													<div class="tab-pane" id="passoword_tab" style="height:250px;">
-														<form role="form" class="col-md-6">
-															<div class="form-body">
-																<div class="form-group">
-																	<label>Ancien mot de passe</label>
-																	<div class="input-group">
-																		<span class="input-group-addon input-left">
-																				<i class="fa fa-user"></i>
-																				</span>
-																		<input type="text" class="form-control" placeholder="Ancien mot de passe" name="old_password">
-																	</div>
-																</div>
-																<div class="form-group">
-																	<label>Nouveau mot de passe</label>
-																	<div class="input-group">
-																		<span class="input-group-addon">
-																				<i class="fa fa-envelope"></i>
-																				</span>
-																		<input type="text" class="form-control" placeholder="Nouveau mot de passe" name="new_password">
-																	</div>
-																</div>
-
-																<div class="form-group">
-																	<label>Confirmation du mot de passe</label>
-																	<div class="input-group">
-																		<span class="input-group-addon input-left">
-																				<i class="fa fa-phone"></i>
-																				</span>
-																		<input type="text" class="form-control" placeholder="Confirmé le nouveau mot de passe" name="cconfirme_password">
-																	</div>
-																</div>
-
-															</div>
-															<div class="form-actions">
-																<button type="submit" class="btn blue pull-right">Modifier</button>
-															</div>
-														</form>
-													</div>
+									<div class="tab-pane" id="passoword_tab" style="height:350px;">
+										<div class="alert alert-success success_msg" style="display:none;">
+								            Votre mot de passe a été modifiée avec succès
+								        </div>
+								        <div class="alert alert-danger new_password_min_length_error" style="display:none;">
+								            Le nouveau mot de passe doit avoir au moin 8 caractères
+								        </div>
+										<div class="alert alert-danger old_password_error" style="display:none;">
+								            L'ancien mot de passe est incorrect, vous avez encore <span class="remaining_attempts"></span> tentatives
+								        </div>
+								        <div class="alert alert-danger unhandled_error" style="display:none;">
+								            <strong>Désolé!</strong> une erreur inattendue s'est intervenue :(
+								        </div>
+										<form id="password_form" method="POST" role="form" class="col-md-6">
+											<div class="form-body">
+												<div class="form-group">
+													<label>Ancien mot de passe</label>
+													<input type="password" class="form-control" placeholder="Ancien mot de passe" name="old_password" pattern=".{8,}" title="Le mot de passe doit avoir au moin 8 caractères" required>
 												</div>
+												<div class="form-group">
+													<label>Nouveau mot de passe</label>
+													<input type="password" class="form-control" placeholder="Nouveau mot de passe" name="new_password" pattern=".{8,}" title="Le mot de passe doit avoir au moin 8 caractères" required>
+												</div>
+
+												<div class="form-group">
+													<label>Confirmation du mot de passe</label>
+													<input type="password" class="form-control" placeholder="Confirmer le nouveau mot de passe" pattern=".{8,}" title="Le mot de passe doit avoir au moin 8 caractères" required>
+												</div>
+
 											</div>
-										</div>
+											<div class="form-actions">
+												<button type="submit" class="btn blue pull-right">Modifier</button>
+											</div>
+										</form>
 									</div>
 								</div>
 							</div>
@@ -181,136 +149,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-</div>
-
-<div class="modal fade" id="new_company_modal" role="basic" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-				<h4 class="modal-title">Modal Title</h4>
-			</div>
-			<form>
-			<div class="modal-body">
-			
-				 <div class="form-group">
-				    <label for="inputNom3" class="col-sm-2 control-label">Nom</label>
-				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="inputEmail3" placeholder="Nom">
-				    </div>
-				    
-				  </div>
-				  <div class="form-group">
-				    <label for="inputNom3" class="col-sm-2 control-label">Slogan</label>
-				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="inputEmail3" placeholder="Slogan">
-				    </div>
-				    
-				  </div>
-				  <div class="form-group">
-				    <label for="inputDesc3" class="col-sm-2 control-label">Déscription</label>
-				    <div class="col-sm-10">
-				    	<textarea class="form-control" rows="3" placeholder="Déscription"></textarea>
-				    </div>
-				    
-				  </div>
-				 
-				  <div class="form-group">
-				    <label for="exampleInputFile" class="col-sm-2 control-label">Logo</label>
-				    <div class="col-sm-10">
-				    <input type="file" id="InputFile">				    	
-				    </div>
-				    <p class="help-block">&nbsp;</p>
-				    
-				  </div>
-				   <div class="form-group">
-				    <label for="exampleInputFile" class="col-sm-2 control-label">Cover</label>
-				    <div class="col-sm-10">
-				    <input type="file" id="InputFile">				    	
-				    </div>
-				    <p class="help-block">&nbsp;</p>
-				    
-				  </div>
-				</div>
-			<div class="modal-footer">
-					<button type="button" class="btn default" data-dismiss="modal">Fermer</button>
-				<button type="button" class="btn blue">Ajouter</button>
-			</div>
-			</form>
-		</div>
-	</div>
-</div>
-
-<div class="modal fade" id="new_job_modal" role="basic" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-				<h4 class="modal-title">Modal Title</h4>
-			</div>
-			<form>
-			<div class="modal-body">
-			
-				 <div class="form-group">
-				    <label for="inputNom3" class="col-sm-2 control-label">Nom</label>
-				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="inputEmail3" placeholder="Nom">
-				    </div>
-				    
-				  </div>
-				  <div class="form-group">
-				    <label for="inputDesc3" class="col-sm-2 control-label">Adresse</label>
-				    <div class="col-sm-10">
-				    	<textarea class="form-control" rows="3" placeholder="Adresse"></textarea>
-				    </div>
-				    
-				  </div>
-				  <div class="form-group">
-				    <label for="inputNom3" class="col-sm-2 control-label">E-mail</label>
-				    <div class="col-sm-10">
-				      <input type="email" class="form-control" id="inputEmail3" placeholder="Slogan">
-				    </div>
-				    
-				  </div>
-				  <div class="form-group">
-				    <label for="inputNom3" class="col-sm-2 control-label">Téléphone</label>
-				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="inputEmail3" placeholder="Téléphone">
-				    </div>
-				    
-				  </div>
-				  <div class="form-group">
-				    <label for="inputNom3" class="col-sm-2 control-label">Portable</label>
-				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="inputEmail3" placeholder="Portable">
-				    </div>
-				    
-				  </div>
-				  <div class="form-group">
-				    <label for="inputDesc3" class="col-sm-2 control-label">Déscription</label>
-				    <div class="col-sm-10">
-				    	<textarea class="form-control" rows="3" placeholder="Déscription"></textarea>
-				    </div>
-				    
-				  </div>
-				 
-				  <div class="form-group">
-				    <label for="exampleInputFile" class="col-sm-2 control-label">image</label>
-				    <div class="col-sm-10">
-				    <input type="file" id="InputFile">				    	
-				    </div>
-				    <p class="help-block">&nbsp;</p>
-				    
-				  </div>
-				   
-				</div>
-			<div class="modal-footer">
-					<button type="button" class="btn default" data-dismiss="modal">Fermer</button>
-				<button type="button" class="btn blue">Ajouter</button>
-			</div>
-			</form>
 		</div>
 	</div>
 </div>

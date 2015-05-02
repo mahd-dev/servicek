@@ -4,7 +4,7 @@
 	<div class="col-md-12">
 		<div class="page-head">
 			<div class="page-title">
-				<h1>Se connecter&nbsp;&nbsp;&nbsp;&nbsp;<small>Connectez à votre compte et gérer vos entreprises</small></h1>
+				<h1>Se connecter&nbsp;&nbsp;<small>Connectez à votre compte et gérer vos entreprises</small></h1>
 			</div>
 		</div>
 	</div>
@@ -36,10 +36,7 @@
 				<label for="password" class="control-label">Mot de passe</label>
 				<input type="password" class="form-control" name="password" placeholder="Entrer votre mot de passe" required>
 			</div>
-			<div class="form-group">
-				<div class="checkbox"><label><input type="checkbox"> Se souvenir de moi</label></div>
-			</div>
-			<div class="form-group">
+			<div class="form-actions">
 				<button type="submit" class="btn btn-primary pull-right"><i class="icon-check"></i> Se connecter</button>
 			</div>
 		</form>

@@ -37,6 +37,10 @@
 						$q=$db->query("select id from job where (id_admin='".$this->id."')");
 						while($r=$q->fetch_row()) $list[] = new job($r[0]);
 						return $list;
+					case "count_pages":
+						$q=$db->query("select (count(user_admin.id_user) + count(job.id)) as rslt from user_admin, job where (user_admin.id_user='".$this->id."' and job.id_admin='".$this->id."')");
+						$r=$q->fetch_row();
+						return $r[0];
 					default:
 						$q=$db->query("select ".$name." from user where (id='".$this->id."')");
 						$r=$q->fetch_row();
@@ -58,7 +62,7 @@
 		public static function create($username,$password){
 			global $db;
 			if(user::username_exists($username)) return "username_exists";
-			$db->query("insert into user (username,passowrd) values('".$db->real_escape_string($username)."','".$db->real_escape_string($password)."')");
+			$db->query("insert into user (username,password) values('".$db->real_escape_string($username)."','".$db->real_escape_string($password)."')");
 			return new user($db->insert_id);
 		}
 
@@ -85,9 +89,9 @@
 				return "username_error";
 			}else{
 				$r=$q->fetch_row();
-				$db->query("delete from restricted_user_ip where (TIMESTAMPDIFF(MINUTE,restriction_time,NOW())>=".$waiting_minutes.")");
+				$db->query("delete from restricted_ip where (TIMESTAMPDIFF(MINUTE,restriction_time,NOW())>=".$waiting_minutes.")");
 
-				$ch_ip=$db->query("select attempts, TIMESTAMPDIFF(MINUTE,NOW(),DATE_ADD(restriction_time, INTERVAL ".$waiting_minutes." MINUTE)) from restricted_user_ip where (id_user='".$r[0]."' and ip_address='".$ip."')");
+				$ch_ip=$db->query("select attempts, TIMESTAMPDIFF(MINUTE,NOW(),DATE_ADD(restriction_time, INTERVAL ".$waiting_minutes." MINUTE)) from restricted_ip where (ip_address='".$ip."')");
 
 				$ch_r=$ch_ip->fetch_row();
 				$attempts = ($ch_ip->num_rows > 0 ? ($ch_r[0] + 1) : 1);
@@ -96,13 +100,13 @@
 				else {
 
 					if ($password != $r[1]) {
-						$db->query("INSERT INTO restricted_user_ip (id_user, ip_address) values('".$r[0]."', '".$ip."') ON DUPLICATE KEY UPDATE attempts=attempts+1, restriction_time=NOW()");
-						$ch_ip=$db->query("select TIMESTAMPDIFF(MINUTE,NOW(),DATE_ADD(restriction_time, INTERVAL ".$waiting_minutes." MINUTE)) from restricted_user_ip where (id_user='".$r[0]."' and ip_address='".$ip."')");
+						$db->query("INSERT INTO restricted_ip (ip_address) values('".$ip."') ON DUPLICATE KEY UPDATE attempts=attempts+1, restriction_time=NOW()");
+						$ch_ip=$db->query("select TIMESTAMPDIFF(MINUTE,NOW(),DATE_ADD(restriction_time, INTERVAL ".$waiting_minutes." MINUTE)) from restricted_ip where (ip_address='".$ip."')");
 						$ch_r=$ch_ip->fetch_row();
 						if( $attempts >= $allowed_attempts ) return array("status" => "waiting_restriction_time", "remaining_time" => $ch_r[0]);
 						return array("status" => "password_error", "remaining_attempts" => ($allowed_attempts - $attempts));
 					} else {
-						$db->query("delete from restricted_user_ip where (id_user='".$r[0]."' and ip_address='".$ip."')");
+						$db->query("delete from restricted_ip where (ip_address='".$ip."')");
 						return new user($r[0]);
 					}
 				}

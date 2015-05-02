@@ -81,17 +81,12 @@
 								</li>
 							</ul>
 						</li>
-						<!-- END USER LOGIN DROPDOWN -->
 					</ul>
 				</div>
-				<!-- END TOP NAVIGATION MENU -->
 			</div>
 		</div>
-		<!-- END HEADER TOP -->
-		<!-- BEGIN HEADER MENU -->
 		<div class="page-header-menu">
 			<div class="container">
-				<!-- BEGIN HEADER SEARCH BOX -->
 				<form id="master_search_form" class="search-form">
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="Search" name="q">
@@ -100,15 +95,12 @@
 					</span>
 					</div>
 				</form>
-				<!-- END HEADER SEARCH BOX -->
-				<!-- BEGIN MEGA MENU -->
-				<!-- DOC: Apply "hor-menu-light" class after the "hor-menu" class below to have a horizontal menu with white background -->
-				<!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
 				<div class="hor-menu ">
 					<ul class="nav navbar-nav">
 						<li>
 							<a href="<?php echo url_root;?>" class="ajaxify">Actualités</a>
 						</li>
+						<!--
 						<li class="menu-dropdown mega-menu-dropdown active">
 							<a data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">
 								Features <i class="fa fa-angle-down"></i>
@@ -147,22 +139,18 @@
 								</li>
 							</ul>
 						</li>
+						-->
 					</ul>
 				</div>
-				<!-- END MEGA MENU -->
 			</div>
 		</div>
-		<!-- END HEADER MENU -->
 	</div>
-	<!-- END HEADER -->
-	<!-- BEGIN PAGE CONTAINER -->
 	<div class="page-container">
 		<div class="page-content">
 			<div class="container">
 				<?php echo $content; // inserting requested page content ?>
 			</div>
 		</div>
-		<!-- END PAGE CONTENT -->
 	</div>
 
 	<div class="page-footer">
@@ -199,7 +187,11 @@
 	<script src="<?php echo cdn;?>/scripts/app.js" type="text/javascript"></script>
 	<script src="<?php echo cdn;?>/scripts/layout.js" type="text/javascript"></script>
 
+	<script type="text/javascript" src="<?php echo cdn;?>/plugins/bootstrap-editable/bootstrap-editable/js/bootstrap-editable.js"></script>
+
 	<script type="text/javascript" src="<?php echo cdn;?>/plugins/bootstrap-fileinput/bootstrap-fileinput.js"></script>
+
+	<script type="text/javascript" src="<?php echo cdn;?>/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
 
 	<script src="<?php echo url_root;?>/master/script_1.js" type="text/javascript"></script>
 	<script>
