@@ -294,16 +294,15 @@ UNLOCK TABLES;
 -- Table structure for table `restricted_user_ip`
 --
 
-DROP TABLE IF EXISTS `restricted_user_ip`;
+DROP TABLE IF EXISTS `restricted_ip`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `restricted_user_ip` (
   `ip_address` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
-  `id_user` bigint(20) NOT NULL,
   `attempts` int(11) DEFAULT '1',
   `restriction_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`ip_address`,`id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`ip_address`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
