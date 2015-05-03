@@ -1,4 +1,4 @@
-<link href="<?php echo url_root;?>/pages/search/style.css" rel="stylesheet" type="text/css">
+<link href="<?php echo url_root;?>/pages/search/style.min.css" rel="stylesheet" type="text/css">
 
 <div class="row">
 	<div class="col-md-12">
@@ -23,4 +23,4 @@
 </div>
 
 <!-- custom page script -->
-<script src="<?php echo url_root;?>/pages/search/script_1.js" type="text/javascript"></script>
+<script src="<?php echo url_root;?>/pages/search/script_1.min.js" type="text/javascript"></script>

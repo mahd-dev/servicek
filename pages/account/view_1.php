@@ -1,6 +1,6 @@
-<link rel="stylesheet" type="text/css" href="<?php echo cdn;?>/plugins/bootstrap-editable/bootstrap-editable/css/bootstrap-editable.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo cdn;?>/plugins/bootstrap-editable/bootstrap-editable/css/bootstrap-editable<? echo(rtl?"-rtl":"");?>.min.css"/>
 
-<link href="<?php echo url_root;?>/pages/account/style.css" rel="stylesheet" type="text/css">
+<link href="<?php echo url_root;?>/pages/account/style.min.css" rel="stylesheet" type="text/css">
 
 <div class="row">
 	<div class="col-md-12">
@@ -153,5 +153,4 @@
 	</div>
 </div>
 
-<!-- custom page script -->
-<script src="<?php echo url_root;?>/pages/account/script_1.js" type="text/javascript"></script>
+<script src="<?php echo url_root;?>/pages/account/script_1.min.js" type="text/javascript"></script>

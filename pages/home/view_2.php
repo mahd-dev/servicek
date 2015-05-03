@@ -1,7 +1,7 @@
 <!-- custom page styles -->
-<link rel="stylesheet" type="text/css" href="<?php echo cdn;?>/plugins/bootstrap-fileinput/bootstrap-fileinput.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo cdn;?>/plugins/bootstrap-fileinput/bootstrap-fileinput.min.css"/>
 
-<link href="<?php echo url_root;?>/pages/home/style.css" rel="stylesheet" type="text/css">
+<link href="<?php echo url_root;?>/pages/home/style.min.css" rel="stylesheet" type="text/css">
 
 <div class="row">
 	<div class="col-md-12">
@@ -76,8 +76,8 @@
 <script type="text/javascript" src="<?php echo cdn;?>/plugins/salvattore.min.js"></script>
 
 <!-- custom page script -->
-<script src="<?php echo url_root;?>/pages/home/script_2.js" type="text/javascript"></script>
+<script src="<?php echo url_root;?>/pages/home/script_2.min.js" type="text/javascript"></script>
 
 <?php if(isset($logout) && $logout){?>
-<script src="<?php echo url_root;?>/pages/login/logout.js" type="text/javascript"></script>
+<script src="<?php echo url_root;?>/pages/login/logout.min.js" type="text/javascript"></script>
 <?php }?>

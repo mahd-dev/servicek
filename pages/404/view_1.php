@@ -1,7 +1,4 @@
-<!-- custom page styles -->
-<link href="<?php echo cdn;?>/pages/css/error<?php echo (rtl?"-rtl":"");?>.css" rel="stylesheet" type="text/css"/>
 
-<!-- BEGIN PAGE CONTENT-->
 <div class="row">
 	<div class="col-md-12 page-404">
 		<div class="number">404</div>
@@ -20,12 +17,9 @@
 					<button type="submit" class="btn btn-default"><i class="icon-magnifier"></i></button>
 					</span>
 				</div>
-				<!-- /input-group -->
 			</form>
 		</div>
 	</div>
 </div>
-<!-- END PAGE CONTENT-->
 
-<!-- custom page scripts -->
-<script src="<?php echo url_root;?>/pages/404/script_1.js" type="text/javascript"></script>
+<script src="<?php echo url_root;?>/pages/404/script_1.min.js" type="text/javascript"></script>
