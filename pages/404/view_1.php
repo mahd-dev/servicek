@@ -1,4 +1,4 @@
-
+<link href="<?php echo url_root;?>/pages/404/style<?php echo (rtl?"-rtl":"");?>.min.css" rel="stylesheet" type="text/css">
 <div class="row">
 	<div class="col-md-12 page-404">
 		<div class="number">404</div>
