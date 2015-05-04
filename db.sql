@@ -1,8 +1,8 @@
--- MySQL dump 10.14  Distrib 5.5.41-MariaDB, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.24, for debian-linux-gnu (x86_64)
 --
--- Host: localhost    Database: loop
+-- Host: localhost    Database: servicek
 -- ------------------------------------------------------
--- Server version	5.5.41-MariaDB-1ubuntu0.14.10.1-log
+-- Server version	5.6.24-0ubuntu2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -136,7 +136,7 @@ DROP TABLE IF EXISTS `contract`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `contract` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_page` bigint(20) DEFAULT NULL,
   `page_type` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
   `payment_token` varchar(36) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -147,7 +147,7 @@ CREATE TABLE `contract` (
   `duration` int(11) DEFAULT NULL,
   `creation_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -156,6 +156,7 @@ CREATE TABLE `contract` (
 
 LOCK TABLES `contract` WRITE;
 /*!40000 ALTER TABLE `contract` DISABLE KEYS */;
+INSERT INTO `contract` VALUES (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,365,'2015-05-04 16:02:48'),(2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,365,'2015-05-04 16:03:28');
 /*!40000 ALTER TABLE `contract` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -365,4 +366,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-04  3:20:21
+-- Dump completed on 2015-05-04 20:29:05
