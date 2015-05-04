@@ -46,7 +46,6 @@
 			}else{
 				switch ($url[1]) {
 					case "company":
-						if(isset($_POST["check_url"])) $check_url=true;
 						$req_page = "pages/newcompany/controller.php";break;
 					case "job":
 						$req_page = "pages/newjob/controller.php";break;
