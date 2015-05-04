@@ -4,7 +4,10 @@ page_script({
 		// posts plugin init
 
 		salvattore.rescanMediaQueries();
-
+		setTimeout(function (){
+			if($(window).width()>768 && $(".home-news").attr("data-columns")==1) salvattore.rescanMediaQueries();
+		},500);
+		
 		// add news items sample
 		/*
 		var item = $("<div>",{class:"item portlet light"})[0];
