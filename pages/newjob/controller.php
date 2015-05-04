@@ -9,6 +9,10 @@
 
 	// select and display right view
 	// ...
+	
+	$new_job_token = gf::generate_guid();
+	$_SESSION["new_job_token"] = $new_job_token;
+
 	include "view_1.php";
 
 	skip_this_page:

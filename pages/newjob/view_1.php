@@ -14,6 +14,7 @@
 		<div class="portlet light" id="page_wizard">
 			<div class="portlet-body form">
 				<form action="javascript:;" class="form-horizontal" id="submit_form" method="POST">
+					<input type="hidden" name="token" value="<?php echo $new_job_token;?>">
 					<div class="form-wizard">
 						<div class="form-body">
 							<ul class="nav nav-pills nav-justified steps">

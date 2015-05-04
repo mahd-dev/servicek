@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="<?php echo cdn;?>/plugins/bootstrap-editable/bootstrap-editable/css/bootstrap-editable<? echo(rtl?"-rtl":"");?>.min.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo cdn;?>/plugins/bootstrap-editable/bootstrap-editable/css/bootstrap-editable<?php echo(rtl?"-rtl":"");?>.min.css"/>
 
 <link href="<?php echo url_root;?>/pages/account/style.min.css" rel="stylesheet" type="text/css">
 

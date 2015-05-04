@@ -48,6 +48,12 @@
 										</div>
 									</div>
 									<div class="form-group">
+										<label class="control-label col-md-3">Slogan</label>
+										<div class="col-md-6">
+											<input type="text" class="form-control" name="slogan"/>
+										</div>
+									</div>
+									<div class="form-group">
 										<label class="control-label col-md-3">Détails <span class="required">*</span></label>
 										<div class="col-md-6">
 											<textarea class="form-control" name="description" style="max-width:100%; min-with:100%;" rows="5"></textarea>
