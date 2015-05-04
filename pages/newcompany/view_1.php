@@ -13,7 +13,7 @@
 	<div class="col-md-12">
 		<div class="portlet light" id="page_wizard">
 			<div class="portlet-body form">
-				<form action="javascript:;" class="form-horizontal" id="submit_form" method="POST">
+				<form action="javascript:;" class="form-horizontal" id="submit_form" method="POST" onsubmit="return:false;">
 					<div class="form-wizard">
 						<div class="form-body">
 							<ul class="nav nav-pills nav-justified steps">
@@ -43,7 +43,7 @@
 									<div class="form-group">
 										<label class="control-label col-md-3">Nom <span class="required">*</span></label>
 										<div class="col-md-6">
-											<input type="text" class="form-control" name="name"/>
+											<input type="text" class="form-control" name="name" data-msg-required="Ce champ est obligatoire"/>
 											<span class="help-block">Saisir le nom du travail </span>
 										</div>
 									</div>
@@ -56,8 +56,18 @@
 									<div class="form-group">
 										<label class="control-label col-md-3">Détails <span class="required">*</span></label>
 										<div class="col-md-6">
-											<textarea class="form-control" name="description" style="max-width:100%; min-with:100%;" rows="5"></textarea>
+											<textarea class="form-control" name="description" data-msg-required="Ce champ est obligatoire" style="max-width:100%; min-with:100%;" rows="5"></textarea>
 											<span class="help-block">Expliquez brièvement le travail</span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3">Lien électronique</label>
+										<div class="col-md-6">
+											<div class="input-group">
+												<span class="input-group-addon"><?php echo url_root."/";?></span>
+												<input type="text" class="form-control" name="url" data-msg-required="Ce champ est obligatoire" data-msg-remote="Ce lien n'est pas disponible"/>
+											</div>
+											<span class="help-block">Choisissez le lien électronique pour votre société</span>
 										</div>
 									</div>
 
@@ -68,7 +78,7 @@
 										<div class="col-md-6">
 
 											<div class="input-group">
-												<input type="text" class="form-control" name="address"/>
+												<input type="text" class="form-control" name="address" data-msg-required="Ce champ est obligatoire"/>
 												<span class="input-group-btn">
 													<a class="btn btn-default" id="find_my_position" data-toggle="tooltip" title="Rechercher ma position"><i class="icon-target"></i></a>
 												</span>
@@ -86,7 +96,7 @@
 									<div class="form-group">
 										<label class="control-label col-md-3">Tel fixe <span class="required">*</span></label>
 										<div class="col-md-6">
-											<input type="tel" class="form-control" name="tel"/>
+											<input type="tel" class="form-control" name="tel" data-msg-required="Ce champ est obligatoire"/>
 										</div>
 									</div>
 									<div class="form-group">
@@ -98,7 +108,7 @@
 									<div class="form-group">
 										<label class="control-label col-md-3">E-mail <span class="required">*</span></label>
 										<div class="col-md-6">
-											<input type="email" class="form-control" name="email"/>
+											<input type="email" class="form-control" name="email" data-msg-required="Ce champ est obligatoire"/>
 										</div>
 									</div>
 									
@@ -112,7 +122,7 @@
 									<div class="form-group">
 										<label class="control-label col-md-3">Offre</label>
 										<div class="col-md-6">
-											<div class="list-group radio-list">
+											<div class="list-group radio-list offer-list">
 												<label class="list-group-item"><input type="radio" name="offer" value="1" data-title="6 mois" data-amount="20 DT TTC"> 6 mois : <strong>20 DT</strong> <span class="label label-info pull-right" style="padding:10px;margin:-4px;"><i class="icon-speedometer"></i> Optimisé pour le test</span></label>
 												<label class="list-group-item"><input type="radio" name="offer" value="2" data-title="12 mois" data-amount="30 DT TTC" checked> 12 mois : <strong>30 DT</strong> <span class="label label-success pull-right" style="padding:10px;margin:-4px;"><i class="icon-check"></i> Recommandé</span></label>
 												<label class="list-group-item"><input type="radio" name="offer" value="3" data-title="3 ans" data-amount="60 DT TTC"> 3 ans : <strong>60 DT</strong> <span class="label label-primary pull-right" style="padding:10px;margin:-4px;"><i class="icon-star"></i> Inscription longue terme</span></label>
@@ -145,7 +155,7 @@
 
 														</div>
 													</div>
-													<label><input type="checkbox" name="accept_contract"> Je suis d'accord et j'accepte les termes du contrat</label>
+													<label><input type="checkbox" name="accept_contract" data-msg-required="Ce champ est obligatoire"> Je suis d'accord et j'accepte les termes du contrat</label>
 												</div>
 											</div>
 										</div>
@@ -180,14 +190,14 @@
 									<div class="form-group">
 										<label class="control-label col-md-3">Numéro de la carte <span class="required">*</span></label>
 										<div class="col-md-4">
-											<input type="text" class="form-control" name="credit_card_number"/>
+											<input type="text" class="form-control" name="credit_card_number" data-msg-required="Ce champ est obligatoire"/>
 										</div>
 									</div>
 
 									<div class="form-group">
 										<label class="control-label col-md-3">Mot de passe de la carte <span class="required">*</span></label>
 										<div class="col-md-4">
-											<input type="password" class="form-control" name="credit_card_password"/>
+											<input type="password" class="form-control" name="credit_card_password" data-msg-required="Ce champ est obligatoire"/>
 										</div>
 									</div>
 									

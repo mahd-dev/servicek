@@ -91,19 +91,19 @@ page_script({
 			
 				try{
 					parsed=JSON.parse(rslt);
-					if ( parsed.resp_msg == "logged_in" ) {
+					if ( parsed.status == "logged_in" ) {
 						$(".top-menu .user-btn .username").text(parsed.params.displayname);
 						$(".top-menu .login-btn").hide();
 						$(".top-menu .user-btn").show();
 						Layout.ajaxify(location.origin + "/account");
-					} else if (res.resp_msg == 'username_exists') {
+					} else if (res.status == 'username_exists') {
 						var input = $("#register_form input[name=username]");
 						input.closest('.form-group').removeClass('has-success').addClass('has-error');
 						$('.fa-check', input.closest('.form-group')).remove();
 						input.before('<i class="icon-ban"></i>');
 						$("#username_unvailable_msg").show();
 						input.focus();
-					} else if (res.resp_msg == 'password_min_length_error') {
+					} else if (res.status == 'password_min_length_error') {
 						var input = $("#register_form input[name=password]");
 						input.closest('.form-group').removeClass('has-success').addClass('has-error');
 						$('.fa-check', input.closest('.form-group')).remove();
@@ -111,6 +111,7 @@ page_script({
 						$("#password_min_length_error").show();
 						input.focus();
 					} else {
+						console.log(rslt);
 						$(".unhandled_error").show();
 					}
 					
@@ -119,6 +120,10 @@ page_script({
 					$(".unhandled_error").show();
 				}
 				
+			},
+			error: function () {
+				console.log(rslt);
+				$(".unhandled_error").show();
 			}
 		});
 	}

@@ -45,6 +45,19 @@ page_script({
                 
                 name: {minlength: 3, maxlength: 255, required: true},
                 description: {minlength: 50, maxlength: 4095, required: true},
+                url: {
+                    required: true,
+                    remote: {
+                        url: location.href,
+                        type: "post",
+                        data: {
+                            check_url: function() {
+                                return $("[name=url]",form).val();
+                            }
+                        }
+                    }
+                },
+
                 address: {required: true},
                 longitude: {required: true},
                 latitude: {required: true},
@@ -86,6 +99,7 @@ page_script({
             }
 
         });
+
 
         var displayConfirm = function() {
             $('#validation .form-control-static', form).each(function(){

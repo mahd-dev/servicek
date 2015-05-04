@@ -16,7 +16,7 @@
             $_SESSION["user"]=serialize($login_resp); // storing user to session
             
             die(json_encode(array(
-                "resp_msg" => "logged_in",
+                "status" => "logged_in",
                 "params" => array(
                     "displayname" => $login_resp->displayname
                 )
@@ -24,19 +24,22 @@
         }elseif (is_array($login_resp)) {
             if($login_resp["status"] == "waiting_restriction_time"){
                 die(json_encode(array(
-                    "resp_msg" => "waiting_restriction_time",
+                    "status" => "waiting_restriction_time",
                     "params" => array(
                         "remaining_time" => $login_resp["remaining_time"]
                     )
                 )));
             }elseif($login_resp["status"] == "password_error"){
                 die(json_encode(array(
-                    "resp_msg" => "password_error",
+                    "status" => "password_error",
                     "params" => array(
                         "remaining_attempts" => $login_resp["remaining_attempts"]
                     )
                 )));
-            }else die("unhandled_error");
+            }
+            elseif($login_resp["status"] == "username_error") die(json_encode(array("status"=>"username_error")));
+            elseif($login_resp["status"] == "restricted_host") die(json_encode(array("status"=>"restricted_host")));
+            else die(json_encode(array("status"=>"unhandled_error")));
         }else die($login_resp); // username_error
     }
     

@@ -34,16 +34,16 @@ page_script({
 			success: function (rslt) {
 				try{
                     parsed=JSON.parse(rslt);
-                    if (parsed.resp_msg == "success") {
+                    if (parsed.status == "success") {
                     	$(".success_msg").show();
                     	$("#password_form")[0].reset();
-                	} else if (parsed.resp_msg == "new_password_min_length_error") {
+                	} else if (parsed.status == "new_password_min_length_error") {
                         $(".new_password_min_length_error").show();
                         $("#login_form input[name=newpassword]").val("");
                         $("#login_form input[name=newpassword]").focus();
-                    } else if (parsed.resp_msg == "not_logged_in") {
+                    } else if (parsed.status == "not_logged_in") {
                         Layout.logout(location.origin + "/login", true);
-                    } else if (parsed.resp_msg == "old_password_error") {
+                    } else if (parsed.status == "old_password_error") {
                         $(".old_password_error .remaining_attempts").text(parsed.params.remaining_attempts);
                         $(".old_password_error").show();
                         $("#login_form input[name=oldpassword]").val("");

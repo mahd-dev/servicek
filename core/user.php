@@ -82,11 +82,11 @@
 			$allowed_attempts = 5; 
 			$waiting_minutes = 15;
 
-			if( $ip == NULL ) return "restricted_host";
+			if( $ip == NULL ) return array("status"=>"restricted_host");
 
 			$q=$db->query("select id, password from user where (username='".$username."')");
 			if($q->num_rows==0){
-				return "username_error";
+				return array("status"=>"username_error");
 			}else{
 				$r=$q->fetch_row();
 				$db->query("delete from restricted_ip where (TIMESTAMPDIFF(MINUTE,restriction_time,NOW())>=".$waiting_minutes.")");

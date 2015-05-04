@@ -7,7 +7,7 @@
 
 <head>
 	<meta charset="utf-8" />
-	<title>loop</title>
+	<title>Servicek</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -54,7 +54,7 @@
 
 				<div class="page-logo">
 					<a href="<?php echo url_root;?>" class="ajaxify">
-					<img src="<?php echo cdn;?>/img/logo<?php echo(rtl?"-rtl":"");?>.svg" alt="loop" class="logo-default">
+					<img src="<?php echo cdn;?>/img/logo<?php echo(rtl?"-rtl":"");?>.svg" alt="logo" class="logo-default">
 				</a>
 				</div>
 
@@ -70,7 +70,7 @@
 						</li>
 						<li class="user-btn dropdown dropdown-user dropdown-dark" <?php if($user==null) echo ' style="display:none;"';?>>
 							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
-								<span class="username"><?php echo $user->displayname;?></span>&nbsp;&nbsp;<i class="icon-user"></i>
+								<span class="username"><?php if($user) echo $user->displayname;?></span>&nbsp;&nbsp;<i class="icon-user"></i>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-default">
 								<li>
@@ -157,7 +157,7 @@
 
 	<div class="page-footer">
 		<div class="container">
-			<?php echo date( 'Y');?> &copy; loop company.
+			<?php echo date( 'Y');?> &copy; <a href="https://servicek.tn/about">Servicek</a> | Powered by <a href="http://mahd.tn">Mahd Company</a>.
 		</div>
 	</div>
 	<div class="scroll-to-top">

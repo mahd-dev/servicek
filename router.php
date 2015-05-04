@@ -4,6 +4,22 @@
 	$url=explode("/",reset(explode("?",strtolower($_SERVER["REQUEST_URI"]))));
 	array_shift($url);
 
+	$reserved_urls=array(
+		"",
+		"search",
+		"login",
+		"logout",
+		"register",
+		"account",
+		"new",
+		"job",
+		"company",
+		"product",
+		"service",
+		"post",
+		"sitemap.xml",
+	);
+
 	// selecting page based on url
 	switch($url[0]){
 
@@ -30,6 +46,7 @@
 			}else{
 				switch ($url[1]) {
 					case "company":
+						if(isset($_POST["check_url"])) $check_url=true;
 						$req_page = "pages/newcompany/controller.php";break;
 					case "job":
 						$req_page = "pages/newjob/controller.php";break;

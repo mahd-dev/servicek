@@ -20,22 +20,22 @@
 	}
 
 	if(isset($_POST["old_password"]) && isset($_POST["new_password"])){
-		if(strlen($_POST["new_password"]) < 8) die(json_encode(array("resp_msg"=>"new_password_min_length_error")));
+		if(strlen($_POST["new_password"]) < 8) die(json_encode(array("status"=>"new_password_min_length_error")));
 		$check_password=user::login($user->username, $_POST["old_password"], gf::getClientIP());
 		if($check_password instanceOf user){
 			$user->password=$_POST["new_password"];
 			die(json_encode(array(
-				"resp_msg"=>"success"
+				"status"=>"success"
 			)));
 		}elseif (is_array($check_password)) {
             if($check_password["status"] == "waiting_restriction_time"){
             	session_destroy();
                 die(json_encode(array(
-                    "resp_msg" => "not_logged_in"
+                    "status" => "not_logged_in"
                 )));
             }elseif($check_password["status"] == "password_error"){
                 die(json_encode(array(
-                    "resp_msg" => "old_password_error",
+                    "status" => "old_password_error",
                     "params" => array(
                         "remaining_attempts" => $check_password["remaining_attempts"]
                     )

@@ -4,6 +4,8 @@
 		goto skip_this_page;
 	}
 
+	if($check_url) die((company::check_url($_POST["check_url"])?"true":"false"));
+	
 	// definig SEO parameters
 	// ...
 

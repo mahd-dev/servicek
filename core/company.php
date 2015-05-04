@@ -1,5 +1,5 @@
 <?php
-	class template{
+	class company{
 
 		private $id;
 
@@ -34,12 +34,14 @@
 						$q=$db->query("select count(*) from user_admin where (id_page='".$this->id."')");
 						$r=$q->fetch_row();
 						return $r[0];
+					
 					case "seats":
 						$list = array();
 						$q=$db->query("select id from company_seat where (id_company='".$this->id."')");
 						while($r=$q->fetch_row()) $list[] = new company_seat($r[0]);
 						return $list;
 					break;
+					
 					case "products":
 						$list = array();
 						$q=$db->query("select id from product where (id_company='".$this->id."')");
@@ -58,12 +60,40 @@
 						while($r=$q->fetch_row()) $list[] = new offer($r[0]);
 						return $list;
 					break;
+					
 					case "categories":
 						$list = array();
 						$q=$db->query("select id_category from category_children where (id_children='".$this->id."' and children_type='company')");
 						while($r=$q->fetch_row()) $list[] = new category($r[0]);
 						return $list;
 					break;
+					
+					case "is_contracted":
+						$q=$db->query("select count(id) from conract where (id_page='".$this->id."' and page_type='company' and TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration DAY)) >= 0)");
+						$r=$q->fetch_row();
+						return $r[0]>0;
+					break;					
+					case "current_contract":
+						$q=$db->query("select id from conract where (id_page='".$this->id."' and page_type='company' and TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration DAY)) >= 0) ORDER BY DATE_ADD(creation_time, INTERVAL duration DAY) DESC LIMIT 1");
+						if($q->num_rows==0) return null;
+						else{
+							$r=$q->fetch_row();
+							return new contract($r[0]);
+						}
+					break;
+					case "available_contracts":
+						$q=$db->query("select id from conract where (id_page='".$this->id."' and page_type='company' and TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration DAY)) >= 0)");
+						$list = array();
+						while($r=$q->fetch_row()) $list[] = new contract($r[0]);
+						return $list;
+					break;
+					case "all_contracts":
+						$q=$db->query("select id from conract where (id_page='".$this->id."' and page_type='company')");
+						$list = array();
+						while($r=$q->fetch_row()) $list[] = new contract($r[0]);
+						return $list;
+					break;
+					
 					default:
 						$q=$db->query("select ".$name." from company where (id='".$this->id."')");
 						$r=$q->fetch_row();
@@ -127,5 +157,13 @@
 			$db->query("delete from category_children where (id_category='".$category->id."' and id_children='".$this->id."' and children_type='company')");
 		}
 
+		public static function check_url($url){
+			global $db;
+			global $reserved_urls;
+			if(in_array($url, $reserved_urls)) return false;
+			$q=$db->query("select count(*) from company where (url='".$url."')");
+			$r=$q->fetch_row();
+			return $r[0]==0;
+		}
 	}
 ?>

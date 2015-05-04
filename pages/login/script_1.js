@@ -19,41 +19,44 @@ page_script({
             
                 try{
                     parsed=JSON.parse(rslt);
-                    if ( parsed.resp_msg == "logged_in" ) {
+                    if ( parsed.status == "logged_in" ) {
                         $(".top-menu .user-btn .username").text(parsed.params.displayname);
                         $(".top-menu .login-btn").hide();
                         $(".top-menu .user-btn").show();
                         Layout.ajaxify(location.origin + "/account");
-                    } else if (parsed.resp_msg == "waiting_restriction_time") {
+                    } else if (parsed.status == "username_error") {
+                        $(".username_error").show();
+                        $("#login_form input[name=password]").val("");
+                        $("#login_form input[name=username]").focus();
+                    } else if (parsed.status == "waiting_restriction_time") {
                         $(".waiting_restriction_time .remaining_time").text(parsed.params.remaining_time);
                         $(".waiting_restriction_time").show();
                         $("#login_form input[name=password]").val("");
                         $("#login_form input[name=username]").focus();
-                    } else if (parsed.resp_msg == "password_error") {
+                    } else if (parsed.status == "password_error") {
                         $(".password_error .remaining_attempts").text(parsed.params.remaining_attempts);
                         $(".password_error").show();
                         $("#login_form input[name=password]").val("");
                         $("#login_form input[name=password]").focus();
-                    } else {
-                        $(".unhandled_error").show();
-                    }
-                    
-                }catch(ex){
-                    if(rslt=="username_error"){
-                        $(".username_error").show();
-                        $("#login_form input[name=password]").val("");
-                        $("#login_form input[name=username]").focus();
-                    }else if(rslt=="restricted_host"){
+                    } else if (parsed.status == "restricted_host") {
                         $(".restricted_host").show();
                         $("#login_form input[name=username]").val("");
                         $("#login_form input[name=password]").val("");
                         $("#login_form input[name=username]").focus();
-                    }else{
+                    } else {
                         console.log(rslt);
                         $(".unhandled_error").show();
                     }
+                    
+                }catch(ex){
+                    console.log(rslt);
+                    $(".unhandled_error").show();
                 }
                 
+            },
+            error: function (rslt) {
+                console.log(rslt);
+                $(".unhandled_error").show();
             }
         });
 	}

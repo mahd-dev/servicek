@@ -8,7 +8,7 @@
 	if(isset($_POST["check_username"])) die(json_encode(array("status" => (user::username_exists($_POST["check_username"]) ? "not_available":"available"))));
 	
 	elseif (isset($_POST["displayname"]) && isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["email"]) && isset($_POST["mobile"])) {
-		if(strlen($_POST["password"]) < 8) die(json_encode(array("resp_msg" => "password_min_length_error")));
+		if(strlen($_POST["password"]) < 8) die(json_encode(array("status" => "password_min_length_error")));
 		$new_user=user::create($_POST["username"],$_POST["password"]);
 		if($new_user instanceOf user){
 			$new_user->displayname = $_POST["displayname"];
@@ -18,14 +18,12 @@
 			$_SESSION["user"]=serialize($new_user); // storing user to session
             
             die(json_encode(array(
-                "resp_msg" => "logged_in",
+                "status" => "logged_in",
                 "params" => array(
                     "displayname" => $new_user->displayname
                 )
             )));
-		}else die(json_encode(array(
-				"resp_msg"=>"username_exists"
-			)));
+		}else die(json_encode(array("status"=>"username_exists")));
 	}
 
 	// definig SEO parameters

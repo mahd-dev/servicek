@@ -61,5 +61,11 @@
             $db->query("delete from contract where (id='".$this->id."')");
         }
 
+        public static function check_token($token){
+            $q=$db->query("select id from contract where (payment_token='".$token."')");
+            if($q->num_rows==0) return null;
+            $r=$q->fetch_row();
+            return new contract($r[0]);
+        }
     }
 ?>
