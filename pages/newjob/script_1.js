@@ -14,6 +14,7 @@ page_script({
 			radius: 0,
 			zoom: 6,
 			enableAutocomplete: true,
+			scrollwheel: false,
 			inputBinding: {
 				locationNameInput: $('#submit_form [name=address]'),
 				latitudeInput: $('#submit_form [name=latitude]'),
@@ -33,12 +34,15 @@ page_script({
 
 		// handling wizard
 		var form = $('#submit_form');
-		var error = $('.alert-danger', form);
-		var success = $('.alert-success', form);
+		var error = $('.alert-danger.form-error', form);
+		var payment_error = $('.alert-danger.payment_unhandled_error', form);
 
-		form.validate({
+		form.submit(function(e){ e.preventDefault(); });
+
+		var formvalidator = form.validate({
+			ignore: "",
 			doNotHideMessage: true,
-			/*errorElement: 'span',*/
+			errorElement: 'span',
 			errorClass: 'help-block help-block-error',
 			focusInvalid: true,
 			rules: {
@@ -60,9 +64,10 @@ page_script({
 			},
 
 			invalidHandler: function (event, validator) { //display error alert on form submit   
-				success.hide();
+				var cr = $(validator.currentElements[0]);
+				$('#page_wizard').bootstrapWizard("show", $(cr.parents(".tab-pane")[0]).index());
 				error.show();
-				app.scrollTo(error, -200);
+				app.scrollTo(cr, -200);
 			},
 
 			highlight: function (element) { // hightlight error inputs
@@ -78,19 +83,30 @@ page_script({
 			success: function (label) {
 				
 			},
+			errorPlacement: function (error, element) {
 
+				switch($(element).attr("name")){
+					case "accept_contract":
+						error.appendTo($(element.parents(".form-group")[0]).find(".error_msg"));
+					break;
+					default:
+						error.insertAfter(element);
+					break;
+				}
+			},
 			submitHandler: function (form) {
-				success.show();
 				error.hide();
-				//add here some ajax code to submit your form or just call form.submit() if you want to submit the form without ajax
+				payment_error.hide();
 			}
 
 		});
+		
+		form.submit(function (e){ e.preventDefault(); });
 
 		var displayConfirm = function() {
 			$('#validation .form-control-static', form).each(function(){
 				if($(this).attr("data-display")=="amount"){
-					$("strong", this).text($('[name="offer"]:checked', form).attr("data-amount"));
+					$("strong", this).html($('[name="offer"]:checked', form).attr("data-amount"));
 					return;
 				}
 
@@ -99,13 +115,13 @@ page_script({
 					input = $('[name="'+$(this).attr("data-display")+'"]:checked', form);
 				}
 				if (input.is("select")) {
-					$("strong", this).text(input.find('option:selected').text());
+					$("strong", this).html(input.find('option:selected').text());
 
 				} else if (input.is(":radio") && input.is(":checked")) {
-					$("strong", this).text(input.attr("data-title"));
+					$("strong", this).html(input.attr("data-title"));
 
 				}else{
-					$("strong", this).text(input.val());
+					$("strong", this).html(input.val());
 				}
 			});
 		}
@@ -146,20 +162,12 @@ page_script({
 				return false;
 			},
 			onNext: function (tab, navigation, index) {
-				success.hide();
 				error.hide();
-
-				if (form.valid() == false) {
-					return false;
-				}
-
-				handleTitle(tab, navigation, index);
+				payment_error.hide();
 			},
 			onPrevious: function (tab, navigation, index) {
-				success.hide();
 				error.hide();
-
-				handleTitle(tab, navigation, index);
+				payment_error.hide();
 			},
 			onTabShow: function (tab, navigation, index) {
 				var total = navigation.find('li').length;
@@ -168,20 +176,70 @@ page_script({
 				$('#page_wizard').find('.progress-bar').css({
 					width: $percent + '%'
 				});
+				handleTitle(tab, navigation, index);
 			}
 		});
 
 		$('#page_wizard').find('.button-previous').hide();
-		$('#page_wizard .button-submit').hide();
+		$('#page_wizard .button-submit').click(function (e){
+			if(!form.valid()) return false;
 
-		$('#submit_form').ajaxForm({
-			success: function (rslt) {
-				
-			},
-			error: function (rslt) {
-				console.log(rslt);
-			}
-		});
+			app.blockUI({iconOnly:true, animate:true});
+			$.ajax({
+				url: location.href,
+				type: "POST",
+				data: $(form).serialize(),
+				success: function (rslt) {
+					app.unblockUI();
+					try{
+						p=JSON.parse(rslt);
+						switch(p.status){
+							case "success":
+								$("#success_msg .payment_recipt").html(p.params.payment_recipt);
+								$("#success_msg .goto_job").attr("href", p.params.job_url);
+								$("#page_wizard").remove();
+								$("#success_msg").show();
+							break;
+							case "already_done":
+								$("#already_done_msg .payment_recipt").html(p.params.payment_recipt);
+								$("#already_done_msg .goto_job").attr("href", p.params.job_url);
+								$("#page_wizard").remove();
+								$("#already_done_msg").show();
+							break;
+							case "invalid_card_number":
+								$('#page_wizard').bootstrapWizard("show",2); // goto payment page
+								formvalidator.showErrors({credit_card_number: $("[name=credit_card_number]", form).attr("data-msg-error")});
+							break;
+							case "error_card_password":
+								$('#page_wizard').bootstrapWizard("show",2); // goto payment page
+								formvalidator.showErrors({credit_card_password: $("[name=credit_card_password]", form).attr("data-msg-error")});
+							break;
+							case "insufficient_balance":
+								$('#page_wizard').bootstrapWizard("show",2); // goto payment page
+								formvalidator.showErrors({credit_card_number: $("[name=credit_card_number]", form).attr("data-msg-balance-error")});
+							break;
+							case "unhandled_payment_error":
+								$('#page_wizard').bootstrapWizard("show",2); // goto payment page
+								payment_error.show();
+							break;
+							default:
+								console.log(p);
+								return false;
+							break;
+						}
+					}catch(ex){
+						console.log(rslt);
+						return false;
+					}
+				},
+				error: function (rslt) {
+					app.unblockUI();
+					console.log(rslt);
+					return false;
+				}
+			});
+		}).hide();
 
+		$("[name=name]", form).focus();
 	}
 });

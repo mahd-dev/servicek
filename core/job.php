@@ -49,7 +49,7 @@
 
         public static function create($user){
             global $db;
-            $db->query("insert into job values()");
+            $db->query("insert into job (id_admin) values('".$user->id."')");
             return new job($db->insert_id);
         }
 

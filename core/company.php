@@ -94,6 +94,13 @@
 						return $list;
 					break;
 					
+					case "url":
+						$q=$db->query("select url from company where (id='".$this->id."')");
+						$r=$q->fetch_row();
+						if($r[0]) return $r[0];
+						else return "company/".$this->id;
+					break;
+
 					default:
 						$q=$db->query("select ".$name." from company where (id='".$this->id."')");
 						$r=$q->fetch_row();

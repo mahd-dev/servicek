@@ -62,6 +62,7 @@
         }
 
         public static function check_token($token){
+            global $db;
             $q=$db->query("select id from contract where (payment_token='".$token."')");
             if($q->num_rows==0) return null;
             $r=$q->fetch_row();

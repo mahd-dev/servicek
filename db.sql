@@ -84,7 +84,7 @@ CREATE TABLE `company` (
   FULLTEXT KEY `name` (`name`),
   FULLTEXT KEY `slogan` (`slogan`,`description`),
   FULLTEXT KEY `name_2` (`name`,`slogan`,`description`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,7 +108,7 @@ CREATE TABLE `company_seat` (
   `id_company` bigint(20) DEFAULT NULL,
   `name` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL,
   `type` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `geolocation` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `geolocation` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `address` varchar(1023) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tel` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
   `mobile` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -147,7 +147,7 @@ CREATE TABLE `contract` (
   `duration` int(11) DEFAULT NULL,
   `creation_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -156,7 +156,7 @@ CREATE TABLE `contract` (
 
 LOCK TABLES `contract` WRITE;
 /*!40000 ALTER TABLE `contract` DISABLE KEYS */;
-INSERT INTO `contract` VALUES (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,365,'2015-05-04 16:02:48'),(2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,365,'2015-05-04 16:03:28');
+INSERT INTO `contract` VALUES (5,2,'job','6490398094D57982C1D675E165E64308','e_dinar_smart_tunisian_post','ignored_payment','3',60,36,'2015-05-05 18:05:33');
 /*!40000 ALTER TABLE `contract` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,7 +173,7 @@ CREATE TABLE `job` (
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` varchar(4095) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `geolocation` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `geolocation` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `address` varchar(1023) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tel` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
   `mobile` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -183,7 +183,7 @@ CREATE TABLE `job` (
   FULLTEXT KEY `name` (`name`),
   FULLTEXT KEY `description` (`description`,`address`,`tel`,`mobile`,`email`),
   FULLTEXT KEY `name_2` (`name`,`description`,`address`,`tel`,`mobile`,`email`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -192,6 +192,7 @@ CREATE TABLE `job` (
 
 LOCK TABLES `job` WRITE;
 /*!40000 ALTER TABLE `job` DISABLE KEYS */;
+INSERT INTO `job` VALUES (2,NULL,'mahd',NULL,'Sotware development company, we\'re working on cloud programing','{\"longitude\":\"10.52671799999996\",\"l','C48, Kalaa Kebira, Tunisie','73349119','93625649','contact@mahd.tn','2015-05-05 18:05:33');
 /*!40000 ALTER TABLE `job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -366,4 +367,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-04 20:29:05
+-- Dump completed on 2015-05-05 19:15:45

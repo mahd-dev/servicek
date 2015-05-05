@@ -592,7 +592,7 @@ var app = function() {
                     },
                     overlayCSS: {
                         backgroundColor: options.overlayColor ? options.overlayColor : '#555',
-                        opacity: options.boxed ? 0.05 : 0.1,
+                        opacity: options.boxed ? 0.1 : 0.2,
                         cursor: 'wait'
                     }
                 });
@@ -607,7 +607,7 @@ var app = function() {
                     },
                     overlayCSS: {
                         backgroundColor: options.overlayColor ? options.overlayColor : '#555',
-                        opacity: options.boxed ? 0.05 : 0.1,
+                        opacity: options.boxed ? 0.1 : 0.2,
                         cursor: 'wait'
                     }
                 });
