@@ -12,6 +12,8 @@
     define("url_root","http".(!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "off"?"s":"")."://".$_SERVER["HTTP_HOST"]);
 	define("srv_root",$_SERVER['DOCUMENT_ROOT']);
 
+	$paths = new paths();
+
 	// language selection
 	define("lang",(isset($_COOKIE["lang"]) && $_COOKIE["lang"]!=""?$_COOKIE["lang"]:"fr"));
 	define("rtl",(lang=="ar"?TRUE:FALSE));
