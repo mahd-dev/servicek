@@ -1,7 +1,7 @@
 <!-- custom page styles -->
-<link rel="stylesheet" type="text/css" href="<?php echo cdn;?>/plugins/bootstrap-fileinput/bootstrap-fileinput.min.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo cdn;?>/plugins/bootstrap-fileinput/bootstrap-fileinput<?php if(!debug) echo ".min";?>.css"/>
 
-<link href="<?php echo url_root;?>/pages/home/style.min.css" rel="stylesheet" type="text/css">
+<link href="<?php echo url_root;?>/pages/home/style<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css">
 
 <div class="row">
 	<div class="col-md-12">
@@ -73,11 +73,11 @@
 </div>
 
 <!-- plugins -->
-<script type="text/javascript" src="<?php echo cdn;?>/plugins/salvattore.min.js"></script>
+<script type="text/javascript" src="<?php echo cdn;?>/plugins/salvattore<?php if(!debug) echo ".min";?>.js"></script>
 
 <!-- custom page script -->
-<script src="<?php echo url_root;?>/pages/home/script_2.min.js" type="text/javascript"></script>
+<script src="<?php echo url_root;?>/pages/home/script_2<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 
 <?php if(isset($logout) && $logout){?>
-<script src="<?php echo url_root;?>/pages/login/logout.min.js" type="text/javascript"></script>
+<script src="<?php echo url_root;?>/pages/login/logout<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 <?php }?>

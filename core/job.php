@@ -24,6 +24,12 @@
             global $db;
             if ($this->id != NULL) {
                 switch($name){
+                    case "isvalid":
+                        $q=$db->query("select count(*) from job where (id='".$this->id."')");
+                        $r=$q->fetch_row();
+
+                        return $r[0]!=0;
+                        break;
                     case "id":
                         return $this->id;
                     break;
@@ -79,6 +85,9 @@
             global $db;
             $db->query("delete from category_children where (id_category='".$category->id."' and id_children='".$this->id."' and children_type='job')");
         }
+
+
+   
 
     }
 ?>

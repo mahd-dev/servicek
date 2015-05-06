@@ -1,6 +1,6 @@
-<link rel="stylesheet" type="text/css" href="<?php echo cdn;?>/plugins/bootstrap-editable/bootstrap-editable/css/bootstrap-editable<?php echo(rtl?"-rtl":"");?>.min.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo cdn;?>/plugins/bootstrap-editable/bootstrap-editable/css/bootstrap-editable<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css"/>
 
-<link href="<?php echo url_root;?>/pages/account/style.min.css" rel="stylesheet" type="text/css">
+<link href="<?php echo url_root;?>/pages/account/style<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css">
 
 <div class="row">
 	<div class="col-md-12">
@@ -55,25 +55,23 @@
 
 						<?php }else{?>
 							<div class="portlet light">
-								<div class="portlet-title tabbable-line">
-									<ul class="nav nav-tabs pull-left">
-										<li class="active">
-											<a data-toggle="tab" aria-expanded="true">
-												Sociétés
-											</a>
-										</li>
-									</ul>
+								<div class="portlet-title">
 									<div class="btn-group btn-group-solid pull-right">
-										<a type="button" class="btn green-haze " href="<?php echo url_root;?>/new/company"><i class="icon-flag"></i> Publier ma Société</a>
-										<a type="button" class="btn blue-madison" href="<?php echo url_root;?>/new/job"><i class="icon-pointer"></i> Publier mon travail</a>
+										<a type="button" class="btn green-haze " href="<?php echo url_root;?>/new/company"><i class="icon-flag"></i> Publier une autre Société</a>
+										<a type="button" class="btn blue-madison" href="<?php echo url_root;?>/new/job"><i class="icon-pointer"></i> Publier un autre travail</a>
 									</div>
 								</div>
 								<div class="portlet-body">
-									<ul class="feeds">
+									<div class="list-group">
 										<?php foreach($pages as $p){?>
-											<li><i class="icon-<?php echo($p["type"]=="company" ? "flag" : "pointer");?>"></i> <a href="<?php echo $p["url"];?>" class="ajaxify"><?php echo $p["name"];?></a></li>
+											<a href="<?php echo $p["url"];?>" class="ajaxify list-group-item">
+												<h4>
+													<i class="icon-<?php echo($p["type"]=="company" ? "flag" : "pointer");?>"></i>
+													<?php echo $p["name"];?>
+												</h4>
+											</a>
 										<?php }?>
-									</ul>
+									</div>
 								</div>
 							</div>
 
@@ -153,4 +151,4 @@
 	</div>
 </div>
 
-<script src="<?php echo url_root;?>/pages/account/script_1.min.js" type="text/javascript"></script>
+<script src="<?php echo url_root;?>/pages/account/script_1<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>

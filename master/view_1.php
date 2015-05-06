@@ -15,26 +15,26 @@
 	<meta content="" name="author" />
 
 	<script src="<?php echo cdn;?>/plugins/pace/pace.min.js"></script>
-	<link href="<?php echo cdn;?>/plugins/pace/themes/pace-theme-minimal<?php echo(rtl?"-rtl":"");?>.min.css" rel="stylesheet" />
+	<link href="<?php echo cdn;?>/plugins/pace/themes/pace-theme-minimal<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css" rel="stylesheet" />
 
-	<link href="<?php echo cdn;?>/fonts/default/default.min.css" rel="stylesheet" type="text/css">
+	<link href="<?php echo cdn;?>/fonts/default/default<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css">
 	<link href="<?php echo cdn;?>/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<link href="<?php echo cdn;?>/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css">
+	<link href="<?php echo cdn;?>/plugins/simple-line-icons/simple-line-icons<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css">
 	<link href="<?php echo cdn;?>/plugins/bootstrap/css/bootstrap<?php echo(rtl?"-rtl":"");?>.min.css" rel="stylesheet" type="text/css">
-	<link href="<?php echo cdn;?>/plugins/uniform/css/uniform.default.min.css" rel="stylesheet" type="text/css">
+	<link href="<?php echo cdn;?>/plugins/uniform/css/uniform.default<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css">
 
 	<link href="<?php echo cdn;?>/plugins/bootstrap-switch/css/bootstrap-switch<?php echo(rtl?"-rtl":"");?>.min.css" rel="stylesheet" type="text/css" />
 
-	<link href="<?php echo cdn;?>/css/components-rounded<?php echo(rtl?"-rtl":"");?>.min.css" id="style_components" rel="stylesheet" type="text/css" />
-	<link href="<?php echo cdn;?>/css/plugins<?php echo(rtl?"-rtl":"");?>.min.css" rel="stylesheet" type="text/css" />
-	<link href="<?php echo cdn;?>/css/layout<?php echo(rtl?"-rtl":"");?>.min.css" rel="stylesheet" type="text/css" />
-	<link href="<?php echo cdn;?>/css/themes/default<?php echo(rtl?"-rtl":"");?>.min.css" rel="stylesheet" type="text/css" />
-	<link href="<?php echo cdn;?>/css/custom<?php echo(rtl?"-rtl":"");?>.min.css" rel="stylesheet" type="text/css" />
+	<link href="<?php echo cdn;?>/css/components-rounded<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css" id="style_components" rel="stylesheet" type="text/css" />
+	<link href="<?php echo cdn;?>/css/plugins<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
+	<link href="<?php echo cdn;?>/css/layout<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
+	<link href="<?php echo cdn;?>/css/themes/default<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
+	<link href="<?php echo cdn;?>/css/custom<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
 
-	<link href="<?php echo cdn;?>/plugins/tag-it/css/jquery.tagit.min.css" rel="stylesheet" type="text/css" />
-	<link href="<?php echo cdn;?>/plugins/tag-it/css/tagit.ui-zendesk.min.css" rel="stylesheet" type="text/css" />
+	<link href="<?php echo cdn;?>/plugins/tag-it/css/jquery.tagit<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
+	<link href="<?php echo cdn;?>/plugins/tag-it/css/tagit.ui-zendesk<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
 
-	<link href="<?php echo cdn;?>/plugins/aspectratio/aspectratio.min.css" rel="stylesheet" type="text/css" />
+	<link href="<?php echo cdn;?>/plugins/aspectratio/aspectratio<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
 
 	<link rel="shortcut icon" href="<?php echo cdn;?>/img/favicons/favicon.png" />
 
@@ -181,17 +181,17 @@
 	<script src="<?php echo cdn;?>/plugins/jquery.cokie.min.js" type="text/javascript"></script>
 	<script src="<?php echo cdn;?>/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
 	
-	<script src="<?php echo cdn;?>/plugins/jquery.form.min.js" type="text/javascript"></script>
+	<script src="<?php echo cdn;?>/plugins/jquery.form<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 	<script src="<?php echo cdn;?>/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 	
-	<script src="<?php echo cdn;?>/plugins/tag-it/js/tag-it.min.js" type="text/javascript"></script>
+	<script src="<?php echo cdn;?>/plugins/tag-it/js/tag-it<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 	
-	<script src="<?php echo cdn;?>/scripts/app.min.js" type="text/javascript"></script>
-	<script src="<?php echo cdn;?>/scripts/layout.min.js" type="text/javascript"></script>
+	<script src="<?php echo cdn;?>/scripts/app<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
+	<script src="<?php echo cdn;?>/scripts/layout<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 
-	<script src="<?php echo cdn;?>/plugins/bootstrap-editable/bootstrap-editable/js/bootstrap-editable.min.js" type="text/javascript"></script>
+	<script src="<?php echo cdn;?>/plugins/bootstrap-editable/bootstrap-editable/js/bootstrap-editable<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 
-	<script src="<?php echo cdn;?>/plugins/bootstrap-fileinput/bootstrap-fileinput.min.js" type="text/javascript"></script>
+	<script src="<?php echo cdn;?>/plugins/bootstrap-fileinput/bootstrap-fileinput<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 
 	<script src="<?php echo cdn;?>/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js" type="text/javascript"></script>
 
@@ -199,13 +199,9 @@
 	<script src="<?php echo cdn;?>/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
 
 	<script src='http://maps.google.com/maps/api/js?sensor=false&libraries=places' type="text/javascript"></script>
-	<script src="<?php echo cdn;?>/plugins/locationpicker/locationpicker.jquery.min.js" type="text/javascript"></script>
+	<script src="<?php echo cdn;?>/plugins/locationpicker/locationpicker.jquery<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 
-	<script src="<?php echo cdn;?>/plugins/icheck/icheck.min.js" type="text/javascript"></script>
-
-	<script src="<?php echo cdn;?>/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js" type="text/javascript"></script>
-
-	<script src="<?php echo url_root;?>/master/script_1.min.js" type="text/javascript"></script>
+	<script src="<?php echo url_root;?>/master/script_1<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 	<script>
 		jQuery(document).ready(function () {
 			app.init();

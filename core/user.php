@@ -38,9 +38,11 @@
 						while($r=$q->fetch_row()) $list[] = new job($r[0]);
 						return $list;
 					case "count_pages":
-						$q=$db->query("select (count(user_admin.id_user) + count(job.id)) as rslt from user_admin, job where (user_admin.id_user='".$this->id."' and job.id_admin='".$this->id."')");
-						$r=$q->fetch_row();
-						return $r[0];
+						$q=$db->query("select count(*) from job where (id_admin='".$this->id."')");
+						$r1=$q->fetch_row();
+						$q=$db->query("select count(*) from user_admin where (id_user='".$this->id."')");
+						$r2=$q->fetch_row();
+						return $r1[0] + $r2[0];
 					default:
 						$q=$db->query("select ".$name." from user where (id='".$this->id."')");
 						$r=$q->fetch_row();

@@ -1,5 +1,5 @@
 <!-- custom page styles -->
-<link href="<?php echo url_root;?>/pages/home/style.min.css" rel="stylesheet" type="text/css">
+<link href="<?php echo url_root;?>/pages/home/style<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css">
 
 <div class="row">
 	<div class="col-md-12">
@@ -48,10 +48,10 @@
 </div>
 
 <!-- plugins -->
-<script type="text/javascript" src="<?php echo cdn;?>/plugins/salvattore.min.js"></script>
+<script type="text/javascript" src="<?php echo cdn;?>/plugins/salvattore<?php if(!debug) echo ".min";?>.js"></script>
 
 <!-- custom page scripts -->
-<script src="<?php echo url_root;?>/pages/home/script_1.min.js" type="text/javascript"></script>
+<script src="<?php echo url_root;?>/pages/home/script_1<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 <?php if(isset($logout) && $logout){?>
-<script src="<?php echo url_root;?>/pages/login/logout.min.js" type="text/javascript"></script>
+<script src="<?php echo url_root;?>/pages/login/logout<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 <?php }?>

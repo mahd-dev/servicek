@@ -2,10 +2,12 @@
 	class company{
 
 		private $id;
-
+	
 		public function __construct($nid){
 			$this->id = $nid;
 		}
+
+		
 
 		public function __set($name,$value){
 			global $db;
@@ -22,6 +24,12 @@
 			global $db;
 			if ($this->id != NULL) {
 				switch($name){
+					case "isvalid":
+						$q=$db->query("select count(*) from company where (id='".$this->id."')");
+						$r=$q->fetch_row();
+
+						return $r[0]!=0;
+						break;
 					case "id":
 						return $this->id;
 					break;
@@ -126,7 +134,9 @@
 		public static function create($user){
 			global $db;
 			$db->query("insert into company values()");
-			return new company($db->insert_id);
+			$nid = $db->insert_id;
+			$db->query("insert into user_admin (id_user, id_company) values('".$user->id."', '".$nid."')");
+			return new company($nid);
 		}
 
 		public static function get_all(){
