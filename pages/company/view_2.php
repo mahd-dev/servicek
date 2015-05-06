@@ -98,6 +98,7 @@
 										</div>
 									</div>
 								</div>
+							<?php }?>
 							</div>
 							<div class="tab-pane row" id="prods">
 							<?php foreach ($c->services as $p) {?>
@@ -111,6 +112,7 @@
 										</div>
 									</div>
 								</div>
+							<?php }?>
 							</div>
 						</div>
 					</div>

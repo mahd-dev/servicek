@@ -210,13 +210,13 @@ page_script({
 						switch(p.status){
 							case "success":
 								$("#success_msg .payment_recipt").html(p.params.payment_recipt);
-								$("#success_msg .goto_job").attr("href", p.params.job_url);
+								$("#success_msg .goto_company").attr("href", p.params.company_url);
 								$("#page_wizard").remove();
 								$("#success_msg").show();
 							break;
 							case "already_done":
 								$("#already_done_msg .payment_recipt").html(p.params.payment_recipt);
-								$("#already_done_msg .goto_job").attr("href", p.params.job_url);
+								$("#already_done_msg .goto_company").attr("href", p.params.company_url);
 								$("#page_wizard").remove();
 								$("#already_done_msg").show();
 							break;

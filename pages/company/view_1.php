@@ -94,6 +94,7 @@
 										</div>
 									</div>
 								</div>
+							<?php }?>
 							</div>
 							<div class="tab-pane row" id="prods">
 							<?php foreach ($c->services as $p) {?>
@@ -107,6 +108,7 @@
 										</div>
 									</div>
 								</div>
+							<?php }?>
 							</div>
 						</div>
 					</div>
@@ -118,5 +120,4 @@
 
 
 <!-- custom page script -->
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 <script src="<?php echo url_root;?>/pages/company/script_1<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>

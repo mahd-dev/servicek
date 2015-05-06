@@ -52,5 +52,5 @@
 		include "view_1.php";
 	}
 			
-skip_this_page:	
+	skip_this_page:
 ?>
