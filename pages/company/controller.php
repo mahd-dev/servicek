@@ -8,7 +8,7 @@
 	$s=$c->seats[0];
 	$geolocation=json_decode($s->geolocation);
 
-	if ($c->is_assigned_to_admin($user)) {
+	if ($user!=null && $c->is_assigned_to_admin($user)) {
 		if (isset($_POST['for']) && isset($_POST['pk']) && isset($_POST['name']) && isset($_POST['value'])) {
 			switch ($_POST['for']) {
 				case 'company':
