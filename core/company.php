@@ -182,5 +182,13 @@
 			$r=$q->fetch_row();
 			return $r[0]==0;
 		}
+
+		public static function get_by_url($url){
+			global $db;
+			$q=$db->query("select id from company where (url='".$url."')");
+			if($q->num_rows==0) return null;
+			$r=$q->fetch_row();
+			return new company($r[0]);
+		}
 	}
 ?>

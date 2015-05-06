@@ -81,6 +81,11 @@
 			die(include"seo/sitemap.php");break;
 
 		default:
+			$company = company::get_by_url($url[0]);
+			if($company){
+				$_GET["id"]=$company->id;
+				$req_page = "pages/company/controller.php";break;
+			}
 			$req_page="pages/404/controller.php";break;
 	}
 
