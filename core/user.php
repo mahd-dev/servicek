@@ -27,22 +27,39 @@
 					break;
 					case "pages":
 						return array_merge($this->companies, $this->jobs);
+					break;
 					case "companies":
 						$list = array();
 						$q=$db->query("select id_company from user_admin where (id_user='".$this->id."')");
 						while($r=$q->fetch_row()) $list[] = new company($r[0]);
 						return $list;
+					break;
 					case "jobs":
 						$list = array();
 						$q=$db->query("select id from job where (id_admin='".$this->id."')");
 						while($r=$q->fetch_row()) $list[] = new job($r[0]);
 						return $list;
+					break;
 					case "count_pages":
 						$q=$db->query("select count(*) from job where (id_admin='".$this->id."')");
 						$r1=$q->fetch_row();
 						$q=$db->query("select count(*) from user_admin where (id_user='".$this->id."')");
 						$r2=$q->fetch_row();
 						return $r1[0] + $r2[0];
+					break;
+
+					case "has_agent_requests":
+                        $q=$db->query("select count(*) from agent_request where (id_for='".$this->id."' and rel_type='user')");
+                        $r=$q->fetch_row();
+                        return $r[0]>0;
+                    break;
+                    case "agent_requests":
+                        $list = array();
+                        $q=$db->query("select id, creation_time from agent_request where (id_for='".$this->id."' and rel_type='user')");
+                        while($r=$q->fetch_row()) $list[] = array("id"=>$r[0], "creation_time"=>$r[1]);
+                        return $list;
+                    break;
+
 					default:
 						$q=$db->query("select ".$name." from user where (id='".$this->id."')");
 						$r=$q->fetch_row();
@@ -114,6 +131,16 @@
 				}
 			}
 		}
+
+		public function request_agent(){
+            global $db;
+            $db->query("insert into agent_request (id_for, rel_type) values('".$this->id."', 'user')");
+        }
+
+        public function clear_agent_requests(){
+            global $db;
+            $db->query("delete from agent_request where (id_for = '".$this->id."' and rel_type = 'user')");
+        }
 		
 	}
 ?>

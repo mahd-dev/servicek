@@ -24,14 +24,13 @@
             global $db;
             if ($this->id != NULL) {
                 switch($name){
+                    case "id":
+                        return $this->id;
+                    break;
                     case "isvalid":
                         $q=$db->query("select count(*) from job where (id='".$this->id."')");
                         $r=$q->fetch_row();
-
-                        return $r[0]!=0;
-                        break;
-                    case "id":
-                        return $this->id;
+                        return $r[0]==1;
                     break;
                     case "admin":
                         return new user($this->id_admin);
@@ -40,6 +39,17 @@
                         $list = array();
                         $q=$db->query("select id_category from category_children where (id_children='".$this->id."' and children_type='job')");
                         while($r=$q->fetch_row()) $list[] = new category($r[0]);
+                        return $list;
+                    break;
+                    case "has_agent_requests":
+                        $q=$db->query("select count(*) from agent_request where (id_for='".$this->id."' and rel_type='job')");
+                        $r=$q->fetch_row();
+                        return $r[0]>0;
+                    break;
+                    case "agent_requests":
+                        $list = array();
+                        $q=$db->query("select id, creation_time from agent_request where (id_for='".$this->id."' and rel_type='job')");
+                        while($r=$q->fetch_row()) $list[] = array("id"=>$r[0], "creation_time"=>$r[1]);
                         return $list;
                     break;
                     default:
@@ -86,8 +96,15 @@
             $db->query("delete from category_children where (id_category='".$category->id."' and id_children='".$this->id."' and children_type='job')");
         }
 
+        public function request_agent(){
+            global $db;
+            $db->query("insert into agent_request (id_for, rel_type) values('".$this->id."', 'job')");
+        }
 
-   
+        public function clear_agent_requests(){
+            global $db;
+            $db->query("delete from agent_request where (id_for = '".$this->id."' and rel_type = 'job')");
+        }
 
     }
 ?>

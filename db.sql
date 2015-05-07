@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.24, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.14  Distrib 5.5.41-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: servicek
 -- ------------------------------------------------------
--- Server version	5.6.24-0ubuntu2
+-- Server version	5.5.41-MariaDB-1ubuntu0.14.10.1-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,15 +24,15 @@ DROP TABLE IF EXISTS `agent`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `agent` (
   `id` bigint(20) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `public_code` varchar(255) DEFAULT NULL,
-  `address` varchar(1023) DEFAULT NULL,
-  `mobile` varchar(35) DEFAULT NULL,
-  `email` varchar(127) DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `username` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address` varchar(1023) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mobile` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -423,4 +423,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-07 20:42:13
+-- Dump completed on 2015-05-08  0:51:58

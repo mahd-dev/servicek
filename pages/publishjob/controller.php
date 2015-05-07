@@ -4,8 +4,10 @@
 		$job=new job($_GET['id']);
 		if (!$job->isvalid || $job->admin!=$user) {include __DIR__."/../404/controller.php";goto skip_this_page;}
 	}
+
 	if(isset($_GET["request_agent"])){
-		
+		$job->request_agent();
+		die(json_encode(array("status"=>"success")));
 	}
 
 	$offers=array(
@@ -19,7 +21,8 @@
 		isset($_POST["offer"]) &&
 		isset($_POST["method"]) &&
 		isset($_POST["credit_card_number"]) &&
-		isset($_POST["credit_card_password"])
+		isset($_POST["credit_card_password"]) &&
+		isset($_POST["agent_code"])
 	){
 
 		// checking parameters
@@ -38,20 +41,28 @@
 		if(
 			!$_POST["offer"] ||
 			!$_POST["method"] ||
-			!$_POST["credit_card_number"] ||
-			!$_POST["credit_card_password"]
-		)  die(json_encode(array("status"=>"error_empty_parameter")));
+			(
+				!$_POST["credit_card_number"] ||
+				!$_POST["credit_card_password"]
+			) && (
+				!$_POST["agent_code"]
+			)
+		) die(json_encode(array("status"=>"error_empty_parameter")));
 
 		if(!array_key_exists($_POST["offer"], $offers))  die(json_encode(array("status"=>"invalid_offer")));
 		
-		
-		$payment=gf::pay($_POST["method"], $_POST["credit_card_number"], $_POST["credit_card_password"], $offers[$_POST["offer"]]["amount"]);
-		if($payment["status"]!="success") die(json_encode($payment));
+		if($_POST["credit_card_number"]){
+			$payment=gf::pay($_POST["method"], $_POST["credit_card_number"], $_POST["credit_card_password"], $offers[$_POST["offer"]]["amount"]);
+			if($payment["status"]!="success") die(json_encode($payment));
+		}else{
+			$agent=agent::login_by_code($_POST["agent_code"]);
+			if(is_array($agent)) die(json_encode($agent));
+		}
 
 		$contract=contract::create($job,$_POST["token"]);
 				
 		$contract->payment_from=$_POST["method"];
-		$contract->payment_recipt=$payment["params"]["payment_recipt"];
+		if(isset($payment)) $contract->payment_recipt=$payment["params"]["payment_recipt"];
 
 		$contract->type=$_POST["offer"];
 		$contract->amount=$offers[$_POST["offer"]]["amount"];
@@ -60,7 +71,7 @@
 		die(json_encode(array(
 			"status"=>"success",
 			"params"=>array(
-				"payment_recipt"=>$payment["params"]["payment_recipt"],
+				"payment_recipt"=>(isset($payment) ? $payment["params"]["payment_recipt"] : null),
 				"job_url"=>url_root."/job/".$job->id
 			)
 		)));

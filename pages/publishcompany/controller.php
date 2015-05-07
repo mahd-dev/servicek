@@ -1,38 +1,30 @@
 <?php
-	if($user==null){ // must be connected to access account page
-		include __DIR__."/../404/controller.php";
-		goto skip_this_page;
+	if (!isset($_GET['id'])) {include __DIR__."/../404/controller.php";goto skip_this_page;}
+	else{
+		$company=new company($_GET['id']);
+		if (!$company->isvalid || $company->admin!=$user) {include __DIR__."/../404/controller.php";goto skip_this_page;}
 	}
+
+	if(isset($_GET["request_agent"])){
+		$job->request_agent();
+		die(json_encode(array("status"=>"success")));
+	}
+
+	if(isset($_POST["check_url"])) die((company::check_url($_POST["check_url"])?"true":"false"));
 
 	$offers=array(
 		"1" => array("duration" => "6", "amount" => "60", "text" => "6 mois : <strong>60 DT</strong>", "help" => '<span class="label label-info pull-right" style="padding:10px;margin:-4px;"><i class="icon-speedometer"></i> Désigné pour le test</span>', "default" => false),
 		"2" => array("duration" => "12", "amount" => "90", "text" => "12 mois : <strong>90 DT</strong>", "help" => '<span class="label label-success pull-right" style="padding:10px;margin:-4px;"><i class="icon-check"></i> Recommandé</span>', "default" => true),
 		"3" => array("duration" => "36", "amount" => "180", "text" => "3 ans : <strong>180 DT</strong>", "help" => '<span class="label label-primary pull-right" style="padding:10px;margin:-4px;"><i class="icon-star"></i> Inscription longue terme</span>', "default" => false)
 	);
-	$payment_methods=array(
-		"e_dinar_smart_tunisian_post",
-		"visa_electron_tunisian_post",
-		"visa",
-		"mastecard",
-	);
-
-	if(isset($_POST["check_url"])) die((company::check_url($_POST["check_url"])?"true":"false"));
+	
 	if(
 		isset($_POST["token"]) &&
-		isset($_POST["name"]) &&
-		isset($_POST["slogan"]) &&
-		isset($_POST["description"]) &&
-		isset($_POST["url"]) &&
-		isset($_POST["address"]) &&
-		isset($_POST["longitude"]) &&
-		isset($_POST["latitude"]) &&
-		isset($_POST["tel"]) &&
-		isset($_POST["mobile"]) &&
-		isset($_POST["email"]) &&
 		isset($_POST["offer"]) &&
 		isset($_POST["method"]) &&
 		isset($_POST["credit_card_number"]) &&
-		isset($_POST["credit_card_password"])
+		isset($_POST["credit_card_password"]) &&
+		isset($_POST["agent_code"])
 	){
 
 		// checking parameters

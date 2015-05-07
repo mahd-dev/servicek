@@ -31,15 +31,18 @@
 						$q=$db->query("select count(*) from company where (id='".$this->id."')");
 						$r=$q->fetch_row();
 						return $r[0]==1;
+					break;
 					case "admins":
 						$list = array();
 						$q=$db->query("select id_user from user_admin where (id_page='".$this->id."')");
 						while($r=$q->fetch_row()) $list[] = new user($r[0]);
 						return $list;
+					break;
 					case "count_admins":
 						$q=$db->query("select count(*) from user_admin where (id_page='".$this->id."')");
 						$r=$q->fetch_row();
 						return $r[0];
+					break;
 					
 					case "seats":
 						$list = array();
@@ -106,6 +109,18 @@
 						if($r[0]) return $r[0];
 						else return "company/".$this->id;
 					break;
+
+					case "has_agent_requests":
+                        $q=$db->query("select count(*) from agent_request where (id_for='".$this->id."' and rel_type='company')");
+                        $r=$q->fetch_row();
+                        return $r[0]>0;
+                    break;
+                    case "agent_requests":
+                        $list = array();
+                        $q=$db->query("select id, creation_time from agent_request where (id_for='".$this->id."' and rel_type='company')");
+                        while($r=$q->fetch_row()) $list[] = array("id"=>$r[0], "creation_time"=>$r[1]);
+                        return $list;
+                    break;
 
 					default:
 						$q=$db->query("select ".$name." from company where (id='".$this->id."')");
@@ -188,5 +203,16 @@
 			$r=$q->fetch_row();
 			return new company($r[0]);
 		}
+
+		public function request_agent(){
+			global $db;
+			$db->query("insert into agent_request (id_for, rel_type) values('".$this->id."', 'company')");
+		}
+
+        public function clear_agent_requests(){
+            global $db;
+            $db->query("delete from agent_request where (id_for = '".$this->id."' and rel_type = 'company')");
+        }
+
 	}
 ?>

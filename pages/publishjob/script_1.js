@@ -156,7 +156,8 @@ page_script({
 						p=JSON.parse(rslt);
 						switch(p.status){
 							case "success":
-								$("#success_msg .payment_recipt").html(p.params.payment_recipt);
+								if(p.params.payment_recipt) $("#success_msg .payment_recipt").html(p.params.payment_recipt);
+								else $("#success_msg .payment_recipt").parent().hide();
 								$("#success_msg .goto_job").attr("href", p.params.job_url);
 								$("#page_wizard").remove();
 								$("#success_msg").show();
@@ -207,9 +208,12 @@ page_script({
 				case "local_pay":
 					$(".agent_warning").show();
 					$(".agent_request_success").hide();
+
 					$("[name=agent_code]", form).rules( "add", {
 						required: true
 					});
+					$("[name=credit_card_number]", form).val("");
+					$("[name=credit_card_password]", form).val("");
 					$("[name=credit_card_number]", form).rules( "remove" );
 					$("[name=credit_card_password]", form).rules( "remove" );
 				break;
@@ -220,6 +224,7 @@ page_script({
 					$("[name=credit_card_password]", form).rules( "add", {
 						required: true
 					});
+					$("[name=agent_code]", form).val("");
 					$("[name=agent_code]", form).rules( "remove" );
 				break;
 			}
