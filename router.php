@@ -56,10 +56,12 @@
 			}
         case "job":
 			if(isset($url[1])) $_GET["id"]=$url[1];
-			$req_page = "pages/job/controller.php";break;
+			if(isset($url[2]) && $url[2]=="publish") $req_page = "pages/publishjob/controller.php";break;
+			else $req_page = "pages/job/controller.php";break;
         case "company":
 			if(isset($url[1])) $_GET["id"]=$url[1];
-			$req_page = "pages/company/controller.php";break;
+			if(isset($url[2]) && $url[2]=="publish") $req_page = "pages/publishcompany/controller.php";break;
+			else $req_page = "pages/company/controller.php";break;
         case "product":
 			if(isset($url[1])) $_GET["id"]=$url[1];
 			$req_page = "pages/product/controller.php";break;
@@ -84,7 +86,8 @@
 			$company = company::get_by_url($url[0]);
 			if($company){
 				$_GET["id"]=$company->id;
-				$req_page = "pages/company/controller.php";break;
+				if(isset($url[1]) && $url[1]=="publish") $req_page = "pages/publishcompany/controller.php";break;
+				else $req_page = "pages/company/controller.php";break;
 			}
 			$req_page="pages/404/controller.php";break;
 	}

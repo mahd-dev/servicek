@@ -5,7 +5,6 @@
 		if (!$j->isvalid) {include __DIR__."/../404/controller.php";goto skip_this_page;}
 	}
 
-
 	$geolocation=json_decode($j->geolocation);
 	
 	if ($j->admin==$user) {
@@ -37,8 +36,10 @@
 		}
 
 		include "view_2.php";
-	}else{
+	}elseif($j->is_contracted){
 		include "view_1.php";
+	}else{
+		include __DIR__."/../404/controller.php";goto skip_this_page;
 	}
 			
 	skip_this_page:	

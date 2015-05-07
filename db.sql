@@ -16,6 +16,60 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `agent`
+--
+
+DROP TABLE IF EXISTS `agent`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `agent` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `public_code` varchar(255) DEFAULT NULL,
+  `address` varchar(1023) DEFAULT NULL,
+  `mobile` varchar(35) DEFAULT NULL,
+  `email` varchar(127) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `agent`
+--
+
+LOCK TABLES `agent` WRITE;
+/*!40000 ALTER TABLE `agent` DISABLE KEYS */;
+/*!40000 ALTER TABLE `agent` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `agent_request`
+--
+
+DROP TABLE IF EXISTS `agent_request`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `agent_request` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_for` bigint(20) DEFAULT NULL,
+  `rel_type` varchar(35) DEFAULT NULL,
+  `creation_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `agent_request`
+--
+
+LOCK TABLES `agent_request` WRITE;
+/*!40000 ALTER TABLE `agent_request` DISABLE KEYS */;
+/*!40000 ALTER TABLE `agent_request` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `category`
 --
 
@@ -84,7 +138,7 @@ CREATE TABLE `company` (
   FULLTEXT KEY `name` (`name`),
   FULLTEXT KEY `slogan` (`slogan`,`description`),
   FULLTEXT KEY `name_2` (`name`,`slogan`,`description`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,6 +147,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
+INSERT INTO `company` VALUES (2,'mahd','Toghther we do the best','Software development company, we love cloud computing and web development','mahdCompany',NULL,NULL,'2015-05-06 16:30:00');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,7 +171,7 @@ CREATE TABLE `company_seat` (
   `creation_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   FULLTEXT KEY `name` (`name`,`address`,`tel`,`mobile`,`email`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,6 +180,7 @@ CREATE TABLE `company_seat` (
 
 LOCK TABLES `company_seat` WRITE;
 /*!40000 ALTER TABLE `company_seat` DISABLE KEYS */;
+INSERT INTO `company_seat` VALUES (1,2,'Kalaa kebira','master','{\"longitude\":\"10.52671799999996\",\"latitude\":\"35.878347\"}','C48, Kalaa Kebira, Tunisie','73349119','93625649','contact@mahd.tn','2015-05-06 16:30:00');
 /*!40000 ALTER TABLE `company_seat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,6 +195,7 @@ CREATE TABLE `contract` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_page` bigint(20) DEFAULT NULL,
   `page_type` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id_agent` bigint(20) DEFAULT NULL,
   `payment_token` varchar(36) COLLATE utf8_unicode_ci DEFAULT NULL,
   `payment_from` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL,
   `payment_recipt` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -147,7 +204,7 @@ CREATE TABLE `contract` (
   `duration` int(11) DEFAULT NULL,
   `creation_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -156,7 +213,7 @@ CREATE TABLE `contract` (
 
 LOCK TABLES `contract` WRITE;
 /*!40000 ALTER TABLE `contract` DISABLE KEYS */;
-INSERT INTO `contract` VALUES (5,2,'job','6490398094D57982C1D675E165E64308','e_dinar_smart_tunisian_post','ignored_payment','3',60,36,'2015-05-05 18:05:33');
+INSERT INTO `contract` VALUES (5,2,'job',NULL,'6490398094D57982C1D675E165E64308','e_dinar_smart_tunisian_post','ignored_payment','3',60,36,'2015-05-05 18:05:33'),(6,3,'job',NULL,'EA5B39AFE5B0B11B848F230D85BDCDEE','e_dinar_smart_tunisian_post','ignored_payment','3',60,36,'2015-05-06 13:12:54'),(7,2,'company',NULL,'006AF1A9225F95FE73159B3968B3E03B','e_dinar_smart_tunisian_post','ignored_payment','3',180,36,'2015-05-06 16:30:00');
 /*!40000 ALTER TABLE `contract` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,7 +240,7 @@ CREATE TABLE `job` (
   FULLTEXT KEY `name` (`name`),
   FULLTEXT KEY `description` (`description`,`address`,`tel`,`mobile`,`email`),
   FULLTEXT KEY `name_2` (`name`,`description`,`address`,`tel`,`mobile`,`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -192,7 +249,7 @@ CREATE TABLE `job` (
 
 LOCK TABLES `job` WRITE;
 /*!40000 ALTER TABLE `job` DISABLE KEYS */;
-INSERT INTO `job` VALUES (2,NULL,'mahd',NULL,'Sotware development company, we\'re working on cloud programing','{\"longitude\":\"10.52671799999996\",\"l','C48, Kalaa Kebira, Tunisie','73349119','93625649','contact@mahd.tn','2015-05-05 18:05:33');
+INSERT INTO `job` VALUES (2,NULL,'mahd',NULL,'Sotware development company, we\'re working on cloud programing','{\"longitude\":\"10.52671799999996\",\"l','C48, Kalaa Kebira, Tunisie','73349119','93625649','contact@mahd.tn','2015-05-05 18:05:33'),(3,3,'mahd',NULL,'SociÃ©tÃ© de dÃ©veloppement informatique','{\"longitude\":\"10.52671799999996\",\"latitude\":\"35.878347\"}','P16, Tunisie','73349119','93625649','contact@mahd.tn','2015-05-06 13:12:54');
 /*!40000 ALTER TABLE `job` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -313,8 +370,6 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `id_creator` bigint(20) DEFAULT NULL,
-  `type` varchar(63) COLLATE utf8_unicode_ci DEFAULT NULL,
   `username` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `displayname` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -331,7 +386,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,NULL,'user','test','123','Test user','test@server.com','123456789','2015-04-24 19:46:41'),(3,NULL,NULL,'med','12345678','Mohamed Dardouri','dardouri.mohamed@hotmail.com','93625649','2015-05-01 16:28:29');
+INSERT INTO `user` VALUES (2,'test','123','Test user','test@server.com','123456789','2015-04-24 19:46:41'),(3,'med','12345678','Mohamed Dardouri','dardouri.mohamed@hotmail.com','93625649','2015-05-01 16:28:29');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -355,6 +410,7 @@ CREATE TABLE `user_admin` (
 
 LOCK TABLES `user_admin` WRITE;
 /*!40000 ALTER TABLE `user_admin` DISABLE KEYS */;
+INSERT INTO `user_admin` VALUES (3,2);
 /*!40000 ALTER TABLE `user_admin` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -367,4 +423,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-05 19:15:45
+-- Dump completed on 2015-05-07 20:42:13

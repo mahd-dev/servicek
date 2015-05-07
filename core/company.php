@@ -24,15 +24,13 @@
 			global $db;
 			if ($this->id != NULL) {
 				switch($name){
-					case "isvalid":
-						$q=$db->query("select count(*) from company where (id='".$this->id."')");
-						$r=$q->fetch_row();
-
-						return $r[0]!=0;
-						break;
 					case "id":
 						return $this->id;
 					break;
+					case "isvalid":
+						$q=$db->query("select count(*) from company where (id='".$this->id."')");
+						$r=$q->fetch_row();
+						return $r[0]==1;
 					case "admins":
 						$list = array();
 						$q=$db->query("select id_user from user_admin where (id_page='".$this->id."')");

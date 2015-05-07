@@ -2,6 +2,50 @@
 
 	class gf {
 
+		public static function pay($method, $card_number, $card_password, $amount){
+			
+			switch ($method) {
+				case 'e_dinar_smart_tunisian_post':
+
+					$payment_recipt="ignored_payment";
+					$payment_error=null;
+
+					break;
+				case 'visa_electron_tunisian_post':
+
+					$payment_recipt="ignored_payment";
+					$payment_error=null;
+
+					break;
+				case 'visa':
+
+					$payment_recipt="ignored_payment";
+					$payment_error=null;
+
+					break;
+				case 'mastecard':
+
+					$payment_recipt="ignored_payment";
+					$payment_error=null;
+					
+					break;
+				default:
+					$payment_error = "invalid_method";
+					break;
+			}
+
+			if(!$payment_error) $rslt = array("status"=>"success", "params"=>array(
+				"payment_recipt"=>$payment_recipt
+			));
+			elseif($payment_error=="invalid_method") $rslt = array("status"=>"invalid_method");
+			elseif($payment_error=="invalid_card_number") $rslt = array("status"=>"invalid_card_number");
+			elseif($payment_error=="error_card_password") $rslt = array("status"=>"error_card_password");
+			elseif($payment_error=="insufficient_balance") $rslt = array("status"=>"insufficient_balance");
+			elseif($payment_error)  $rslt = array("status"=>"unhandled_payment_error");
+
+			return $rslt;
+		}
+
 		public static function search($q){
 			global $db;
 

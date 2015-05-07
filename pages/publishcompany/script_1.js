@@ -41,7 +41,6 @@ page_script({
 
 		var formvalidator = form.validate({
 			ignore: "",
-			doNotHideMessage: true,
 			errorElement: 'span',
 			errorClass: 'help-block help-block-error',
 			focusInvalid: true,
@@ -49,15 +48,34 @@ page_script({
 				
 				name: {minlength: 3, maxlength: 255, required: true},
 				description: {minlength: 50, maxlength: 4095, required: true},
+				url: {
+					minlength: 5,
+					remote: {
+						url: location.href,
+						type: "post",
+						data: {
+							check_url: function() {
+								return $("[name=url]",form).val();
+							}
+						}
+					}
+				},
+
 				address: {required: true},
 				longitude: {required: true},
 				latitude: {required: true},
 				tel: {required: true},
 				email: {required: true},
 				
+				offer: {required: true},
+				accept_contract: {required: true},
+				
+				credit_card_number: {required: true, creditcard: true},
+				credit_card_password: {required: true}
+				
 			},
 
-			invalidHandler: function (event, validator) { //display error alert on form submit   
+			invalidHandler: function (event, validator) { //display error alert on form submit 
 				var cr = $(validator.currentElements[0]);
 				$('#page_wizard').bootstrapWizard("show", $(cr.parents(".tab-pane")[0]).index());
 				error.show();
@@ -80,6 +98,10 @@ page_script({
 			errorPlacement: function (error, element) {
 
 				switch($(element).attr("name")){
+					case "url": 
+					case "accept_contract":
+						error.appendTo($(element.parents(".form-group")[0]).find(".error_msg"));
+					break;
 					default:
 						error.insertAfter(element);
 					break;
@@ -92,7 +114,7 @@ page_script({
 
 		});
 		
-		form.submit(function (e){ e.preventDefault(); });
+		form.submit(function (e) { e.preventDefault(); });
 
 		var displayConfirm = function() {
 			$('#validation .form-control-static', form).each(function(){
@@ -174,7 +196,8 @@ page_script({
 		$('#page_wizard').find('.button-previous').hide();
 		$('#page_wizard .button-submit').click(function (e){
 			if(!form.valid()) return false;
-
+			console.log(form);
+			console.log(new FormData(form));
 			app.blockUI({iconOnly:true, animate:true});
 			$.ajax({
 				url: location.href,
@@ -187,9 +210,31 @@ page_script({
 						switch(p.status){
 							case "success":
 								$("#success_msg .payment_recipt").html(p.params.payment_recipt);
-								$("#success_msg .goto_job").attr("href", p.params.job_url);
+								$("#success_msg .goto_company").attr("href", p.params.company_url);
 								$("#page_wizard").remove();
 								$("#success_msg").show();
+							break;
+							case "already_done":
+								$("#already_done_msg .payment_recipt").html(p.params.payment_recipt);
+								$("#already_done_msg .goto_company").attr("href", p.params.company_url);
+								$("#page_wizard").remove();
+								$("#already_done_msg").show();
+							break;
+							case "invalid_card_number":
+								$('#page_wizard').bootstrapWizard("show",2); // goto payment page
+								formvalidator.showErrors({credit_card_number: $("[name=credit_card_number]", form).attr("data-msg-error")});
+							break;
+							case "error_card_password":
+								$('#page_wizard').bootstrapWizard("show",2); // goto payment page
+								formvalidator.showErrors({credit_card_password: $("[name=credit_card_password]", form).attr("data-msg-error")});
+							break;
+							case "insufficient_balance":
+								$('#page_wizard').bootstrapWizard("show",2); // goto payment page
+								formvalidator.showErrors({credit_card_number: $("[name=credit_card_number]", form).attr("data-msg-balance-error")});
+							break;
+							case "unhandled_payment_error":
+								$('#page_wizard').bootstrapWizard("show",2); // goto payment page
+								payment_error.show();
 							break;
 							default:
 								console.log(p);
@@ -208,7 +253,6 @@ page_script({
 				}
 			});
 		}).hide();
-
 		$("[name=name]", form).focus();
 	}
 });
