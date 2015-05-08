@@ -1,6 +1,55 @@
 <?php
 	// definig SEO parameters
 	// ...
+	
+	$r=array_slice(gf::news(), 0, 50);
+	$rslt=array();
+	foreach ($r as $e) {
+		switch (get_class($e)) {
+			case 'company':
+				$rslt[]=array(
+					"type"=>get_class($e),
+					"title"=>$e->name,
+					"sub_title"=>$e->slogan,
+					"content"=>$e->description,
+					"image_url"=>$paths->company_logo->url.$e->logo,
+					"url"=>url_root."/".$e->url
+					);
+				break;
+			case 'job':
+				$rslt[]=array(
+					"type"=>get_class($e),
+					"title"=>$e->name,
+					"sub_title"=>"",
+					"content"=>$e->description,
+					"image_url"=>$paths->job_image->url.$e->image,
+					"url"=>url_root."/job/".$e->id
+					);
+				break;
+			case 'product':
+				$pc=$e->company;
+				$rslt[]=array(
+					"type"=>get_class($e),
+					"title"=>$e->name,
+					"sub_title"=>$pc->name,
+					"content"=>$e->description,
+					"image_url"=>$paths->product_image->url.$e->image,
+					"url"=>url_root."/".$pc->url
+					);
+				break;
+			case 'service':
+				$sc=$e->company;
+				$rslt[]=array(
+					"type"=>get_class($e),
+					"title"=>$e->name,
+					"sub_title"=>$sc->name,
+					"content"=>$e->description,
+					"image_url"=>$paths->service_image->url.$e->image,
+					"url"=>url_root."/".$sc->url
+					);
+				break;
+		}
+	}
 
 	// select and display right view
 	// ...

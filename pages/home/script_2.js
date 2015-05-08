@@ -17,7 +17,7 @@ page_script({
 		salvattore['append_elements']($(".home-news")[0], [item]);
 
 		*/
-
+		/*
 		$("#search_form .autocomplete").tagit({
 			placeholderText: $("#search_form .autocomplete").attr("placeholder"),
 			afterTagAdded: function () {
@@ -40,11 +40,13 @@ page_script({
 	            });
 	        }
 		});
+		*/
 
 		// process search form submit event
 		$("#search_form").submit(function (e) {
 			e.preventDefault();
-			Layout.ajaxify(location.origin + "/search?q=" + $(this).find("ul.autocomplete").tagit("assignedTags").join(" "));
+			//Layout.ajaxify(location.origin + "/search?q=" + $(this).find("ul.autocomplete").tagit("assignedTags").join(" "));
+			Layout.ajaxify(location.origin + "/search?q=" + $(this).find(".query").val());
 		});
 
 		// process new post form submit event

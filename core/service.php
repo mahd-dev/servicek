@@ -34,6 +34,9 @@
                         while($r=$q->fetch_row()) $list[] = new category($r[0]);
                         return $list;
                     break;
+                    case "is_contracted":
+                        return $this->company->is_contracted;
+                    break;
                     default:
                         $q=$db->query("select ".$name." from service where (id='".$this->id."')");
 			            $r=$q->fetch_row();

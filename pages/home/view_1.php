@@ -7,7 +7,8 @@
 			<div class="col-md-8">
 				<form id="search_form" class="row">
 					<div class="form-group input-group input-lg">
-						<ul class="autocomplete form-control input-lg" placeholder="Qu'est-ce que vous voulez?"></ul>
+						<input type="text" class="query form-control input-lg" placeholder="Qu'est-ce que vous voulez?" required/>
+						<!--<ul class="autocomplete form-control input-lg" placeholder="Qu'est-ce que vous voulez?"></ul>-->
 						<span class="input-group-btn">
 							<button class="btn input-lg btn-default" type="submit"><i class="icon-magnifier"></i></button>
 						</span>
@@ -17,31 +18,24 @@
 		</div>
 		<div class="row home-news" data-columns>
 
-			<?php for($i=0;$i<20;$i++){?>
-
-				<div class="item portlet light bordered">
+			<?php foreach ($rslt as $r) {?>
+        	
+        	<a href="<?php echo $r["url"];?>" class="ajaxify">
+	        	<div class="item portlet light bordered">
 					<div class="portlet-title">
 						<div class="caption">
-							<i class="icon-puzzle font-grey-gallery"></i>
-							<span class="caption-subject bold font-grey-gallery uppercase">
-							Tools <?php echo $i;?> </span>
-							<span class="caption-helper">more samples...</span>
+							<?php if($r["type"]=="company"){?><i class="icon-flag font-grey-gallery"></i><?php }?>
+							<span class="caption-subject bold font-grey-gallery uppercase"><?php echo $r["title"];?></span>
+							<span class="caption-helper"><?php echo $r["sub_title"];?></span>
 						</div>
 					</div>
 					<div class="portlet-body">
-						<h4>Heading text goes here...</h4>
-						<p>
-							 <?php
-								$max = rand(20,70);
-								for($j=0;$j<$max;$j++){
-									echo "text ";
-								}
-							 ?>
-						</p>
+						<?php echo $r["content"];?>
 					</div>
 				</div>
-
-			<?php }?>
+			</a>
+            
+            <?php } ?>
 
 		</div>
 	</div>

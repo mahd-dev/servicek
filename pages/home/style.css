@@ -16,6 +16,11 @@
 	margin-bottom: 30px;
 }
 
+.item{
+	text-decoration:none !important;
+	color:#000 !important;
+}
+
 /* news masnory responsive columns */
 
 @media screen and (max-width: 768px) {

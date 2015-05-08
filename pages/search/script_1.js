@@ -1,6 +1,12 @@
 page_script({
 	init: function () {
 
+		salvattore.rescanMediaQueries();
+		setTimeout(function (){
+			if($(window).width()>768 && $(".home-news").attr("data-columns")==1) salvattore.rescanMediaQueries();
+		},1000);
+
+		/*
 		$("#search_form .autocomplete").tagit({
 			placeholderText: $("#search_form .autocomplete").attr("placeholder"),
 			afterTagAdded: function () {
@@ -23,11 +29,13 @@ page_script({
 	            });
 	        }
 		});
-
+		*/
+		
 		// process search form submit event
 		$("#search_form").submit(function (e) {
 			e.preventDefault();
-			Layout.ajaxify(location.origin + "/search?q=" + $(this).find("ul.autocomplete").tagit("assignedTags").join(" "));
+			//Layout.ajaxify(location.origin + "/search?q=" + $(this).find("ul.autocomplete").tagit("assignedTags").join(" "));
+			Layout.ajaxify(location.origin + "/search?q=" + $(this).find(".query").val());
 		});
 		
 	}

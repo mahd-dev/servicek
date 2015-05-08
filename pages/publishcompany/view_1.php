@@ -95,7 +95,7 @@
 											<li class="active"><a href="#local_pay" class="payment_type" data-toggle="tab">Paiement assisté par agent</a></li>
 										</ul>
 										<div class="tab-content">
-											<div class="tab-pane active" id="pay_online">
+											<div class="tab-pane" id="pay_online">
 
 												<div class="row">
 													<div class="col-md-offset-3 col-md-6">
@@ -138,7 +138,7 @@
 												</div>
 											</div>
 
-											<div class="tab-pane" id="local_pay">
+											<div class="tab-pane active" id="local_pay">
 												<div class="row">
 													<div class="col-md-offset-3 col-md-6">
 														<div class="note note-info agent_warning">

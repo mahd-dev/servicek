@@ -59,7 +59,10 @@
 				AS score
     			FROM company WHERE (MATCH (name, slogan, description) AGAINST ('$q'))
     		") or die("q_company : ".$db->error);
-			while ($r=$q_company->fetch_row()) $rslt[] = array("obj" => new company($r[0]), "score" => $r[1]);
+			while ($r=$q_company->fetch_row()) {
+				$e = new company($r[0]);
+				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => 1);
+			}
 
 			$q_company_seat=$db->query("
 				SELECT id_company, MATCH (name, address, tel, mobile, email) AGAINST ('$q') AS score
@@ -67,13 +70,12 @@
 			") or die("q_category : ".$db->error);
 			while ($r=$q_company_seat->fetch_row()) {
 				$c = new company($r[0]);
-				$ex = array_search($c, array_column($rslt, 'obj'));
-				if($ex) $rslt[$ex]["score"] += $r[1];
-				else $rslt[] = array("obj" => $c, "score" => $r[1]);
+				if($c->is_contracted) {
+					$ex = array_search($c, array_column($rslt, 'obj'));
+					if($ex!==false) $rslt[$ex]["score"] += 1;
+					else $rslt[] = array("obj" => $c, "score" => 1);
+				}
 			}
-
-			// 
-
 
 			$q_job=$db->query("
 				SELECT id,
@@ -81,19 +83,28 @@
 				AS score
     			FROM job WHERE MATCH (name, description, address, tel, mobile, email) AGAINST ('$q')
 			") or die("q_job : ".$db->error);
-			while ($r=$q_job->fetch_row()) $rslt[] = array("obj" => new job($r[0]), "score" => $r[1]);
+			while ($r=$q_job->fetch_row()) {
+				$e = new job($r[0]);
+				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => 1);
+			}
 			
 			$q_product=$db->query("
 				SELECT id, MATCH (name, description) AGAINST ('$q') AS score
     			FROM product WHERE MATCH (name, description) AGAINST ('$q')
 			") or die("q_product : ".$db->error);
-			while ($r=$q_product->fetch_row()) $rslt[] = array("obj" => new product($r[0]), "score" => $r[1]);
+			while ($r=$q_product->fetch_row()) {
+				$e = new product($r[0]);
+				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => 1);
+			}
 			
 			$q_service=$db->query("
 				SELECT id, MATCH (name, description) AGAINST ('$q') AS score
     			FROM service WHERE MATCH (name, description) AGAINST ('$q')
 			") or die("q_service : ".$db->error);
-			while ($r=$q_service->fetch_row()) $rslt[] = array("obj" => new service($r[0]), "score" => $r[1]);
+			while ($r=$q_service->fetch_row()) {
+				$e = new service($r[0]);
+				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => 1);
+			}
 
 			$q_category=$db->query("
 				SELECT id, MATCH (name) AGAINST ('$q') AS score
@@ -102,9 +113,11 @@
 			while ($r=$q_category->fetch_row()) {
 				$c = new category($r[0]);
 				foreach($c->childrens as $child){
-					$ex = array_search($child, array_column($rslt, 'obj'));
-					if($ex) $rslt[$ex]["score"] += $r[1];
-					else $rslt[] = array("obj" => $child, "score" => $r[1]);
+					if($child->is_contracted){
+						$ex = array_search($child, array_column($rslt, 'obj'));
+						if($ex!==false) $rslt[$ex]["score"] += 1;
+						else $rslt[] = array("obj" => $child, "score" => 1);
+					}
 				}
 				
 			}
@@ -115,6 +128,131 @@
 
 			return $rslt;
 
+		}
+
+		public static function legacy_search($q){
+			global $db;
+
+			$q = $db->real_escape_string($q);
+			
+			$rslt = array();
+			
+			$q_company=$db->query("
+				SELECT id
+				FROM company WHERE (concat(IFNULL(name,''),' ',IFNULL(slogan,''),' ',IFNULL(description,'')) like '%".str_replace(" ","%",$q)."%')
+    		") or die("q_company : ".$db->error);
+			while ($r=$q_company->fetch_row()) {
+				$e = new company($r[0]);
+				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => 1);
+			}
+
+			$q_company_seat=$db->query("
+				SELECT id_company
+				FROM company_seat WHERE (concat(IFNULL(name,''),' ',IFNULL(address,''),' ',IFNULL(tel,''),' ',IFNULL(mobile,''),' ',IFNULL(email,'')) like '%".str_replace(" ","%",$q)."%')
+			") or die("q_category : ".$db->error);
+			while ($r=$q_company_seat->fetch_row()) {
+				$c = new company($r[0]);
+				if($c->is_contracted) {
+					$ex = array_search($c, array_column($rslt, 'obj'));
+					if($ex!==false) $rslt[$ex]["score"] += 1;
+					else $rslt[] = array("obj" => $c, "score" => 1);
+				}
+			}
+
+			$q_job=$db->query("
+				SELECT id
+				FROM job WHERE (concat(IFNULL(name,''),' ',IFNULL(description,''),' ',IFNULL(address,''),' ',IFNULL(tel,''),' ',IFNULL(mobile,''),' ',IFNULL(email,'')) like '%".str_replace(" ","%",$q)."%')
+			") or die("q_job : ".$db->error);
+			while ($r=$q_job->fetch_row()) {
+				$e = new job($r[0]);
+				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => 1);
+			}
+
+			$q_product=$db->query("
+				SELECT id
+				FROM product WHERE (concat(IFNULL(name,''),' ',IFNULL(description,'')) like '%".str_replace(" ","%",$q)."%')
+			") or die("q_product : ".$db->error);
+			while ($r=$q_product->fetch_row()) {
+				$e = new product($r[0]);
+				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => 1);
+			}
+			
+			$q_service=$db->query("
+				SELECT id
+    			FROM service WHERE (concat(IFNULL(name,''),' ',IFNULL(description,'')) like '%".str_replace(" ","%",$q)."%')
+			") or die("q_service : ".$db->error);
+			while ($r=$q_service->fetch_row()) {
+				$e = new service($r[0]);
+				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => 1);
+			}
+
+			$q_category=$db->query("
+				SELECT id
+    			FROM category WHERE (IFNULL(name,'') like '%".str_replace(" ","%",$q)."%')
+			") or die("q_category : ".$db->error);
+			while ($r=$q_category->fetch_row()) {
+				$c = new category($r[0]);
+				foreach($c->childrens as $child){
+					if($child->is_contracted){
+						$ex = array_search($child, array_column($rslt, 'obj'));
+						if($ex!==false) $rslt[$ex]["score"] += 1;
+						else $rslt[] = array("obj" => $child, "score" => 1);
+					}
+				}
+				
+			}
+			
+			usort($rslt, function($a, $b) {
+			    return $a['score'] - $b['score'];
+			});
+
+			return $rslt;
+		}
+
+		public static function news(){
+			global $db;
+
+			$rslt = array();
+			
+			$q_company=$db->query("
+				SELECT id
+				FROM company ORDER BY RAND() LIMIT 50
+    		") or die("q_company : ".$db->error);
+			while ($r=$q_company->fetch_row()) {
+				$e = new company($r[0]);
+				if($e->is_contracted) $rslt[] = $e;
+			}
+
+			$q_job=$db->query("
+				SELECT id
+				FROM job ORDER BY RAND() LIMIT 50
+			") or die("q_job : ".$db->error);
+			while ($r=$q_job->fetch_row()) {
+				$e = new job($r[0]);
+				if($e->is_contracted) $rslt[] = $e;
+			}
+
+			$q_product=$db->query("
+				SELECT id
+				FROM product ORDER BY RAND() LIMIT 50
+			") or die("q_product : ".$db->error);
+			while ($r=$q_product->fetch_row()) {
+				$e = new product($r[0]);
+				if($e->is_contracted) $rslt[] = $e;
+			}
+			
+			$q_service=$db->query("
+				SELECT id
+    			FROM service ORDER BY RAND() LIMIT 50
+			") or die("q_service : ".$db->error);
+			while ($r=$q_service->fetch_row()) {
+				$e = new service($r[0]);
+				if($e->is_contracted) $rslt[] = $e;
+			}
+			
+			shuffle($rslt);
+
+			return $rslt;
 		}
 
 		public static function getClientIP(){
