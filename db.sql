@@ -1,8 +1,8 @@
--- MySQL dump 10.14  Distrib 5.5.41-MariaDB, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.24, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: servicek
 -- ------------------------------------------------------
--- Server version	5.5.41-MariaDB-1ubuntu0.14.10.1-log
+-- Server version	5.6.24-0ubuntu2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `agent`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `agent` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `username` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE `agent` (
   `mobile` varchar(35) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +41,7 @@ CREATE TABLE `agent` (
 
 LOCK TABLES `agent` WRITE;
 /*!40000 ALTER TABLE `agent` DISABLE KEYS */;
+INSERT INTO `agent` VALUES (1,'Test Agent',NULL,NULL,'test',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `agent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +58,7 @@ CREATE TABLE `agent_request` (
   `rel_type` varchar(35) DEFAULT NULL,
   `creation_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -138,7 +139,7 @@ CREATE TABLE `company` (
   FULLTEXT KEY `name` (`name`),
   FULLTEXT KEY `slogan` (`slogan`,`description`),
   FULLTEXT KEY `name_2` (`name`,`slogan`,`description`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,7 +148,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (2,'mahd','Toghther we do the best','Software development company, we love cloud computing and web development','mahdCompany',NULL,NULL,'2015-05-06 16:30:00');
+INSERT INTO `company` VALUES (2,'mahd','Toghther we do the best','Software development company, we love cloud computing and web development','mahdCompany',NULL,NULL,'2015-05-06 16:30:00'),(3,'servicek','pub','aaaaaaaaaa aaaaaaaaaaaa\r\naaaaaaaaaa aaaaaaaaaaaa\r\naaaaaaaaaa aaaaaaaaaaaa\r\naaaaaaaaaa aaaaaaaaaaaa','servicek',NULL,NULL,'2015-05-08 16:58:25');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,7 +172,7 @@ CREATE TABLE `company_seat` (
   `creation_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   FULLTEXT KEY `name` (`name`,`address`,`tel`,`mobile`,`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +181,7 @@ CREATE TABLE `company_seat` (
 
 LOCK TABLES `company_seat` WRITE;
 /*!40000 ALTER TABLE `company_seat` DISABLE KEYS */;
-INSERT INTO `company_seat` VALUES (1,2,'Kalaa kebira','master','{\"longitude\":\"10.52671799999996\",\"latitude\":\"35.878347\"}','C48, Kalaa Kebira, Tunisie','73349119','93625649','contact@mahd.tn','2015-05-06 16:30:00');
+INSERT INTO `company_seat` VALUES (1,2,'Kalaa kebira','master','{\"longitude\":\"10.52671799999996\",\"latitude\":\"35.878347\"}','C48, Kalaa Kebira, Tunisie','73349119','93625649','contact@mahd.tn','2015-05-06 16:30:00'),(2,3,'SiÃ¨ge social','master','{\"longitude\":\"10.608394999999973\",\"latitude\":\"35.825603\"}','Sousse, Gouvernorat de Sousse, Tunisie','73349119','352154','contact@servicek.net','2015-05-08 16:58:25');
 /*!40000 ALTER TABLE `company_seat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,7 +205,7 @@ CREATE TABLE `contract` (
   `duration` int(11) DEFAULT NULL,
   `creation_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,7 +214,7 @@ CREATE TABLE `contract` (
 
 LOCK TABLES `contract` WRITE;
 /*!40000 ALTER TABLE `contract` DISABLE KEYS */;
-INSERT INTO `contract` VALUES (5,2,'job',NULL,'6490398094D57982C1D675E165E64308','e_dinar_smart_tunisian_post','ignored_payment','3',60,36,'2015-05-05 18:05:33'),(6,3,'job',NULL,'EA5B39AFE5B0B11B848F230D85BDCDEE','e_dinar_smart_tunisian_post','ignored_payment','3',60,36,'2015-05-06 13:12:54'),(7,2,'company',NULL,'006AF1A9225F95FE73159B3968B3E03B','e_dinar_smart_tunisian_post','ignored_payment','3',180,36,'2015-05-06 16:30:00');
+INSERT INTO `contract` VALUES (8,2,'company',NULL,'CC0DDA125D78D53EB99ADB37481E163F','e_dinar_smart_tunisian_post',NULL,'2',90,12,'2015-05-08 16:48:46'),(9,3,'job',NULL,'7B551AEF4CA3833B8EFA61F116B7998A','e_dinar_smart_tunisian_post',NULL,'3',60,36,'2015-05-08 16:50:32');
 /*!40000 ALTER TABLE `contract` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -410,7 +411,7 @@ CREATE TABLE `user_admin` (
 
 LOCK TABLES `user_admin` WRITE;
 /*!40000 ALTER TABLE `user_admin` DISABLE KEYS */;
-INSERT INTO `user_admin` VALUES (3,2);
+INSERT INTO `user_admin` VALUES (3,2),(3,3);
 /*!40000 ALTER TABLE `user_admin` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -423,4 +424,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-08  0:51:58
+-- Dump completed on 2015-05-08 18:04:17
