@@ -2,10 +2,10 @@
 	if (!isset($_GET['id'])) {include __DIR__."/../404/controller.php";goto skip_this_page;}
 	else{
 		$company=new company($_GET['id']);
-		if (!$company->isvalid || $company->admin!=$user) {include __DIR__."/../404/controller.php";goto skip_this_page;}
+		if (!$company->isvalid || !$company->is_assigned_to_admin($user)) {include __DIR__."/../404/controller.php";goto skip_this_page;}
 	}
 
-	if(isset($_GET["request_agent"])){
+	if(isset($_POST["request_agent"])){
 		$job->request_agent();
 		die(json_encode(array("status"=>"success")));
 	}
@@ -41,56 +41,44 @@
 			)));
 		}
 		if(
-			!$_POST["name"] ||
-			!$_POST["description"] ||
-			!$_POST["address"] ||
-			!$_POST["longitude"] ||
-			!$_POST["latitude"] ||
-			!$_POST["tel"] ||
-			!$_POST["email"] ||
 			!$_POST["offer"] ||
 			!$_POST["method"] ||
-			!$_POST["credit_card_number"] ||
-			!$_POST["credit_card_password"]
+			(
+				!$_POST["credit_card_number"] ||
+				!$_POST["credit_card_password"]
+			) && (
+				!$_POST["agent_code"]
+			)
 		)  die(json_encode(array("status"=>"error_empty_parameter")));
 
-		if(!company::check_url($_POST["url"])) die(json_encode(array("status"=>"unvailable_url")));
 		if(!array_key_exists($_POST["offer"], $offers))  die(json_encode(array("status"=>"invalid_offer")));
-		if(!in_array($_POST["method"], $payment_methods))  die(json_encode(array("status"=>"invalid_method")));
 		
-		
-		// process payment
-		// ...
-		$payment_recipt="ignored_payment";
-		$payment_error=null;
-		
-		if($payment_error=="invalid_card_number") die(json_encode(array("status"=>"invalid_card_number")));
-		elseif($payment_error=="error_card_password") die(json_encode(array("status"=>"error_card_password")));
-		elseif($payment_error=="insufficient_balance") die(json_encode(array("status"=>"insufficient_balance")));
-		elseif($payment_error)  die(json_encode(array("status"=>"unhandled_payment_error")));
-
+		if($_POST["credit_card_number"]){
+			$payment=gf::pay($_POST["method"], $_POST["credit_card_number"], $_POST["credit_card_password"], $offers[$_POST["offer"]]["amount"]);
+			if($payment["status"]!="success") die(json_encode($payment));
+		}else{
+			$agent=agent::login_by_code($_POST["agent_code"], gf::getClientIP());
+			if(is_array($agent)) {
+				switch ($agent["status"]) {
+					case "waiting_restriction_time":
+						$agent["msg"] = "Vous avez encore ".$agent["remaining_time"]." minutes pour pouvoir réessayer accéder à partir de cet appareil";
+					break;
+					case "code_error":
+						$agent["msg"] = "Code incorrect, vous avez encore ".$agent["remaining_attempts"]." tentatives";
+					break;
+					case "restricted_host":
+						$agent["msg"] = "Vous n'êtes pas autorisé à se connecter a partir de cet appareil";
+					break;
+				}
+				die(json_encode($agent));
+			}
+		}
 
 		// create company é contract
-		$company=company::create($user);
-		$seat=company_seat::create($company);
 		$contract=contract::create($company,$_POST["token"]);
 		
-
-		$company->name=$_POST["name"];
-		$company->slogan=$_POST["slogan"];
-		$company->description=$_POST["description"];
-		if(company::check_url($_POST["url"])) $company->url=$_POST["url"];
-
-		$seat->name="Siège social"; // to translate
-		$seat->type="master";
-		$seat->address=$_POST["address"];
-		$seat->geolocation=json_encode(array("longitude"=>$_POST["longitude"], "latitude"=>$_POST["latitude"]));
-		$seat->tel=$_POST["tel"];
-		$seat->mobile=$_POST["mobile"];
-		$seat->email=$_POST["email"];
-
 		$contract->payment_from=$_POST["method"];
-		$contract->payment_recipt=$payment_recipt;
+		if(isset($payment)) $contract->payment_recipt=$payment["params"]["payment_recipt"];
 
 		$contract->type=$_POST["offer"];
 		$contract->amount=$offers[$_POST["offer"]]["amount"];
@@ -99,7 +87,7 @@
 		die(json_encode(array(
 			"status"=>"success",
 			"params"=>array(
-				"payment_recipt"=>$payment_recipt,
+				"payment_recipt"=>(isset($payment) ? $payment["params"]["payment_recipt"] : null),
 				"company_url"=>url_root."/".$company->url
 			)
 		)));

@@ -1,21 +1,21 @@
 <?php
 	if (!isset($_GET['id'])) {include __DIR__."/../404/controller.php";goto skip_this_page;}
 	else{
-		$c=new company($_GET['id']);
-		if (!$c->isvalid) {include __DIR__."/../404/controller.php";goto skip_this_page;}
+		$company=new company($_GET['id']);
+		if (!$company->isvalid) {include __DIR__."/../404/controller.php";goto skip_this_page;}
 	}
 	
-	$s=$c->seats[0];
+	$s=$company->seats[0];
 	$geolocation=json_decode($s->geolocation);
-
-	if ($user!=null && $c->is_assigned_to_admin($user)) {
+	$is_contracted=$company->is_contracted;
+	if ($user!=null && $company->is_assigned_to_admin($user)) {
 		if (isset($_POST['for']) && isset($_POST['pk']) && isset($_POST['name']) && isset($_POST['value'])) {
 			switch ($_POST['for']) {
 				case 'company':
 					switch ($_POST['name']) {
-						case 'name': $c->name=$_POST['value']; break;
-						case 'slogan': $c->slogan=$_POST['value']; break;
-						case 'description': $c->description=$_POST['value']; break;
+						case 'name': $company->name=$_POST['value']; break;
+						case 'slogan': $company->slogan=$_POST['value']; break;
+						case 'description': $company->description=$_POST['value']; break;
 					}
 					break;
 				case 'seat':
@@ -48,8 +48,10 @@
 			die();
 		}
 		include "view_2.php";
-	}else{
+	}elseif($is_contracted){
 		include "view_1.php";
+	}else{
+		include __DIR__."/../404/controller.php";goto skip_this_page;
 	}
 			
 	skip_this_page:

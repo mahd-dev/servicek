@@ -41,6 +41,33 @@
                         while($r=$q->fetch_row()) $list[] = new category($r[0]);
                         return $list;
                     break;
+
+                    case "is_contracted":
+                        $q=$db->query("select count(id) from contract where (id_page='".$this->id."' and page_type='job' and TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration DAY)) >= 0)");
+                        $r=$q->fetch_row();
+                        return $r[0]>0;
+                    break;                  
+                    case "current_contract":
+                        $q=$db->query("select id from contract where (id_page='".$this->id."' and page_type='job' and TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration DAY)) >= 0) ORDER BY DATE_ADD(creation_time, INTERVAL duration DAY) DESC LIMIT 1");
+                        if($q->num_rows==0) return null;
+                        else{
+                            $r=$q->fetch_row();
+                            return new contract($r[0]);
+                        }
+                    break;
+                    case "available_contracts":
+                        $q=$db->query("select id from contract where (id_page='".$this->id."' and page_type='job' and TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration DAY)) >= 0)");
+                        $list = array();
+                        while($r=$q->fetch_row()) $list[] = new contract($r[0]);
+                        return $list;
+                    break;
+                    case "all_contracts":
+                        $q=$db->query("select id from contract where (id_page='".$this->id."' and page_type='job')");
+                        $list = array();
+                        while($r=$q->fetch_row()) $list[] = new contract($r[0]);
+                        return $list;
+                    break;
+
                     case "has_agent_requests":
                         $q=$db->query("select count(*) from agent_request where (id_for='".$this->id."' and rel_type='job')");
                         $r=$q->fetch_row();
@@ -52,6 +79,8 @@
                         while($r=$q->fetch_row()) $list[] = array("id"=>$r[0], "creation_time"=>$r[1]);
                         return $list;
                     break;
+                    case "url":
+                        return "job/".$this->id;
                     default:
                         $q=$db->query("select ".$name." from job where (id='".$this->id."')");
 			            $r=$q->fetch_row();

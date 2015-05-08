@@ -78,12 +78,12 @@
 					break;
 					
 					case "is_contracted":
-						$q=$db->query("select count(id) from conract where (id_page='".$this->id."' and page_type='company' and TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration DAY)) >= 0)");
+						$q=$db->query("select count(id) from contract where (id_page='".$this->id."' and page_type='company' and TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration DAY)) >= 0)");
 						$r=$q->fetch_row();
 						return $r[0]>0;
 					break;					
 					case "current_contract":
-						$q=$db->query("select id from conract where (id_page='".$this->id."' and page_type='company' and TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration DAY)) >= 0) ORDER BY DATE_ADD(creation_time, INTERVAL duration DAY) DESC LIMIT 1");
+						$q=$db->query("select id from contract where (id_page='".$this->id."' and page_type='company' and TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration DAY)) >= 0) ORDER BY DATE_ADD(creation_time, INTERVAL duration DAY) DESC LIMIT 1");
 						if($q->num_rows==0) return null;
 						else{
 							$r=$q->fetch_row();
@@ -91,13 +91,13 @@
 						}
 					break;
 					case "available_contracts":
-						$q=$db->query("select id from conract where (id_page='".$this->id."' and page_type='company' and TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration DAY)) >= 0)");
+						$q=$db->query("select id from contract where (id_page='".$this->id."' and page_type='company' and TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration DAY)) >= 0)");
 						$list = array();
 						while($r=$q->fetch_row()) $list[] = new contract($r[0]);
 						return $list;
 					break;
 					case "all_contracts":
-						$q=$db->query("select id from conract where (id_page='".$this->id."' and page_type='company')");
+						$q=$db->query("select id from contract where (id_page='".$this->id."' and page_type='company')");
 						$list = array();
 						while($r=$q->fetch_row()) $list[] = new contract($r[0]);
 						return $list;

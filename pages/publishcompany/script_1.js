@@ -1,37 +1,6 @@
 page_script({
 	init: function () {
 
-		// handling geolocation picker
-
-		if(!navigator.geolocation){
-			var main = $("#find_my_position").parents(".input-group");
-			main.before($("input",main));
-			main.remove();
-		}
-
-		$('#geolocation').locationpicker({
-			location: {latitude: 33.881967, longitude: 9.560764},
-			radius: 0,
-			zoom: 6,
-			enableAutocomplete: true,
-			scrollwheel: false,
-			inputBinding: {
-				locationNameInput: $('#submit_form [name=address]'),
-				latitudeInput: $('#submit_form [name=latitude]'),
-				longitudeInput: $('#submit_form [name=longitude]'),
-			}
-		});
-		$("#find_my_position").click(function (e) {
-			e.preventDefault();
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(function (position) {
-					$('#submit_form [name=latitude]').val(position.coords.latitude).change();
-					$('#submit_form [name=longitude]').val(position.coords.longitude).change();
-				});
-			}
-		});
-
-
 		// handling wizard
 		var form = $('#submit_form');
 		var error = $('.alert-danger.form-error', form);
@@ -45,27 +14,6 @@ page_script({
 			errorClass: 'help-block help-block-error',
 			focusInvalid: true,
 			rules: {
-				
-				name: {minlength: 3, maxlength: 255, required: true},
-				description: {minlength: 50, maxlength: 4095, required: true},
-				url: {
-					minlength: 5,
-					remote: {
-						url: location.href,
-						type: "post",
-						data: {
-							check_url: function() {
-								return $("[name=url]",form).val();
-							}
-						}
-					}
-				},
-
-				address: {required: true},
-				longitude: {required: true},
-				latitude: {required: true},
-				tel: {required: true},
-				email: {required: true},
 				
 				offer: {required: true},
 				accept_contract: {required: true},
@@ -196,8 +144,7 @@ page_script({
 		$('#page_wizard').find('.button-previous').hide();
 		$('#page_wizard .button-submit').click(function (e){
 			if(!form.valid()) return false;
-			console.log(form);
-			console.log(new FormData(form));
+			
 			app.blockUI({iconOnly:true, animate:true});
 			$.ajax({
 				url: location.href,
@@ -209,7 +156,8 @@ page_script({
 						p=JSON.parse(rslt);
 						switch(p.status){
 							case "success":
-								$("#success_msg .payment_recipt").html(p.params.payment_recipt);
+								if(p.params.payment_recipt) $("#success_msg .payment_recipt").html(p.params.payment_recipt);
+								else $("#success_msg .payment_recipt").parent().hide();
 								$("#success_msg .goto_company").attr("href", p.params.company_url);
 								$("#page_wizard").remove();
 								$("#success_msg").show();
@@ -232,6 +180,20 @@ page_script({
 								$('#page_wizard').bootstrapWizard("show",2); // goto payment page
 								formvalidator.showErrors({credit_card_number: $("[name=credit_card_number]", form).attr("data-msg-balance-error")});
 							break;
+
+							case "waiting_restriction_time":
+		                        $('#page_wizard').bootstrapWizard("show",1); // goto payment page
+								formvalidator.showErrors({agent_code: p.msg});
+							break;
+		                    case "code_error":
+		                        $('#page_wizard').bootstrapWizard("show",1); // goto payment page
+								formvalidator.showErrors({agent_code: p.msg});
+							break;
+		                    case "restricted_host":
+		                        $('#page_wizard').bootstrapWizard("show",1); // goto payment page
+								formvalidator.showErrors({agent_code: p.msg});
+							break;
+
 							case "unhandled_payment_error":
 								$('#page_wizard').bootstrapWizard("show",2); // goto payment page
 								payment_error.show();
@@ -253,6 +215,52 @@ page_script({
 				}
 			});
 		}).hide();
-		$("[name=name]", form).focus();
+		
+		$('a[data-toggle="tab"].payment_type').on('shown.bs.tab', function (e) {
+			var target = $(e.target).attr("href");
+			
+			switch(target){
+				case "#local_pay":
+					$(".agent_warning").show();
+					$(".agent_request_success").hide();
+
+					$("[name=agent_code]").rules( "add", {
+						required: true
+					});
+					$("[name=credit_card_number]").val("");
+					$("[name=credit_card_password]").val("");
+					$("[name=credit_card_number]").rules( "remove" );
+					$("[name=credit_card_password]").rules( "remove" );
+				break;
+				case "#pay_online":
+					$("[name=credit_card_number]").rules( "add", {
+						required: true, creditcard: true
+					});
+					$("[name=credit_card_password]").rules( "add", {
+						required: true
+					});
+					$("[name=agent_code]").val("");
+					$("[name=agent_code]").rules( "remove" );
+				break;
+			}
+		});
+
+		$(".get_agent").click(function () {
+			$.post(location.href, {request_agent:true}, function (rslt) {
+				try{
+					p=JSON.parse(rslt);
+					if(p.status="success"){
+						$(".agent_warning").hide();
+						$(".agent_request_success").show();
+					}else{
+						console.log(rslt);
+					}
+				}catch(ex){
+					console.log(rslt);
+				}
+			}).fail(function (rslt) {
+				console.log(rslt);
+			});
+		});
 	}
 });

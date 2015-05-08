@@ -20,9 +20,6 @@
 							<div class="alert alert-danger form-error hide">
 								Vous avez des champs invalides, SVP vérifier ci-dessous.
 							</div>
-							<div class="alert alert-danger payment_unhandled_error hide">
-								Désolé une erreur s'est produite lors de l'authentification pour le paiement <button class="btn btn-link" type="submit"><i class="icon-reload"></i> Réessayer</button>
-							</div>
 							
 							<h4 class="block">Informations d'identité</h4>
 
@@ -84,7 +81,7 @@
 							
 						</div>
 						<div class="form-actions">
-							<button type="submit" class="btn btn-success button-submit pull-right">Créer <i class="icon-check"></i></button>
+							<button type="submit" class="btn btn-success pull-right">Créer le travail <i class="icon-check"></i></button>
 						</div>
 
 				</form>
@@ -95,7 +92,7 @@
 			<div class="note note-success">
 				<h4 class="block"><i class="icon-trophy" style="font-size:150%;"></i>&nbsp;&nbsp;Félicitations, le travail é été bien crée</h4>
 				<p>
-				<a class="btn btn-success ajaxify goto_job" href=""><i class="icon-link"></i>&nbsp;&nbsp;Accéder au travail crée</a>
+				<a class="btn btn-success ajaxify goto_job" href="<?php echo url_root;?>/account"><i class="icon-link"></i>&nbsp;&nbsp;Accéder au travail crée</a>
 				</p>
 			</div>
 		</div>

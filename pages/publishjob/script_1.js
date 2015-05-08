@@ -10,7 +10,6 @@ page_script({
 
 		var formvalidator = form.validate({
 			ignore: "",
-			doNotHideMessage: true,
 			errorElement: 'span',
 			errorClass: 'help-block help-block-error',
 			focusInvalid: true,
@@ -180,6 +179,20 @@ page_script({
 								$('#page_wizard').bootstrapWizard("show",1); // goto payment page
 								formvalidator.showErrors({credit_card_number: $("[name=credit_card_number]", form).attr("data-msg-balance-error")});
 							break;
+
+							case "waiting_restriction_time":
+		                        $('#page_wizard').bootstrapWizard("show",1); // goto payment page
+								formvalidator.showErrors({agent_code: p.msg});
+							break;
+		                    case "code_error":
+		                        $('#page_wizard').bootstrapWizard("show",1); // goto payment page
+								formvalidator.showErrors({agent_code: p.msg});
+							break;
+		                    case "restricted_host":
+		                        $('#page_wizard').bootstrapWizard("show",1); // goto payment page
+								formvalidator.showErrors({agent_code: p.msg});
+							break;
+							
 							case "unhandled_payment_error":
 								$('#page_wizard').bootstrapWizard("show",1); // goto payment page
 								payment_error.show();
@@ -204,28 +217,29 @@ page_script({
 		
 		$('a[data-toggle="tab"].payment_type').on('shown.bs.tab', function (e) {
 			var target = $(e.target).attr("href");
+
 			switch(target){
-				case "local_pay":
+				case "#local_pay":
 					$(".agent_warning").show();
 					$(".agent_request_success").hide();
 
-					$("[name=agent_code]", form).rules( "add", {
+					$("[name=agent_code]").rules( "add", {
 						required: true
 					});
-					$("[name=credit_card_number]", form).val("");
-					$("[name=credit_card_password]", form).val("");
-					$("[name=credit_card_number]", form).rules( "remove" );
-					$("[name=credit_card_password]", form).rules( "remove" );
+					$("[name=credit_card_number]").val("");
+					$("[name=credit_card_password]").val("");
+					$("[name=credit_card_number]").rules( "remove" );
+					$("[name=credit_card_password]").rules( "remove" );
 				break;
-				case "pay_online":
-					$("[name=credit_card_number]", form).rules( "add", {
+				case "#pay_online":
+					$("[name=credit_card_number]").rules( "add", {
 						required: true, creditcard: true
 					});
-					$("[name=credit_card_password]", form).rules( "add", {
+					$("[name=credit_card_password]").rules( "add", {
 						required: true
 					});
-					$("[name=agent_code]", form).val("");
-					$("[name=agent_code]", form).rules( "remove" );
+					$("[name=agent_code]").val("");
+					$("[name=agent_code]").rules( "remove" );
 				break;
 			}
 		});

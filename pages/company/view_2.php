@@ -1,6 +1,20 @@
 <link href="<?php echo url_root;?>/pages/company/style<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="<?php echo cdn;?>/plugins/bootstrap-editable/bootstrap-editable/css/bootstrap-editable<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css"/>
 
+<?php if(!$is_contracted){?>
+<div class="row">
+	<div class="col-md-12">
+		<div class="note note-warning">
+			<h4 class="block">Cette société n'est pas pubiée</h4>
+			<p>
+				 Cette société n'est pas disponible au public, vous seul vous pouvez y accéder.<br>
+				 Vous ne disposez pas encore de contrat de publication.<br><br>
+				 <a class="btn green ajaxify" href="<?php echo url_root."/".$company->url;?>/publish"><i class="icon-rocket"></i> Publier maintenant</a>
+			</p>
+		</div>
+	</div>
+</div>
+<?php }?>
 <div class="row">
 	<div class="profile-sidebar col-md-3">
 		<div class="portlet light profile-sidebar-portlet">
@@ -11,10 +25,10 @@
 			-->
 			<div class="profile-usertitle">
 				<div class="profile-usertitle-name">
-					<a class="editable" data-name="name" data-type="text" ><?php echo $c->name;?></a>
+					<a class="editable" data-name="name" data-type="text" ><?php echo $company->name;?></a>
 				</div>
 				<div class="profile-usertitle-job">
-					<a class="editable" data-name="slogan" data-type="text" ><?php echo $c->slogan;?></a>
+					<a class="editable" data-name="slogan" data-type="text" ><?php echo $company->slogan;?></a>
 				</div>
 			</div>
 			
@@ -22,7 +36,7 @@
 		</div>
 		<div class="portlet light">
 			<h5>A propos :</h5>
-			<a class="editable" data-name="description" data-type="textarea" ><?php echo $c->description;?></a>
+			<a class="editable" data-name="description" data-type="textarea" ><?php echo $company->description;?></a>
 		</div>
 	</div>
 	<div class="profile-content col-md-9">
@@ -87,7 +101,7 @@
 					<div class="portlet-body">
 						<div class="tab-content">
 							<div class="tab-pane row active" id="services">
-							<?php foreach ($c->products as $p) { ?>
+							<?php foreach ($company->products as $p) { ?>
 								<div class="col-xs-12 col-sm-6 col-md-4">
 									<div class="thumbnail">
 										<!--<img src="" alt="100%x200" style="width: 100%;  display: block;">-->
@@ -101,7 +115,7 @@
 							<?php }?>
 							</div>
 							<div class="tab-pane row" id="prods">
-							<?php foreach ($c->services as $p) {?>
+							<?php foreach ($company->services as $p) {?>
 								<div class="col-xs-12 col-sm-6 col-md-4">
 									<div class="thumbnail">
 										<!--<img src="" alt="100%x200" style="width: 100%;  display: block;">-->

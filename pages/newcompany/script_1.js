@@ -35,9 +35,6 @@ page_script({
 		// handling wizard
 		var form = $('#submit_form');
 		var error = $('.alert-danger.form-error', form);
-		var payment_error = $('.alert-danger.payment_unhandled_error', form);
-
-		form.submit(function(e){ e.preventDefault(); });
 
 		var formvalidator = form.validate({
 			ignore: "",
@@ -65,13 +62,7 @@ page_script({
 				longitude: {required: true},
 				latitude: {required: true},
 				tel: {required: true},
-				email: {required: true},
-				
-				offer: {required: true},
-				accept_contract: {required: true},
-				
-				credit_card_number: {required: true, creditcard: true},
-				credit_card_password: {required: true}
+				email: {required: true}
 				
 			},
 
@@ -99,7 +90,6 @@ page_script({
 
 				switch($(element).attr("name")){
 					case "url": 
-					case "accept_contract":
 						error.appendTo($(element.parents(".form-group")[0]).find(".error_msg"));
 					break;
 					default:
@@ -109,95 +99,16 @@ page_script({
 			},
 			submitHandler: function (form) {
 				error.hide();
-				payment_error.hide();
 			}
 
 		});
 		
-		form.submit(function (e) { e.preventDefault(); });
-
-		var displayConfirm = function() {
-			$('#validation .form-control-static', form).each(function(){
-				if($(this).attr("data-display")=="amount"){
-					$("strong", this).html($('[name="offer"]:checked', form).attr("data-amount"));
-					return;
-				}
-
-				var input = $('[name="'+$(this).attr("data-display")+'"]', form);
-				if (input.is(":radio")) {
-					input = $('[name="'+$(this).attr("data-display")+'"]:checked', form);
-				}
-				if (input.is("select")) {
-					$("strong", this).html(input.find('option:selected').text());
-
-				} else if (input.is(":radio") && input.is(":checked")) {
-					$("strong", this).html(input.attr("data-title"));
-
-				}else{
-					$("strong", this).html(input.val());
-				}
-			});
-		}
-
-		var handleTitle = function(tab, navigation, index) {
-			var total = navigation.find('li').length;
-			var current = index + 1;
-			// set wizard title
-			$('.step-title', $('#page_wizard')).text('Step ' + (index + 1) + ' of ' + total);
-			// set done steps
-			jQuery('li', $('#page_wizard')).removeClass("done");
-			var li_list = navigation.find('li');
-			for (var i = 0; i < index; i++) {
-				jQuery(li_list[i]).addClass("done");
-			}
-
-			if (current == 1) {
-				$('#page_wizard').find('.button-previous').hide();
-			} else {
-				$('#page_wizard').find('.button-previous').show();
-			}
-
-			if (current >= total) {
-				$('#page_wizard').find('.button-next').hide();
-				$('#page_wizard').find('.button-submit').show();
-				displayConfirm();
-			} else {
-				$('#page_wizard').find('.button-next').show();
-				$('#page_wizard').find('.button-submit').hide();
-			}
-			app.scrollTo($('.page-title'));
-		}
-
-		$('#page_wizard').bootstrapWizard({
-			'nextSelector': '.button-next',
-			'previousSelector': '.button-previous',
-			onTabClick: function (tab, navigation, index, clickedIndex) {
+		form.submit(function (e){
+			if(!form.valid()){
+				e.preventDefault();
 				return false;
-			},
-			onNext: function (tab, navigation, index) {
-				error.hide();
-				payment_error.hide();
-			},
-			onPrevious: function (tab, navigation, index) {
-				error.hide();
-				payment_error.hide();
-			},
-			onTabShow: function (tab, navigation, index) {
-				var total = navigation.find('li').length;
-				var current = index + 1;
-				var $percent = (current / total) * 100;
-				$('#page_wizard').find('.progress-bar').css({
-					width: $percent + '%'
-				});
-				handleTitle(tab, navigation, index);
 			}
-		});
 
-		$('#page_wizard').find('.button-previous').hide();
-		$('#page_wizard .button-submit').click(function (e){
-			if(!form.valid()) return false;
-			console.log(form);
-			console.log(new FormData(form));
 			app.blockUI({iconOnly:true, animate:true});
 			$.ajax({
 				url: location.href,
@@ -209,32 +120,9 @@ page_script({
 						p=JSON.parse(rslt);
 						switch(p.status){
 							case "success":
-								$("#success_msg .payment_recipt").html(p.params.payment_recipt);
 								$("#success_msg .goto_company").attr("href", p.params.company_url);
 								$("#page_wizard").remove();
 								$("#success_msg").show();
-							break;
-							case "already_done":
-								$("#already_done_msg .payment_recipt").html(p.params.payment_recipt);
-								$("#already_done_msg .goto_company").attr("href", p.params.company_url);
-								$("#page_wizard").remove();
-								$("#already_done_msg").show();
-							break;
-							case "invalid_card_number":
-								$('#page_wizard').bootstrapWizard("show",2); // goto payment page
-								formvalidator.showErrors({credit_card_number: $("[name=credit_card_number]", form).attr("data-msg-error")});
-							break;
-							case "error_card_password":
-								$('#page_wizard').bootstrapWizard("show",2); // goto payment page
-								formvalidator.showErrors({credit_card_password: $("[name=credit_card_password]", form).attr("data-msg-error")});
-							break;
-							case "insufficient_balance":
-								$('#page_wizard').bootstrapWizard("show",2); // goto payment page
-								formvalidator.showErrors({credit_card_number: $("[name=credit_card_number]", form).attr("data-msg-balance-error")});
-							break;
-							case "unhandled_payment_error":
-								$('#page_wizard').bootstrapWizard("show",2); // goto payment page
-								payment_error.show();
 							break;
 							default:
 								console.log(p);
@@ -252,7 +140,7 @@ page_script({
 					return false;
 				}
 			});
-		}).hide();
+		});
 		$("[name=name]", form).focus();
 	}
 });

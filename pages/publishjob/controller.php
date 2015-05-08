@@ -5,7 +5,7 @@
 		if (!$job->isvalid || $job->admin!=$user) {include __DIR__."/../404/controller.php";goto skip_this_page;}
 	}
 
-	if(isset($_GET["request_agent"])){
+	if(isset($_POST["request_agent"])){
 		$job->request_agent();
 		die(json_encode(array("status"=>"success")));
 	}
@@ -34,7 +34,7 @@
 				"status"=>"already_done",
 				"params"=>array(
 					"payment_recipt"=>$check_token->payment_recipt,
-					"job_url"=>url_root."/job/".$created_job->id
+					"job_url"=>url_root."/".$created_job->url
 				)
 			)));
 		}
@@ -55,8 +55,21 @@
 			$payment=gf::pay($_POST["method"], $_POST["credit_card_number"], $_POST["credit_card_password"], $offers[$_POST["offer"]]["amount"]);
 			if($payment["status"]!="success") die(json_encode($payment));
 		}else{
-			$agent=agent::login_by_code($_POST["agent_code"]);
-			if(is_array($agent)) die(json_encode($agent));
+			$agent=agent::login_by_code($_POST["agent_code"], gf::getClientIP());
+			if(is_array($agent)) {
+				switch ($agent["status"]) {
+					case "waiting_restriction_time":
+						$agent["msg"] = "Vous avez encore ".$agent["remaining_time"]." minutes pour pouvoir réessayer accéder à partir de cet appareil";
+					break;
+					case "code_error":
+						$agent["msg"] = "Code incorrect, vous avez encore ".$agent["remaining_attempts"]." tentatives";
+					break;
+					case "restricted_host":
+						$agent["msg"] = "Vous n'êtes pas autorisé à se connecter a partir de cet appareil";
+					break;
+				}
+				die(json_encode($agent));
+			}
 		}
 
 		$contract=contract::create($job,$_POST["token"]);
@@ -72,7 +85,7 @@
 			"status"=>"success",
 			"params"=>array(
 				"payment_recipt"=>(isset($payment) ? $payment["params"]["payment_recipt"] : null),
-				"job_url"=>url_root."/job/".$job->id
+				"job_url"=>url_root."/".$job->url
 			)
 		)));
 	}

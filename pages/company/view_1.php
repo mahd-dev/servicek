@@ -10,10 +10,10 @@
 			-->
 			<div class="profile-usertitle">
 				<div class="profile-usertitle-name">
-					<?php echo $c->name;?>
+					<?php echo $company->name;?>
 				</div>
 				<div class="profile-usertitle-job">
-					<?php echo $c->slogan;?>
+					<?php echo $company->slogan;?>
 				</div>
 			</div>
 			
@@ -21,7 +21,7 @@
 		</div>
 		<div class="portlet light">
 			<h5>A propos :</h5>
-			<?php echo $c->description;?>
+			<?php echo $company->description;?>
 		</div>
 	</div>
 	<div class="profile-content col-md-9">
@@ -83,7 +83,7 @@
 					<div class="portlet-body">
 						<div class="tab-content">
 							<div class="tab-pane row active" id="services">
-							<?php foreach ($c->products as $p) {?>
+							<?php foreach ($company->products as $p) {?>
 								<div class="col-xs-12 col-sm-6 col-md-4">
 									<div class="thumbnail">
 										<!--<img src="" alt="100%x200" style="width: 100%;  display: block;">-->
@@ -97,7 +97,7 @@
 							<?php }?>
 							</div>
 							<div class="tab-pane row" id="prods">
-							<?php foreach ($c->services as $p) {?>
+							<?php foreach ($company->services as $p) {?>
 								<div class="col-xs-12 col-sm-6 col-md-4">
 									<div class="thumbnail">
 										<!--<img src="" alt="100%x200" style="width: 100%;  display: block;">-->

@@ -15,14 +15,14 @@
 							-->
 							<div class="profile-usertitle">
 								<div class="profile-usertitle-name">
-									 <?php echo $j->name;?>
+									 <?php echo $job->name;?>
 								</div>
 								
 							</div>
 						</div>
 						<div class="portlet light">
 							<h5>A propos :</h5>
-							<?php echo $j->description;?>
+							<?php echo $job->description;?>
 						</div>
 					</div>
 					<div class="col-md-9">
@@ -40,19 +40,19 @@
 											<div class="tab-pane active" id="tab_1_1">
 												<p class="margin-bottom-30">
 													<strong><h5>Adresse :</h5></strong>
-													<?php echo $j->address;?>
+													<?php echo $job->address;?>
 												</p>
 												<p class="margin-bottom-30">
 													<strong><h5>Téléphone :</h5></strong>
-													<?php echo $j->tel;?>
+													<?php echo $job->tel;?>
 												</p>
 												<p class="margin-bottom-30">
 													<strong><h5>Portable :</h5></strong>
-													<?php echo $j->mobile;?>
+													<?php echo $job->mobile;?>
 												</p>
 												<p class="margin-bottom-30">
 													<strong><h5>Email :</h5></strong>
-													<?php echo $j->email;?>
+													<?php echo $job->email;?>
 												</p>
 											</div>
 										</div>

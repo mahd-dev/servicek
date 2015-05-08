@@ -39,7 +39,7 @@
 		die(json_encode(array(
 			"status"=>"success",
 			"params"=>array(
-				"job_url"=>url_root."/job/".$job->id
+				"job_url"=>url_root."/".$job->url
 			)
 		)));
 	}

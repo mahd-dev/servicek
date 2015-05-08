@@ -27,10 +27,10 @@
 								</div>
 							</div>
 
-							<div class="alert alert-danger form-error hide">
+							<div class="alert alert-danger form-error" style="display:none;">
 								Vous avez des champs invalides, SVP vérifier ci-dessous.
 							</div>
-							<div class="alert alert-danger payment_unhandled_error hide">
+							<div class="alert alert-danger payment_unhandled_error" style="display:none;">
 								Désolé une erreur s'est produite lors de l'authentification pour le paiement <button class="btn btn-link" type="submit"><i class="icon-reload"></i> Réessayer</button>
 							</div>
 							
@@ -91,38 +91,11 @@
 
 									<div class="tabbable-line">
 										<ul class="nav nav-tabs ">
-											<li class="active"><a href="#local_pay" data-toggle="tab">Paiement assisté par agent</a></li>
-											<li><a href="#pay_online" data-toggle="tab">Payer enligne</a></li>
+											<li class="active"><a href="#pay_online" class="payment_type" data-toggle="tab">Payer enligne</a></li>
+											<li><a href="#local_pay" class="payment_type" data-toggle="tab">Paiement assisté par agent</a></li>
 										</ul>
 										<div class="tab-content">
-											<div class="tab-pane active" id="local_pay">
-
-												<div class="row">
-													<div class="col-md-offset-3 col-md-6">
-														<div class="note note-info agent_warning">
-															<h4 class="block"><i class="icon-info" style="font-size:150%;"></i> Cette méthode requit un agent agrée</h4>
-															<p>
-																Si vous n'êtes pas accompagné d'un de nos agents agrées, <a class="get_agent">demander un agent</a> immédiatement, ou <a class="ajaxify" href="<?php echo url_root;?>/contact">contactez nous</a> pour avoir un support direct.
-															</p>
-														</div>
-														<div class="note note-success agent_request_success hide">
-															<h4 class="block"><i class="icon-like" style="font-size:150%;"></i> Merci,</h4>
-															<p>
-																on a bien reçu votre demande, on vous contactera très bientôt.
-															</p>
-														</div>
-													</div>
-												</div>
-
-												<div class="form-group">
-													<label class="control-label col-md-3">Code privé de l'agent <span class="required">*</span></label>
-													<div class="col-md-6">
-														<input type="password" class="form-control" name="agent_code" data-msg-required="Ce champ est obligatoire" data-msg-error="Ce code n'est pas valide"/>
-													</div>
-												</div>
-
-											</div>
-											<div class="tab-pane" id="pay_online">
+											<div class="tab-pane active" id="pay_online">
 
 												<div class="row">
 													<div class="col-md-offset-3 col-md-6">
@@ -164,6 +137,33 @@
 													</div>
 												</div>
 											</div>
+
+											<div class="tab-pane" id="local_pay">
+												<div class="row">
+													<div class="col-md-offset-3 col-md-6">
+														<div class="note note-info agent_warning">
+															<h4 class="block"><i class="icon-info" style="font-size:150%;"></i> Cette méthode requit un agent agrée</h4>
+															<p>
+																Si vous n'êtes pas accompagné d'un de nos agents agrées, <a class="get_agent">demander un agent</a> immédiatement, ou <a class="ajaxify" href="<?php echo url_root;?>/contact">contactez nous</a> pour avoir un support direct.
+															</p>
+														</div>
+														<div class="note note-success agent_request_success" style="display:none;">
+															<h4 class="block"><i class="icon-like" style="font-size:150%;"></i> Merci,</h4>
+															<p>
+																on a bien reçu votre demande, on vous contactera très bientôt.
+															</p>
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="control-label col-md-3">Code privé de l'agent <span class="required">*</span></label>
+													<div class="col-md-6">
+														<input type="password" class="form-control" name="agent_code" data-msg-required="Ce champ est obligatoire" data-msg-error="Ce code n'est pas valide"/>
+													</div>
+												</div>
+
+											</div>
 										</div>
 									</div>
 
@@ -202,11 +202,6 @@
 										<div class="col-md-6"><p class="form-control-static" data-display="method"><strong></strong></p></div>
 									</div>
 
-									<div class="form-group">
-										<label class="control-label col-md-3">Numéro de la carte :</label>
-										<div class="col-md-6"><p class="form-control-static" data-display="credit_card_number"><strong></strong></p></div>
-									</div>
-
 								</div>
 
 
@@ -231,20 +226,20 @@
 					<strong class="payment_recipt"></strong>
 				</p>
 				<p>
-					<a class="btn btn-success ajaxify goto_job" href=""><i class="icon-link"></i>&nbsp;&nbsp;Accéder au travail publié</a>
+					<a class="btn btn-success ajaxify goto_job" href="<?php echo url_root;?>/account"><i class="icon-link"></i>&nbsp;&nbsp;Accéder au travail publié</a>
 				</p>
 			</div>
 		</div>
 
 		<div id="already_done_msg" style="display:none;">
 			<div class="note note-info">
-				<h4 class="block"><i class="icon-info" style="font-size:150%;"></i>&nbsp;&nbsp;Vous avez déja publié le travail.</h4>
+				<h4 class="block"><i class="icon-info" style="font-size:150%;"></i>&nbsp;&nbsp;Vous avez déja publié le travail</h4>
 				<p>
 					Accusé de paiment:
 					<strong class="payment_recipt"></strong>
 				</p>
 				<p>
-					<a class="btn btn-success ajaxify goto_job" href=""><i class="icon-link"></i>&nbsp;&nbsp;Accéder au travail publié</a>
+					<a class="btn btn-success ajaxify goto_job" href="<?php echo url_root;?>/account"><i class="icon-link"></i>&nbsp;&nbsp;Accéder au travail publié</a>
 				</p>
 			</div>
 		</div>

@@ -2,6 +2,20 @@
 <link href="<?php echo cdn;?>/plugins/bootstrap-fileinput/bootstrap-fileinput<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css"/>
 <link href="<?php echo url_root;?>/pages/job/style<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css">
 
+<?php if(!$is_contracted){?>
+<div class="row">
+	<div class="col-md-12">
+		<div class="note note-warning">
+			<h4 class="block">Ce travail n'est pas publié</h4>
+			<p>
+				 Ce travail n'est pas disponible au public, vous seul vous pouvez y accéder.<br>
+				 Vous ne disposez pas encore de contrat de publication.<br><br>
+				 <a class="btn green ajaxify" href="<?php echo url_root."/".$job->url;?>/publish"><i class="icon-rocket"></i> Publier maintenant</a>
+			</p>
+		</div>
+	</div>
+</div>
+<?php }?>
 <div class="row">
 	<div class="col-md-12">
 		<div class="row">
@@ -16,13 +30,13 @@
 							-->
 							<div class="profile-usertitle">
 								<div class="profile-usertitle-name">
-									 <a href="javascript:;" class="editable" data-name="name" data-type="text" ><?php echo $j->name;?></a>
+									 <a href="javascript:;" class="editable" data-name="name" data-type="text" ><?php echo $job->name;?></a>
 								</div>
 							</div>
 						</div>
 						<div class="portlet light">
 							<h5>A propos :</h5>
-							<a href="javascript:;" class="editable" data-name="description" data-type="textarea" ><?php echo $j->description;?></a>
+							<a href="javascript:;" class="editable" data-name="description" data-type="textarea" ><?php echo $job->description;?></a>
 						</div>
 					</div>
 					<div class="profile-content col-md-9">
@@ -40,19 +54,19 @@
 											<div class="tab-pane active" id="tab_1_1">
 												<p class="margin-bottom-30">
 													<strong><h5>Adresse :</h5></strong>
-													<a href="javascript:;" class="" data-name="address" data-type="textarea" ><?php echo $j->address;?></a>
+													<a href="javascript:;" class="" data-name="address" data-type="textarea" ><?php echo $job->address;?></a>
 												</p>
 												<p class="margin-bottom-30">
 													<strong><h5>Téléphone :</h5></strong>
-													<a href="javascript:;" class="editable" data-name="tel" data-type="text" ><?php echo $j->tel;?></a>
+													<a href="javascript:;" class="editable" data-name="tel" data-type="text" ><?php echo $job->tel;?></a>
 												</p>
 												<p class="margin-bottom-30">
 													<strong><h5>Portable :</h5></strong>
-													<a href="javascript:;" class="editable" data-name="mobile" data-type="text" ><?php echo $j->mobile;?></a>
+													<a href="javascript:;" class="editable" data-name="mobile" data-type="text" ><?php echo $job->mobile;?></a>
 												</p>
 												<p class="margin-bottom-30">
 													<strong><h5>Email :</h5></strong>
-													<a href="javascript:;" class="editable" data-name="email" data-type="text" ><?php echo $j->email;?></a>
+													<a href="javascript:;" class="editable" data-name="email" data-type="text" ><?php echo $job->email;?></a>
 												</p>
 											</div>
 										</div>
