@@ -8,25 +8,25 @@
 				case 'e_dinar_smart_tunisian_post':
 
 					$payment_recipt="ignored_payment";
-					$payment_error=null;
+					$payment_error="unhandled";
 
 					break;
 				case 'visa_electron_tunisian_post':
 
 					$payment_recipt="ignored_payment";
-					$payment_error=null;
+					$payment_error="unhandled";
 
 					break;
 				case 'visa':
 
 					$payment_recipt="ignored_payment";
-					$payment_error=null;
+					$payment_error="unhandled";
 
 					break;
 				case 'mastecard':
 
 					$payment_recipt="ignored_payment";
-					$payment_error=null;
+					$payment_error="unhandled";
 					
 					break;
 				default:

@@ -94,8 +94,8 @@
 							<li><a href="#prods" data-toggle="tab" aria-expanded="false">Produits</a></li>
 						</ul>
 						<div class="btn-group btn-group-solid pull-right">
-							<a type="button" class="btn  green-haze " data-toggle="modal" href="#new_service_modal">Ajouter un Services</a>
-							<a type="button" class="btn  blue-madison" data-toggle="modal" href="#new_produit_modal">Ajouter un Produits</a>&nbsp; &nbsp;
+							<a type="button" class="btn btn-default" data-toggle="modal" href="#new_service_modal">Ajouter un Services</a>
+							<a type="button" class="btn btn-default" data-toggle="modal" href="#new_produit_modal">Ajouter un Produits</a>&nbsp; &nbsp;
 						</div>
 					</div>
 					<div class="portlet-body">

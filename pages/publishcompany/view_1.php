@@ -87,12 +87,12 @@
 
 								<div class="tab-pane" id="payment_informations">
 
-									<h4 class="block">Carte de crédit</h4>
+									<h4 class="block">Informations de paiement</h4>
 									
 									<div class="tabbable-line">
 										<ul class="nav nav-tabs ">
-											<li class="active"><a href="#pay_online" class="payment_type" data-toggle="tab">Payer enligne</a></li>
-											<li><a href="#local_pay" class="payment_type" data-toggle="tab">Paiement assisté par agent</a></li>
+											<li><a>Payer enligne (En cours de développement)</a></li>
+											<li class="active"><a href="#local_pay" class="payment_type" data-toggle="tab">Paiement assisté par agent</a></li>
 										</ul>
 										<div class="tab-content">
 											<div class="tab-pane active" id="pay_online">

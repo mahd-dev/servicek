@@ -218,7 +218,6 @@ page_script({
 		
 		$('a[data-toggle="tab"].payment_type').on('shown.bs.tab', function (e) {
 			var target = $(e.target).attr("href");
-			
 			switch(target){
 				case "#local_pay":
 					$(".agent_warning").show();
@@ -243,7 +242,7 @@ page_script({
 					$("[name=agent_code]").rules( "remove" );
 				break;
 			}
-		});
+		}).trigger('shown.bs.tab');
 
 		$(".get_agent").click(function () {
 			$.post(location.href, {request_agent:true}, function (rslt) {
