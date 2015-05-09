@@ -7,6 +7,10 @@
 
 	$geolocation=json_decode($job->geolocation);
 	$is_contracted = $job->is_contracted;
+	$img = $job->image;
+	if($img) $image = $paths->job_image->url.$img;
+	else $image = null;
+
 	if ($job->admin==$user) {
 		if (isset($_POST['pk']) && isset($_POST['name']) && isset($_POST['value'])) {
 			switch ($_POST['name']) {
@@ -33,6 +37,17 @@
 					break;
 			}
 			die();
+		}elseif(isset($_POST["file"]) && $_POST["file"]=="image"){
+			$oldname=$paths->job_image->dir.$img;
+
+			if(file_exists($oldname) && is_file($oldname)) unlink($oldname);
+			
+			$name=gf::generate_guid().".".end((explode(".", $_FILES["image"]["name"])));
+			move_uploaded_file($_FILES["image"]["tmp_name"], $paths->job_image->dir.$name);
+			
+			$job->image=$name;
+			
+			die("success");
 		}
 
 		include "view_2.php";

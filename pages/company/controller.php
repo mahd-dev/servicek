@@ -81,7 +81,19 @@
 			
 			die(json_encode(array("status"=>"success")));
 
+		}elseif(isset($_POST["file"]) && $_POST["file"]=="logo"){
+			$oldname=$paths->company_logo->dir.$company->logo;
+
+			if(file_exists($oldname) && is_file($oldname)) unlink($oldname);
+			
+			$name=gf::generate_guid().".".end((explode(".", $_FILES["logo"]["name"])));
+			move_uploaded_file($_FILES["logo"]["tmp_name"], $paths->company_logo->dir.$name);
+			
+			$company->logo=$name;
+			
+			die("success");
 		}
+
 		include "view_2.php";
 	}elseif($is_contracted){
 		include "view_1.php";

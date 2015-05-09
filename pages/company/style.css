@@ -1,5 +1,13 @@
 /** view_1 **/
 
+.logo{
+	float: none;
+}
+.logo .fileinput-preview{
+	cursor: pointer;
+	min-height: 100px;
+}
+
 html,
 body,
 #map-canvas {

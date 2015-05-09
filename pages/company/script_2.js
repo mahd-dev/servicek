@@ -170,5 +170,27 @@ page_script({
 			});
 		});
 
+		$(".logo input[type=file]").change(function (e) {
+        	if(this.files.length == 0) return;
+        	var form = $(".logo form");
+        	var fd = new FormData(form[0]);
+            fd.append("file", "logo");
+            $.ajax({
+				url: location.href,
+				type: "POST",
+				data: fd,
+				enctype: 'multipart/form-data',
+				processData: false,
+				contentType: false,
+				success: function (rslt) {
+					if(rslt!="success") console.log(rslt);
+				},
+				error: function (rslt) {
+					console.log(rslt);
+				}
+            });
+        	
+        });
+
 	}
 });

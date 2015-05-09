@@ -1,4 +1,6 @@
 <link href="<?php echo url_root;?>/pages/company/style<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css">
+
+<link href="<?php echo cdn;?>/plugins/bootstrap-fileinput/bootstrap-fileinput<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" type="text/css" href="<?php echo cdn;?>/plugins/bootstrap-editable/bootstrap-editable/css/bootstrap-editable<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css"/>
 
 <?php if(!$is_contracted){?>
@@ -18,11 +20,15 @@
 <div class="row">
 	<div class="profile-sidebar col-md-3">
 		<div class="portlet light profile-sidebar-portlet">
-			<!--
-			<div class="profile-userpic">
-				<img src="../../assets/pages/media/profile/profile_user.jpg" class="img-responsive" alt="">
+			
+		<div class="logo fileinput col-xs-offset-4 col-xs-4 col-md-offset-0 col-md-12 fileinput-new" data-provides="fileinput">
+				<a class="fileinput-preview thumbnail" data-trigger="fileinput">
+					<img src="<?php $logo=$company->logo; if($logo) echo $paths->company_logo->url.$logo; else {?>http://www.placehold.it/400x300/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt=""/>
+				</a>
+				<a class="btn-file pull-right">
+				<form><input type="file" name="logo"></a></form>
 			</div>
-			-->
+
 			<div class="profile-usertitle">
 				<div class="profile-usertitle-name">
 					<a class="editable" data-name="name" data-type="text" ><?php echo $company->name;?></a>
@@ -271,5 +277,8 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript" src="<?php echo cdn;?>/plugins/bootstrap-fileinput/bootstrap-fileinput<?php if(!debug) echo ".min";?>.js"></script>
+
 <!-- custom page script -->
 <script src="<?php echo url_root;?>/pages/company/script_2<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>

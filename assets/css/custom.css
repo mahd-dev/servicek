@@ -18,6 +18,10 @@ Rounded Portlets
 }
 */
 
-.form-group{
+.modal .form-group{
 	display: -webkit-box;
+}
+
+.fileinput-preview{
+	width: 100%;
 }
