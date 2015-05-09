@@ -47,8 +47,8 @@
 								<h3 class="block">Démarrez ici ..</h3>
 								<p>
 									 <div class="btn-group btn-group-solid margin-bottom-20">
-										<a type="button" class="btn btn-lg btn-default ajaxify" href="<?php echo url_root;?>/new/company"><i class="icon-flag"></i> Publier ma Société</a>
-										<a type="button" class="btn btn-lg btn-default ajaxify" href="<?php echo url_root;?>/new/job"><i class="icon-pointer"></i> Publier mon travail</a>
+										<a type="button" class="btn btn-lg btn-default ajaxify" href="<?php echo url_root;?>/new/company"><i class="icon-flag"></i> Créer ma Société</a>
+										<a type="button" class="btn btn-lg btn-default ajaxify" href="<?php echo url_root;?>/new/job"><i class="icon-pointer"></i> Créer mon travail</a>
 									</div>
 								</p>
 							</div>
@@ -57,8 +57,8 @@
 							<div class="portlet light">
 								<div class="portlet-title">
 									<div class="btn-group btn-group-solid pull-right">
-										<a type="button" class="btn btn-default ajaxify" href="<?php echo url_root;?>/new/company"><i class="icon-flag"></i> Publier une autre Société</a>
-										<a type="button" class="btn btn-default ajaxify" href="<?php echo url_root;?>/new/job"><i class="icon-pointer"></i> Publier un autre travail</a>
+										<a type="button" class="btn btn-default ajaxify" href="<?php echo url_root;?>/new/company"><i class="icon-flag"></i> Créer une autre Société</a>
+										<a type="button" class="btn btn-default ajaxify" href="<?php echo url_root;?>/new/job"><i class="icon-pointer"></i> Créer un autre travail</a>
 									</div>
 								</div>
 								<div class="portlet-body">

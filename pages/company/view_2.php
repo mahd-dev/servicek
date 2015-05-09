@@ -4,8 +4,8 @@
 <?php if(!$is_contracted){?>
 <div class="row">
 	<div class="col-md-12">
-		<div class="note note-warning">
-			<h4 class="block">Cette société n'est pas pubiée</h4>
+		<div class="note note-danger">
+			<h4 class="block">Cette société n'est pas pubilée</h4>
 			<p>
 				 Cette société n'est pas disponible au public, vous seul vous pouvez y accéder.<br>
 				 Vous ne disposez pas encore de contrat de publication.<br><br>
@@ -95,38 +95,59 @@
 						</ul>
 						<div class="btn-group btn-group-solid pull-right">
 							<a type="button" class="btn btn-default" data-toggle="modal" href="#new_service_modal">Ajouter un Services</a>
-							<a type="button" class="btn btn-default" data-toggle="modal" href="#new_produit_modal">Ajouter un Produits</a>&nbsp; &nbsp;
+							<a type="button" class="btn btn-default" data-toggle="modal" href="#new_product_modal">Ajouter un Produits</a>&nbsp; &nbsp;
 						</div>
 					</div>
 					<div class="portlet-body">
 						<div class="tab-content">
-							<div class="tab-pane row active" id="services">
+							<div class="tab-pane row active" id="services_list">
 							<?php foreach ($company->products as $p) { ?>
-								<div class="col-xs-12 col-sm-6 col-md-4">
+								<div class="col-sm-6 col-md-4">
 									<div class="thumbnail">
 										<!--<img src="" alt="100%x200" style="width: 100%;  display: block;">-->
 										<div class="caption">
-											<h3><a href="javascript:;" class="product_editable"  data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
-											<p><a href="javascript:;" class="product_editable"  data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->description; ?></a></p>
-											<p><a href="javascript:;" class="product_editable"  data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?> DNT</a></p>
+											<h3><a class="product_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
+											<p><a class="product_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->description; ?></a></p>
+											<p><a class="product_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a>DNT</p>
 										</div>
 									</div>
 								</div>
 							<?php }?>
+							<div class="col-sm-6 col-md-4" id="new_service_template" style="display:none;">
+								<div class="thumbnail">
+									<!--<img src="" alt="100%x200" style="width: 100%;  display: block;">-->
+									<div class="caption">
+										<h3><a class="product_editable name" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ></a></h3>
+										<p><a class="product_editable description" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ></a></p>
+										<p><a class="product_editable price" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ></a> DNT</p>
+									</div>
+								</div>
 							</div>
-							<div class="tab-pane row" id="prods">
+							
+							</div>
+							<div class="tab-pane row" id="products_list">
 							<?php foreach ($company->services as $p) {?>
-								<div class="col-xs-12 col-sm-6 col-md-4">
+								<div class="col-sm-6 col-md-4">
 									<div class="thumbnail">
 										<!--<img src="" alt="100%x200" style="width: 100%;  display: block;">-->
 										<div class="caption">
-											<h3><a href="javascript:;" class="service_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
-											<p><a href="javascript:;" class="service_editable"  data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->description; ?></a></p>
-											<p><a href="javascript:;" class="service_editable"  data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?> DNT</a></p>
+											<h3><a class="service_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
+											<p><a class="service_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->description; ?></a></p>
+											<p><a class="service_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a> DNT</p>
 										</div>
 									</div>
 								</div>
 							<?php }?>
+							<div class="col-sm-6 col-md-4" id="new_product_template" style="display:none;">
+								<div class="thumbnail">
+									<!--<img src="" alt="100%x200" style="width: 100%;  display: block;">-->
+									<div class="caption">
+										<h3><a class="product_editable name" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ></a></h3>
+										<p><a class="product_editable description" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ></a></p>
+										<p><a class="product_editable price" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ></a> DNT</p>
+									</div>
+								</div>
+							</div>
 							</div>
 						</div>
 					</div>
@@ -138,92 +159,84 @@
 <div class="modal fade" id="new_service_modal" role="basic" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-				<h4 class="modal-title">Ajouter un Service</h4>
-			</div>
 			<form>
-			<div class="modal-body">
-				 <div class="form-group">
-				    <label for="inputNom3" class="col-sm-2 control-label">Nom</label>
-				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="inputEmail3" placeholder="Nom">
-				    </div>
-				    
-				  </div>
-				  <div class="form-group">
-				    <label for="inputDesc3" class="col-sm-2 control-label" placeholder="Déscription">Déscription</label>
-				    <div class="col-sm-10">
-				    	<textarea class="form-control" rows="3"></textarea>
-				    </div>
-				    
-				  </div>
-				  <div class="form-group">
-				   <label for="exampleInputAmount" class="col-sm-2 control-label">Prix</label>
-				  	<div class="col-sm-10">
-				    <div class="input-group ">
-				      <div class="input-group-addon">DNT</div>
-				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Prix">
-				    </div>
-				  	</div>
-				  </div>
-				 <p class="help-block">&nbsp;</p>
-			</div>
-			<div class="modal-footer">
-					<button type="button" class="btn default" data-dismiss="modal">Fermer</button>
-				<button type="button" class="btn blue">Ajouter</button>
-			</div>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+					<h4 class="modal-title">Ajouter un Service</h4>
+				</div>
+			
+				<div class="modal-body">
+					<div class="form-body">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Nom</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="service_name" placeholder="Nom" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" placeholder="Description">Description</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" name="service_description" rows="3" required></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">Prix</label>
+							<div class="col-sm-10">
+								<div class="input-group ">
+									<input type="text" class="form-control" name="service_price" placeholder="Prix" required>
+									<div class="input-group-addon">DNT</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<a class="btn default" data-dismiss="modal">Fermer</a>
+						<button type="submit" class="btn blue">Ajouter</button>
+					</div>
+				
+				</div>
 			</form>
 		</div>
 	</div>
 </div>
 
-<div class="modal fade" id="new_produit_modal" role="basic" aria-hidden="true">
+<div class="modal fade" id="new_product_modal" role="basic" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-				<h4 class="modal-title">Ajouter un Produit</h4>
-			</div>
 			<form>
-			<div class="modal-body">
-			
-				 <div class="form-group">
-				    <label for="inputNom3" class="col-sm-2 control-label">Nom</label>
-				    <div class="col-sm-10">
-				      <input type="text" class="form-control" id="inputEmail3" placeholder="Nom">
-				    </div>
-				    
-				  </div>
-				  <div class="form-group">
-				    <label for="inputDesc3" class="col-sm-2 control-label" placeholder="Déscription">Déscription</label>
-				    <div class="col-sm-10">
-				    	<textarea class="form-control" rows="3"></textarea>
-				    </div>
-				    
-				  </div>
-				  <div class="form-group">
-				   <label for="exampleInputAmount" class="col-sm-2 control-label">Prix</label>
-				  	<div class="col-sm-10">
-				    <div class="input-group ">
-				      <div class="input-group-addon">DNT</div>
-				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Prix">
-				    </div>
-				  	</div>
-				  </div>
-				  <div class="form-group">
-				    <label for="exampleInputFile" class="col-sm-2 control-label">Image</label>
-				    <div class="col-sm-10">
-				    <input type="file" id="InputFile">				    	
-				    </div>
-				    <p class="help-block">&nbsp;</p>
-				    
-				  </div>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+					<h4 class="modal-title">Ajouter un Produit</h4>
 				</div>
-			<div class="modal-footer">
-					<button type="button" class="btn default" data-dismiss="modal">Fermer</button>
-				<button type="button" class="btn blue">Ajouter</button>
-			</div>
+			
+				<div class="modal-body">
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Nom</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="product_name" placeholder="Nom" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" placeholder="Description">Description</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" name="product_description" rows="3" required></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Prix</label>
+						<div class="col-sm-10">
+							<div class="input-group ">
+								<input type="text" class="form-control" name="product_price" placeholder="Prix" required>
+								<div class="input-group-addon">DNT</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<a class="btn default" data-dismiss="modal">Fermer</a>
+					<button type="submit" class="btn blue">Ajouter</button>
+				</div>
 			</form>
 		</div>
 	</div>

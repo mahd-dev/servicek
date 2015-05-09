@@ -108,46 +108,6 @@
 						<li>
 							<a href="<?php echo url_root;?>/contact" class="ajaxify">Contact</a>
 						</li>
-						<!--
-						<li class="menu-dropdown mega-menu-dropdown active">
-							<a data-close-others="true" data-toggle="dropdown" href="javascript:;" class="dropdown-toggle">
-								Features <i class="fa fa-angle-down"></i>
-							</a>
-							<ul class="dropdown-menu" style="min-width: 710px">
-								<li>
-									<div class="mega-menu-content">
-										<div class="row">
-											<div class="col-md-4">
-												<ul class="mega-menu-submenu">
-													<li>
-														<h3>eCommerce</h3>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</li>
-							</ul>
-						</li>
-
-						<li class="menu-dropdown classic-menu-dropdown ">
-							<a data-close-others="true" data-toggle="dropdown" href="javascript:;">
-						Extra <i class="fa fa-angle-down"></i>
-						</a>
-							<ul class="dropdown-menu pull-left">
-								<li class=" dropdown-submenu">
-									<a href=javascript:;>
-										<i class="icon-briefcase"></i> Data Tables </a>
-									<ul class="dropdown-menu">
-										<li class=" ">
-											<a href="table_basic.html">
-										Basic Datatables </a>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-						-->
 					</ul>
 				</div>
 			</div>
@@ -163,14 +123,13 @@
 
 	<div class="page-footer">
 		<div class="container">
-			<?php echo date( 'Y');?> &copy; <a href="https://servicek.tn/about">Servicek</a> | Powered by <a href="http://mahd.tn">Mahd Company</a>.
+			<?php echo date('Y');?> &copy; <a href="https://servicek.tn/about">Société tunisienne des services</a>, Tout droits réservés.
+			<div class="pull-right">Site développé par <a href="http://mahd.tn" target="_blank">Ste mahd</a></div>
 		</div>
 	</div>
 	<div class="scroll-to-top">
 		<i class="icon-arrow-up"></i>
 	</div>
-
-
 
 
 	<!--[if lt IE 9]>

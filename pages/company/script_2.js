@@ -27,16 +27,143 @@ page_script({
 			marker.setMap(map);
         });
 
-		$.ajax({
-			url: location.href,
-			type: "POST",
-			data: $(form).serialize(),
-			success: function (rslt) {
-				
-			},
-			error: function (rslt) {
-				
-			}
+		$("#new_product_modal form").submit(function (e) {
+			e.preventDefault();
+			var new_product_form = $(this);
+			$.ajax({
+				url: location.href,
+				type: "POST",
+				data: $(new_product_form).serialize(),
+				success: function (rslt) {
+					try{
+						var p = JSON.parse(rslt);
+						switch(p.status){
+							case "success":
+								var new_element = $("#new_product_template").clone();
+							
+								$(".name", new_element).text($("[name=product_name]", new_product_form).val()).attr("data-pk", p.id);
+								$(".description", new_element).text($("[name=product_description]", new_product_form).val()).attr("data-pk", p.id);
+								$(".price", new_element).text($("[name=product_price]", new_product_form).val()).attr("data-pk", p.id);
+								
+								$("#new_product_modal").modal('hide');
+								new_product_form[0].reset();
+
+								new_element.appendTo("#products_list").show();
+
+								$(".product_editable", new_element).editable({params:function (p) { p.for="product"; return p; }});
+
+							break;
+							default:
+								console.log(rslt);
+							break;
+						}
+					}catch(ex){
+						console.log(rslt);
+					}
+				},
+				error: function (rslt) {
+					console.log(rslt);
+				}
+			});
 		});
+
+		$("#new_service_modal form").submit(function (e) {
+			e.preventDefault();
+			var new_service_form = $(this);
+			$.ajax({
+				url: location.href,
+				type: "POST",
+				data: $(new_service_form).serialize(),
+				success: function (rslt) {
+					try{
+						var p = JSON.parse(rslt);
+						switch(p.status){
+							case "success":
+								var new_element = $("#new_service_template").clone();
+							
+								$(".name", new_element).text($("[name=service_name]", new_service_form).val()).attr("data-pk", p.id);
+								$(".description", new_element).text($("[name=service_description]", new_service_form).val()).attr("data-pk", p.id);
+								$(".price", new_element).text($("[name=service_price]", new_service_form).val()).attr("data-pk", p.id);
+						
+								$("#new_service_modal").modal('hide');
+								new_service_form[0].reset();
+
+								new_element.appendTo("#services_list").removeAttr("id").show();
+
+								$(".service_editable", new_element).editable({params:function (p) { p.for="service"; return p; }});
+
+							break;
+							default:
+								console.log(rslt);
+							break;
+						}
+					}catch(ex){
+						console.log(rslt);
+					}
+				},
+				error: function (rslt) {
+					console.log(rslt);
+				}
+			});
+		});
+		
+
+		$(".product .delete").click(function (e) {
+			e.preventDefault();
+			var container = $(this).parents(".product");
+			$.ajax({
+				url: location.href,
+				type: "POST",
+				data: {delete_product : container.attr("data-id")},
+				success: function (rslt) {
+					try{
+						var p = JSON.parse(rslt);
+						switch(p.status){
+							case "success":
+								container.remove();
+							break;
+							default:
+								console.log(rslt);
+							break;
+						}
+					}catch(ex){
+						console.log(rslt);
+					}
+				},
+				error: function (rslt) {
+					console.log(rslt);
+				}
+			});
+		});
+
+		$(".service .delete").click(function (e) {
+			e.preventDefault();
+			var container = $(this).parents(".service");
+			$.ajax({
+				url: location.href,
+				type: "POST",
+				data: {delete_service : container.attr("data-id")},
+				success: function (rslt) {
+					try{
+						var p = JSON.parse(rslt);
+						switch(p.status){
+							case "success":
+								container.remove();
+							break;
+							default:
+								console.log(rslt);
+							break;
+						}
+					}catch(ex){
+						console.log(rslt);
+					}
+				},
+				error: function (rslt) {
+					console.log(rslt);
+				}
+			});
+		});
+
+		
 	}
 });

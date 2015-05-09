@@ -5,7 +5,7 @@
 <?php if(!$is_contracted){?>
 <div class="row">
 	<div class="col-md-12">
-		<div class="note note-warning">
+		<div class="note note-danger">
 			<h4 class="block">Ce travail n'est pas publié</h4>
 			<p>
 				 Ce travail n'est pas disponible au public, vous seul vous pouvez y accéder.<br>

@@ -8,6 +8,7 @@
 	$s=$company->seats[0];
 	$geolocation=json_decode($s->geolocation);
 	$is_contracted=$company->is_contracted;
+
 	if ($user!=null && $company->is_assigned_to_admin($user)) {
 		if (isset($_POST['for']) && isset($_POST['pk']) && isset($_POST['name']) && isset($_POST['value'])) {
 			switch ($_POST['for']) {
@@ -46,6 +47,40 @@
 					break;
 			}
 			die();
+		}elseif (isset($_POST['service_name']) && isset($_POST['service_description']) && isset($_POST['service_price'])) {
+			
+			$service=service::create($company);
+			
+			$service->name=$_POST['service_name'];
+			$service->description=$_POST['service_description'];
+			$service->price=$_POST['service_price'];
+			
+			die(json_encode(array("status"=>"success", "id"=>$service->id)));
+
+		}elseif (isset($_POST['product_name']) && isset($_POST['product_description']) && isset($_POST['product_price'])) {
+
+			$product=product::create($company);
+			
+			$product->name=$_POST['product_name'];
+			$product->description=$_POST['product_description'];
+			$product->price=$_POST['product_price'];
+			
+			die(json_encode(array("status"=>"success", "id"=>$product->id)));
+
+		}elseif (isset($_POST['delete_service'])) {
+			
+			$service=new service($_POST['delete_service']);
+			$service->delete();
+			
+			die(json_encode(array("status"=>"success")));
+
+		}elseif (isset($_POST['delete_product'])) {
+			
+			$product=new produit($_POST['delete_product']);
+			$product->delete();
+			
+			die(json_encode(array("status"=>"success")));
+
 		}
 		include "view_2.php";
 	}elseif($is_contracted){
