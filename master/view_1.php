@@ -123,7 +123,7 @@
 
 	<div class="page-footer">
 		<div class="container">
-			<?php echo date('Y');?> &copy; <a href="https://servicek.tn/about">Société tunisienne des services</a>, Tout droits réservés.
+			<?php echo date('Y');?> &copy; <a href="<?php echo url_root;?>/about" class="ajaxify">Société tunisienne des services</a>, Tout droits réservés.
 			<div class="pull-right">Site développé par <a href="http://mahd.tn" target="_blank">Ste mahd</a></div>
 		</div>
 	</div>
@@ -165,6 +165,8 @@
 
 	<script src='http://maps.google.com/maps/api/js?sensor=false&libraries=places' type="text/javascript"></script>
 	<script src="<?php echo cdn;?>/plugins/locationpicker/locationpicker.jquery<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
+
+	<script src="<?php echo cdn;?>/plugins/jquery.pulsate.min.js" type="text/javascript"></script>
 
 	<script src="<?php echo url_root;?>/master/script_1<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 	<script>

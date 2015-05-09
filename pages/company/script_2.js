@@ -40,18 +40,21 @@ page_script({
 						switch(p.status){
 							case "success":
 								var new_element = $("#new_product_template").clone();
-							
-								$(".name", new_element).text($("[name=product_name]", new_product_form).val()).attr("data-pk", p.id);
-								$(".description", new_element).text($("[name=product_description]", new_product_form).val()).attr("data-pk", p.id);
-								$(".price", new_element).text($("[name=product_price]", new_product_form).val()).attr("data-pk", p.id);
 								
+								new_element.attr("data-id", p.id);
+								$(".name", new_element).text($("[name='product_name']", new_product_form).val()).attr("data-pk", p.id);
+								$(".description", new_element).text($("[name='product_description']", new_product_form).val()).attr("data-pk", p.id);
+								$(".price", new_element).text($("[name='product_price']", new_product_form).val()).attr("data-pk", p.id);
+								$(".product_editable", new_element).editable({params:function (p) { p.for="product"; return p; }});
+
 								$("#new_product_modal").modal('hide');
 								new_product_form[0].reset();
 
-								new_element.appendTo("#products_list").show();
+								new_element.prependTo("#products_list").show();
 
-								$(".product_editable", new_element).editable({params:function (p) { p.for="product"; return p; }});
+								$("[href='#products_list']").click();
 
+								new_element.pulsate({color: "#399bc3",repeat: false});
 							break;
 							default:
 								console.log(rslt);
@@ -80,18 +83,21 @@ page_script({
 						switch(p.status){
 							case "success":
 								var new_element = $("#new_service_template").clone();
-							
-								$(".name", new_element).text($("[name=service_name]", new_service_form).val()).attr("data-pk", p.id);
-								$(".description", new_element).text($("[name=service_description]", new_service_form).val()).attr("data-pk", p.id);
-								$(".price", new_element).text($("[name=service_price]", new_service_form).val()).attr("data-pk", p.id);
-						
+								
+								new_element.attr("data-id", p.id);
+								$(".name", new_element).text($("[name='service_name']", new_service_form).val()).attr("data-pk", p.id);
+								$(".description", new_element).text($("[name='service_description']", new_service_form).val()).attr("data-pk", p.id);
+								$(".price", new_element).text($("[name='service_price']", new_service_form).val()).attr("data-pk", p.id);
+								$(".service_editable", new_element).editable({params:function (p) { p.for="service"; return p; }});
+
 								$("#new_service_modal").modal('hide');
 								new_service_form[0].reset();
 
-								new_element.appendTo("#services_list").removeAttr("id").show();
+								new_element.prependTo("#services_list").removeAttr("id").show();
 
-								$(".service_editable", new_element).editable({params:function (p) { p.for="service"; return p; }});
+								$("[href='#services_list']").click();
 
+								new_element.pulsate({color: "#399bc3",repeat: false});
 							break;
 							default:
 								console.log(rslt);
@@ -108,7 +114,7 @@ page_script({
 		});
 		
 
-		$(".product .delete").click(function (e) {
+		$(".product .delete").live("click", function (e) {
 			e.preventDefault();
 			var container = $(this).parents(".product");
 			$.ajax({
@@ -136,7 +142,7 @@ page_script({
 			});
 		});
 
-		$(".service .delete").click(function (e) {
+		$(".service .delete").live("click", function (e) {
 			e.preventDefault();
 			var container = $(this).parents(".service");
 			$.ajax({
@@ -164,6 +170,5 @@ page_script({
 			});
 		});
 
-		
 	}
 });

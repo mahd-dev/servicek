@@ -34,7 +34,7 @@
 					switch ($_POST['name']) {
 						case 'name': $product->name=$_POST['value']; break;
 						case 'description': $product->description=$_POST['value']; break;
-						case 'price': $product->tel=$_POST['value']; break;
+						case 'price': $product->price=$_POST['value']; break;
 					}
 					break;
 				case 'service':
@@ -42,7 +42,7 @@
 					switch ($_POST['name']) {
 						case 'name': $service->name=$_POST['value']; break;
 						case 'description': $service->description=$_POST['value']; break;
-						case 'price': $service->tel=$_POST['value']; break;
+						case 'price': $service->price=$_POST['value']; break;
 					}
 					break;
 			}
@@ -76,7 +76,7 @@
 
 		}elseif (isset($_POST['delete_product'])) {
 			
-			$product=new produit($_POST['delete_product']);
+			$product=new product($_POST['delete_product']);
 			$product->delete();
 			
 			die(json_encode(array("status"=>"success")));

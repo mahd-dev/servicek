@@ -6,7 +6,7 @@
 	}
 
 	if(isset($_POST["request_agent"])){
-		$job->request_agent();
+		$company->request_agent();
 		die(json_encode(array("status"=>"success")));
 	}
 
