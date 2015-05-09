@@ -91,7 +91,7 @@
 			<div class="container">
 				<form id="master_search_form" class="search-form">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search" name="q">
+						<input type="text" class="form-control" placeholder="Search" name="q" required>
 						<span class="input-group-btn">
 						<a class="btn submit"><i class="icon-magnifier"></i></a>
 					</span>
