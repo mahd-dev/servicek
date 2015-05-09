@@ -2,7 +2,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-        <div class="row">
+        <div class="row margin-bottom-20">
 			<div class="col-md-8">
 				<form id="search_form" class="row">
 					<div class="form-group input-group input-lg">
