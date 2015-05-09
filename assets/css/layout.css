@@ -72,6 +72,10 @@ General
 }
 /* Theme Light Portlet */
 
+.portlet{
+	word-wrap: break-word;
+}
+
 .portlet.light .btn.btn-circle.btn-icon-only.btn-default {
 	border-color: #bbc2ce;
 }
