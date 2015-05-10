@@ -31,7 +31,7 @@
         $image->setSecureURL( cdn."/img/main_ref.png" );
         $image->setType( 'image/png' );
         $image->setWidth( 300 );
-        $image->setHeight( 83 );
+        $image->setHeight( 300 );
 
         $ogp->addImage($image);
     }
