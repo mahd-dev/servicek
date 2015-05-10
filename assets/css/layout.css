@@ -500,16 +500,16 @@ Page Header
 }
 
 .page-header .page-header-menu .search-form {
-	background: #38414c;
+	background: #405;
 }
 
 .page-header .page-header-menu .search-form .input-group {
-	background: #38414c;
+	background: #405;
 }
 
 .page-header .page-header-menu .search-form .input-group .form-control {
 	color: #616d7d;
-	background: #38414c;
+	background: #405;
 }
 
 .page-header .page-header-menu .search-form .input-group .form-control::-moz-placeholder {
@@ -721,7 +721,7 @@ Page Header
 
 .page-header .page-header-top {
 	height: 75px;
-	background-color: #38414c;
+	background-color: #405;
 	/* Header logo */
 	/* Top menu */
 	/* Menu Toggler */
@@ -743,7 +743,7 @@ Page Header
 }
 
 .page-header .page-header-top .page-logo .logo-default {
-	margin: 13px 0 0 0;
+	margin: 15px 0 0 0;
 }
 
 .page-header .page-header-top .top-menu {

@@ -45,7 +45,7 @@ Page Header
 ******/
 
 .page-header {
-	background-color: #444d58;
+	background-color: #A08;
 	/* Page Header Top */
 	/* Page Header Menu */
 }
@@ -241,7 +241,7 @@ Page Header
 }
 
 .page-header .page-header-menu {
-	background: #444d58;
+	background: #A08;
 	/* Default Mega Menu */
 	/* Light Mega Menu */
 	/* Header seaech box */
@@ -265,17 +265,17 @@ Page Header
 }
 
 .page-header .page-header-menu .hor-menu .navbar-nav > li > a {
-	color: #BCC2CB;
+	color: #ffffff;
 }
 
 .page-header .page-header-menu .hor-menu .navbar-nav > li > a > i {
-	color: #BCC2CB;
+	color: #ffffff;
 }
 
 .page-header .page-header-menu .hor-menu .navbar-nav > li.open > a,
 .page-header .page-header-menu .hor-menu .navbar-nav > li > a:hover {
 	color: #ffffff;
-	background: #55616f !important;
+	background: #800066 !important;
 }
 
 .page-header .page-header-menu .hor-menu .navbar-nav > li.open > a > i,
@@ -295,12 +295,12 @@ Page Header
 .page-header .page-header-menu .hor-menu .navbar-nav > li.active > a:hover > i,
 .page-header .page-header-menu .hor-menu .navbar-nav > li.current > a > i,
 .page-header .page-header-menu .hor-menu .navbar-nav > li.current > a:hover > i {
-	color: #BCC2CB;
+	color: #ffffff;
 }
 
 .page-header .page-header-menu .hor-menu .navbar-nav > li .dropdown-menu {
 	box-shadow: 5px 5px rgba(85, 97, 111, 0.2);
-	background: #55616f;
+	background: #800066;
 }
 
 .page-header .page-header-menu .hor-menu .navbar-nav > li .dropdown-menu li > a {
@@ -357,16 +357,16 @@ Page Header
 }
 
 .page-header .page-header-menu .hor-menu.hor-menu-light .navbar-nav > li > a {
-	color: #BCC2CB;
+	color: #ffffff;
 }
 
 .page-header .page-header-menu .hor-menu.hor-menu-light .navbar-nav > li > a > i {
-	color: #BCC2CB;
+	color: #ffffff;
 }
 
 .page-header .page-header-menu .hor-menu.hor-menu-light .navbar-nav > li > a:hover {
 	color: #ffffff;
-	background: #55616f;
+	background: #800066;
 }
 
 .page-header .page-header-menu .hor-menu.hor-menu-light .navbar-nav > li > a:hover > i {
@@ -394,7 +394,7 @@ Page Header
 .page-header .page-header-menu .hor-menu.hor-menu-light .navbar-nav > li.active > a:hover > i,
 .page-header .page-header-menu .hor-menu.hor-menu-light .navbar-nav > li.current > a > i,
 .page-header .page-header-menu .hor-menu.hor-menu-light .navbar-nav > li.current > a:hover > i {
-	color: #BCC2CB;
+	color: #ffffff;
 }
 
 .page-header .page-header-menu .hor-menu.hor-menu-light .navbar-nav > li .dropdown-menu {
@@ -444,16 +444,16 @@ Page Header
 }
 
 .page-header .page-header-menu .search-form {
-	background: #38414c;
+	background: #405;
 }
 
 .page-header .page-header-menu .search-form .input-group {
-	background: #38414c;
+	background: #405;
 }
 
 .page-header .page-header-menu .search-form .input-group .form-control {
-	color: #616d7d;
-	background: #38414c;
+	color: #ddd;
+	background: #405;
 }
 
 .page-header .page-header-menu .search-form .input-group .form-control::-moz-placeholder {
