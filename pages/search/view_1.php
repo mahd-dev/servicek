@@ -23,7 +23,7 @@
 	            
 	            <?php foreach ($rslt as $r) {?>
             	
-            	<a href="<?php echo $r["url"];?>" class="ajaxify">
+            	<a href="<?php echo $r["url"];?>" class="item_a ajaxify">
 		        	<div class="item portlet light bordered">
 						<div class="portlet-title">
 							<div class="caption">

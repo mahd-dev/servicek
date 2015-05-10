@@ -22,9 +22,16 @@
 	margin-bottom: 30px;
 }
 
+.item_a{
+	text-decoration: none;
+}
+
 .item{
 	text-decoration:none !important;
 	color:#000 !important;
+}
+.item:hover{
+	background-color: #eee;
 }
 
 /* news masnory responsive columns */
