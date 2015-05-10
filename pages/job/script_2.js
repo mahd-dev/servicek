@@ -9,7 +9,11 @@ page_script({
         $.fn.editable.defaults.onblur = 'submit';
         
         $('.editable').editable();
-
+        $('.categories-editable').editable({
+        	mode: "popup",
+        	select2: {tags: JSON.parse($('.categories-editable').attr("data-available"))}
+        });
+        
         $(".map-canvas").each(function (){
 			$(this).locationpicker({
 				location: {latitude: $(this).attr("data-latitude"), longitude: $(this).attr("data-longitude")},

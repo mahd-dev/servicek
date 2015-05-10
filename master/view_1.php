@@ -34,6 +34,10 @@
 	<link href="<?php echo cdn;?>/plugins/tag-it/css/jquery.tagit<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
 	<link href="<?php echo cdn;?>/plugins/tag-it/css/tagit.ui-zendesk<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
 
+	<link href="<?php echo cdn;?>/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css"/>
+	<link href="<?php echo cdn;?>/plugins/select2/select2<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css"/>
+	<link href="<?php echo cdn;?>/plugins/jquery-multi-select/css/multi-select<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css"/>
+
 	<link href="<?php echo cdn;?>/plugins/aspectratio/aspectratio<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
 
 	<link rel="shortcut icon" href="<?php echo cdn;?>/img/favicons/favicon.png" />
@@ -165,6 +169,10 @@
 
 	<script src='http://maps.google.com/maps/api/js?sensor=false&libraries=places' type="text/javascript"></script>
 	<script src="<?php echo cdn;?>/plugins/locationpicker/locationpicker.jquery<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
+
+	<script src="<?php echo cdn;?>/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+	<script src="<?php echo cdn;?>/plugins/select2/select2.min.js" type="text/javascript"></script>
+	<script src="<?php echo cdn;?>/plugins/jquery-multi-select/js/jquery.multi-select.js" type="text/javascript"></script>
 
 	<script src="<?php echo cdn;?>/plugins/jquery.pulsate.min.js" type="text/javascript"></script>
 

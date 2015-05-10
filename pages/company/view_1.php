@@ -24,6 +24,10 @@
 			<h5>A propos :</h5>
 			<?php echo $company->description;?>
 		</div>
+		<div class="portlet light">
+			<h5>Domaines d'activité :</h5>
+			<?php echo $categories;?>
+		</div>
 	</div>
 	<div class="profile-content col-md-9">
 		<div class="row">

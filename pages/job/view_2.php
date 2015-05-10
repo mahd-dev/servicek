@@ -38,10 +38,17 @@
 								</div>
 							</div>
 						</div>
+
 						<div class="portlet light">
 							<h5>A propos :</h5>
 							<a href="javascript:;" class="editable" data-name="description" data-type="textarea" ><?php echo $job->description;?></a>
 						</div>
+
+						<div class="portlet light">
+							<h5>Domaines d'activité :</h5>
+							<a class="categories-editable" data-name="categories" data-type="select2" data-available='<?php echo json_encode($available_categories);?>'><?php echo $categories;?></a>
+						</div>
+
 					</div>
 					<div class="profile-content col-md-9">
 						<div class="row">

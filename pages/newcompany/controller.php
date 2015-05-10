@@ -10,6 +10,7 @@
 		isset($_POST["name"]) &&
 		isset($_POST["slogan"]) &&
 		isset($_POST["description"]) &&
+		isset($_POST["categories"]) &&
 		isset($_POST["url"]) &&
 		isset($_POST["address"]) &&
 		isset($_POST["longitude"]) &&
@@ -38,6 +39,8 @@
 		$company->name=$_POST["name"];
 		$company->slogan=$_POST["slogan"];
 		$company->description=$_POST["description"];
+		foreach (explode(",", $_POST["categories"]) as $c) $company->assign_to_category(category::get_by_name($c));
+		
 		if(company::check_url($_POST["url"])) $company->url=$_POST["url"];
 
 		$seat->name="Siège social"; // to translate
@@ -60,7 +63,9 @@
 	// ...
 
 	// process required data
-
+	$available_categories = array();
+	foreach (category::get_all() as $c) $available_categories[] = $c->name;
+	
 	// select and display right view
 	// ...
 	include "view_1.php";

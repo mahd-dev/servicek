@@ -9,6 +9,11 @@ page_script({
         $.fn.editable.defaults.onblur = 'submit';
         
         $(".editable").editable({params:function (p) { p.for="company"; return p; }});
+        $('.categories-editable').editable({
+        	mode: "popup",
+        	params:function (p) { p.for="company"; return p; },
+        	select2: {tags: JSON.parse($('.categories-editable').attr("data-available"))}
+        });
 		$(".seat_editable").editable({params:function (p) { p.for="seat"; return p; }});
 		$(".product_editable").editable({params:function (p) { p.for="product"; return p; }});
 		$(".service_editable").editable({params:function (p) { p.for="service"; return p; }});

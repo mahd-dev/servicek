@@ -31,7 +31,6 @@ page_script({
 			}
 		});
 
-
 		// handling wizard
 		var form = $('#submit_form');
 		var error = $('.alert-danger.form-error', form);
@@ -101,6 +100,10 @@ page_script({
 				error.hide();
 			}
 
+		});
+		
+		$("[name=categories]", form).select2({
+			tags:JSON.parse($("[name=categories]", form).attr("data-available"))
 		});
 		
 		form.submit(function (e){

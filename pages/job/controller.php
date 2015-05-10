@@ -7,8 +7,11 @@
 
 	$geolocation=json_decode($job->geolocation);
 	$is_contracted = $job->is_contracted;
-	
-	if ($job->admin==$user || $user->is_master) {
+	$categories = array();
+	foreach ($job->categories as $c) $categories[] = $c->name;
+	$categories = implode(", ", $categories);
+
+	if ($job->admin==$user || ($user && $user->is_master)) {
 		if (isset($_POST['pk']) && isset($_POST['name']) && isset($_POST['value'])) {
 			switch ($_POST['name']) {
 				case 'description':
@@ -29,6 +32,11 @@
 				case 'email':
 					$job->email=$_POST['value'];
 					break;
+				case 'categories' :
+					foreach ($_POST['value'] as $value) {
+						$job->assign_to_category(category::get_by_name($value));
+					}
+				break;
 				default:
 					header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
 					break;
@@ -51,6 +59,9 @@
 			
 			die("success");
 		}
+
+		$available_categories = array();
+		foreach (category::get_all() as $c) $available_categories[] = $c->name;
 
 		include "view_2.php";
 	}elseif($is_contracted){

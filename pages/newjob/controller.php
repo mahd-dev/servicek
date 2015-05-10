@@ -7,6 +7,7 @@
 	if(
 		isset($_POST["name"]) &&
 		isset($_POST["description"]) &&
+		isset($_POST["categories"]) &&
 		isset($_POST["address"]) &&
 		isset($_POST["longitude"]) &&
 		isset($_POST["latitude"]) &&
@@ -30,6 +31,7 @@
 		
 		$job->name=$_POST["name"];
 		$job->description=$_POST["description"];
+		foreach (explode(",", $_POST["categories"]) as $c) $job->assign_to_category(category::get_by_name($c));
 		$job->address=$_POST["address"];
 		$job->geolocation=json_encode(array("longitude"=>$_POST["longitude"], "latitude"=>$_POST["latitude"]));
 		$job->tel=$_POST["tel"];
@@ -47,10 +49,9 @@
 	// definig SEO parameters
 	// ...
 
-	// select right view
-	
 	// process required data
-	// ...
+	$available_categories = array();
+	foreach (category::get_all() as $c) $available_categories[] = $c->name;
 
 	// display view
 	include "view_1.php";

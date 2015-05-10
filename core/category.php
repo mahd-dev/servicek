@@ -77,10 +77,31 @@
             }
         }
 
+        public static function get_by_name($name){
+            global $db;
+            $q=$db->query("select id from category where (name='".$db->real_escape_string($name)."')");
+            if($q->num_rows>0){
+                $r=$q->fetch_row();
+                return new category($r[0]);
+            }else{
+                $category = category::create();
+                $category->name = $name;
+                return $category;
+            };
+        }
+
+        public static function get_all(){
+            global $db;
+            $rslt=array();
+            $q=$db->query("select id from category");
+            while ($r=$q->fetch_row()) $rslt[] = new category($r[0]);
+            return $rslt;
+        }
+
         public static function create(){
             global $db;
             $db->query("insert into category values()");
-            return new user($db->insert_id);
+            return new category($db->insert_id);
         }
 
         public function delete(){

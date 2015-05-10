@@ -87,6 +87,10 @@ page_script({
 
 		});
 		
+		$("[name=categories]", form).select2({
+			tags:JSON.parse($("[name=categories]", form).attr("data-available"))
+		});
+		
 		form.submit(function (e){
 			if(!form.valid()) {
 				e.preventDefault();

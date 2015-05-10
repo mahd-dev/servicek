@@ -43,6 +43,16 @@
 								<span class="help-block">Expliquez brièvement le travail</span>
 							</div>
 						</div>
+
+						<div class="form-group">
+							<label class="control-label col-md-3">Domaines d'activité</label>
+							<div class="col-md-6">
+								<input type="hidden" name="categories" class="form-control select2" data-available='<?php echo json_encode($available_categories);?>'>
+								<span class="help-block">Sélectionnez ou ajouter vos domaines d'activité</span>
+							</div>
+						</div>
+
+
 						<div class="form-group">
 							<label class="control-label col-md-3">Lien électronique</label>
 							<div class="col-md-6">

@@ -8,6 +8,9 @@
 	$s=$company->seats[0];
 	$geolocation=json_decode($s->geolocation);
 	$is_contracted=$company->is_contracted;
+	$categories = array();
+	foreach ($company->categories as $c) $categories[] = $c->name;
+	$categories = implode(", ", $categories);
 
 	if ($user!=null && ($company->is_assigned_to_admin($user) || $user->is_master)) {
 		if (isset($_POST['for']) && isset($_POST['pk']) && isset($_POST['name']) && isset($_POST['value'])) {
@@ -17,6 +20,11 @@
 						case 'name': $company->name=$_POST['value']; break;
 						case 'slogan': $company->slogan=$_POST['value']; break;
 						case 'description': $company->description=$_POST['value']; break;
+						case 'categories' :
+							foreach ($_POST['value'] as $value) {
+								$company->assign_to_category(category::get_by_name($value));
+							}
+						break;
 					}
 					break;
 				case 'seat':
@@ -117,6 +125,9 @@
 			
 			die("success");
 		}
+
+		$available_categories = array();
+		foreach (category::get_all() as $c) $available_categories[] = $c->name;
 
 		include "view_2.php";
 	}elseif($is_contracted){
