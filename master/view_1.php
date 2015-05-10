@@ -117,12 +117,14 @@
 						<li>
 							<a href="<?php echo url_root;?>" class="ajaxify">Actualités</a>
 						</li>
+						<!--
 						<li>
 							<a href="<?php echo url_root;?>/about" class="ajaxify">A propos</a>
 						</li>
 						<li>
 							<a href="<?php echo url_root;?>/contact" class="ajaxify">Contact</a>
 						</li>
+						-->
 					</ul>
 				</div>
 			</div>
