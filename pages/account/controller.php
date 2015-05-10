@@ -14,7 +14,7 @@
 				$user->displayname=$_POST["value"];
 			break;
 			case "email":$user->email=$_POST["value"];break;
-			case "phone":$user->phone=$_POST["value"];break;
+			case "mobile":$user->mobile=$_POST["value"];break;
 		}
 		die("success");
 	}
