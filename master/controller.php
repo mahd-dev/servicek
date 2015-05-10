@@ -28,7 +28,7 @@
 	if($ogp->getImage()==NULL){
         $image = new OpenGraphProtocolImage();
         $image->setURL( cdn."/img/main_ref.png" );
-        //$image->setSecureURL( cdn."/img/main_ref.png" );
+        $image->setSecureURL( cdn."/img/main_ref.png" );
         $image->setType( 'image/png' );
         $image->setWidth( 300 );
         $image->setHeight( 83 );
