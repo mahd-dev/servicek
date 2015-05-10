@@ -30,8 +30,8 @@
         $image->setURL( cdn."/img/main_ref.png" );
         $image->setSecureURL( cdn."/img/main_ref.png" );
         $image->setType( 'image/png' );
-        $image->setWidth( 300 );
-        $image->setHeight( 300 );
+        $image->setWidth( 500 );
+        $image->setHeight( 500 );
 
         $ogp->addImage($image);
     }
