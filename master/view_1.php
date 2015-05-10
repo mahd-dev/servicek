@@ -12,8 +12,6 @@
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 	
-	<meta name="google-site-verification" content="NVsG7-kBjFeuZdzK73TKkEs_APJesW8Kk5v9KeLcvVs" />
-	
 	<?php echo rtrim( $meta, PHP_EOL );?>
 
     <meta name="twitter:card" content="PLACEHOLDER">
