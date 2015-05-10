@@ -57,7 +57,7 @@
 			$payment=gf::pay($_POST["method"], $_POST["credit_card_number"], $_POST["credit_card_password"], $offers[$_POST["offer"]]["amount"]);
 			if($payment["status"]!="success") die(json_encode($payment));
 		}else{
-			$agent=agent::login_by_code($_POST["agent_code"], gf::getClientIP());
+			$agent=user::agent_code($_POST["agent_code"], gf::getClientIP());
 			if(is_array($agent)) {
 				switch ($agent["status"]) {
 					case "waiting_restriction_time":
@@ -79,7 +79,8 @@
 		
 		$contract->payment_from=$_POST["method"];
 		if(isset($payment)) $contract->payment_recipt=$payment["params"]["payment_recipt"];
-
+		else $contract->id_agent = $agent->id;
+		
 		$contract->type=$_POST["offer"];
 		$contract->amount=$offers[$_POST["offer"]]["amount"];
 		$contract->duration=$offers[$_POST["offer"]]["duration"];

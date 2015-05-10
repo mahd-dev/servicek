@@ -12,6 +12,8 @@
 	</div>
 </div>
 
+<?php $ia = $user->is_agent;?>
+
 <div class="row">
 	<div class="col-md-12">
 		<div class="row">
@@ -22,13 +24,15 @@
 					</div>
 					<div class="profile-usermenu">
 						<ul class="nav">
+							<?php if(!ia){?>
 							<li class="active">
 								<a href="#companies_tab" data-toggle="tab" aria-expanded="true">
 									<i class="icon-badge"></i>
 									Pages administées
 								</a>
 							</li>
-							<li>
+							<?php }?>
+							<li<?php if(ia){?> class="active"<?php }?>>
 								<a href="#settings" data-toggle="tab" aria-expanded="false">
 									<i class="icon-settings"></i>
 									Paramètres
@@ -40,6 +44,8 @@
 			</div>
 			<div class="profile-content col-md-9">
 				<div class="tab-content">
+
+					<?php if(!ia){?>
 					<div class="tab-pane active" id="companies_tab">
 						<?php if($num_pages==0){?>
 
@@ -78,7 +84,9 @@
 						<?php }?>
 
 					</div>
-					<div class="tab-pane" id="settings">
+					<?php }?>
+
+					<div class="tab-pane<?php if(ia){?> active<?php }?>" id="settings">
 						<div class="portlet light">
 							<div class="portlet-title tabbable-line">
 								<ul class="nav nav-tabs pull-left">

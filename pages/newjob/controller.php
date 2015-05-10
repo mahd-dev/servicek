@@ -1,5 +1,5 @@
 <?php
-	if($user==null){ // must be connected to access account page
+	if($user==null || $user->is_agent){
 		include __DIR__."/../404/controller.php";
 		goto skip_this_page;
 	}

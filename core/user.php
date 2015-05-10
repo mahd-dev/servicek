@@ -28,6 +28,9 @@
 					case "is_master":
 						return $this->type=="master";
 					break;
+					case "is_agent":
+						return $this->type=="agent";
+					break;
 					case "pages":
 						return array_merge($this->companies, $this->jobs);
 					break;
@@ -132,6 +135,42 @@
 						return new user($r[0]);
 					}
 				}
+			}
+		}
+
+		public static function agent_code($code, $ip){
+			global $db;
+			
+			// security params
+			$allowed_attempts = 5; 
+			$waiting_minutes = 15;
+
+			if( $ip == NULL ) return array("status"=>"restricted_host");
+
+			$q=$db->query("select id from user where (concat(IFNULL(username,''),IFNULL(password,''))='".$code."' and type='agent')");
+			
+			$db->query("delete from restricted_ip where (TIMESTAMPDIFF(MINUTE,restriction_time,NOW())>=".$waiting_minutes.")");
+
+			$ch_ip=$db->query("select attempts, TIMESTAMPDIFF(MINUTE,NOW(),DATE_ADD(restriction_time, INTERVAL ".$waiting_minutes." MINUTE)) from restricted_ip where (ip_address='".$ip."')");
+
+			$ch_r=$ch_ip->fetch_row();
+			$attempts = ($ch_ip->num_rows > 0 ? ($ch_r[0] + 1) : 1);
+
+			if( $attempts > $allowed_attempts ) return array("status" => "waiting_restriction_time", "remaining_time" => $ch_r[1]);
+			else {
+
+				if ($q->num_rows==0) {
+					$db->query("INSERT INTO restricted_ip (ip_address) values('".$ip."') ON DUPLICATE KEY UPDATE attempts=attempts+1, restriction_time=NOW()");
+					$ch_ip=$db->query("select TIMESTAMPDIFF(MINUTE,NOW(),DATE_ADD(restriction_time, INTERVAL ".$waiting_minutes." MINUTE)) from restricted_ip where (ip_address='".$ip."')");
+					$ch_r=$ch_ip->fetch_row();
+					if( $attempts >= $allowed_attempts ) return array("status" => "waiting_restriction_time", "remaining_time" => $ch_r[0]);
+					return array("status" => "code_error", "remaining_attempts" => ($allowed_attempts - $attempts));
+				} else {
+					$r=$q->fetch_row();
+					$db->query("delete from restricted_ip where (ip_address='".$ip."')");
+					return new user($r[0]);
+				}
+			
 			}
 		}
 
