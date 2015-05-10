@@ -4,7 +4,14 @@
 
 	// autoload required core classes
 	function __autoload($class_name) {
-		include_once 'core/'.$class_name.'.php';
+		switch ($class_name) {
+			case 'OpenGraphProtocol':
+				include_once 'core/ogp/open-graph-protocol.php';
+				break;
+			default:
+				include_once 'core/'.$class_name.'.php';
+				break;
+		}
 	}
 
 	define("debug",TRUE);

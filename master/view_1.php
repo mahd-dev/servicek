@@ -11,8 +11,19 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-	<meta content="" name="description" />
-	<meta content="" name="author" />
+	
+	<?php echo rtrim( $meta, PHP_EOL );?>
+
+    <meta name="twitter:card" content="PLACEHOLDER">
+    <meta name="twitter:title" content="<?php echo (isset($ref["twitter:title"])?$ref["twitter:title"]:"Servicek.net")?>">
+    <meta name="twitter:description" content="<?php echo (isset($ref["twitter:description"])?$ref["twitter:description"]:$seo_description)?>">
+    <meta name="twitter:image:src" content="<?php echo (isset($ref["twitter:image:src"])?$ref["twitter:image:src"]:cdn."/img/main_ref.png")?>">
+    <meta name="twitter:domain" content="servicek.net">
+
+    <meta name="description" content="<?php echo $seo_description;?>">
+    <meta name="author" content="Société Tunisienne des Services" />
+    <meta name="og:updated_time" content="<?php echo time();?>">
+
 
 	<script src="<?php echo cdn;?>/plugins/pace/pace.min.js"></script>
 	<link href="<?php echo cdn;?>/plugins/pace/themes/pace-theme-minimal<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css" rel="stylesheet" />

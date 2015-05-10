@@ -65,6 +65,37 @@
 
 		include "view_2.php";
 	}elseif($is_contracted){
+
+		// defining seo parameters
+		if(isset($ogp)){
+	        $ogp->setTitle( $job->name );
+	        $ogp->setDescription( $job->description );
+	        $ogp->setURL( url_root."/".$job->url );
+
+	        $ogp->setType( 'article' );
+
+	        $seo_img = $job->image;
+	        if($seo_img){
+	            $image = new OpenGraphProtocolImage();
+	            $image->setURL( $paths->job_image->url.$seo_img );
+	            $image->setSecureURL( $paths->job_image->url.$seo_img );
+	            $image->setType( 'image/jpeg' );
+	            $ogp->addImage($image);
+
+	            $ref["twitter:image:src"] = $paths->job_image->url.$seo_img;
+	        }
+	        
+	        $article = new OpenGraphProtocolArticle();
+	        $article->setPublishedTime( date(DATE_ISO8601, strtotime($job->creation_time)) );
+	        $article->setModifiedTime( new DateTime( 'now', new DateTimeZone( 'Africa/Tunis' ) ) );
+	        $article->setSection( 'Job' );
+	        foreach(array_filter(explode(",",$categories)) as $c) $article->addTag( $c );
+
+	        $ref["twitter:title"=$job->name;
+            $ref["twitter:description"=$job->description;
+	        
+	    }
+
 		include "view_1.php";
 	}else{
 		include __DIR__."/../404/controller.php";goto skip_this_page;
