@@ -27,9 +27,9 @@
 
 		case "":
 			$req_page = "pages/home/controller.php";break;
-		/*
 		case "about":
 			$req_page = "pages/about/controller.php";break;
+		/*
 		case "contact":
 			$req_page = "pages/contact/controller.php";break;
 		*/
