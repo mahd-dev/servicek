@@ -22,7 +22,7 @@
 
 	// connecting to database
 	include "db_config.php";
-	$db = new mysqli($db_server, $db_user, $db_password, $db_name) or die (mysqli_error);
+	$db = mysqli_connect($db_server, $db_user, $db_password, $db_name) or die (mysqli_error);
 
 	// check login
 	$user = (isset($_SESSION["user"]) ? unserialize($_SESSION["user"]) : null);
