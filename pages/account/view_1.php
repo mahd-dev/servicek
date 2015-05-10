@@ -24,7 +24,7 @@
 					</div>
 					<div class="profile-usermenu">
 						<ul class="nav">
-							<?php if(!ia){?>
+							<?php if(!$ia){?>
 							<li class="active">
 								<a href="#companies_tab" data-toggle="tab" aria-expanded="true">
 									<i class="icon-badge"></i>
@@ -32,7 +32,7 @@
 								</a>
 							</li>
 							<?php }?>
-							<li<?php if(ia){?> class="active"<?php }?>>
+							<li<?php if($ia){?> class="active"<?php }?>>
 								<a href="#settings" data-toggle="tab" aria-expanded="false">
 									<i class="icon-settings"></i>
 									Paramètres
@@ -45,7 +45,7 @@
 			<div class="profile-content col-md-9">
 				<div class="tab-content">
 
-					<?php if(!ia){?>
+					<?php if(!$ia){?>
 					<div class="tab-pane active" id="companies_tab">
 						<?php if($num_pages==0){?>
 
@@ -86,7 +86,7 @@
 					</div>
 					<?php }?>
 
-					<div class="tab-pane<?php if(ia){?> active<?php }?>" id="settings">
+					<div class="tab-pane<?php if($ia){?> active<?php }?>" id="settings">
 						<div class="portlet light">
 							<div class="portlet-title tabbable-line">
 								<ul class="nav nav-tabs pull-left">
