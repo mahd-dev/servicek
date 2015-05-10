@@ -159,10 +159,35 @@
 							
 							</div>
 							<div class="tab-pane row" id="products_list">
-							<?php foreach ($company->products as $p) {?>
-								<div class="col-sm-6 col-md-4 product" data-id="<?php echo $p->id; ?>">
+								<?php foreach ($company->products as $p) {?>
+									<div class="col-sm-6 col-md-4 product" data-id="<?php echo $p->id; ?>">
+										<div class="thumbnail">
+											
+											<div class="btn-group pull-right">
+												<button class="btn btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-angle-down"></i></button>
+												<ul class="dropdown-menu" role="menu">
+													<li><a class="delete"><i class="icon-close"></i> Supprimer</a></li>
+												</ul>
+											</div>
+
+											<div class="product_image fileinput fileinput-new" data-provides="fileinput">
+												<a class="fileinput-preview thumbnail" data-trigger="fileinput">
+													<img src="<?php $image=$p->image; if($image) echo $paths->product_image->url.$image; else {?>http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
+												</a>
+												<form class="hide"><input type="file" name="image"></form>
+											</div>
+
+											<div class="caption">
+												<h3><a class="product_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
+												<p><a class="product_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->description; ?></a></p>
+												<p><a class="product_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a> DNT</p>
+											</div>
+										</div>
+									</div>
+								<?php }?>
+								<div class="col-sm-6 col-md-4 product" data-id="" id="new_product_template" style="display:none;">
 									<div class="thumbnail">
-										
+
 										<div class="btn-group pull-right">
 											<button class="btn btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-angle-down"></i></button>
 											<ul class="dropdown-menu" role="menu">
@@ -172,43 +197,18 @@
 
 										<div class="product_image fileinput fileinput-new" data-provides="fileinput">
 											<a class="fileinput-preview thumbnail" data-trigger="fileinput">
-												<img src="<?php $image=$p->image; if($image) echo $paths->product_image->url.$image; else {?>http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
+												<img src="http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image" alt="image"/>
 											</a>
 											<form class="hide"><input type="file" name="image"></form>
 										</div>
 
 										<div class="caption">
-											<h3><a class="product_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
-											<p><a class="product_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->description; ?></a></p>
-											<p><a class="product_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a> DNT</p>
+											<h3><a class="product_editable name" data-name="name" data-pk="" data-type="text" ></a></h3>
+											<p><a class="product_editable description" data-name="description" data-pk="" data-type="text" ></a></p>
+											<p><a class="product_editable price" data-name="price" data-pk="" data-type="number" ></a> DNT</p>
 										</div>
 									</div>
 								</div>
-							<?php }?>
-							<div class="col-sm-6 col-md-4 product" data-id="" id="new_product_template" style="display:none;">
-								<div class="thumbnail">
-
-									<div class="btn-group pull-right">
-										<button class="btn btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-angle-down"></i></button>
-										<ul class="dropdown-menu" role="menu">
-											<li><a class="delete"><i class="icon-close"></i> Supprimer</a></li>
-										</ul>
-									</div>
-
-									<div class="product_image fileinput fileinput-new" data-provides="fileinput">
-										<a class="fileinput-preview thumbnail" data-trigger="fileinput">
-											<img src="http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image" alt="image"/>
-										</a>
-										<form class="hide"><input type="file" name="image"></form>
-									</div>
-
-									<div class="caption">
-										<h3><a class="product_editable name" data-name="name" data-pk="" data-type="text" ></a></h3>
-										<p><a class="product_editable description" data-name="description" data-pk="" data-type="text" ></a></p>
-										<p><a class="product_editable price" data-name="price" data-pk="" data-type="number" ></a> DNT</p>
-									</div>
-								</div>
-							</div>
 							</div>
 						</div>
 					</div>

@@ -54,7 +54,7 @@ page_script({
 								var new_element = $("#new_service_template").clone();
 								
 								new_element.attr("data-id", p.id);
-								$(".service_editable", new_element).editable({params:function (p) { p.for="service"; return p; }});
+								$(".service_editable", new_element).attr("data-pk", p.id).editable({params:function (p) { p.for="service"; return p; }});
 								$(".delete", new_element).click(function (e) {service_delete(e, this);});
 								$("input[type=file]", new_element).change(function (e) {service_image_change(e, this);});
 
@@ -91,7 +91,7 @@ page_script({
 								var new_element = $("#new_product_template").clone();
 								
 								new_element.attr("data-id", p.id);
-								$(".product_editable", new_element).editable({params:function (p) { p.for="product"; return p; }});
+								$(".product_editable", new_element).attr("data-pk", p.id).editable({params:function (p) { p.for="product"; return p; }});
 								$(".delete", new_element).click(function (e) {product_delete(e, this);});
 								$("input[type=file]", new_element).change(function (e) {product_image_change(e, this);});
 
