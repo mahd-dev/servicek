@@ -13,70 +13,39 @@ page_script({
 		$(".product_editable").editable({params:function (p) { p.for="product"; return p; }});
 		$(".service_editable").editable({params:function (p) { p.for="service"; return p; }});
 
-		$(".map-canvas").each(function () {
-        	var myLatlng = new google.maps.LatLng($(this).attr("data-latitude"), $(this).attr("data-longitude"));
-			var mapOptions = {
+		$(".map-canvas").each(function (){
+			$(this).locationpicker({
+				location: {latitude: $(this).attr("data-latitude"), longitude: $(this).attr("data-longitude")},
+				radius: 0,
+				zoom: 13,
+				enableAutocomplete: true,
 				scrollwheel: false,
-			  	zoom: 13,
-			  	center: myLatlng
-			}
-			var map = new google.maps.Map($(this)[0], mapOptions);
-			var marker = new google.maps.Marker({
-			    position: myLatlng
-			});
-			marker.setMap(map);
-        });
-
-		$("#new_product_modal form").submit(function (e) {
-			e.preventDefault();
-			var new_product_form = $(this);
-			$.ajax({
-				url: location.href,
-				type: "POST",
-				data: $(new_product_form).serialize(),
-				success: function (rslt) {
-					try{
-						var p = JSON.parse(rslt);
-						switch(p.status){
-							case "success":
-								var new_element = $("#new_product_template").clone();
-								
-								new_element.attr("data-id", p.id);
-								$(".name", new_element).text($("[name='product_name']", new_product_form).val()).attr("data-pk", p.id);
-								$(".description", new_element).text($("[name='product_description']", new_product_form).val()).attr("data-pk", p.id);
-								$(".price", new_element).text($("[name='product_price']", new_product_form).val()).attr("data-pk", p.id);
-								$(".product_editable", new_element).editable({params:function (p) { p.for="product"; return p; }});
-
-								$("#new_product_modal").modal('hide');
-								new_product_form[0].reset();
-
-								new_element.prependTo("#products_list").show();
-
-								$("[href='#products_list']").click();
-
-								new_element.pulsate({color: "#399bc3",repeat: false});
-							break;
-							default:
+				onchanged: function(currentLocation, radius, isMarkerDropped) {
+					$.ajax({
+						url: location.href,
+						type: "POST",
+						data: {geolocation:$(this).attr("data-pk"), latitude:currentLocation.latitude, longitude:currentLocation.longitude},
+						success: function (rslt) {
+							try{
+								var p = JSON.parse(rslt);
+								if(p.status!="success") console.log(rslt);
+							}catch(ex){
 								console.log(rslt);
-							break;
+							}
+						},
+						error: function (rslt) {
+							console.log(rslt);
 						}
-					}catch(ex){
-						console.log(rslt);
-					}
-				},
-				error: function (rslt) {
-					console.log(rslt);
+					});
 				}
 			});
 		});
 
-		$("#new_service_modal form").submit(function (e) {
-			e.preventDefault();
-			var new_service_form = $(this);
+		$(".new_service").click(function (e) {
 			$.ajax({
 				url: location.href,
 				type: "POST",
-				data: $(new_service_form).serialize(),
+				data: {new_service:true},
 				success: function (rslt) {
 					try{
 						var p = JSON.parse(rslt);
@@ -85,19 +54,15 @@ page_script({
 								var new_element = $("#new_service_template").clone();
 								
 								new_element.attr("data-id", p.id);
-								$(".name", new_element).text($("[name='service_name']", new_service_form).val()).attr("data-pk", p.id);
-								$(".description", new_element).text($("[name='service_description']", new_service_form).val()).attr("data-pk", p.id);
-								$(".price", new_element).text($("[name='service_price']", new_service_form).val()).attr("data-pk", p.id);
 								$(".service_editable", new_element).editable({params:function (p) { p.for="service"; return p; }});
+								$(".delete", new_element).click(function (e) {service_delete(e, this);});
+								$("input[type=file]", new_element).change(function (e) {service_image_change(e, this);});
 
-								$("#new_service_modal").modal('hide');
-								new_service_form[0].reset();
-
-								new_element.prependTo("#services_list").removeAttr("id").show();
+								new_element.prependTo("#services_list").show();
 
 								$("[href='#services_list']").click();
-
-								new_element.pulsate({color: "#399bc3",repeat: false});
+								app.scrollTo(new_element, -200);
+								new_element.pulsate({color: "#399bc3",repeat: 2});
 							break;
 							default:
 								console.log(rslt);
@@ -112,11 +77,47 @@ page_script({
 				}
 			});
 		});
-		
 
-		$(".product .delete").live("click", function (e) {
+		$(".new_product").click(function (e) {
+			$.ajax({
+				url: location.href,
+				type: "POST",
+				data: {new_product:true},
+				success: function (rslt) {
+					try{
+						var p = JSON.parse(rslt);
+						switch(p.status){
+							case "success":
+								var new_element = $("#new_product_template").clone();
+								
+								new_element.attr("data-id", p.id);
+								$(".product_editable", new_element).editable({params:function (p) { p.for="product"; return p; }});
+								$(".delete", new_element).click(function (e) {product_delete(e, this);});
+								$("input[type=file]", new_element).change(function (e) {product_image_change(e, this);});
+
+								new_element.prependTo("#products_list").show();
+
+								$("[href='#products_list']").click();
+								app.scrollTo(new_element, -200);
+								new_element.pulsate({color: "#399bc3",repeat: 2});
+							break;
+							default:
+								console.log(rslt);
+							break;
+						}
+					}catch(ex){
+						console.log(rslt);
+					}
+				},
+				error: function (rslt) {
+					console.log(rslt);
+				}
+			});
+		});
+
+		var product_delete = function (e, btn) {
 			e.preventDefault();
-			var container = $(this).parents(".product");
+			var container = $(btn).parents(".product");
 			$.ajax({
 				url: location.href,
 				type: "POST",
@@ -140,11 +141,11 @@ page_script({
 					console.log(rslt);
 				}
 			});
-		});
+		};
 
-		$(".service .delete").live("click", function (e) {
+		var service_delete = function (e, btn) {
 			e.preventDefault();
-			var container = $(this).parents(".service");
+			var container = $(btn).parents(".service");
 			$.ajax({
 				url: location.href,
 				type: "POST",
@@ -168,7 +169,57 @@ page_script({
 					console.log(rslt);
 				}
 			});
-		});
+		};
+
+		$(".service .delete").click(function (e) {service_delete(e, this);});
+		$(".product .delete").click(function (e) {product_delete(e, this);});
+
+		var product_image_change = function (e, input) {
+			if(input.files.length == 0) return;
+        	var form = $(".product form");
+        	var fd = new FormData(form[0]);
+            fd.append("file", "product_image");
+            fd.append("pk", $(input).parents(".product").attr("data-id"));
+            $.ajax({
+				url: location.href,
+				type: "POST",
+				data: fd,
+				enctype: 'multipart/form-data',
+				processData: false,
+				contentType: false,
+				success: function (rslt) {
+					if(rslt!="success") console.log(rslt);
+				},
+				error: function (rslt) {
+					console.log(rslt);
+				}
+            });
+		};
+
+		var service_image_change = function (e, input) {
+			if(input.files.length == 0) return;
+        	var form = $(".service form");
+        	var fd = new FormData(form[0]);
+            fd.append("file", "service_image");
+            fd.append("pk", $(input).parents(".service").attr("data-id"));
+            $.ajax({
+				url: location.href,
+				type: "POST",
+				data: fd,
+				enctype: 'multipart/form-data',
+				processData: false,
+				contentType: false,
+				success: function (rslt) {
+					if(rslt!="success") console.log(rslt);
+				},
+				error: function (rslt) {
+					console.log(rslt);
+				}
+            });
+		};
+
+		$(".service input[type=file]").change(function (e) {service_image_change(e, this);});
+		$(".product input[type=file]").change(function (e) {product_image_change(e, this);});
 
 		$(".logo input[type=file]").change(function (e) {
         	if(this.files.length == 0) return;

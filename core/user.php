@@ -25,6 +25,9 @@
 					case "id":
 						return $this->id;
 					break;
+					case "is_master":
+						return $this->type=="master";
+					break;
 					case "pages":
 						return array_merge($this->companies, $this->jobs);
 					break;

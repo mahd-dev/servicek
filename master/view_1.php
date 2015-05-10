@@ -124,7 +124,7 @@
 	<div class="page-footer">
 		<div class="container">
 			<?php echo date('Y');?> &copy; <a href="<?php echo url_root;?>/about" class="ajaxify">Société tunisienne des services</a>, Tout droits réservés.
-			<div class="pull-right">Site développé par <a href="http://mahd.tn" target="_blank">Ste mahd</a></div>
+			<div class="pull-right" style="margin-right:40px;">Developed with Love <i class="icon-heart" style="font-size:80%;"></i>, by <a href="http://mahd.tn" target="_blank">mahd</a></div>
 		</div>
 	</div>
 	<div class="scroll-to-top">

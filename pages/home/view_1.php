@@ -24,13 +24,15 @@
 	        	<div class="item portlet light bordered">
 					<div class="portlet-title">
 						<div class="caption">
-							<?php if($r["type"]=="company"){?><i class="icon-flag font-grey-gallery"></i><?php }?>
 							<span class="caption-subject bold font-grey-gallery uppercase"><?php echo $r["title"];?></span>
 							<span class="caption-helper"><?php echo $r["sub_title"];?></span>
 						</div>
 					</div>
 					<div class="portlet-body">
-						<?php echo $r["content"];?>
+						<p>
+							<?php if($r["image_url"]){?><img class="image" src="<?php echo $r["image_url"];?>" alt="image"/><?php }?>
+							<?php echo $r["content"];?>
+						</p>
 					</div>
 				</div>
 			</a>

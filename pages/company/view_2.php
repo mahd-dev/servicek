@@ -21,12 +21,11 @@
 	<div class="profile-sidebar col-md-3">
 		<div class="portlet light profile-sidebar-portlet">
 			
-		<div class="logo fileinput col-xs-offset-4 col-xs-4 col-md-offset-0 col-md-12 fileinput-new" data-provides="fileinput">
+			<div class="logo fileinput col-sm-offset-3 col-sm-6 col-md-offset-0 col-md-12 fileinput-new" data-provides="fileinput">
 				<a class="fileinput-preview thumbnail" data-trigger="fileinput">
-					<img src="<?php $logo=$company->logo; if($logo) echo $paths->company_logo->url.$logo; else {?>http://www.placehold.it/400x300/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt=""/>
+					<img src="<?php $logo=$company->logo; if($logo) echo $paths->company_logo->url.$logo; else {?>http://www.placehold.it/400x300/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="logo"/>
 				</a>
-				<a class="btn-file pull-right">
-				<form><input type="file" name="logo"></a></form>
+				<form class="hide"><input type="file" name="logo"></form>
 			</div>
 
 			<div class="profile-usertitle">
@@ -59,7 +58,7 @@
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab_1_1">
 								<p class="margin-bottom-30">
-									<strong><h5>Adresse :</h5></strong> <a class="" data-pk="<?php echo $s->id;?>" data-name="address" data-type="text" ><?php echo $s->address; ?></a>
+									<strong><h5>Adresse :</h5></strong> <a class="seat_editable" data-pk="<?php echo $s->id;?>" data-name="address" data-type="text" ><?php echo $s->address; ?></a>
 								</p>
 								<p class="margin-bottom-30">
 									<strong><h5>Téléphone :</h5></strong> <a class="seat_editable" data-pk="<?php echo $s->id;?>" data-name="tel" data-type="text" ><?php echo $s->tel; ?></a>
@@ -85,7 +84,7 @@
 					</div>
 					<div class="portlet-body">
 						<div class="tab-content aspectratio-container aspect-4-3 fit-width">
-							<div class="map-canvas aspectratio-content" data-longitude="<?php echo $geolocation->longitude;?>" data-latitude="<?php echo $geolocation->latitude;?>"></div>
+							<div class="map-canvas aspectratio-content" data-pk="<?php echo $s->id;?>" data-longitude="<?php echo $geolocation->longitude;?>" data-latitude="<?php echo $geolocation->latitude;?>"></div>
 						</div>
 					</div>
 				</div>
@@ -100,8 +99,8 @@
 							<li><a href="#products_list" data-toggle="tab" aria-expanded="false">Produits</a></li>
 						</ul>
 						<div class="btn-group btn-group-solid pull-right">
-							<a type="button" class="btn btn-default" data-toggle="modal" href="#new_service_modal">Ajouter un Service</a>
-							<a type="button" class="btn btn-default" data-toggle="modal" href="#new_product_modal">Ajouter un Produit</a>&nbsp; &nbsp;
+							<button class="btn btn-default new_service">Ajouter un Service</button>
+							<button class="btn btn-default new_product">Ajouter un Produit</button>
 						</div>
 					</div>
 					<div class="portlet-body">
@@ -118,7 +117,13 @@
 											</ul>
 										</div>
 
-										<!--<img src="" alt="100%x200" style="width: 100%;  display: block;">-->
+										<div class="service_image fileinput fileinput-new" data-provides="fileinput">
+											<a class="fileinput-preview thumbnail" data-trigger="fileinput">
+												<img src="<?php $image=$p->image; if($image) echo $paths->service_image->url.$image; else {?>http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
+											</a>
+											<form class="hide"><input type="file" name="image"></form>
+										</div>
+
 										<div class="caption">
 											<h3><a class="service_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
 											<p><a class="service_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->description; ?></a></p>
@@ -137,8 +142,13 @@
 										</ul>
 									</div>
 
+									<div class="service_image fileinput fileinput-new" data-provides="fileinput">
+										<a class="fileinput-preview thumbnail" data-trigger="fileinput">
+											<img src="http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image" alt="image"/>
+										</a>
+										<form class="hide"><input type="file" name="image"></form>
+									</div>
 
-									<!--<img src="" alt="100%x200" style="width: 100%;  display: block;">-->
 									<div class="caption">
 										<h3><a class="service_editable name" data-name="name" data-pk="" data-type="text" ></a></h3>
 										<p><a class="service_editable description" data-name="description" data-pk="" data-type="text" ></a></p>
@@ -160,7 +170,13 @@
 											</ul>
 										</div>
 
-										<!--<img src="" alt="100%x200" style="width: 100%;  display: block;">-->
+										<div class="product_image fileinput fileinput-new" data-provides="fileinput">
+											<a class="fileinput-preview thumbnail" data-trigger="fileinput">
+												<img src="<?php $image=$p->image; if($image) echo $paths->product_image->url.$image; else {?>http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
+											</a>
+											<form class="hide"><input type="file" name="image"></form>
+										</div>
+
 										<div class="caption">
 											<h3><a class="product_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
 											<p><a class="product_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->description; ?></a></p>
@@ -179,7 +195,13 @@
 										</ul>
 									</div>
 
-									<!--<img src="" alt="100%x200" style="width: 100%;  display: block;">-->
+									<div class="product_image fileinput fileinput-new" data-provides="fileinput">
+										<a class="fileinput-preview thumbnail" data-trigger="fileinput">
+											<img src="http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image" alt="image"/>
+										</a>
+										<form class="hide"><input type="file" name="image"></form>
+									</div>
+
 									<div class="caption">
 										<h3><a class="product_editable name" data-name="name" data-pk="" data-type="text" ></a></h3>
 										<p><a class="product_editable description" data-name="description" data-pk="" data-type="text" ></a></p>
@@ -192,88 +214,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-</div>
-
-<div class="modal fade" id="new_service_modal" role="basic" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<form>
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-					<h4 class="modal-title">Ajouter un Service</h4>
-				</div>
-				<div class="modal-body">
-					<div class="form-body">
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Nom</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" name="service_name" placeholder="Nom" required>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-2 control-label" placeholder="Description">Description</label>
-							<div class="col-sm-10">
-								<textarea class="form-control" name="service_description" rows="3" style="width:100%;max-width:100%;" required></textarea>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-2 control-label">Prix</label>
-							<div class="col-sm-10">
-								<div class="input-group ">
-									<input type="text" class="form-control" name="service_price" placeholder="Prix" required>
-									<div class="input-group-addon">DNT</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<a class="btn default" data-dismiss="modal">Fermer</a>
-					<button type="submit" class="btn blue">Ajouter</button>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-
-<div class="modal fade" id="new_product_modal" role="basic" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<form>
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-					<h4 class="modal-title">Ajouter un Produit</h4>
-				</div>
-				<div class="modal-body">
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Nom</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" name="product_name" placeholder="Nom" required>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label" placeholder="Description">Description</label>
-						<div class="col-sm-10">
-							<textarea class="form-control" name="product_description" rows="3" style="width:100%;max-width:100%;" required></textarea>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Prix</label>
-						<div class="col-sm-10">
-							<div class="input-group ">
-								<input type="text" class="form-control" name="product_price" placeholder="Prix" required>
-								<div class="input-group-addon">DNT</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<a class="btn default" data-dismiss="modal">Fermer</a>
-					<button type="submit" class="btn blue">Ajouter</button>
-				</div>
-			</form>
 		</div>
 	</div>
 </div>

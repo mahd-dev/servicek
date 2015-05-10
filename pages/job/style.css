@@ -1,14 +1,12 @@
 /** view_1 **/
 /** view_1 **/
 
-.logo{
+.image{
 	float: none;
 }
-.logo .fileinput-preview{
-	cursor: pointer;
-	min-height: 100px;
+.public_image{
+	width: 100%;
 }
-
 html,
 body,
 #map-canvas {
@@ -39,6 +37,7 @@ margin-bottom: 10px!important;
 
 .profile-usertitle {
 	text-align: center;
+	margin-bottom: 0px;
 }
 
 .profile-usertitle-name {

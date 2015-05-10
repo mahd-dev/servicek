@@ -16,7 +16,7 @@
 					"title"=>$e->name,
 					"sub_title"=>$e->slogan,
 					"content"=>$e->description,
-					"image_url"=>$paths->company_logo->url.$e->logo,
+					"image_url"=>($e->logo ? $paths->company_logo->url.$e->logo : null),
 					"url"=>url_root."/".$e->url
 					);
 				break;
@@ -26,7 +26,7 @@
 					"title"=>$e->name,
 					"sub_title"=>"",
 					"content"=>$e->description,
-					"image_url"=>$paths->job_image->url.$e->image,
+					"image_url"=>($e->image ? $paths->job_image->url.$e->image : null),
 					"url"=>url_root."/job/".$e->id
 					);
 				break;
@@ -37,7 +37,7 @@
 					"title"=>$e->name,
 					"sub_title"=>$pc->name,
 					"content"=>$e->description,
-					"image_url"=>$paths->product_image->url.$e->image,
+					"image_url"=>($e->image ? $paths->product_image->url.$e->image : null),
 					"url"=>url_root."/".$pc->url
 					);
 				break;
@@ -48,7 +48,7 @@
 					"title"=>$e->name,
 					"sub_title"=>$sc->name,
 					"content"=>$e->description,
-					"image_url"=>$paths->service_image->url.$e->image,
+					"image_url"=>($e->image ? $paths->service_image->url.$e->image : null),
 					"url"=>url_root."/".$sc->url
 					);
 				break;

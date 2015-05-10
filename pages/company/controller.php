@@ -9,7 +9,7 @@
 	$geolocation=json_decode($s->geolocation);
 	$is_contracted=$company->is_contracted;
 
-	if ($user!=null && $company->is_assigned_to_admin($user)) {
+	if ($user!=null && ($company->is_assigned_to_admin($user) || $user->is_master)) {
 		if (isset($_POST['for']) && isset($_POST['pk']) && isset($_POST['name']) && isset($_POST['value'])) {
 			switch ($_POST['for']) {
 				case 'company':
@@ -47,24 +47,19 @@
 					break;
 			}
 			die();
-		}elseif (isset($_POST['service_name']) && isset($_POST['service_description']) && isset($_POST['service_price'])) {
+		}elseif(isset($_POST["geolocation"]) && isset($_POST["latitude"]) && isset($_POST["longitude"])){
+			$seat = new company_seat($_POST["geolocation"]);
+			$seat->geolocation = json_encode(array("longitude"=>$_POST["longitude"], "latitude"=>$_POST["latitude"]));
+			die("success");
+			
+		}elseif (isset($_POST['new_service'])) {
 			
 			$service=service::create($company);
-			
-			$service->name=$_POST['service_name'];
-			$service->description=$_POST['service_description'];
-			$service->price=$_POST['service_price'];
-			
 			die(json_encode(array("status"=>"success", "id"=>$service->id)));
 
-		}elseif (isset($_POST['product_name']) && isset($_POST['product_description']) && isset($_POST['product_price'])) {
+		}elseif (isset($_POST['new_product'])) {
 
 			$product=product::create($company);
-			
-			$product->name=$_POST['product_name'];
-			$product->description=$_POST['product_description'];
-			$product->price=$_POST['product_price'];
-			
 			die(json_encode(array("status"=>"success", "id"=>$product->id)));
 
 		}elseif (isset($_POST['delete_service'])) {
@@ -82,6 +77,7 @@
 			die(json_encode(array("status"=>"success")));
 
 		}elseif(isset($_POST["file"]) && $_POST["file"]=="logo"){
+			
 			$oldname=$paths->company_logo->dir.$company->logo;
 
 			if(file_exists($oldname) && is_file($oldname)) unlink($oldname);
@@ -90,6 +86,34 @@
 			move_uploaded_file($_FILES["logo"]["tmp_name"], $paths->company_logo->dir.$name);
 			
 			$company->logo=$name;
+			
+			die("success");
+		}elseif(isset($_POST["file"]) && $_POST["file"]=="service_image" && isset($_POST["pk"])){
+			
+			$service=new service($_POST["pk"]);
+
+			$oldname=$paths->service_image->dir.$service->image;
+
+			if(file_exists($oldname) && is_file($oldname)) unlink($oldname);
+			
+			$name=gf::generate_guid().".".end((explode(".", $_FILES["image"]["name"])));
+			move_uploaded_file($_FILES["image"]["tmp_name"], $paths->service_image->dir.$name);
+			
+			$service->image=$name;
+			
+			die("success");
+		}elseif(isset($_POST["file"]) && $_POST["file"]=="product_image" && isset($_POST["pk"])){
+			
+			$product=new product($_POST["pk"]);
+
+			$oldname=$paths->product_image->dir.$product->image;
+
+			if(file_exists($oldname) && is_file($oldname)) unlink($oldname);
+			
+			$name=gf::generate_guid().".".end((explode(".", $_FILES["image"]["name"])));
+			move_uploaded_file($_FILES["image"]["tmp_name"], $paths->product_image->dir.$name);
+			
+			$product->image=$name;
 			
 			die("success");
 		}

@@ -25,12 +25,11 @@
 					<div class="profile-sidebar col-md-3">
 						<div class="portlet light profile-sidebar-portlet">
 							
-							<div class="image fileinput col-xs-offset-4 col-xs-4 col-md-offset-0 col-md-12 fileinput-new" data-provides="fileinput">
+							<div class="image fileinput col-sm-offset-3 col-sm-6 col-md-offset-0 col-md-12 fileinput-new" data-provides="fileinput">
 								<a class="fileinput-preview thumbnail" data-trigger="fileinput">
-									<img src="<?php if($image) echo $image; else {?>http://www.placehold.it/400x300/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt=""/>
+									<img src="<?php $image=$job->image; if($image) echo $paths->job_image->url.$image; else {?>http://www.placehold.it/400x300/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
 								</a>
-								<a class="btn-file pull-right">
-								<form><input type="file" name="image"></a></form>
+								<form class="hide"><input type="file" name="image"></form>
 							</div>
 							
 							<div class="profile-usertitle">

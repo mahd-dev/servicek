@@ -3,11 +3,13 @@
 <div class="row">
 	<div class="profile-sidebar col-md-3">
 		<div class="portlet light profile-sidebar-portlet">
-			<!--
-			<div class="profile-userpic">
-				<img src="../../assets/pages/media/profile/profile_user.jpg" class="img-responsive" alt="">
-			</div>
-			-->
+			
+			<?php $logo=$company->logo; if($logo){?>
+				<div class="logo col-sm-offset-3 col-sm-6 col-md-offset-0 col-md-12">
+					<img class="public_logo" src="<?php echo $paths->company_logo->url.$logo;?>" alt="logo"/>
+				</div>
+			<?php }?>
+
 			<div class="profile-usertitle">
 				<div class="profile-usertitle-name">
 					<?php echo $company->name;?>
@@ -16,7 +18,6 @@
 					<?php echo $company->slogan;?>
 				</div>
 			</div>
-			
 
 		</div>
 		<div class="portlet light">
@@ -70,51 +71,67 @@
 				</div>
 			</div>
 		</div>
+		<?php
+			$products = $company->products;
+			$services = $company->services;
+			$cp=count($products);
+			$cs=count($services);
+			if(($cp+$cs)>0){
+		?>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="portlet light">
 					<div class="portlet-title tabbable-line">
 						<ul class="nav nav-tabs pull-left">
-							<li class="active"><a href="#services" data-toggle="tab" aria-expanded="true">Services</a></li>
-							<li><a href="#prods" data-toggle="tab" aria-expanded="false">Produits</a></li>
+							<?php if($cs>0){?><li class="active"><a href="#services" data-toggle="tab" aria-expanded="true">Services</a></li><?php }?>
+							<?php if($cp>0){?><li<?php if($cs==0){?> class="active"<?php }?>><a href="#products" data-toggle="tab" aria-expanded="false">Produits</a></li><?php }?>
 						</ul>
 						
 					</div>
 					<div class="portlet-body">
 						<div class="tab-content">
-							<div class="tab-pane row active" id="services">
-							<?php foreach ($company->products as $p) {?>
-								<div class="col-xs-12 col-sm-6 col-md-4">
-									<div class="thumbnail">
-										<!--<img src="" alt="100%x200" style="width: 100%;  display: block;">-->
-										<div class="caption">
-											<h3><?php echo $p->name; ?></h3>
-											<p><?php echo $p->description; ?></p>
-											<p><?php echo $p->price ; ?> DNT</p>
+							<?php if($cs>0){?>
+								<div class="tab-pane row active" id="services">
+								<?php foreach ($services as $p) {?>
+									<div class="col-xs-12 col-sm-6 col-md-4">
+										<div class="thumbnail">
+											<?php $image=$p->image; if($image){?>
+												<img class="service_image" src="<?php echo $paths->service_image->url.$image;?>" alt="image"/>
+											<?php }?>
+											<div class="caption">
+												<h3><?php echo $p->name; ?></h3>
+												<p><?php echo $p->description; ?></p>
+												<?php if($p->price){?><h4><?php echo $p->price ; ?> DNT</h4><?php }?>
+											</div>
 										</div>
 									</div>
+								<?php }?>
 								</div>
 							<?php }?>
-							</div>
-							<div class="tab-pane row" id="prods">
-							<?php foreach ($company->services as $p) {?>
-								<div class="col-xs-12 col-sm-6 col-md-4">
-									<div class="thumbnail">
-										<!--<img src="" alt="100%x200" style="width: 100%;  display: block;">-->
-										<div class="caption">
-											<h3><?php echo $p->name; ?></h3>
-											<p><?php echo $p->description; ?></p>
-											<p><?php echo $p->price ; ?> DNT</p>
+							<?php if($cp>0){?>
+								<div class="tab-pane row<?php if($cs==0){?> active<?php }?>" id="products">
+								<?php foreach ($products as $p) {?>
+									<div class="col-xs-12 col-sm-6 col-md-4">
+										<div class="thumbnail">
+											<?php $image=$p->image; if($image){?>
+												<img class="product_image" src="<?php echo $paths->product_image->url.$image;?>" alt="image"/>
+											<?php }?>
+											<div class="caption">
+												<h3><?php echo $p->name; ?></h3>
+												<p><?php echo $p->description; ?></p>
+												<?php if($p->price){?><h4><?php echo $p->price ; ?> DNT</h4><?php }?>
+											</div>
 										</div>
 									</div>
+								<?php }?>
 								</div>
 							<?php }?>
-							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<?php }?>
 	</div>
 </div>
 

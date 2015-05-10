@@ -7,11 +7,8 @@
 
 	$geolocation=json_decode($job->geolocation);
 	$is_contracted = $job->is_contracted;
-	$img = $job->image;
-	if($img) $image = $paths->job_image->url.$img;
-	else $image = null;
-
-	if ($job->admin==$user) {
+	
+	if ($job->admin==$user || $user->is_master) {
 		if (isset($_POST['pk']) && isset($_POST['name']) && isset($_POST['value'])) {
 			switch ($_POST['name']) {
 				case 'description':
@@ -37,8 +34,13 @@
 					break;
 			}
 			die();
+		}elseif(isset($_POST["geolocation"]) && isset($_POST["latitude"]) && isset($_POST["longitude"])){
+			$job->geolocation = json_encode(array("longitude"=>$_POST["longitude"], "latitude"=>$_POST["latitude"]));
+			die("success");
+			
 		}elseif(isset($_POST["file"]) && $_POST["file"]=="image"){
-			$oldname=$paths->job_image->dir.$img;
+			
+			$oldname=$paths->job_image->dir.$job->image;
 
 			if(file_exists($oldname) && is_file($oldname)) unlink($oldname);
 			

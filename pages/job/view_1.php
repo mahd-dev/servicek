@@ -8,11 +8,11 @@
 				<div class="row">
 					<div class="profile-sidebar col-md-3">
 						<div class="portlet light profile-sidebar-portlet">
-							<!--
-							<div class="profile-userpic">
-								<img src="../../assets/pages/media/profile/profile_user.jpg" class="img-responsive" alt="">
+							
+							<div class="col-sm-offset-3 col-sm-6 col-md-offset-0 col-md-12">
+								<img class="public_image" src="<?php $image=$job->image; if($image) echo $paths->job_image->url.$image; else {?>http://www.placehold.it/400x300/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
 							</div>
-							-->
+							
 							<div class="profile-usertitle">
 								<div class="profile-usertitle-name">
 									 <?php echo $job->name;?>
