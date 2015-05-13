@@ -95,15 +95,17 @@
 					<div class="portlet-body">
 						<div class="tab-content">
 							<?php if($cs>0){?>
-								<div class="tab-pane row active" id="services">
+								<div class="tab-pane row active" id="services" data-columns>
 								<?php foreach ($services as $p) {?>
-									<div class="col-xs-12 col-sm-6 col-md-4">
+									<div>
 										<div class="thumbnail">
+											<h3><?php echo $p->name; ?></h3>
 											<?php $image=$p->image; if($image){?>
-												<img class="service_image" src="<?php echo $paths->service_image->url.$image;?>" alt="image"/>
+												<div class="aspectratio-container aspect-4-3 fit-width">
+													<div class="aspectratio-content image" style="background-image:url('<?php echo $paths->service_image->url.$image;?>');"></div>
+												</div>
 											<?php }?>
 											<div class="caption">
-												<h3><?php echo $p->name; ?></h3>
 												<p><?php echo $p->description; ?></p>
 												<?php if($p->price){?><h4><?php echo $p->price ; ?> DNT</h4><?php }?>
 											</div>
@@ -113,15 +115,17 @@
 								</div>
 							<?php }?>
 							<?php if($cp>0){?>
-								<div class="tab-pane row<?php if($cs==0){?> active<?php }?>" id="products">
+								<div class="tab-pane row<?php if($cs==0){?> active<?php }?>" id="products" data-columns>
 								<?php foreach ($products as $p) {?>
-									<div class="col-xs-12 col-sm-6 col-md-4">
+									<div>
 										<div class="thumbnail">
+											<h3><?php echo $p->name; ?></h3>
 											<?php $image=$p->image; if($image){?>
-												<img class="product_image" src="<?php echo $paths->product_image->url.$image;?>" alt="image"/>
+												<div class="aspectratio-container aspect-4-3 fit-width">
+													<div class="aspectratio-content image" style="background-image:url('<?php echo $paths->product_image->url.$image;?>');"></div>
+												</div>
 											<?php }?>
 											<div class="caption">
-												<h3><?php echo $p->name; ?></h3>
 												<p><?php echo $p->description; ?></p>
 												<?php if($p->price){?><h4><?php echo $p->price ; ?> DNT</h4><?php }?>
 											</div>
@@ -139,6 +143,8 @@
 	</div>
 </div>
 
+<!-- plugins -->
+<script type="text/javascript" src="<?php echo cdn;?>/plugins/salvattore<?php if(!debug) echo ".min";?>.js"></script>
 
 <!-- custom page script -->
 <script src="<?php echo url_root;?>/pages/company/script_1<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>

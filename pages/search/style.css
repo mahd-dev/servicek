@@ -1,9 +1,9 @@
 /** view_1 **/
 
 .image{
-	max-width: 100%;
-	max-height: 100px;
-	display: block;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 /* search query style */
@@ -22,16 +22,14 @@
 	margin-bottom: 30px;
 }
 
-.item_a{
-	text-decoration: none;
+.item_a, .item_a:hover{
+	text-decoration: none !important;
 }
 
 .item{
 	text-decoration:none !important;
 	color:#000 !important;
-}
-.item:hover{
-	background-color: #eee;
+	margin-bottom: 0px;
 }
 
 /* masnory responsive columns */

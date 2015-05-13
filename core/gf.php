@@ -231,24 +231,6 @@
 				$e = new job($r[0]);
 				if($e->is_contracted) $rslt[] = $e;
 			}
-
-			$q_product=$db->query("
-				SELECT id
-				FROM product ORDER BY RAND() LIMIT 50
-			") or die("q_product : ".$db->error);
-			while ($r=$q_product->fetch_row()) {
-				$e = new product($r[0]);
-				if($e->is_contracted) $rslt[] = $e;
-			}
-			
-			$q_service=$db->query("
-				SELECT id
-    			FROM service ORDER BY RAND() LIMIT 50
-			") or die("q_service : ".$db->error);
-			while ($r=$q_service->fetch_row()) {
-				$e = new service($r[0]);
-				if($e->is_contracted) $rslt[] = $e;
-			}
 			
 			shuffle($rslt);
 

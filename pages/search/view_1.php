@@ -23,8 +23,8 @@
 	            
 	            <?php foreach ($rslt as $r) {?>
             	
-            	<a href="<?php echo $r["url"];?>" class="item_a ajaxify">
-		        	<div class="item portlet light bordered">
+            	<a href="<?php echo $r["url"];?>" class="item_a ajaxify thumbnail">
+		        	<div class="item portlet light">
 						<div class="portlet-title">
 							<div class="caption">
 								<span class="caption-subject bold font-grey-gallery uppercase"><?php echo $r["title"];?></span>
@@ -32,10 +32,12 @@
 							</div>
 						</div>
 						<div class="portlet-body">
-							<p>
-								<?php if($r["image_url"]){?><img class="image" src="<?php echo $r["image_url"];?>" alt="image"/><?php }?>
-								<?php echo $r["content"];?>
-							</p>
+							<?php if($r["image_url"]){?>
+								<div class="aspectratio-container aspect-4-3 fit-width">
+									<div class="aspectratio-content image" style="background-image:url('<?php echo $r["image_url"];?>');"></div>
+								</div>
+							<?php }?>
+							<p><?php echo $r["content"];?></p>
 						</div>
 					</div>
 				</a>

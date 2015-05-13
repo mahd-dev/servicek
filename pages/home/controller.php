@@ -26,28 +26,6 @@
 					"url"=>url_root."/job/".$e->id
 					);
 				break;
-			case 'product':
-				$pc=$e->company;
-				$rslt[]=array(
-					"type"=>get_class($e),
-					"title"=>$e->name,
-					"sub_title"=>$pc->name,
-					"content"=>$e->description,
-					"image_url"=>($e->image ? $paths->product_image->url.$e->image : null),
-					"url"=>url_root."/".$pc->url
-					);
-				break;
-			case 'service':
-				$sc=$e->company;
-				$rslt[]=array(
-					"type"=>get_class($e),
-					"title"=>$e->name,
-					"sub_title"=>$sc->name,
-					"content"=>$e->description,
-					"image_url"=>($e->image ? $paths->service_image->url.$e->image : null),
-					"url"=>url_root."/".$sc->url
-					);
-				break;
 		}
 	}
 
