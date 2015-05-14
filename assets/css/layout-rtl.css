@@ -411,14 +411,14 @@ Page Header
   border-top: 0;
 }
 .page-header .page-header-menu .search-form {
-  background: #405;
+  background: #ecf0f1;
 }
 .page-header .page-header-menu .search-form .input-group {
-  background: #405;
+  background: #ecf0f1;
 }
 .page-header .page-header-menu .search-form .input-group .form-control {
   color: #616d7d;
-  background: #405;
+  background: #ecf0f1;
 }
 .page-header .page-header-menu .search-form .input-group .form-control::-moz-placeholder {
   color: #5f6a7a;
@@ -584,7 +584,7 @@ Page Header
 }
 .page-header .page-header-top {
   height: 75px;
-  background-color: #405;
+  background-color: #ecf0f1;
 ;
   /* Header logo */
   /* Top menu */
