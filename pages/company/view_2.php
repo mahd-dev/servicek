@@ -84,8 +84,8 @@
 				<div class="row">
 					<div class="col-md-12 tabbable-line margin-bottom-20">
 						<ul class="nav nav-tabs pull-left">
-							<li class="active"><a href="#services_list" data-toggle="tab" aria-expanded="true">Services</a></li>
-							<li><a href="#products_list" data-toggle="tab" aria-expanded="false">Produits</a></li>
+							<li class="active"><a href="#services_list" class="sp_tabs" data-toggle="tab" aria-expanded="true">Services</a></li>
+							<li><a href="#products_list" class="sp_tabs" data-toggle="tab" aria-expanded="false">Produits</a></li>
 						</ul>
 						<div class="btn-group btn-group-solid pull-right">
 							<button class="btn btn-default new_service">Ajouter un Service</button>

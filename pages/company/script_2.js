@@ -1,7 +1,9 @@
 page_script({
 	init: function () {
-		$("#services_list").masonry();
-		$("#products_list").masonry();
+
+		$('a[data-toggle="tab"].sp_tabs').on('shown.bs.tab', function (e) {
+			$($(e.target).attr("href")).masonry();
+		});
 
 		$.fn.editable.defaults.ajaxOptions = {type: "POST"};
 		$.fn.editable.defaults.type = 'text';

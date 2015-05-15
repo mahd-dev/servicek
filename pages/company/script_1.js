@@ -1,9 +1,10 @@
 page_script({
 	init: function () {
 		
-		$("#services_list").masonry();
-		$("#products_list").masonry();
-		
+		$('a[data-toggle="tab"].sp_tabs').on('shown.bs.tab', function (e) {
+			$($(e.target).attr("href")).masonry();
+		});
+
 		$(".map-canvas").each(function () {
         	var myLatlng = new google.maps.LatLng($(this).attr("data-latitude"), $(this).attr("data-longitude"));
 			var mapOptions = {

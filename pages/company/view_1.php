@@ -69,8 +69,8 @@
 				<div class="row">
 					<div class="col-md-12 tabbable-line margin-bottom-20">
 						<ul class="nav nav-tabs pull-left">
-							<?php if($cs>0){?><li class="active"><a href="#services" data-toggle="tab" aria-expanded="true">Services</a></li><?php }?>
-							<?php if($cp>0){?><li<?php if($cs==0){?> class="active"<?php }?>><a href="#products" data-toggle="tab" aria-expanded="false">Produits</a></li><?php }?>
+							<?php if($cs>0){?><li class="active"><a href="#services" class="sp_tabs" data-toggle="tab" aria-expanded="true">Services</a></li><?php }?>
+							<?php if($cp>0){?><li<?php if($cs==0){?> class="active"<?php }?>><a href="#products" class="sp_tabs" data-toggle="tab" aria-expanded="false">Produits</a></li><?php }?>
 						</ul>
 					</div>
 				</div>
