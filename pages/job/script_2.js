@@ -7,6 +7,7 @@ page_script({
 		$.fn.editable.defaults.inputclass = 'form-control';
         $.fn.editable.defaults.url = location.href;
         $.fn.editable.defaults.onblur = 'submit';
+        $.fn.editable.defaults.emptytext = 'Vide';
         
         $('.editable').editable();
         if($(".categories-editable").length>0){

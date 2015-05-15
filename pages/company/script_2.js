@@ -12,6 +12,7 @@ page_script({
 		$.fn.editable.defaults.inputclass = 'form-control';
         $.fn.editable.defaults.url = location.href;
         $.fn.editable.defaults.onblur = 'submit';
+        $.fn.editable.defaults.emptytext = 'Vide';
         
         $(".editable").editable({params:function (p) { p.for="company"; return p; }});
         if($(".categories-editable").length>0){
@@ -26,6 +27,34 @@ page_script({
 		$(".seat_editable").editable({params:function (p) { p.for="seat"; return p; }});
 		$(".product_editable").editable({params:function (p) { p.for="product"; return p; }});
 		$(".service_editable").editable({params:function (p) { p.for="service"; return p; }});
+
+		$(".price_checkbox").change(function (e) {
+			if($(this).prop('checked')){
+				$("[data-name=price]", $(this).parents("p")).editable('enable');
+				$(".unit", $(this).parents("p")).show();
+			}else{
+				var container = $(this).parents("p");
+				var editable = $("[data-name=price]", container);
+				var unit = $(".unit", container);
+				$.post(location.href, {for: (editable.hasClass("product_editable")?"product":"service"), pk: editable.attr("data-pk"), name: "price", value: null}, function (rslt) {
+					$("[data-name=price]", $(this).parents("p")).editable('setValue', null).editable('submit').editable('disable');
+					$(".unit", $(this).parents("p")).hide();
+				});
+				
+			}
+		});
+		$(".rent_price_checkbox").change(function (e) {
+			if($(this).prop('checked')){
+				$("[data-name=rent_price]", $(this).parents("p")).editable('enable');
+				$(".unit", $(this).parents("p")).show();
+			}else{
+				$.post(location.href, {for: (editable.hasClass("product_editable")?"product":"service"), pk: editable.attr("data-pk"), name: "rent_price", value: null}, function (rslt) {
+					$("[data-name=rent_price]", $(this).parents("p")).editable('setValue', null).editable('submit').editable('disable');
+					$(".unit", $(this).parents("p")).hide();
+				});
+			
+			}
+		});
 
 		$(".map-canvas").each(function (){
 			$(this).locationpicker({

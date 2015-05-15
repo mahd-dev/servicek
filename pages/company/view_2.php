@@ -96,11 +96,12 @@
 				<div class="tab-content">
 					<div class="tab-pane row js-masonry active" id="services_list">
 					<?php foreach ($company->services as $p) { ?>
-						<div class="col-xs-12 col-sm-6 col-md-4 service" data-id="<?php echo $p->id; ?>">
+						<div class="col-xs-12 col-sm-6 col-md-4 item service" data-id="<?php echo $p->id; ?>">
 							<div class="thumbnail">
 								
 								<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
 
+								<h3><a class="service_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
 								<div class="service_image fileinput fileinput-new" data-provides="fileinput">
 									<a class="fileinput-preview thumbnail" data-trigger="fileinput">
 										<img src="<?php $image=$p->image; if($image) echo $paths->service_image->url.$image; else {?>http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
@@ -109,9 +110,8 @@
 								</div>
 
 								<div class="caption">
-									<h3><a class="service_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
-									<p><a class="service_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->description; ?></a></p>
-									<p><a class="service_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a> DNT</p>
+									<p>Description :<br><a class="service_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->description; ?></a></p>
+									<p>Prix :<br><a class="service_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a> DNT</p>
 								</div>
 							</div>
 						</div>
@@ -120,11 +120,12 @@
 					</div>
 					<div class="tab-pane row js-masonry" id="products_list">
 						<?php foreach ($company->products as $p) {?>
-							<div class="col-xs-12 col-sm-6 col-md-4 product" data-id="<?php echo $p->id; ?>">
+							<div class="col-xs-12 col-sm-6 col-md-4 item product" data-id="<?php echo $p->id; ?>">
 								<div class="thumbnail">
 									
 									<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
 
+									<h3><a class="product_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
 									<div class="product_image fileinput fileinput-new" data-provides="fileinput">
 										<a class="fileinput-preview thumbnail" data-trigger="fileinput">
 											<img src="<?php $image=$p->image; if($image) echo $paths->product_image->url.$image; else {?>http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
@@ -133,9 +134,12 @@
 									</div>
 
 									<div class="caption">
-										<h3><a class="product_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
-										<p><a class="product_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->description; ?></a></p>
-										<p><a class="product_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a> DNT</p>
+										<p>Description :<br><a class="product_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->description; ?></a></p>
+										<p>Prix :<br>
+											<?php $price=$p->price; $rent_price=$p->rent_price;?>
+											<p><label><span><input type="checkbox" class="price_checkbox"<?php if($price!=null){?> checked<?php }?>></span>Vente </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number"<?php if($price==null){?> data-disabled='true'<?php }?>><?php echo $price; ?></a><span class="unit"<?php if($price==null){?> style='display:none;'<?php }?>> DNT</span></p>
+											<p><label><span><input type="checkbox" class="rent_price_checkbox"<?php if($rent_price!=null){?> checked<?php }?>></span>Location </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="rent_price" data-pk="<?php echo $p->id; ?>" data-type="number"<?php if($rent_price==null){?> data-disabled='true'<?php }?>><?php echo $rent_price; ?></a><span class="unit"<?php if($rent_price==null){?> style='display:none;'<?php }?>> DNT</span></p>
+										</p>
 									</div>
 								</div>
 							</div>
@@ -149,11 +153,12 @@
 </div>
 
 
-<div class="col-xs-12 col-sm-6 col-md-4 service" data-id="" id="new_service_template" style="display:none;">
+<div class="col-xs-12 col-sm-6 col-md-4 item service" data-id="" id="new_service_template" style="display:none;">
 	<div class="thumbnail">
 		
 		<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
 
+		<h3><a class="service_editable name" data-name="name" data-pk="" data-type="text" ></a></h3>
 		<div class="service_image fileinput fileinput-new" data-provides="fileinput">
 			<a class="fileinput-preview thumbnail" data-trigger="fileinput">
 				<img src="http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image" alt="image"/>
@@ -162,18 +167,18 @@
 		</div>
 
 		<div class="caption">
-			<h3><a class="service_editable name" data-name="name" data-pk="" data-type="text" ></a></h3>
-			<p><a class="service_editable description" data-name="description" data-pk="" data-type="text" ></a></p>
-			<p><a class="service_editable price" data-name="price" data-pk="" data-type="number" ></a> DNT</p>
+			<p>Description :<br><a class="service_editable description" data-name="description" data-pk="" data-type="text" ></a></p>
+			<p>Prix :<br><a class="service_editable" data-name="price" data-pk="" data-type="number" ></a> DNT</p>
 		</div>
 	</div>
 </div>
 
-<div class="col-xs-12 col-sm-6 col-md-4 product" data-id="" id="new_product_template" style="display:none;">
+<div class="col-xs-12 col-sm-6 col-md-4 item product" data-id="" id="new_product_template" style="display:none;">
 	<div class="thumbnail">
 
 		<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
 
+		<h3><a class="product_editable name" data-name="name" data-pk="" data-type="text" ></a></h3>
 		<div class="product_image fileinput fileinput-new" data-provides="fileinput">
 			<a class="fileinput-preview thumbnail" data-trigger="fileinput">
 				<img src="http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image" alt="image"/>
@@ -182,9 +187,11 @@
 		</div>
 
 		<div class="caption">
-			<h3><a class="product_editable name" data-name="name" data-pk="" data-type="text" ></a></h3>
-			<p><a class="product_editable description" data-name="description" data-pk="" data-type="text" ></a></p>
-			<p><a class="product_editable price" data-name="price" data-pk="" data-type="number" ></a> DNT</p>
+			<p>Description :<br><a class="product_editable description" data-name="description" data-pk="" data-type="text" ></a></p>
+			<p>Prix :<br>
+				<p><label><span><input type="checkbox" class="price_checkbox" checked></span>Vente </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a><span class="unit"> DNT</span></p>
+				<p><label><span><input type="checkbox" class="rent_price_checkbox"></span>Location </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="rent_price" data-pk="<?php echo $p->id; ?>" data-type="number" data-disabled='true'><?php echo $p->price; ?></a><span class="unit" style='display:none;'> DNT</span></p>
+			</p>
 		</div>
 	</div>
 </div>

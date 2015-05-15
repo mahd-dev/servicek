@@ -53,6 +53,7 @@
 						case 'name': $product->name=$_POST['value']; break;
 						case 'description': $product->description=$_POST['value']; break;
 						case 'price': $product->price=$_POST['value']; break;
+						case 'rent_price': $product->rent_price=$_POST['value']; break;
 					}
 					break;
 				case 'service':
@@ -61,6 +62,7 @@
 						case 'name': $service->name=$_POST['value']; break;
 						case 'description': $service->description=$_POST['value']; break;
 						case 'price': $service->price=$_POST['value']; break;
+						case 'rent_price': $service->rent_price=$_POST['value']; break;
 					}
 					break;
 			}

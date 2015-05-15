@@ -80,11 +80,12 @@ DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `publish_price` float DEFAULT NULL,
+  `company_publish_price` float DEFAULT NULL,
+  `job_publish_price` float DEFAULT NULL,
   `icon` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   FULLTEXT KEY `name` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +94,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'aaa',NULL,NULL),(2,'bbb',NULL,NULL),(3,'ccc',NULL,NULL);
+INSERT INTO `category` VALUES (1,'aaa',90,30,NULL),(2,'bbb',90,30,NULL),(3,'ccc',90,30,NULL);
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,6 +119,7 @@ CREATE TABLE `category_children` (
 
 LOCK TABLES `category_children` WRITE;
 /*!40000 ALTER TABLE `category_children` DISABLE KEYS */;
+INSERT INTO `category_children` VALUES (2,3,'company');
 /*!40000 ALTER TABLE `category_children` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +152,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (2,'mahd','Toghther we do the best','Software development company, we love cloud computing and web development','mahdCompany','06CAA71E618AF39409F1576E46BD280D.png',NULL,'2015-05-06 16:30:00'),(3,'servicek','pub','aaaaaaaaaa aaaaaaaaaaaa\r\naaaaaaaaaa aaaaaaaaaaaa\r\naaaaaaaaaa aaaaaaaaaaaa\r\naaaaaaaaaa aaaaaaaaaaaa','servicek',NULL,NULL,'2015-05-08 16:58:25');
+INSERT INTO `company` VALUES (2,'mahd','Toghther we do the best','Software development company, we love cloud computing and web development','mahdCompany','06CAA71E618AF39409F1576E46BD280D.png','D8255B95167E1392C5679ED63331C654.png','2015-05-06 16:30:00'),(3,'servicek','pub','aaaaaaaaaa aaaaaaaaaaaa\r\naaaaaaaaaa aaaaaaaaaaaa\r\naaaaaaaaaa aaaaaaaaaaaa\r\naaaaaaaaaa aaaaaaaaaaaa','servicek',NULL,'03C6916B71C665CB83BA8A01ABACF4CE.jpg','2015-05-08 16:58:25');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,7 +185,7 @@ CREATE TABLE `company_seat` (
 
 LOCK TABLES `company_seat` WRITE;
 /*!40000 ALTER TABLE `company_seat` DISABLE KEYS */;
-INSERT INTO `company_seat` VALUES (1,2,'Kalaa kebira','master','{\"longitude\":\"10.52671799999996\",\"latitude\":\"35.878347\"}','C48, Kalaa Kebira, Tunisie','73349119','93625649','contact@mahd.tn','2015-05-06 16:30:00'),(2,3,'SiÃ¨ge social','master','{\"longitude\":\"10.608394999999973\",\"latitude\":\"35.825603\"}','Sousse, Gouvernorat de Sousse, Tunisie','73349119','352154','contact@servicek.net','2015-05-08 16:58:25');
+INSERT INTO `company_seat` VALUES (1,2,'Kalaa kebira','master','{\"longitude\":\"10.52671799999996\",\"latitude\":\"35.878347\"}','C48, Kalaa Kebira, Tunisie','73349119','93625649','contact@mahd.tn','2015-05-06 16:30:00'),(2,3,'SiÃ¨ge social','master','{\"longitude\":\"10.609768291015598\",\"latitude\":\"35.825742183325104\"}','Sousse, Gouvernorat de Sousse, Tunisie','73349119','352154','contact@servicek.net','2015-05-08 16:58:25');
 /*!40000 ALTER TABLE `company_seat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -295,11 +297,12 @@ CREATE TABLE `product` (
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` varchar(4095) COLLATE utf8_unicode_ci DEFAULT NULL,
   `price` float DEFAULT NULL,
+  `rent_price` float DEFAULT NULL,
   `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `creation_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   FULLTEXT KEY `name` (`name`,`description`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -308,6 +311,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
+INSERT INTO `product` VALUES (14,2,'',NULL,NULL,NULL,'FDE65ACE95237E33CAE931A4528C64C6.jpg','2015-05-15 17:22:00');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -352,7 +356,7 @@ CREATE TABLE `service` (
   `creation_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   FULLTEXT KEY `name` (`name`,`description`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
+) ENGINE=MyISAM AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -361,6 +365,7 @@ CREATE TABLE `service` (
 
 LOCK TABLES `service` WRITE;
 /*!40000 ALTER TABLE `service` DISABLE KEYS */;
+INSERT INTO `service` VALUES (46,2,NULL,NULL,NULL,'F7A613BC5C8F7D8082B3F0E8764E0E4A.jpg','2015-05-15 17:25:38');
 /*!40000 ALTER TABLE `service` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -427,4 +432,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-15 12:59:56
+-- Dump completed on 2015-05-15 20:10:37
