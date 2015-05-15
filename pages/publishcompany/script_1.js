@@ -120,7 +120,7 @@ page_script({
 			'nextSelector': '.button-next',
 			'previousSelector': '.button-previous',
 			onTabClick: function (tab, navigation, index, clickedIndex) {
-				return false;
+				//return false;
 			},
 			onNext: function (tab, navigation, index) {
 				error.hide();

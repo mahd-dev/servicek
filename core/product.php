@@ -60,5 +60,20 @@
             $db->query("delete from product where (id='".$this->id."')");
         }
 
+        public function assign_to_category($category){
+            global $db;
+            $db->query("replace into category_children (id_category, id_children, children_type) values('".$category->id."', '".$this->id."', 'product')");
+        }
+
+        public function unassign_from_category($category){
+            global $db;
+            $db->query("delete from category_children where (id_category='".$category->id."' and id_children='".$this->id."' and children_type='product')");
+        }
+
+        public function unassign_from_all_categories(){
+            global $db;
+            $db->query("delete from category_children where (id_children='".$this->id."' and children_type='product')");
+        }
+
     }
 ?>

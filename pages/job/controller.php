@@ -8,7 +8,11 @@
 	$geolocation=json_decode($job->geolocation);
 	$is_contracted = $job->is_contracted;
 	$categories = array();
-	foreach ($job->categories as $c) $categories[] = $c->name;
+	$categories_json = array();
+	foreach ($job->categories as $c){
+		$categories_json[] = intval($c->id);
+		$categories[] = $c->name;
+	}
 	$categories = implode(", ", $categories);
 
 	if ($job->admin==$user || ($user && $user->is_master)) {
@@ -33,8 +37,14 @@
 					$job->email=$_POST['value'];
 					break;
 				case 'categories' :
+					if(count($_POST['value'])==0){
+						header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
+						echo "Domaine d'activité requit";
+						die();
+					}
+					$job->unassign_from_all_categories();
 					foreach ($_POST['value'] as $value) {
-						$job->assign_to_category(category::get_by_name($value));
+						$job->assign_to_category(new category(intval($value)));
 					}
 				break;
 				default:
@@ -61,7 +71,7 @@
 		}
 
 		$available_categories = array();
-		foreach (category::get_all() as $c) $available_categories[] = $c->name;
+		foreach (category::get_roots() as $c) $available_categories[] = array("id"=>intval($c->id), "text"=>$c->name);
 
 		include "view_2.php";
 	}elseif($is_contracted){
@@ -91,8 +101,8 @@
 	        $article->setSection( 'Job' );
 	        foreach(array_filter(explode(",",$categories)) as $c) $article->addTag( $c );
 
-	        $ref["twitter:title"=$job->name;
-            $ref["twitter:description"=$job->description;
+	        $ref["twitter:title"]=$job->name;
+            $ref["twitter:description"]=$job->description;
 	        
 	    }
 

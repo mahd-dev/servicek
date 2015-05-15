@@ -23,58 +23,38 @@
 		<div class="portlet light">
 			<h5>A propos :</h5>
 			<?php echo $company->description;?>
-		</div>
-		<div class="portlet light">
+		<hr>
 			<h5>Domaines d'activité :</h5>
 			<?php echo $categories;?>
+		<hr>
+			<h5><?php echo $s->name; ?></h5>
+			<p class="margin-bottom-10">
+				<strong>Adresse:</strong> <?php echo $s->address; ?>
+			</p>
+			<p class="margin-bottom-10">
+				<strong>Téléphone:</strong> <?php echo $s->tel; ?>
+			</p>
+			<p class="margin-bottom-10">
+				<strong>Portable:</strong> <?php echo $s->mobile; ?>
+			</p>
+			<p class="margin-bottom-10">
+				<strong>Email:</strong> <?php echo $s->email; ?>
+			</p>
+		</div>
+		<div class="potlet light">
+			<div class="tab-content aspectratio-container aspect-4-3 fit-width">
+				<div class="map-canvas aspectratio-content" data-longitude="<?php echo $geolocation->longitude;?>" data-latitude="<?php echo $geolocation->latitude;?>"></div>
+			</div>
 		</div>
 	</div>
 	<div class="profile-content col-md-9">
-		<div class="row">
-			<div class="col-md-6">
-				<div class="portlet light">
-					<div class="portlet-title tabbable-line">
-						<div class="caption caption-md">
-							<i class="icon-globe theme-font hide"></i>
-							<span class="caption-subject font-blue-madison bold uppercase"><?php echo $s->name; ?></span>
-						</div>
-					</div>
-					<div class="portlet-body">
-						<div class="tab-content">
-							<div class="tab-pane active" id="tab_1_1">
-								<p class="margin-bottom-30">
-									<strong><h5>Adresse:</h5></strong> <?php echo $s->address; ?>
-								</p>
-								<p class="margin-bottom-30">
-									<strong><h5>Téléphone:</h5></strong> <?php echo $s->tel; ?>
-								</p>
-								<p class="margin-bottom-30">
-									<strong><h5>Portable:</h5></strong> <?php echo $s->mobile; ?>
-								</p>
-								<p class="margin-bottom-30">
-									<strong><h5>Email:</h5></strong> <?php echo $s->email; ?>
-								</p>
-							</div>
-						</div>
-					</div>
+		<?php $cover = $company->cover; if($cover){?>
+			<div class="row">
+				<div class="col-md-12 aspectratio-container aspect-3-1 fit-width">
+					<div class="image aspectratio-content" style="background-image:url('<?php echo $paths->company_cover->url.$cover;?>');"></div>
 				</div>
 			</div>
-			<div class="col-md-6">
-				<div class="portlet light">
-					<div class="portlet-title tabbable-line">
-						<div class="caption caption-md">
-							<i class="icon-globe theme-font hide"></i>
-							<span class="caption-subject font-blue-madison bold uppercase">Map</span>
-						</div>
-					</div>
-					<div class="portlet-body">
-						<div class="tab-content aspectratio-container aspect-4-3 fit-width">
-							<div class="map-canvas aspectratio-content" data-longitude="<?php echo $geolocation->longitude;?>" data-latitude="<?php echo $geolocation->latitude;?>"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<?php }?>
 		<?php
 			$products = $company->products;
 			$services = $company->services;

@@ -9,10 +9,14 @@ page_script({
         $.fn.editable.defaults.onblur = 'submit';
         
         $('.editable').editable();
-        $('.categories-editable').editable({
-        	mode: "popup",
-        	select2: {tags: JSON.parse($('.categories-editable').attr("data-available"))}
-        });
+        if($(".categories-editable").length>0){
+	        $('.categories-editable').editable({
+	        	mode: "popup",
+	        	inputclass: "input-medium",
+	        	select2: {multiple: true},
+	        	source: JSON.parse($('.categories-editable').attr("data-available"))
+	        });
+       	}
         
         $(".map-canvas").each(function (){
 			$(this).locationpicker({

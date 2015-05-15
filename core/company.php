@@ -187,6 +187,11 @@
 			$db->query("delete from category_children where (id_category='".$category->id."' and id_children='".$this->id."' and children_type='company')");
 		}
 
+		public function unassign_from_all_categories(){
+			global $db;
+			$db->query("delete from category_children where (id_children='".$this->id."' and children_type='company')");
+		}
+
 		public static function check_url($url){
 			global $db;
 			global $reserved_urls;

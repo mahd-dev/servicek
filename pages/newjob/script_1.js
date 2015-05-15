@@ -45,6 +45,7 @@ page_script({
 				
 				name: {minlength: 3, maxlength: 255, required: true},
 				description: {minlength: 50, maxlength: 4095, required: true},
+				categories: {required: true},
 				address: {required: true},
 				longitude: {required: true},
 				latitude: {required: true},
@@ -87,9 +88,7 @@ page_script({
 
 		});
 		
-		$("[name=categories]", form).select2({
-			tags:JSON.parse($("[name=categories]", form).attr("data-available"))
-		});
+		$("[name=categories]", form).select2();
 		
 		form.submit(function (e){
 			if(!form.valid()) {

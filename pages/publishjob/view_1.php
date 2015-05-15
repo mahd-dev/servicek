@@ -47,7 +47,7 @@
 													<label class="list-group-item"><input type="radio" name="offer" value="<?php echo $on;?>" data-title="<?php echo $o["text"];?>" data-amount="<?php echo $o["amount"];?> DT TTC" <?php if($o["default"]) echo "checked";?>> <?php echo $o["text"];?> <?php echo $o["help"];?></label>
 												<?php }?>
 											</div>
-											
+											<span class="help-block">Ces prix sont basés sur vos domaines d'activité et la durée du contrat.</span>
 										</div>
 									</div>
 									
@@ -195,11 +195,6 @@
 									<div class="form-group">
 										<label class="control-label col-md-3">Montant à payer :</label>
 										<div class="col-md-6"><p class="form-control-static" data-display="amount"><strong></strong></p></div>
-									</div>
-
-									<div class="form-group">
-										<label class="control-label col-md-3">Méthode :</label>
-										<div class="col-md-6"><p class="form-control-static" data-display="method"><strong></strong></p></div>
 									</div>
 
 								</div>

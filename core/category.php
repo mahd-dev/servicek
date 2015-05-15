@@ -25,6 +25,11 @@
                     case "id":
                         return $this->id;
                     break;
+                    case "isvalid":
+                        $q=$db->query("select count(*) from category where (id='".$this->id."')");
+                        $r=$q->fetch_row();
+                        return $r[0]==1;
+                    break;
                     case "childrens":
                         return array_merge($this->companies, $this->jobs, $this->products, $this->services);
                     case "subcategories_list":
@@ -94,6 +99,14 @@
             global $db;
             $rslt=array();
             $q=$db->query("select id from category");
+            while ($r=$q->fetch_row()) $rslt[] = new category($r[0]);
+            return $rslt;
+        }
+
+        public static function get_roots(){
+            global $db;
+            $rslt=array();
+            $q=$db->query("select c.id from category c left join category_children ch on c.id = ch.id_children where ch.id_children is null");
             while ($r=$q->fetch_row()) $rslt[] = new category($r[0]);
             return $rslt;
         }

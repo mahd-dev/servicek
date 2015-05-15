@@ -38,10 +38,14 @@
 								</div>
 							</div>
 							<div class="form-group">
-							<label class="control-label col-md-3">Domaines d'activité</label>
+							<label class="control-label col-md-3">Domaines d'activité <span class="required">*</span></label>
 							<div class="col-md-6">
-								<input type="hidden" name="categories" class="form-control select2" data-available='<?php echo json_encode($available_categories);?>'>
-								<span class="help-block">Sélectionnez ou ajouter vos domaines d'activité</span>
+								<select name="categories" class="form-control select2" multiple>
+									<?php foreach ($available_categories as $c) {?>
+										<option value="<?php echo $c->id;?>"><?php echo $c->name;?></option>
+									<?php }?>
+								</select>
+								<span class="help-block">Sélectionnez vos domaines d'activité</span>
 							</div>
 						</div>
 

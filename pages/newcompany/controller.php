@@ -23,6 +23,7 @@
 		if(
 			!$_POST["name"] ||
 			!$_POST["description"] ||
+			!$_POST["categories"] ||
 			!$_POST["address"] ||
 			!$_POST["longitude"] ||
 			!$_POST["latitude"] ||
@@ -32,6 +33,11 @@
 
 		if(!company::check_url($_POST["url"])) die(json_encode(array("status"=>"unvailable_url")));
 		
+		foreach ($_POST["categories"] as $c){
+			$c = new category($c);
+			if(!$c->isvalid) die(json_encode(array("status"=>"error_invalid_parameter")));
+		}
+
 		// create company é contract
 		$company=company::create($user);
 		$seat=company_seat::create($company);
@@ -39,7 +45,7 @@
 		$company->name=$_POST["name"];
 		$company->slogan=$_POST["slogan"];
 		$company->description=$_POST["description"];
-		foreach (explode(",", $_POST["categories"]) as $c) $company->assign_to_category(category::get_by_name($c));
+		foreach ($_POST["categories"] as $c) $company->assign_to_category(new category($c));
 		
 		if(company::check_url($_POST["url"])) $company->url=$_POST["url"];
 
@@ -63,8 +69,7 @@
 	// ...
 
 	// process required data
-	$available_categories = array();
-	foreach (category::get_all() as $c) $available_categories[] = $c->name;
+	$available_categories = category::get_roots();
 	
 	// select and display right view
 	// ...

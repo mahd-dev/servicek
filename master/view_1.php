@@ -36,12 +36,6 @@
 
 	<link href="<?php echo cdn;?>/plugins/bootstrap-switch/css/bootstrap-switch<?php echo(rtl?"-rtl":"");?>.min.css" rel="stylesheet" type="text/css" />
 
-	<link href="<?php echo cdn;?>/css/components-rounded<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css" id="style_components" rel="stylesheet" type="text/css" />
-	<link href="<?php echo cdn;?>/css/plugins<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
-	<link href="<?php echo cdn;?>/css/layout<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
-	<link href="<?php echo cdn;?>/css/themes/default<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
-	<link href="<?php echo cdn;?>/css/custom<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
-
 	<link href="<?php echo cdn;?>/plugins/tag-it/css/jquery.tagit<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
 	<link href="<?php echo cdn;?>/plugins/tag-it/css/tagit.ui-zendesk<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
 
@@ -50,6 +44,14 @@
 	<link href="<?php echo cdn;?>/plugins/jquery-multi-select/css/multi-select<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css"/>
 
 	<link href="<?php echo cdn;?>/plugins/aspectratio/aspectratio<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
+
+
+
+	<link href="<?php echo cdn;?>/css/components-rounded<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css" id="style_components" rel="stylesheet" type="text/css" />
+	<link href="<?php echo cdn;?>/css/plugins<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
+	<link href="<?php echo cdn;?>/css/layout<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
+	<link href="<?php echo cdn;?>/css/themes/default<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
+	<link href="<?php echo cdn;?>/css/custom<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
 
 	<link rel="shortcut icon" href="<?php echo cdn;?>/img/favicons/favicon.png" />
 
@@ -189,6 +191,8 @@
 
 	<script src="<?php echo cdn;?>/plugins/jquery.pulsate.min.js" type="text/javascript"></script>
 
+	<script src="<?php echo cdn;?>/plugins/bootstrap-fileinput/bootstrap-fileinput<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
+	
 	<script src="<?php echo url_root;?>/master/script_1<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 	<script>
 		jQuery(document).ready(function () {

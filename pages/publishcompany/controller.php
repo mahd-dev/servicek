@@ -12,10 +12,19 @@
 
 	if(isset($_POST["check_url"])) die((company::check_url($_POST["check_url"])?"true":"false"));
 
+	$price=0;
+	foreach ($company->categories as $cc) {
+		$price+=floatval($cc->company_publish_price);
+	}
+	$prices_list=array(
+		round($price * (2/3)),
+		round($price * 1),
+		round($price * 2)
+	);
 	$offers=array(
-		"1" => array("duration" => "6", "amount" => "60", "text" => "6 mois : <strong>60 DT</strong>", "help" => '<span class="label label-info pull-right" style="padding:10px;margin:-4px;"><i class="icon-speedometer"></i> Désigné pour le test</span>', "default" => false),
-		"2" => array("duration" => "12", "amount" => "90", "text" => "12 mois : <strong>90 DT</strong>", "help" => '<span class="label label-success pull-right" style="padding:10px;margin:-4px;"><i class="icon-check"></i> Recommandé</span>', "default" => true),
-		"3" => array("duration" => "36", "amount" => "180", "text" => "3 ans : <strong>180 DT</strong>", "help" => '<span class="label label-primary pull-right" style="padding:10px;margin:-4px;"><i class="icon-star"></i> Inscription longue terme</span>', "default" => false)
+		"1" => array("duration" => "6", "amount" => $prices_list[0], "text" => "6 mois : <strong>".$prices_list[0]." DT</strong>", "help" => '<span class="label label-info pull-right" style="padding:10px;margin:-4px;"><i class="icon-speedometer"></i> Désigné pour le test</span>', "default" => false),
+		"2" => array("duration" => "12", "amount" => $prices_list[1], "text" => "12 mois : <strong>".$prices_list[1]." DT</strong>", "help" => '<span class="label label-success pull-right" style="padding:10px;margin:-4px;"><i class="icon-check"></i> Recommandé</span>', "default" => true),
+		"3" => array("duration" => "36", "amount" => $prices_list[2], "text" => "3 ans : <strong>".$prices_list[2]." DT</strong>", "help" => '<span class="label label-primary pull-right" style="padding:10px;margin:-4px;"><i class="icon-star"></i> Inscription longue terme</span>', "default" => false)
 	);
 	
 	if(

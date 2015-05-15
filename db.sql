@@ -1,8 +1,8 @@
--- MySQL dump 10.14  Distrib 5.5.41-MariaDB, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.24, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: servicek
 -- ------------------------------------------------------
--- Server version	5.5.41-MariaDB-1ubuntu0.14.04.1
+-- Server version	5.6.24-0ubuntu2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -80,10 +80,11 @@ DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(127) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `publish_price` float DEFAULT NULL,
   `icon` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   FULLTEXT KEY `name` (`name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci PACK_KEYS=1 DELAY_KEY_WRITE=1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,6 +93,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
+INSERT INTO `category` VALUES (1,'aaa',NULL,NULL),(2,'bbb',NULL,NULL),(3,'ccc',NULL,NULL);
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,7 +150,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (2,'mahd','Toghther we do the best','Software development company, we love cloud computing and web development','mahdCompany','4392C1DEDE4CEEC8D93191BEDC6A9F5F.png',NULL,'2015-05-06 16:30:00'),(3,'servicek','pub','aaaaaaaaaa aaaaaaaaaaaa\r\naaaaaaaaaa aaaaaaaaaaaa\r\naaaaaaaaaa aaaaaaaaaaaa\r\naaaaaaaaaa aaaaaaaaaaaa','servicek',NULL,NULL,'2015-05-08 16:58:25');
+INSERT INTO `company` VALUES (2,'mahd','Toghther we do the best','Software development company, we love cloud computing and web development','mahdCompany','06CAA71E618AF39409F1576E46BD280D.png',NULL,'2015-05-06 16:30:00'),(3,'servicek','pub','aaaaaaaaaa aaaaaaaaaaaa\r\naaaaaaaaaa aaaaaaaaaaaa\r\naaaaaaaaaa aaaaaaaaaaaa\r\naaaaaaaaaa aaaaaaaaaaaa','servicek',NULL,NULL,'2015-05-08 16:58:25');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -425,4 +427,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-13 16:06:17
+-- Dump completed on 2015-05-15 12:59:56

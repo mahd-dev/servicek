@@ -9,7 +9,11 @@
 	$geolocation=json_decode($s->geolocation);
 	$is_contracted=$company->is_contracted;
 	$categories = array();
-	foreach ($company->categories as $c) $categories[] = $c->name;
+	$categories_json = array();
+	foreach ($company->categories as $cat){
+		$categories_json[] = intval($cat->id);
+		$categories[] = $cat->name;
+	}
 	$categories = implode(", ", $categories);
 
 	if ($user!=null && ($company->is_assigned_to_admin($user) || $user->is_master)) {
@@ -21,8 +25,14 @@
 						case 'slogan': $company->slogan=$_POST['value']; break;
 						case 'description': $company->description=$_POST['value']; break;
 						case 'categories' :
+							if(count($_POST['value'])==0){
+								header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
+								echo "Domaine d'activité requit";
+								die();
+							}
+							$company->unassign_from_all_categories();
 							foreach ($_POST['value'] as $value) {
-								$company->assign_to_category(category::get_by_name($value));
+								$company->assign_to_category(new category(intval($value)));
 							}
 						break;
 					}
@@ -96,6 +106,18 @@
 			$company->logo=$name;
 			
 			die("success");
+		}elseif(isset($_POST["file"]) && $_POST["file"]=="cover"){
+			
+			$oldname=$paths->company_cover->dir.$company->cover;
+
+			if(file_exists($oldname) && is_file($oldname)) unlink($oldname);
+			
+			$name=gf::generate_guid().".".end((explode(".", $_FILES["cover"]["name"])));
+			move_uploaded_file($_FILES["cover"]["tmp_name"], $paths->company_cover->dir.$name);
+			
+			$company->cover=$name;
+			
+			die("success");
 		}elseif(isset($_POST["file"]) && $_POST["file"]=="service_image" && isset($_POST["pk"])){
 			
 			$service=new service($_POST["pk"]);
@@ -127,7 +149,7 @@
 		}
 
 		$available_categories = array();
-		foreach (category::get_all() as $c) $available_categories[] = $c->name;
+		foreach (category::get_roots() as $c) $available_categories[] = array("id"=>intval($c->id), "text"=>$c->name);
 
 		include "view_2.php";
 	}elseif($is_contracted){

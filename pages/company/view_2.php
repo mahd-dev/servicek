@@ -41,57 +41,41 @@
 		<div class="portlet light">
 			<h5>A propos :</h5>
 			<a class="editable" data-name="description" data-type="textarea" ><?php echo $company->description;?></a>
-		</div>
-		
-		<div class="portlet light">
+			<hr>
 			<h5>Domaines d'activité :</h5>
-			<a class="categories-editable" data-name="categories" data-type="select2" data-available='<?php echo json_encode($available_categories);?>'><?php echo $categories;?></a>
+			<?php if($is_contracted){?>
+				<?php echo $categories;?>
+			<?php }else{?>
+				<a class="categories-editable" data-name="categories" data-type="select2" data-value='<?php echo json_encode($categories_json);?>' data-available='<?php echo json_encode($available_categories);?>'></a>
+			<?php }?>
+			<hr>
+			<h5><a class="seat_editable" data-pk="<?php echo $s->id;?>" data-name="name" data-type="text" ><?php echo $s->name; ?></a><h5>
+			<p class="margin-bottom-10">
+				<strong>Adresse:</strong> <a class="seat_editable" data-pk="<?php echo $s->id;?>" data-name="address" data-type="text" ><?php echo $s->address; ?></a>
+			</p>
+			<p class="margin-bottom-10">
+				<strong>Téléphone:</strong> <a class="seat_editable" data-pk="<?php echo $s->id;?>" data-name="tel" data-type="text" ><?php echo $s->tel; ?></a>
+			</p>
+			<p class="margin-bottom-10">
+				<strong>Portable:</strong> <a class="seat_editable" data-pk="<?php echo $s->id;?>" data-name="mobile" data-type="text" ><?php echo $s->mobile; ?></a>
+			</p>
+			<p class="margin-bottom-10">
+				<strong>Email:</strong> <a class="seat_editable" data-pk="<?php echo $s->id;?>" data-name="email" data-type="text" ><?php echo $s->email; ?></a>
+			</p>
+		</div>
+		<div class="tab-content aspectratio-container aspect-4-3 fit-width">
+			<div class="map-canvas aspectratio-content" data-pk="<?php echo $s->id;?>" data-longitude="<?php echo $geolocation->longitude;?>" data-latitude="<?php echo $geolocation->latitude;?>"></div>
 		</div>
 
 	</div>
-	<div class="profile-content col-md-9">
+	<div class="col-md-9">
 		<div class="row">
-			<div class="col-md-6">
-				<div class="portlet light">
-					<div class="portlet-title tabbable-line">
-						<div class="caption caption-md">
-							<i class="icon-globe theme-font hide"></i>
-							<span class="caption-subject font-blue-madison bold uppercase"><a class="seat_editable" data-pk="<?php echo $s->id;?>" data-name="name" data-type="text" ><?php echo $s->name; ?></a></span>
-						</div>
-					</div>
-					<div class="portlet-body">
-						<div class="tab-content">
-							<div class="tab-pane active" id="tab_1_1">
-								<p class="margin-bottom-30">
-									<strong><h5>Adresse :</h5></strong> <a class="seat_editable" data-pk="<?php echo $s->id;?>" data-name="address" data-type="text" ><?php echo $s->address; ?></a>
-								</p>
-								<p class="margin-bottom-30">
-									<strong><h5>Téléphone :</h5></strong> <a class="seat_editable" data-pk="<?php echo $s->id;?>" data-name="tel" data-type="text" ><?php echo $s->tel; ?></a>
-								</p>
-								<p class="margin-bottom-30">
-									<strong><h5>Portable :</h5></strong> <a class="seat_editable" data-pk="<?php echo $s->id;?>" data-name="mobile" data-type="text" ><?php echo $s->mobile; ?></a>
-								</p>
-								<p class="margin-bottom-30">
-									<strong><h5>Email :</h5></strong> <a class="seat_editable" data-pk="<?php echo $s->id;?>" data-name="email" data-type="text" ><?php echo $s->email; ?></a>
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="portlet light">
-					<div class="portlet-title tabbable-line">
-						<div class="caption caption-md">
-							<i class="icon-globe theme-font hide"></i>
-							<span class="caption-subject font-blue-madison bold uppercase">Map</span>
-						</div>
-					</div>
-					<div class="portlet-body">
-						<div class="tab-content aspectratio-container aspect-4-3 fit-width">
-							<div class="map-canvas aspectratio-content" data-pk="<?php echo $s->id;?>" data-longitude="<?php echo $geolocation->longitude;?>" data-latitude="<?php echo $geolocation->latitude;?>"></div>
-						</div>
-					</div>
+			<div class="col-md-12">
+				<div class="cover aspectratio-container aspect-3-1 fit-width fileinput fileinput-new" data-provides="fileinput">
+					<a class="aspectratio-content thumbnail fileinput-preview" data-trigger="fileinput">
+						<img src="<?php $cover=$company->cover; if($cover) echo $paths->company_cover->url.$cover; else {?>http://www.placehold.it/600x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+photo+de+couverture<?php }?>" alt="cover"/>
+					</a>
+					<form class="hide"><input type="file" name="cover"></form>
 				</div>
 			</div>
 		</div>
@@ -115,12 +99,7 @@
 								<div class="col-sm-6 col-md-4 service" data-id="<?php echo $p->id; ?>">
 									<div class="thumbnail">
 										
-										<div class="btn-group pull-right">
-											<button class="btn btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-angle-down"></i></button>
-											<ul class="dropdown-menu" role="menu">
-												<li><a class="delete"><i class="icon-close"></i> Supprimer</a></li>
-											</ul>
-										</div>
+										<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
 
 										<div class="service_image fileinput fileinput-new" data-provides="fileinput">
 											<a class="fileinput-preview thumbnail" data-trigger="fileinput">
@@ -140,12 +119,7 @@
 							<div class="col-sm-6 col-md-4 service" data-id="" id="new_service_template" style="display:none;">
 								<div class="thumbnail">
 									
-									<div class="btn-group pull-right">
-										<button class="btn btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-angle-down"></i></button>
-										<ul class="dropdown-menu" role="menu">
-											<li><a class="delete"><i class="icon-close"></i> Supprimer</a></li>
-										</ul>
-									</div>
+									<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
 
 									<div class="service_image fileinput fileinput-new" data-provides="fileinput">
 										<a class="fileinput-preview thumbnail" data-trigger="fileinput">
@@ -168,12 +142,7 @@
 									<div class="col-sm-6 col-md-4 product" data-id="<?php echo $p->id; ?>">
 										<div class="thumbnail">
 											
-											<div class="btn-group pull-right">
-												<button class="btn btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-angle-down"></i></button>
-												<ul class="dropdown-menu" role="menu">
-													<li><a class="delete"><i class="icon-close"></i> Supprimer</a></li>
-												</ul>
-											</div>
+											<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
 
 											<div class="product_image fileinput fileinput-new" data-provides="fileinput">
 												<a class="fileinput-preview thumbnail" data-trigger="fileinput">
@@ -193,12 +162,7 @@
 								<div class="col-sm-6 col-md-4 product" data-id="" id="new_product_template" style="display:none;">
 									<div class="thumbnail">
 
-										<div class="btn-group pull-right">
-											<button class="btn btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-angle-down"></i></button>
-											<ul class="dropdown-menu" role="menu">
-												<li><a class="delete"><i class="icon-close"></i> Supprimer</a></li>
-											</ul>
-										</div>
+										<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
 
 										<div class="product_image fileinput fileinput-new" data-provides="fileinput">
 											<a class="fileinput-preview thumbnail" data-trigger="fileinput">
@@ -222,8 +186,6 @@
 		</div>
 	</div>
 </div>
-
-<script type="text/javascript" src="<?php echo cdn;?>/plugins/bootstrap-fileinput/bootstrap-fileinput<?php if(!debug) echo ".min";?>.js"></script>
 
 <!-- custom page script -->
 <script src="<?php echo url_root;?>/pages/company/script_2<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
