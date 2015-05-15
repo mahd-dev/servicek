@@ -1,7 +1,8 @@
 page_script({
 	init: function () {
 		
-		$(".js-masonry").masonry();
+		$("#services_list").masonry();
+		$("#products_list").masonry();
 		
 		$(".map-canvas").each(function () {
         	var myLatlng = new google.maps.LatLng($(this).attr("data-latitude"), $(this).attr("data-longitude"));

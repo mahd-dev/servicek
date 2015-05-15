@@ -1,6 +1,7 @@
 page_script({
 	init: function () {
-		$(".js-masonry").masonry();
+		$("#services_list").masonry();
+		$("#products_list").masonry();
 
 		$.fn.editable.defaults.ajaxOptions = {type: "POST"};
 		$.fn.editable.defaults.type = 'text';
