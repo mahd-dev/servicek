@@ -29,6 +29,9 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+.prod_srv_image{
+	width: 100%;
+}
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
 	background-color: transparent;;

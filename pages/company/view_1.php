@@ -49,13 +49,17 @@
 	</div>
 	<div class="profile-content col-md-9">
 		<?php $cover = $company->cover; if($cover){?>
+
 			<div class="row">
 				<div class="col-md-12 margin-bottom-20">
-					<div class="aspectratio-container aspect-3-1 fit-width">
-						<div class="image aspectratio-content" style="background-image:url('<?php echo $paths->company_cover->url.$cover;?>');"></div>
+					<div class="cover aspectratio-container aspect-3-1 fit-width">
+						<div class="aspectratio-content">
+							<img src="<?php echo $paths->company_cover->url.$cover;?>" alt="cover"/>
+						</div>
 					</div>
 				</div>
 			</div>
+
 		<?php }?>
 		<?php
 			$products = $company->products;
@@ -82,9 +86,7 @@
 								<div class="thumbnail">
 									<h3><?php echo $p->name; ?></h3>
 									<?php $image=$p->image; if($image){?>
-										<div class="aspectratio-container aspect-4-3 fit-width">
-											<div class="aspectratio-content image" style="background-image:url('<?php echo $paths->service_image->url.$image;?>');"></div>
-										</div>
+										<img class="prod_srv_image" src="<?php echo $paths->service_image->url.$image;?>" alt="image"/>
 									<?php }?>
 									<div class="caption">
 										<p><?php echo $p->description; ?></p>
@@ -102,9 +104,7 @@
 								<div class="thumbnail">
 									<h3><?php echo $p->name; ?></h3>
 									<?php $image=$p->image; if($image){?>
-										<div class="aspectratio-container aspect-4-3 fit-width">
-											<div class="aspectratio-content image" style="background-image:url('<?php echo $paths->product_image->url.$image;?>');"></div>
-										</div>
+										<img class="prod_srv_image" src="<?php echo $paths->product_image->url.$image;?>" alt="image"/>
 									<?php }?>
 									<div class="caption">
 										<p><?php echo $p->description; ?></p>
