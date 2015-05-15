@@ -81,38 +81,54 @@
 				<div class="tab-content">
 					<?php if($cs>0){?>
 						<div class="tab-pane row js-masonry active" id="services">
-						<?php foreach ($services as $p) {?>
-							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+						<?php foreach ($services as $p) {
+							$name=$p->name;
+							$image=$p->image;
+							$description=$p->description;
+							$price=$p->price;
+							if($name||$image||$description||$price){
+						?>
+							<div class="col-xs-12 col-sm-6 col-md-4">
 								<div class="thumbnail">
-									<h3><?php echo $p->name; ?></h3>
-									<?php $image=$p->image; if($image){?>
+									<?php if($name){?><h3><?php echo $name; ?></h3><?php }?>
+									<?php if($image){?>
 										<img class="prod_srv_image" src="<?php echo $paths->service_image->url.$image;?>" alt="image"/>
 									<?php }?>
-									<div class="caption">
-										<p><?php echo $p->description; ?></p>
-										<?php if($p->price){?><h4><?php echo $p->price ; ?> DNT</h4><?php }?>
-									</div>
+									<?php if($description||$price){?>
+										<div class="caption">
+											<p><?php echo $description; ?></p>
+											<?php if($price){?><h4><?php echo $price ; ?> DNT</h4><?php }?>
+										</div>
+									<?php }?>
 								</div>
 							</div>
-						<?php }?>
+						<?php }}?>
 						</div>
 					<?php }?>
 					<?php if($cp>0){?>
 						<div class="tab-pane row js-masonry<?php if($cs==0){?> active<?php }?>" id="products" data-columns>
-						<?php foreach ($products as $p) {?>
-							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+						<?php foreach ($products as $p) {
+							$name=$p->name;
+							$image=$p->image;
+							$description=$p->description;
+							$price=$p->price;
+							if($name||$image||$description||$price){
+						?>
+							<div class="col-xs-12 col-sm-6 col-md-4">
 								<div class="thumbnail">
-									<h3><?php echo $p->name; ?></h3>
-									<?php $image=$p->image; if($image){?>
+									<?php if($name){?><h3><?php echo $name; ?></h3><?php }?>
+									<?php if($image){?>
 										<img class="prod_srv_image" src="<?php echo $paths->product_image->url.$image;?>" alt="image"/>
 									<?php }?>
-									<div class="caption">
-										<p><?php echo $p->description; ?></p>
-										<?php if($p->price){?><h4><?php echo $p->price ; ?> DNT</h4><?php }?>
-									</div>
+									<?php if($description||$price){?>
+										<div class="caption">
+											<p><?php echo $description; ?></p>
+											<?php if($price){?><h4><?php echo $price ; ?> DNT</h4><?php }?>
+										</div>
+									<?php }?>
 								</div>
 							</div>
-						<?php }?>
+						<?php }}?>
 						</div>
 					<?php }?>
 				</div>

@@ -96,7 +96,7 @@
 				<div class="tab-content">
 					<div class="tab-pane row js-masonry active" id="services_list">
 					<?php foreach ($company->services as $p) { ?>
-						<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 service" data-id="<?php echo $p->id; ?>">
+						<div class="col-xs-12 col-sm-6 col-md-4 service" data-id="<?php echo $p->id; ?>">
 							<div class="thumbnail">
 								
 								<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
@@ -120,7 +120,7 @@
 					</div>
 					<div class="tab-pane row js-masonry" id="products_list">
 						<?php foreach ($company->products as $p) {?>
-							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 product" data-id="<?php echo $p->id; ?>">
+							<div class="col-xs-12 col-sm-6 col-md-4 product" data-id="<?php echo $p->id; ?>">
 								<div class="thumbnail">
 									
 									<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
@@ -149,7 +149,7 @@
 </div>
 
 
-<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 service" data-id="" id="new_service_template" style="display:none;">
+<div class="col-xs-12 col-sm-6 col-md-4 service" data-id="" id="new_service_template" style="display:none;">
 	<div class="thumbnail">
 		
 		<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
@@ -169,7 +169,7 @@
 	</div>
 </div>
 
-<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 product" data-id="" id="new_product_template" style="display:none;">
+<div class="col-xs-12 col-sm-6 col-md-4 product" data-id="" id="new_product_template" style="display:none;">
 	<div class="thumbnail">
 
 		<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
