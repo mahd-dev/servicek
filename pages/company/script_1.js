@@ -1,10 +1,7 @@
 page_script({
 	init: function () {
-
-		salvattore.rescanMediaQueries();
-		setTimeout(function (){
-			if($(window).width()>768 && $(".home-news").attr("data-columns")==1) salvattore.rescanMediaQueries();
-		},500);
+		
+		$(".js-masonry").masonry();
 		
 		$(".map-canvas").each(function () {
         	var myLatlng = new google.maps.LatLng($(this).attr("data-latitude"), $(this).attr("data-longitude"));

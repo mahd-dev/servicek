@@ -70,7 +70,7 @@
 	</div>
 	<div class="col-md-9">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-12 margin-bottom-20">
 				<div class="cover aspectratio-container aspect-3-1 fit-width fileinput fileinput-new" data-provides="fileinput">
 					<a class="aspectratio-content thumbnail fileinput-preview" data-trigger="fileinput">
 						<img src="<?php $cover=$company->cover; if($cover) echo $paths->company_cover->url.$cover; else {?>http://www.placehold.it/600x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+photo+de+couverture<?php }?>" alt="cover"/>
@@ -81,8 +81,8 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<div class="portlet light">
-					<div class="portlet-title tabbable-line">
+				<div class="row">
+					<div class="col-md-12 tabbable-line margin-bottom-20">
 						<ul class="nav nav-tabs pull-left">
 							<li class="active"><a href="#services_list" data-toggle="tab" aria-expanded="true">Services</a></li>
 							<li><a href="#products_list" data-toggle="tab" aria-expanded="false">Produits</a></li>
@@ -92,97 +92,99 @@
 							<button class="btn btn-default new_product">Ajouter un Produit</button>
 						</div>
 					</div>
-					<div class="portlet-body">
-						<div class="tab-content">
-							<div class="tab-pane row active" id="services_list">
-							<?php foreach ($company->services as $p) { ?>
-								<div class="col-sm-6 col-md-4 service" data-id="<?php echo $p->id; ?>">
-									<div class="thumbnail">
-										
-										<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
+				</div>
+				<div class="tab-content">
+					<div class="tab-pane row js-masonry active" id="services_list">
+					<?php foreach ($company->services as $p) { ?>
+						<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 service" data-id="<?php echo $p->id; ?>">
+							<div class="thumbnail">
+								
+								<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
 
-										<div class="service_image fileinput fileinput-new" data-provides="fileinput">
-											<a class="fileinput-preview thumbnail" data-trigger="fileinput">
-												<img src="<?php $image=$p->image; if($image) echo $paths->service_image->url.$image; else {?>http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
-											</a>
-											<form class="hide"><input type="file" name="image"></form>
-										</div>
-
-										<div class="caption">
-											<h3><a class="service_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
-											<p><a class="service_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->description; ?></a></p>
-											<p><a class="service_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a> DNT</p>
-										</div>
-									</div>
+								<div class="service_image fileinput fileinput-new" data-provides="fileinput">
+									<a class="fileinput-preview thumbnail" data-trigger="fileinput">
+										<img src="<?php $image=$p->image; if($image) echo $paths->service_image->url.$image; else {?>http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
+									</a>
+									<form class="hide"><input type="file" name="image"></form>
 								</div>
-							<?php }?>
-							<div class="col-sm-6 col-md-4 service" data-id="" id="new_service_template" style="display:none;">
+
+								<div class="caption">
+									<h3><a class="service_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
+									<p><a class="service_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->description; ?></a></p>
+									<p><a class="service_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a> DNT</p>
+								</div>
+							</div>
+						</div>
+					<?php }?>
+					
+					</div>
+					<div class="tab-pane row js-masonry" id="products_list">
+						<?php foreach ($company->products as $p) {?>
+							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 product" data-id="<?php echo $p->id; ?>">
 								<div class="thumbnail">
 									
 									<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
 
-									<div class="service_image fileinput fileinput-new" data-provides="fileinput">
+									<div class="product_image fileinput fileinput-new" data-provides="fileinput">
 										<a class="fileinput-preview thumbnail" data-trigger="fileinput">
-											<img src="http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image" alt="image"/>
+											<img src="<?php $image=$p->image; if($image) echo $paths->product_image->url.$image; else {?>http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
 										</a>
 										<form class="hide"><input type="file" name="image"></form>
 									</div>
 
 									<div class="caption">
-										<h3><a class="service_editable name" data-name="name" data-pk="" data-type="text" ></a></h3>
-										<p><a class="service_editable description" data-name="description" data-pk="" data-type="text" ></a></p>
-										<p><a class="service_editable price" data-name="price" data-pk="" data-type="number" ></a> DNT</p>
+										<h3><a class="product_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
+										<p><a class="product_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->description; ?></a></p>
+										<p><a class="product_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a> DNT</p>
 									</div>
 								</div>
 							</div>
-							
-							</div>
-							<div class="tab-pane row" id="products_list">
-								<?php foreach ($company->products as $p) {?>
-									<div class="col-sm-6 col-md-4 product" data-id="<?php echo $p->id; ?>">
-										<div class="thumbnail">
-											
-											<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
-
-											<div class="product_image fileinput fileinput-new" data-provides="fileinput">
-												<a class="fileinput-preview thumbnail" data-trigger="fileinput">
-													<img src="<?php $image=$p->image; if($image) echo $paths->product_image->url.$image; else {?>http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
-												</a>
-												<form class="hide"><input type="file" name="image"></form>
-											</div>
-
-											<div class="caption">
-												<h3><a class="product_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
-												<p><a class="product_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->description; ?></a></p>
-												<p><a class="product_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a> DNT</p>
-											</div>
-										</div>
-									</div>
-								<?php }?>
-								<div class="col-sm-6 col-md-4 product" data-id="" id="new_product_template" style="display:none;">
-									<div class="thumbnail">
-
-										<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
-
-										<div class="product_image fileinput fileinput-new" data-provides="fileinput">
-											<a class="fileinput-preview thumbnail" data-trigger="fileinput">
-												<img src="http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image" alt="image"/>
-											</a>
-											<form class="hide"><input type="file" name="image"></form>
-										</div>
-
-										<div class="caption">
-											<h3><a class="product_editable name" data-name="name" data-pk="" data-type="text" ></a></h3>
-											<p><a class="product_editable description" data-name="description" data-pk="" data-type="text" ></a></p>
-											<p><a class="product_editable price" data-name="price" data-pk="" data-type="number" ></a> DNT</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						<?php }?>
+						
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 service" data-id="" id="new_service_template" style="display:none;">
+	<div class="thumbnail">
+		
+		<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
+
+		<div class="service_image fileinput fileinput-new" data-provides="fileinput">
+			<a class="fileinput-preview thumbnail" data-trigger="fileinput">
+				<img src="http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image" alt="image"/>
+			</a>
+			<form class="hide"><input type="file" name="image"></form>
+		</div>
+
+		<div class="caption">
+			<h3><a class="service_editable name" data-name="name" data-pk="" data-type="text" ></a></h3>
+			<p><a class="service_editable description" data-name="description" data-pk="" data-type="text" ></a></p>
+			<p><a class="service_editable price" data-name="price" data-pk="" data-type="number" ></a> DNT</p>
+		</div>
+	</div>
+</div>
+
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 product" data-id="" id="new_product_template" style="display:none;">
+	<div class="thumbnail">
+
+		<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
+
+		<div class="product_image fileinput fileinput-new" data-provides="fileinput">
+			<a class="fileinput-preview thumbnail" data-trigger="fileinput">
+				<img src="http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image" alt="image"/>
+			</a>
+			<form class="hide"><input type="file" name="image"></form>
+		</div>
+
+		<div class="caption">
+			<h3><a class="product_editable name" data-name="name" data-pk="" data-type="text" ></a></h3>
+			<p><a class="product_editable description" data-name="description" data-pk="" data-type="text" ></a></p>
+			<p><a class="product_editable price" data-name="price" data-pk="" data-type="number" ></a> DNT</p>
 		</div>
 	</div>
 </div>

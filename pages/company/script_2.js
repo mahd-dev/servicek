@@ -1,5 +1,7 @@
 page_script({
 	init: function () {
+		$(".js-masonry").masonry();
+
 		$.fn.editable.defaults.ajaxOptions = {type: "POST"};
 		$.fn.editable.defaults.type = 'text';
 		$.fn.editable.defaults.pk = 1;
@@ -63,6 +65,7 @@ page_script({
 								var new_element = $("#new_service_template").clone();
 								new_element.removeAttr("id");
 								new_element.prependTo("#services_list").show();
+								$("#services_list").masonry( 'prepended', new_element.show() );
 
 								new_element.attr("data-id", p.id);
 								$(".service_editable", new_element).attr("data-pk", p.id).editable({value:"", params:function (p) { p.for="service"; return p; }});
@@ -100,6 +103,7 @@ page_script({
 								var new_element = $("#new_product_template").clone();
 								new_element.removeAttr("id");
 								new_element.prependTo("#products_list").show();
+								$("#products_list").masonry( 'prepended', new_element.show() );
 
 								new_element.attr("data-id", p.id);
 								$(".product_editable", new_element).attr("data-pk", p.id).editable({value:"", params:function (p) { p.for="product"; return p; }});
@@ -136,7 +140,8 @@ page_script({
 						var p = JSON.parse(rslt);
 						switch(p.status){
 							case "success":
-								container.remove();
+								$("#products_list").masonry('remove', container);
+								$("#products_list").masonry();
 							break;
 							default:
 								console.log(rslt);
@@ -164,7 +169,8 @@ page_script({
 						var p = JSON.parse(rslt);
 						switch(p.status){
 							case "success":
-								container.remove();
+								$("#services_list").masonry('remove', container);
+								$("#services_list").masonry();
 							break;
 							default:
 								console.log(rslt);

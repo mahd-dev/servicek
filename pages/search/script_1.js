@@ -1,10 +1,6 @@
 page_script({
 	init: function () {
 
-		salvattore.rescanMediaQueries();
-		setTimeout(function (){
-			if($(window).width()>768 && $(".home-news").attr("data-columns")==1) salvattore.rescanMediaQueries();
-		},1000);
 
 		/*
 		$("#search_form .autocomplete").tagit({

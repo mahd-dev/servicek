@@ -19,30 +19,30 @@
             <div class="col-md-12">
             	<?php if(count($rslt)>0){?>
 
-	            <div class="row home-news" data-columns>
+	            <div class="row js-masonry">
 	            
-	            <?php foreach ($rslt as $r) {?>
-            	
-            	<a href="<?php echo $r["url"];?>" class="item_a ajaxify thumbnail">
-		        	<div class="item portlet light">
-						<div class="portlet-title">
-							<div class="caption">
-								<span class="caption-subject bold font-grey-gallery uppercase"><?php echo $r["title"];?></span>
-								<span class="caption-helper"><?php echo $r["sub_title"];?></span>
-							</div>
-						</div>
-						<div class="portlet-body">
-							<?php if($r["image_url"]){?>
-								<div class="aspectratio-container aspect-4-3 fit-width">
-									<div class="aspectratio-content image" style="background-image:url('<?php echo $r["image_url"];?>');"></div>
+		            <?php foreach ($rslt as $r) {?>
+	            	
+		            	<a href="<?php echo $r["url"];?>" class="item col-xs-12 col-sm-6 col-md-4 col-lg-3 ajaxify">
+				        	<div class="portlet light">
+								<div class="portlet-title">
+									<div class="caption">
+										<span class="caption-subject bold font-grey-gallery uppercase"><?php echo $r["title"];?></span>
+										<span class="caption-helper"><?php echo $r["sub_title"];?></span>
+									</div>
 								</div>
-							<?php }?>
-							<p><?php echo $r["content"];?></p>
-						</div>
-					</div>
-				</a>
-	            
-	            <?php } ?>
+								<div class="portlet-body">
+									<?php if($r["image_url"]){?>
+										<div class="aspectratio-container aspect-4-3 fit-width">
+											<div class="aspectratio-content image" style="background-image:url('<?php echo $r["image_url"];?>');"></div>
+										</div>
+									<?php }?>
+									<p><?php echo $r["content"];?></p>
+								</div>
+							</div>
+						</a>
+		            
+		            <?php } ?>
 	            
 	            </div>
 

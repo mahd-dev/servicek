@@ -30,55 +30,12 @@
 	background-size: cover;
 }
 
-@media screen and (max-width: 768px) {
-	div[data-columns]::before {
-		content: '1 .col-xs-12';
-	}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+	background-color: transparent;;
 }
 
-@media screen and (min-width: 769px) and (max-width: 1200px) {
-	div[data-columns]::before {
-		content: '2 .col-xs-6';
-	}
-}
-@media screen and (min-width: 1201px) and (max-width: 1600px) {
-	div[data-columns]::before {
-		content: '3 .col-xs-4';
-	}
-}
-
-@media screen and (min-width: 1601px) {
-	div[data-columns]::before {
-		content: '4 .col-xs-3';
-	}
-}
-
-html,
-body,
-#map-canvas {
-	height: 300px;
-	margin: 0px;
-	padding: 0px;
-	width: 100%;
-}
-#new_produit_modal .form-group .col-sm-10{
-margin-bottom: 10px!important;
-}
-#new_service_modal .form-group .col-sm-10{
-margin-bottom: 10px!important;
-}
 .profile-sidebar-portlet {
 	padding: 12px 0px 15px 0px !important;
-}
-
-.profile-userpic img {
-	float: none;
-	margin: 0 auto;
-	width: 50%;
-	height: 50%;
-	-webkit-border-radius: 50% !important;
-	-moz-border-radius: 50% !important;
-	border-radius: 50% !important;
 }
 
 .profile-usertitle {

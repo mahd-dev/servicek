@@ -165,6 +165,8 @@
 	<script src="<?php echo cdn;?>/plugins/jquery.cokie.min.js" type="text/javascript"></script>
 	<script src="<?php echo cdn;?>/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
 	
+	<script src="<?php echo cdn;?>/plugins/masonry/masonry.pkgd.min.js" type="text/javascript"></script>
+
 	<script src="<?php echo cdn;?>/plugins/jquery.form<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 	<script src="<?php echo cdn;?>/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 	
