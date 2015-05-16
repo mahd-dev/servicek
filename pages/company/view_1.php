@@ -90,7 +90,7 @@
 						?>
 							<div class="col-xs-12 col-sm-6 col-md-4">
 								<div class="thumbnail">
-									<?php if($name){?><h3><?php echo $name; ?></h3><?php }?>
+									<?php if($name){?><div class="caption"><h3><?php echo $name; ?></h3></div><?php }?>
 									<?php if($image){?>
 										<img class="prod_srv_image" src="<?php echo $paths->service_image->url.$image;?>" alt="image"/>
 									<?php }?>
@@ -117,7 +117,7 @@
 						?>
 							<div class="col-xs-12 col-sm-6 col-md-4">
 								<div class="thumbnail">
-									<?php if($name){?><h3><?php echo $name; ?></h3><?php }?>
+									<?php if($name){?><div class="caption"><h3><?php echo $name; ?></h3></div><?php }?>
 									<?php if($image){?>
 										<img class="prod_srv_image" src="<?php echo $paths->product_image->url.$image;?>" alt="image"/>
 									<?php }?>
