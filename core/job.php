@@ -14,7 +14,7 @@
                     case "admin":
                         $this->id_admin=$value->id;
                     default :
-                        $db->query("update job set ".$name."='".$db->real_escape_string($value)."' where (id='".$this->id."')");
+                        $db->query("update job set ".$name."=".($value==null?"NULL":"'".$db->real_escape_string($value)."'")." where (id='".$this->id."')");
                     break;
                 }
             }

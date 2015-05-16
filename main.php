@@ -14,7 +14,7 @@
 		}
 	}
 
-	define("debug",FALSE);
+	define("debug",TRUE);
 
 	// root url constants
 	define("cdn","http".(!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "off"?"s":"")."://".$_SERVER["HTTP_HOST"]."/assets");

@@ -97,7 +97,7 @@
 									<?php if($description||$price){?>
 										<div class="caption">
 											<p><?php echo $description; ?></p>
-											<?php if($price){?><h4><?php echo $price ; ?> DNT</h4><?php }?>
+											<?php if($price){?><h4>Prix : <?php echo $price ; ?><sup> DNT</sup></h4><?php }?>
 										</div>
 									<?php }?>
 								</div>
@@ -112,7 +112,8 @@
 							$image=$p->image;
 							$description=$p->description;
 							$price=$p->price;
-							if($name||$image||$description||$price){
+							$rent_price=$p->rent_price;
+							if($name||$image||$description||$price||$rent_price){
 						?>
 							<div class="col-xs-12 col-sm-6 col-md-4">
 								<div class="thumbnail">
@@ -120,10 +121,11 @@
 									<?php if($image){?>
 										<img class="prod_srv_image" src="<?php echo $paths->product_image->url.$image;?>" alt="image"/>
 									<?php }?>
-									<?php if($description||$price){?>
+									<?php if($description||$price||$rent_price){?>
 										<div class="caption">
 											<p><?php echo $description; ?></p>
-											<?php if($price){?><h4><?php echo $price ; ?> DNT</h4><?php }?>
+											<?php if($price){?><h4>Prix : <?php echo $price ; ?><sup> DNT</sup></h4><?php }?>
+											<?php if($rent_price){?><h4>Prix de location : <?php echo $rent_price ; ?><sup> DNT</sup></h4><?php }?>
 										</div>
 									<?php }?>
 								</div>

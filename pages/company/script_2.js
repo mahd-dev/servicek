@@ -28,34 +28,6 @@ page_script({
 		$(".product_editable").editable({params:function (p) { p.for="product"; return p; }});
 		$(".service_editable").editable({params:function (p) { p.for="service"; return p; }});
 
-		$(".price_checkbox").change(function (e) {
-			if($(this).prop('checked')){
-				$("[data-name=price]", $(this).parents("p")).editable('enable');
-				$(".unit", $(this).parents("p")).show();
-			}else{
-				var container = $(this).parents("p");
-				var editable = $("[data-name=price]", container);
-				var unit = $(".unit", container);
-				$.post(location.href, {for: (editable.hasClass("product_editable")?"product":"service"), pk: editable.attr("data-pk"), name: "price", value: null}, function (rslt) {
-					$("[data-name=price]", $(this).parents("p")).editable('setValue', null).editable('submit').editable('disable');
-					$(".unit", $(this).parents("p")).hide();
-				});
-				
-			}
-		});
-		$(".rent_price_checkbox").change(function (e) {
-			if($(this).prop('checked')){
-				$("[data-name=rent_price]", $(this).parents("p")).editable('enable');
-				$(".unit", $(this).parents("p")).show();
-			}else{
-				$.post(location.href, {for: (editable.hasClass("product_editable")?"product":"service"), pk: editable.attr("data-pk"), name: "rent_price", value: null}, function (rslt) {
-					$("[data-name=rent_price]", $(this).parents("p")).editable('setValue', null).editable('submit').editable('disable');
-					$(".unit", $(this).parents("p")).hide();
-				});
-			
-			}
-		});
-
 		$(".map-canvas").each(function (){
 			$(this).locationpicker({
 				location: {latitude: $(this).attr("data-latitude"), longitude: $(this).attr("data-longitude")},
@@ -100,9 +72,11 @@ page_script({
 								$("#services_list").masonry( 'prepended', new_element.show() );
 
 								new_element.attr("data-id", p.id);
-								$(".service_editable", new_element).attr("data-pk", p.id).editable({value:"", params:function (p) { p.for="service"; return p; }});
+								$(".service_editable", new_element).attr("data-pk", p.id).editable({value:null, params:function (p) { p.for="service"; return p; }});
 								$(".delete", new_element).click(function (e) {service_delete(e, this);});
 								$("input[type=file]", new_element).change(function (e) {service_image_change(e, this);});
+								$(".price_checkbox", new_element).change(price_checkbox);
+								$(".rent_price_checkbox", new_element).change(rent_price_checkbox);
 
 								$("[href='#services_list']").click();
 								app.scrollTo(new_element, -200);
@@ -138,9 +112,11 @@ page_script({
 								$("#products_list").masonry( 'prepended', new_element.show() );
 
 								new_element.attr("data-id", p.id);
-								$(".product_editable", new_element).attr("data-pk", p.id).editable({value:"", params:function (p) { p.for="product"; return p; }});
+								$(".product_editable", new_element).attr("data-pk", p.id).editable({value:null, params:function (p) { p.for="product"; return p; }});
 								$(".delete", new_element).click(function (e) {product_delete(e, this);});
 								$("input[type=file]", new_element).change(function (e) {product_image_change(e, this);});
+								$(".price_checkbox", new_element).change(price_checkbox);
+								$(".rent_price_checkbox", new_element).change(rent_price_checkbox);
 
 								$("[href='#products_list']").click();
 								app.scrollTo(new_element, -200);
@@ -159,6 +135,40 @@ page_script({
 				}
 			});
 		});
+		
+		var price_checkbox = function (e) {
+			var container = $(this).parents("p");
+			var ed = $("[data-name=price]", container);
+			var unit = $(".unit", container);
+			if($(this).prop('checked')){
+				ed.editable('enable');
+				unit.show();
+			}else{
+				$.post(location.href, {for: (ed.hasClass("product_editable")?"product":"service"), pk: ed.attr("data-pk"), name: "price", value: null}, function (rslt) {
+					ed.editable('setValue', null).editable('submit').editable('disable');
+					unit.hide();
+				});
+				
+			}
+		};
+		var rent_price_checkbox = function (e) {
+			var container = $(this).parents("p");
+			var ed = $("[data-name=rent_price]", container);
+			var unit = $(".unit", container);
+			if($(this).prop('checked')){
+				ed.editable('enable');
+				unit.show();
+			}else{
+				$.post(location.href, {for: (ed.hasClass("product_editable")?"product":"service"), pk: ed.attr("data-pk"), name: "rent_price", value: null}, function (rslt) {
+					ed.editable('setValue', null).editable('submit').editable('disable');
+					unit.hide();
+				});
+				
+			}
+		};
+
+		$(".price_checkbox").change(price_checkbox);
+		$(".rent_price_checkbox").change(rent_price_checkbox);
 
 		var product_delete = function (e, btn) {
 			e.preventDefault();

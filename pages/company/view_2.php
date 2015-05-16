@@ -111,7 +111,7 @@
 
 								<div class="caption">
 									<p>Description :<br><a class="service_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->description; ?></a></p>
-									<p>Prix :<br><a class="service_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a> DNT</p>
+									<p>Prix :<br><a class="service_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a><sup> DNT</sup></p>
 								</div>
 							</div>
 						</div>
@@ -137,8 +137,8 @@
 										<p>Description :<br><a class="product_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->description; ?></a></p>
 										<p>Prix :<br>
 											<?php $price=$p->price; $rent_price=$p->rent_price;?>
-											<p><label><span><input type="checkbox" class="price_checkbox"<?php if($price!=null){?> checked<?php }?>></span>Vente </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number"<?php if($price==null){?> data-disabled='true'<?php }?>><?php echo $price; ?></a><span class="unit"<?php if($price==null){?> style='display:none;'<?php }?>> DNT</span></p>
-											<p><label><span><input type="checkbox" class="rent_price_checkbox"<?php if($rent_price!=null){?> checked<?php }?>></span>Location </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="rent_price" data-pk="<?php echo $p->id; ?>" data-type="number"<?php if($rent_price==null){?> data-disabled='true'<?php }?>><?php echo $rent_price; ?></a><span class="unit"<?php if($rent_price==null){?> style='display:none;'<?php }?>> DNT</span></p>
+											<p><label><span><input type="checkbox" class="price_checkbox"<?php if($price!=null){?> checked<?php }?>></span>Vente </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number"<?php if($price==null){?> data-disabled='true'<?php }?>><?php echo $price; ?></a><sup class="unit"<?php if($price==null){?> style='display:none;'<?php }?>> DNT</sup></p>
+											<p><label><span><input type="checkbox" class="rent_price_checkbox"<?php if($rent_price!=null){?> checked<?php }?>></span>Location </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="rent_price" data-pk="<?php echo $p->id; ?>" data-type="number"<?php if($rent_price==null){?> data-disabled='true'<?php }?>><?php echo $rent_price; ?></a><sup class="unit"<?php if($rent_price==null){?> style='display:none;'<?php }?>> DNT</sup></p>
 										</p>
 									</div>
 								</div>
@@ -168,7 +168,7 @@
 
 		<div class="caption">
 			<p>Description :<br><a class="service_editable description" data-name="description" data-pk="" data-type="text" ></a></p>
-			<p>Prix :<br><a class="service_editable" data-name="price" data-pk="" data-type="number" ></a> DNT</p>
+			<p>Prix :<br><a class="service_editable" data-name="price" data-pk="" data-type="number" ></a><sup> DNT</sup></p>
 		</div>
 	</div>
 </div>
@@ -189,8 +189,8 @@
 		<div class="caption">
 			<p>Description :<br><a class="product_editable description" data-name="description" data-pk="" data-type="text" ></a></p>
 			<p>Prix :<br>
-				<p><label><span><input type="checkbox" class="price_checkbox" checked></span>Vente </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a><span class="unit"> DNT</span></p>
-				<p><label><span><input type="checkbox" class="rent_price_checkbox"></span>Location </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="rent_price" data-pk="<?php echo $p->id; ?>" data-type="number" data-disabled='true'><?php echo $p->price; ?></a><span class="unit" style='display:none;'> DNT</span></p>
+				<p><label><span><input type="checkbox" class="price_checkbox" checked></span>Vente </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a><sup class="unit"> DNT</sup></p>
+				<p><label><span><input type="checkbox" class="rent_price_checkbox"></span>Location </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="rent_price" data-pk="<?php echo $p->id; ?>" data-type="number" data-disabled='true'><?php echo $p->price; ?></a><sup class="unit" style='display:none;'> DNT</sup></p>
 			</p>
 		</div>
 	</div>

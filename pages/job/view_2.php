@@ -38,9 +38,7 @@
 		<div class="portlet light">
 			<h5>A propos :</h5>
 			<a href="javascript:;" class="editable" data-name="description" data-type="textarea" ><?php echo $job->description;?></a>
-		</div>
-
-		<div class="portlet light">
+		<hr>
 			<h5>Domaines d'activité :</h5>
 			<?php if($is_contracted){?>
 				<?php echo $categories;?>
