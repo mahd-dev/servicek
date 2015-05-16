@@ -98,10 +98,10 @@
 					<?php foreach ($company->services as $p) { ?>
 						<div class="col-xs-12 col-sm-6 col-md-4 item service" data-id="<?php echo $p->id; ?>">
 							<div class="thumbnail">
+								<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
 								<div class="caption">
-									<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
+									<h3><a class="service_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
 								</div>
-								<h3><a class="service_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
 								<div class="service_image fileinput fileinput-new" data-provides="fileinput">
 									<a class="fileinput-preview thumbnail" data-trigger="fileinput">
 										<img src="<?php $image=$p->image; if($image) echo $paths->service_image->url.$image; else {?>http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
@@ -122,10 +122,10 @@
 						<?php foreach ($company->products as $p) {?>
 							<div class="col-xs-12 col-sm-6 col-md-4 item product" data-id="<?php echo $p->id; ?>">
 								<div class="thumbnail">
+									<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
 									<div class="caption">
-										<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
+										<h3><a class="product_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
 									</div>
-									<h3><a class="product_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
 									<div class="product_image fileinput fileinput-new" data-provides="fileinput">
 										<a class="fileinput-preview thumbnail" data-trigger="fileinput">
 											<img src="<?php $image=$p->image; if($image) echo $paths->product_image->url.$image; else {?>http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
@@ -155,10 +155,10 @@
 
 <div class="col-xs-12 col-sm-6 col-md-4 item service" data-id="" id="new_service_template" style="display:none;">
 	<div class="thumbnail">
+		<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
 		<div class="caption">
-			<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
+			<h3><a class="service_editable name" data-name="name" data-pk="" data-type="text" ></a></h3>
 		</div>
-		<h3><a class="service_editable name" data-name="name" data-pk="" data-type="text" ></a></h3>
 		<div class="service_image fileinput fileinput-new" data-provides="fileinput">
 			<a class="fileinput-preview thumbnail" data-trigger="fileinput">
 				<img src="http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image" alt="image"/>
@@ -175,10 +175,10 @@
 
 <div class="col-xs-12 col-sm-6 col-md-4 item product" data-id="" id="new_product_template" style="display:none;">
 	<div class="thumbnail">
+		<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
 		<div class="caption">
-			<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
+			<h3><a class="product_editable name" data-name="name" data-pk="" data-type="text" ></a></h3>
 		</div>
-		<h3><a class="product_editable name" data-name="name" data-pk="" data-type="text" ></a></h3>
 		<div class="product_image fileinput fileinput-new" data-provides="fileinput">
 			<a class="fileinput-preview thumbnail" data-trigger="fileinput">
 				<img src="http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image" alt="image"/>
