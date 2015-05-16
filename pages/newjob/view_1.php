@@ -40,7 +40,7 @@
 							<div class="form-group">
 							<label class="control-label col-md-3">Domaines d'activité <span class="required">*</span></label>
 							<div class="col-md-6">
-								<select name="categories" class="form-control select2" multiple>
+								<select name="categories[]" class="form-control select2" multiple>
 									<?php foreach ($available_categories as $c) {?>
 										<option value="<?php echo $c->id;?>"><?php echo $c->name;?></option>
 									<?php }?>

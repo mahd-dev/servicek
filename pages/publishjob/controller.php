@@ -11,11 +11,11 @@
 	}
 
 	$price=0;
-	foreach ($company->categories as $cc) {
+	foreach ($job->categories as $cc) {
 		$price+=floatval($cc->job_publish_price);
 	}
 	$prices_list=array(
-		round($price * (2/3))),
+		round($price * (2/3)),
 		round($price * 1),
 		round($price * 2)
 	);
@@ -82,7 +82,10 @@
 		}
 
 		$contract=contract::create($job,$_POST["token"]);
-				
+		$cc = $job->current_contract;
+		if($cc){
+			$contract->creation_time=$cc->expiration;
+		}
 		$contract->payment_from=$_POST["method"];
 		
 		if(isset($payment)) $contract->payment_recipt=$payment["params"]["payment_recipt"];

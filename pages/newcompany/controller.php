@@ -37,7 +37,7 @@
 			$c = new category($c);
 			if(!$c->isvalid) die(json_encode(array("status"=>"error_invalid_parameter")));
 		}
-
+		
 		// create company é contract
 		$company=company::create($user);
 		$seat=company_seat::create($company);
@@ -56,6 +56,12 @@
 		$seat->tel=$_POST["tel"];
 		$seat->mobile=$_POST["mobile"];
 		$seat->email=$_POST["email"];
+
+		$contract=contract::create($company);
+		
+		$contract->type=0;
+		$contract->amount=0;
+		$contract->duration=1;
 
 		die(json_encode(array(
 			"status"=>"success",

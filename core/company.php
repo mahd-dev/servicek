@@ -14,7 +14,7 @@
 			if ($this->id != NULL) {
 				switch($name){
 					default :
-						$db->query("update company set ".$name."=".($value==null?"NULL":"'".$db->real_escape_string($value)."'")." where (id='".$this->id."')");
+						$db->query("update company set ".$name."=".($value===null?"NULL":"'".$db->real_escape_string($value)."'")." where (id='".$this->id."')");
 					break;
 				}
 			}
@@ -78,12 +78,20 @@
 					break;
 					
 					case "is_contracted":
-						$q=$db->query("select count(id) from contract where (id_page='".$this->id."' and page_type='company' and TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration DAY)) >= 0)");
+						$q=$db->query("select count(id) from contract where (id_page='".$this->id."' and page_type='company' and TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration MONTH)) >= 0)");
 						$r=$q->fetch_row();
 						return $r[0]>0;
 					break;					
 					case "current_contract":
-						$q=$db->query("select id from contract where (id_page='".$this->id."' and page_type='company' and TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration DAY)) >= 0) ORDER BY DATE_ADD(creation_time, INTERVAL duration DAY) DESC LIMIT 1");
+						$q=$db->query("select id from contract where (id_page='".$this->id."' and page_type='company' and TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration MONTH)) >= 0) ORDER BY DATE_ADD(creation_time, INTERVAL duration MONTH) DESC LIMIT 1");
+						if($q->num_rows==0) return null;
+						else{
+							$r=$q->fetch_row();
+							return new contract($r[0]);
+						}
+					break;
+					case "last_contract":
+						$q=$db->query("select id from contract where (id_page='".$this->id."' and page_type='company') ORDER BY DATE_ADD(creation_time, INTERVAL duration MONTH) DESC LIMIT 1");
 						if($q->num_rows==0) return null;
 						else{
 							$r=$q->fetch_row();
@@ -91,7 +99,7 @@
 						}
 					break;
 					case "available_contracts":
-						$q=$db->query("select id from contract where (id_page='".$this->id."' and page_type='company' and TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration DAY)) >= 0)");
+						$q=$db->query("select id from contract where (id_page='".$this->id."' and page_type='company' and TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration MONTH)) >= 0)");
 						$list = array();
 						while($r=$q->fetch_row()) $list[] = new contract($r[0]);
 						return $list;

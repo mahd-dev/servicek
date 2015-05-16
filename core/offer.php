@@ -12,7 +12,7 @@
             if ($this->id != NULL) {
                 switch($name){
                     default :
-                        $db->query("update offer set ".$name."=".($value==null?"NULL":"'".$db->real_escape_string($value)."'")." where (id='".$this->id."')");
+                        $db->query("update offer set ".$name."=".($value===null?"NULL":"'".$db->real_escape_string($value)."'")." where (id='".$this->id."')");
                     break;
                 }
             }

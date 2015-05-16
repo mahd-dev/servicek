@@ -85,7 +85,10 @@
 
 		// create company é contract
 		$contract=contract::create($company,$_POST["token"]);
-		
+		$cc = $company->current_contract;
+		if($cc){
+			$contract->creation_time=$cc->expiration;
+		}
 		$contract->payment_from=$_POST["method"];
 		if(isset($payment)) $contract->payment_recipt=$payment["params"]["payment_recipt"];
 		else $contract->id_agent = $agent->id;

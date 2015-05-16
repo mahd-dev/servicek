@@ -3,20 +3,84 @@
 <link href="<?php echo cdn;?>/plugins/bootstrap-fileinput/bootstrap-fileinput<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" type="text/css" href="<?php echo cdn;?>/plugins/bootstrap-editable/bootstrap-editable/css/bootstrap-editable<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css"/>
 
-<?php if(!$is_contracted){?>
+
+<?php
+	if(!$is_contracted){
+		$lc=$company->last_contract;
+		if($lc && $lc->type==0){
+?>
 <div class="row">
 	<div class="col-md-12">
 		<div class="note note-danger">
-			<h4 class="block">Cette société n'est pas pubilée</h4>
+			<h4 class="block">La période d'essai a expiré</h4>
 			<p>
-				 Cette société n'est pas disponible au public, vous seul vous pouvez y accéder.<br>
-				 Vous ne disposez pas encore de contrat de publication.<br><br>
+				 Cette société n'est plus disponible au public, vous seul vous pouvez y accéder.<br>
 				 <a class="btn green ajaxify" href="<?php echo url_root."/".$company->url;?>/publish"><i class="icon-rocket"></i> Publier maintenant</a>
 			</p>
 		</div>
 	</div>
 </div>
-<?php }?>
+<?php }else{?>
+<div class="row">
+	<div class="col-md-12">
+		<div class="note note-danger">
+			<h4 class="block">Cette société n'est pas publiée</h4>
+			<p>
+				 Cette société n'est plus disponible au public, vous seul vous pouvez y accéder.<br>
+				 <a class="btn green ajaxify" href="<?php echo url_root."/".$company->url;?>/publish"><i class="icon-rocket"></i> Publier maintenant</a>
+			</p>
+		</div>
+	</div>
+</div>
+<?php }}else{
+	$cc=$company->current_contract;
+	$rd = $cc->remaining_days;
+	if($cc->type==0){
+		if($rd>10){
+?>
+<div class="row">
+	<div class="col-md-12">
+		<div class="note note-warning">
+			<h4 class="block">Cette société est en période d'essai gratuit</h4>
+			<p>
+				 Vous pouvez essayer toutes les fonctionnalités pendant 1 mois à partir de la date de création de la société,<br>
+				 <span class="text-danger">Au bout de <?php echo $rd;?> jours, cette société ne sera plus disponible au public.</span><br>
+				 Afin d'assurer la disponibilité de la société, créez un contrat de publication avant la fin de la période d'essai.<br><br>
+				 <a class="btn green ajaxify" href="<?php echo url_root."/".$company->url;?>/publish"><i class="icon-rocket"></i> Créer un contrat de publication</a><br>
+				 <span class="text-success">La date de début contrat de publication sera initialisée à la date fin de la période d'essai.</span>
+			</p>
+		</div>
+	</div>
+</div>
+<?php }else{?>
+<div class="row">
+	<div class="col-md-12">
+		<div class="note note-danger">
+			<h4 class="block">La période d'essai est presque finit</h4>
+			<p>
+				 <span class="text-danger">Au bout de <?php echo $rd;?> jours, cette société ne sera plus disponible au public.</span><br>
+				 Afin d'assurer la disponibilité de la société, créez un contrat de publication avant la fin de la période d'essai.<br><br>
+				 <a class="btn green ajaxify" href="<?php echo url_root."/".$company->url;?>/publish"><i class="icon-rocket"></i> Créer un contrat de publication</a><br>
+				 <span class="text-success">La date de début contrat de publication sera initialisée à la date fin de la période d'essai.</span>
+			</p>
+		</div>
+	</div>
+</div>
+<?php }}elseif($rd<=10){?>
+<div class="row">
+	<div class="col-md-12">
+		<div class="note note-danger">
+			<h4 class="block">Le contrat de publication expirera bienôt</h4>
+			<p>
+				 <span class="text-danger">Au bout de <?php echo $rd;?> jours, cette société ne sera plus disponible au public.</span><br><br>
+				 <a class="btn green ajaxify" href="<?php echo url_root."/".$company->url;?>/publish"><i class="icon-rocket"></i> Renouveler le contrat</a><br>
+				 <span class="text-success">La date de début du nouveau contrat de publication sera initialisée à la date fin du contrat existant.</span>
+			</p>
+		</div>
+	</div>
+</div>
+<?php }}?>
+
 <div class="row">
 	<div class="profile-sidebar col-md-3">
 		<div class="portlet light profile-sidebar-portlet">
@@ -32,7 +96,7 @@
 				<div class="profile-usertitle-name">
 					<a class="editable" data-name="name" data-type="text" ><?php echo $company->name;?></a>
 				</div>
-				<div class="profile-usertitle-job">
+				<div class="profile-usertitle-company">
 					<a class="editable" data-name="slogan" data-type="text" ><?php echo $company->slogan;?></a>
 				</div>
 			</div>

@@ -18,7 +18,7 @@
                     break;
                     */
                     default :
-                        $db->query("update template set ".$name."=".($value==null?"NULL":"'".$db->real_escape_string($value)."'")." where (id='".$this->id."')");
+                        $db->query("update template set ".$name."=".($value===null?"NULL":"'".$db->real_escape_string($value)."'")." where (id='".$this->id."')");
                     break;
                 }
             }

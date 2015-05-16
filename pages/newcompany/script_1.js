@@ -67,10 +67,7 @@ page_script({
 			},
 
 			invalidHandler: function (event, validator) { //display error alert on form submit 
-				var cr = $(validator.currentElements[0]);
-				$('#page_wizard').bootstrapWizard("show", $(cr.parents(".tab-pane")[0]).index());
 				error.show();
-				app.scrollTo(cr, -200);
 			},
 
 			highlight: function (element) { // hightlight error inputs
@@ -103,7 +100,7 @@ page_script({
 
 		});
 		
-		$("[name=categories]", form).select2();
+		$("[name='categories[]']", form).select2();
 		
 		form.submit(function (e){
 			if(!form.valid()){

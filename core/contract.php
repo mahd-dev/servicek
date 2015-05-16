@@ -12,7 +12,7 @@
             if ($this->id != NULL) {
                 switch($name){
                     default :
-                        $db->query("update contract set ".$name."=".($value==null?"NULL":"'".$db->real_escape_string($value)."'")." where (id='".$this->id."')");
+                        $db->query("update contract set ".$name."=".($value===null?"NULL":"'".$db->real_escape_string($value)."'")." where (id='".$this->id."')");
                     break;
                 }
             }
@@ -33,9 +33,13 @@
                         }
                     break;
                     case "remaining_days":
-                        $q=$db->query("select TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration DAY)) from contract where (id='".$this->id."')");
+                        $q=$db->query("select TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration MONTH)) from contract where (id='".$this->id."')");
                         $r=$q->fetch_row();
                         return ($r[0] < 0 ? false : $r[0]);
+                    case "expiration":
+                        $q=$db->query("select DATE_ADD(creation_time, INTERVAL duration MONTH) from contract where (id='".$this->id."')");
+                        $r=$q->fetch_row();
+                        return $r[0];
                     case "is_expired":
                         return $this->remaining_days == false;
                     break;
@@ -50,9 +54,9 @@
             }
         }
 
-        public static function create($page, $token){
+        public static function create($page, $token=null){
             global $db;
-            $db->query("insert into contract (id_page, page_type, payment_token) values('".$page->id."', '".get_class($page)."', '".$token."')");
+            $db->query("insert into contract (id_page, page_type".($token?", payment_token":"").") values('".$page->id."', '".get_class($page)."'".($token?", '".$token."'":"").")");
             return new contract($db->insert_id);
         }
 
