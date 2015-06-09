@@ -106,7 +106,7 @@
         public static function get_roots(){
             global $db;
             $rslt=array();
-            $q=$db->query("select c.id from category c where not exists (select null from category_children ch where ch.id_children=c.id)");
+            $q=$db->query("select c.id from category c where not exists (select null from category_children ch where ch.id_children=c.id and ch.children_type='category')");
             while ($r=$q->fetch_row()) $rslt[] = new category($r[0]);
             return $rslt;
         }
