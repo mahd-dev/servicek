@@ -18,7 +18,7 @@ page_script({
 		$('a[data-toggle="tab"].sp_tabs').on('shown.bs.tab', function (e) {
 			$($(e.target).attr("href")).masonry();
 		});
-		settimeout(function (){
+		setTimeout(function (){
         	$('.js-masonry').masonry();
         },1000);
 
