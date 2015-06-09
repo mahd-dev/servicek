@@ -322,7 +322,7 @@ page_script({
 			$($(e.target).attr("href")).masonry();
 		})
         setTimeout(function (){
-        	$('.js-masonry').masonry();
+        	$('.js-masonry').masonry().masonry('layout');
         },1000);
 
 	}
