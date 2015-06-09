@@ -1,10 +1,6 @@
 page_script({
 	init: function () {
 
-		$('a[data-toggle="tab"].sp_tabs').on('shown.bs.tab', function (e) {
-			$($(e.target).attr("href")).masonry();
-		}).trigger('shown.bs.tab');
-
 		$(".map-canvas").each(function () {
         	var myLatlng = new google.maps.LatLng($(this).attr("data-latitude"), $(this).attr("data-longitude"));
 			var mapOptions = {
@@ -18,6 +14,10 @@ page_script({
 			});
 			marker.setMap(map);
         });
+
+		$('a[data-toggle="tab"].sp_tabs').on('shown.bs.tab', function (e) {
+			$($(e.target).attr("href")).masonry();
+		}).trigger('shown.bs.tab');
 
 	}
 });
