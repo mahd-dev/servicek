@@ -1,7 +1,7 @@
 <?php
 
 	// preparing url
-	$url=explode("/",reset(explode("?",strtolower($_SERVER["REQUEST_URI"]))));
+	$url=explode("/",reset(explode("?",strtolower(urldecode($_SERVER["REQUEST_URI"])))));
 	array_shift($url);
 
 	$reserved_urls=array(
