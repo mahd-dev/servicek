@@ -17,7 +17,10 @@ page_script({
 
 		$('a[data-toggle="tab"].sp_tabs').on('shown.bs.tab', function (e) {
 			$($(e.target).attr("href")).masonry();
-		}).trigger('shown.bs.tab');
+		});
+		settimeout(function (){
+        	$('.js-masonry').masonry();
+        },1000);
 
 	}
 });
