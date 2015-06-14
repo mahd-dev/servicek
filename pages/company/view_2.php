@@ -106,7 +106,7 @@
 			<h5>A propos :</h5>
 			<a class="editable" data-name="description" data-type="textarea" ><?php echo $company->description;?></a>
 			<hr>
-			<h5>Domaines d'activité :</h5>
+			<h5>Domaine<?php if($nb_categories) echo "s";?> d'activité :</h5>
 			<?php if($is_contracted){?>
 				<?php echo $categories;?>
 			<?php }else{?>

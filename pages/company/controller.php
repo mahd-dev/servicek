@@ -9,6 +9,7 @@
 	$geolocation=json_decode($s->geolocation);
 	$is_contracted=$company->is_contracted;
 	$categories = array();
+	$nb_categories = count($categories);
 	$categories_json = array();
 	foreach ($company->categories as $cat){
 		$categories_json[] = intval($cat->id);

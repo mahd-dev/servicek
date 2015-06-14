@@ -24,7 +24,7 @@
 			<h5>A propos :</h5>
 			<?php echo $company->description;?>
 		<hr>
-			<h5>Domaines d'activité :</h5>
+			<h5>Domaine<?php if($nb_categories) echo "s";?> d'activité :</h5>
 			<?php echo $categories;?>
 		<hr>
 			<h5><?php echo $s->name; ?></h5>

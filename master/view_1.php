@@ -71,8 +71,8 @@
 
 				<div class="page-logo">
 					<a href="<?php echo url_root;?>" class="ajaxify">
-					<img src="<?php echo cdn;?>/img/logo<?php echo(rtl?"-rtl":"");?>.svg" alt="logo" class="logo-default">
-				</a>
+						<img src="<?php echo cdn;?>/img/logo<?php echo(rtl?"-rtl":"");?>.svg" alt="logo" class="logo-default">
+					</a>
 				</div>
 
 				<a href="javascript:;" class="menu-toggler"><i class="fa fa-bars"></i></a>
