@@ -1,9 +1,9 @@
 page_script({
 	init: function () {
-		var myLatlng = new google.maps.LatLng(33.881967, 9.560764);
+		var myLatlng = new google.maps.LatLng(35.86384047540425, 10.544368078851221);
 		var mapOptions = {
 			scrollwheel: false,
-		  	zoom: 6,
+		  	zoom: 13,
 		  	center: myLatlng
 		}
 		var map = new google.maps.Map($("#map")[0], mapOptions);
@@ -11,6 +11,5 @@ page_script({
 		    position: myLatlng
 		});
 		marker.setMap(map);
-
 	}
 });
