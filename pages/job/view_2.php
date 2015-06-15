@@ -102,7 +102,7 @@
 			<a href="javascript:;" class="editable" data-name="description" data-type="textarea" ><?php echo $job->description;?></a>
 		<hr>
 			<h5>Domaines d'activité :</h5>
-			<?php if($is_contracted){?>
+			<?php if($is_contracted && !$is_trial){?>
 				<?php echo $categories;?>
 			<?php }else{?>
 				<a class="categories-editable" data-name="categories" data-type="select2" data-value='<?php echo json_encode($categories_json);?>' data-available='<?php echo json_encode($available_categories);?>'></a>

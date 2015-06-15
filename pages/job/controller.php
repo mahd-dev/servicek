@@ -7,6 +7,7 @@
 
 	$geolocation=json_decode($job->geolocation);
 	$is_contracted = $job->is_contracted;
+	if($is_contracted) $is_trial = ($job->current_contract->type == 0);
 	$categories = array();
 	$categories_json = array();
 	foreach ($job->categories as $c){

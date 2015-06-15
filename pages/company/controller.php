@@ -8,6 +8,7 @@
 	$s=$company->seats[0];
 	$geolocation=json_decode($s->geolocation);
 	$is_contracted=$company->is_contracted;
+	if($is_contracted) $is_trial = ($company->current_contract->type == 0);
 	$categories = array();
 	$nb_categories = count($categories);
 	$categories_json = array();

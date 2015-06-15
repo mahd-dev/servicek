@@ -107,7 +107,7 @@
 			<a class="editable" data-name="description" data-type="textarea" ><?php echo $company->description;?></a>
 			<hr>
 			<h5>Domaine<?php if($nb_categories) echo "s";?> d'activité :</h5>
-			<?php if($is_contracted){?>
+			<?php if($is_contracted && !$is_trial){?>
 				<?php echo $categories;?>
 			<?php }else{?>
 				<a class="categories-editable" data-name="categories" data-type="select2" data-value='<?php echo json_encode($categories_json);?>' data-available='<?php echo json_encode($available_categories);?>'></a>
