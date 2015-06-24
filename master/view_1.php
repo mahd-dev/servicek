@@ -182,7 +182,7 @@
 	<script src="<?php echo cdn;?>/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
 	<script src="<?php echo cdn;?>/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
 
-	<script src='http://maps.google.com/maps/api/js?sensor=false&libraries=places' type="text/javascript"></script>
+	<script src='//maps.google.com/maps/api/js?sensor=false&libraries=places' type="text/javascript"></script>
 	<script src="<?php echo cdn;?>/plugins/locationpicker/locationpicker.jquery<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 
 	<script src="<?php echo cdn;?>/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>

@@ -31,7 +31,10 @@
 	color:#000 !important;
 	margin-bottom: 0px;
 }
-
+.item p{
+	height: 9ex;
+  	overflow: hidden;
+}
 
 /** view_2 **/
 .new_post textarea{
