@@ -35,6 +35,10 @@
 	height: 9ex;
   	overflow: hidden;
 }
+.item .caption{
+	height: 6ex;
+	overflow: hidden;
+}
 
 /** view_2 **/
 .new_post textarea{
