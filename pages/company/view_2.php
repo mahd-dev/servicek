@@ -133,9 +133,9 @@
 
 	</div>
 	<div class="col-md-9">
-		<div class="row">
+		<div class="row hidden-sm">
 			<div class="col-md-12 margin-bottom-20">
-				<div class="cover aspectratio-container aspect-3-1 fit-width fileinput fileinput-new" data-provides="fileinput">
+				<div class="cover ps_image aspectratio-container aspect-3-1 fit-width fileinput fileinput-new" data-provides="fileinput">
 					<a class="aspectratio-content thumbnail fileinput-preview" data-trigger="fileinput">
 						<img src="<?php $cover=$company->cover; if($cover) echo $paths->company_cover->url.$cover; else {?>http://www.placehold.it/600x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+photo+de+couverture<?php }?>" alt="cover"/>
 					</a>
@@ -158,7 +158,7 @@
 					</div>
 				</div>
 				<div class="tab-content">
-					<div class="tab-pane row js-masonry active" id="services_list">
+					<div class="tab-pane row active" id="services_list">
 					<?php foreach ($company->services as $p) { ?>
 						<div class="col-xs-12 col-sm-6 col-md-4 item service" data-id="<?php echo $p->id; ?>">
 							<div class="thumbnail">
@@ -166,23 +166,24 @@
 								<div class="caption">
 									<h3><a class="service_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
 								</div>
-								<div class="service_image fileinput fileinput-new" data-provides="fileinput">
-									<a class="fileinput-preview thumbnail" data-trigger="fileinput">
+
+								<div class="service_image ps_image aspectratio-container aspect-4-3 fit-width fileinput fileinput-new" data-provides="fileinput">
+									<a class="aspectratio-content fileinput-preview thumbnail" data-trigger="fileinput">
 										<img src="<?php $image=$p->image; if($image) echo $paths->service_image->url.$image; else {?>http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
 									</a>
 									<form class="hide"><input type="file" name="image"></form>
 								</div>
 
 								<div class="caption">
-									<p>Description :<br><a class="service_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->description; ?></a></p>
-									<p>Prix :<br><a class="service_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a><sup> DNT</sup></p>
+									<p>Description :<br><a class="service_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="textarea" ><?php echo $p->description; ?></a></p>
+									<p>Prix : <a class="service_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a><sup> DNT</sup></p>
 								</div>
 							</div>
 						</div>
 					<?php }?>
 					
 					</div>
-					<div class="tab-pane row js-masonry" id="products_list">
+					<div class="tab-pane row" id="products_list">
 						<?php foreach ($company->products as $p) {?>
 							<div class="col-xs-12 col-sm-6 col-md-4 item product" data-id="<?php echo $p->id; ?>">
 								<div class="thumbnail">
@@ -190,15 +191,15 @@
 									<div class="caption">
 										<h3><a class="product_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
 									</div>
-									<div class="product_image fileinput fileinput-new" data-provides="fileinput">
-										<a class="fileinput-preview thumbnail" data-trigger="fileinput">
+									<div class="product_image ps_image aspectratio-container aspect-4-3 fit-width fileinput fileinput-new" data-provides="fileinput">
+										<a class="aspectratio-content fileinput-preview thumbnail" data-trigger="fileinput">
 											<img src="<?php $image=$p->image; if($image) echo $paths->product_image->url.$image; else {?>http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
 										</a>
 										<form class="hide"><input type="file" name="image"></form>
 									</div>
 
 									<div class="caption">
-										<p>Description :<br><a class="product_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->description; ?></a></p>
+										<p>Description :<br><a class="product_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="textarea" ><?php echo $p->description; ?></a></p>
 										<p>Prix :<br>
 											<?php $price=$p->price; $rent_price=$p->rent_price;?>
 											<p><label><span><input type="checkbox" class="price_checkbox"<?php if($price!=null){?> checked<?php }?>></span>Vente </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number"<?php if($price==null){?> data-disabled='true'<?php }?>><?php echo $price; ?></a><sup class="unit"<?php if($price==null){?> style='display:none;'<?php }?>> DNT</sup></p>
@@ -223,16 +224,16 @@
 		<div class="caption">
 			<h3><a class="service_editable name" data-name="name" data-pk="" data-type="text" ></a></h3>
 		</div>
-		<div class="service_image fileinput fileinput-new" data-provides="fileinput">
-			<a class="fileinput-preview thumbnail" data-trigger="fileinput">
+		<div class="service_image ps_image aspectratio-container aspect-4-3 fit-width fileinput fileinput-new" data-provides="fileinput">
+			<a class="aspectratio-content fileinput-preview thumbnail" data-trigger="fileinput">
 				<img src="http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image" alt="image"/>
 			</a>
 			<form class="hide"><input type="file" name="image"></form>
 		</div>
 
 		<div class="caption">
-			<p>Description :<br><a class="service_editable description" data-name="description" data-pk="" data-type="text" ></a></p>
-			<p>Prix :<br><a class="service_editable" data-name="price" data-pk="" data-type="number" ></a><sup> DNT</sup></p>
+			<p>Description :<br><a class="service_editable description" data-name="description" data-pk="" data-type="textarea" ></a></p>
+			<p>Prix : <a class="service_editable" data-name="price" data-pk="" data-type="number" ></a><sup> DNT</sup></p>
 		</div>
 	</div>
 </div>
@@ -243,15 +244,15 @@
 		<div class="caption">
 			<h3><a class="product_editable name" data-name="name" data-pk="" data-type="text" ></a></h3>
 		</div>
-		<div class="product_image fileinput fileinput-new" data-provides="fileinput">
-			<a class="fileinput-preview thumbnail" data-trigger="fileinput">
+		<div class="product_image ps_image aspectratio-container aspect-4-3 fit-width fileinput fileinput-new" data-provides="fileinput">
+			<a class="aspectratio-content fileinput-preview thumbnail" data-trigger="fileinput">
 				<img src="http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image" alt="image"/>
 			</a>
 			<form class="hide"><input type="file" name="image"></form>
 		</div>
 
 		<div class="caption">
-			<p>Description :<br><a class="product_editable description" data-name="description" data-pk="" data-type="text" ></a></p>
+			<p>Description :<br><a class="product_editable description" data-name="description" data-pk="" data-type="textarea" ></a></p>
 			<p>Prix :<br>
 				<p><label><span><input type="checkbox" class="price_checkbox" checked></span>Vente </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="price" data-pk="" data-type="number" ></a><sup class="unit"> DNT</sup></p>
 				<p><label><span><input type="checkbox" class="rent_price_checkbox"></span>Location </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="rent_price" data-pk="" data-type="number" data-disabled='true'></a><sup class="unit" style='display:none;'> DNT</sup></p>

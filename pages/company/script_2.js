@@ -21,8 +21,8 @@ page_script({
 	        });
 	    }
 		$(".seat_editable").editable({params:function (p) { p.for="seat"; return p; }});
-		$(".product_editable").editable({params:function (p) { p.for="product"; return p; }});
-		$(".service_editable").editable({params:function (p) { p.for="service"; return p; }});
+		$(".product_editable").editable({mode:"popup", params:function (p) { p.for="product"; return p; }});
+		$(".service_editable").editable({mode:"popup", params:function (p) { p.for="service"; return p; }});
 
 		$(".map-canvas").each(function (){
 			$(this).locationpicker({
@@ -65,10 +65,9 @@ page_script({
 								var new_element = $("#new_service_template").clone();
 								new_element.removeAttr("id");
 								new_element.prependTo("#services_list").show();
-								$("#services_list").masonry( 'prepended', new_element.show() );
-
+								
 								new_element.attr("data-id", p.id);
-								$(".service_editable", new_element).attr("data-pk", p.id).editable({value:null, params:function (p) { p.for="service"; return p; }});
+								$(".service_editable", new_element).attr("data-pk", p.id).editable({value:null, mode:"popup", params:function (p) { p.for="service"; return p; }});
 								$(".delete", new_element).click(function (e) {service_delete(e, this);});
 								$("input[type=file]", new_element).change(function (e) {service_image_change(e, this);});
 								$(".price_checkbox", new_element).change(price_checkbox);
@@ -105,10 +104,9 @@ page_script({
 								var new_element = $("#new_product_template").clone();
 								new_element.removeAttr("id");
 								new_element.prependTo("#products_list").show();
-								$("#products_list").masonry( 'prepended', new_element.show() );
-
+								
 								new_element.attr("data-id", p.id);
-								$(".product_editable", new_element).attr("data-pk", p.id).editable({value:null, params:function (p) { p.for="product"; return p; }});
+								$(".product_editable", new_element).attr("data-pk", p.id).editable({value:null, mode:"popup", params:function (p) { p.for="product"; return p; }});
 								$(".delete", new_element).click(function (e) {product_delete(e, this);});
 								$("input[type=file]", new_element).change(function (e) {product_image_change(e, this);});
 								$(".price_checkbox", new_element).change(price_checkbox);
@@ -178,8 +176,7 @@ page_script({
 						var p = JSON.parse(rslt);
 						switch(p.status){
 							case "success":
-								$("#products_list").masonry('remove', container);
-								$("#products_list").masonry();
+								container.remove();
 							break;
 							default:
 								console.log(rslt);
@@ -207,8 +204,7 @@ page_script({
 						var p = JSON.parse(rslt);
 						switch(p.status){
 							case "success":
-								$("#services_list").masonry('remove', container);
-								$("#services_list").masonry();
+								container.remove();
 							break;
 							default:
 								console.log(rslt);
@@ -317,13 +313,6 @@ page_script({
             });
         	
         });
-
-		$('a[data-toggle="tab"].sp_tabs').on('shown.bs.tab', function (e) {
-			$($(e.target).attr("href")).masonry();
-		})
-        setTimeout(function (){
-        	$('.js-masonry').masonry().masonry('layout');
-        },1000);
 
 	}
 });

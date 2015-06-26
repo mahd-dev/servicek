@@ -10,13 +10,14 @@
 	max-width: 100%;
 	max-height: 200px;
 }
-.cover{
+
+.ps_image{
 	overflow: hidden;
 }
-.cover a{
+.ps_image a{
 	padding: 0;
 }
-.cover img{
+.ps_image img{
 	width: 100%;
 	max-height: none !important;
 	position: absolute;
@@ -24,6 +25,8 @@
 	bottom: 0;
 	margin: auto;
 }
+
+
 .image{
 	background-position: center;
 	background-repeat: no-repeat;
@@ -31,6 +34,17 @@
 }
 .prod_srv_image{
 	width: 100%;
+}
+
+.item .caption h3{
+	height: 25px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.item .caption>p:first-child{
+	height: 9ex;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{

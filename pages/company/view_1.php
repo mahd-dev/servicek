@@ -50,9 +50,9 @@
 	<div class="profile-content col-md-9">
 		<?php $cover = $company->cover; if($cover){?>
 
-			<div class="row">
+			<div class="row hidden-sm">
 				<div class="col-md-12 margin-bottom-20">
-					<div class="cover aspectratio-container aspect-3-1 fit-width">
+					<div class="cover ps_image aspectratio-container aspect-3-1 fit-width">
 						<div class="aspectratio-content">
 							<img src="<?php echo $paths->company_cover->url.$cover;?>" alt="cover"/>
 						</div>
@@ -80,7 +80,7 @@
 				</div>
 				<div class="tab-content">
 					<?php if($cs>0){?>
-						<div class="tab-pane row js-masonry active" id="services">
+						<div class="tab-pane row active" id="services">
 						<?php foreach ($services as $p) {
 							$name=$p->name;
 							$image=$p->image;
@@ -89,24 +89,37 @@
 							if($name||$image||$description||$price){
 						?>
 							<div class="col-xs-12 col-sm-6 col-md-4">
-								<div class="thumbnail">
+								<a class="thumbnail ps"
+									data-name="<?php if($name){ echo $name; }?>"
+									data-description="<?php echo $description; ?>"
+									data-sale-price="<?php if($price){ echo $price; }?>"
+									data-rent-price=""
+								>
+									<?php /*
 									<?php if($name){?><div class="caption"><h3><?php echo $name; ?></h3></div><?php }?>
+									*/ ?>
+									<div class="ps_image aspectratio-container aspect-4-3 fit-width">
+										<div class="aspectratio-content">
 									<?php if($image){?>
 										<img class="prod_srv_image" src="<?php echo $paths->service_image->url.$image;?>" alt="image"/>
 									<?php }?>
+										</div>
+									</div>
+									<?php /*
 									<?php if($description||$price){?>
 										<div class="caption">
 											<p><?php echo $description; ?></p>
 											<?php if($price){?><h4>Prix : <?php echo $price ; ?><sup> DNT</sup></h4><?php }?>
 										</div>
 									<?php }?>
-								</div>
+									*/ ?>
+								</a>
 							</div>
 						<?php }}?>
 						</div>
 					<?php }?>
 					<?php if($cp>0){?>
-						<div class="tab-pane row js-masonry<?php if($cs==0){?> active<?php }?>" id="products" data-columns>
+						<div class="tab-pane row <?php if($cs==0){?> active<?php }?>" id="products" data-columns>
 						<?php foreach ($products as $p) {
 							$name=$p->name;
 							$image=$p->image;
@@ -116,11 +129,23 @@
 							if($name||$image||$description||$price||$rent_price){
 						?>
 							<div class="col-xs-12 col-sm-6 col-md-4">
-								<div class="thumbnail">
+								<a class="thumbnail ps"
+									data-name="<?php if($name){ echo $name; }?>"
+									data-description="<?php echo $description; ?>"
+									data-sale-price="<?php if($price){ echo $price; }?>"
+									data-rent-price="<?php if($rent_price){ echo $rent_price ; }?>"
+								>
+									<?php /*
 									<?php if($name){?><div class="caption"><h3><?php echo $name; ?></h3></div><?php }?>
+									*/?>
+									<div class="ps_image aspectratio-container aspect-4-3 fit-width">
+										<div class="aspectratio-content">
 									<?php if($image){?>
 										<img class="prod_srv_image" src="<?php echo $paths->product_image->url.$image;?>" alt="image"/>
 									<?php }?>
+										</div>
+									</div>
+									<?php /*
 									<?php if($description||$price||$rent_price){?>
 										<div class="caption">
 											<p><?php echo $description; ?></p>
@@ -128,7 +153,8 @@
 											<?php if($rent_price){?><h4>Prix de location : <?php echo $rent_price ; ?><sup> DNT</sup></h4><?php }?>
 										</div>
 									<?php }?>
-								</div>
+									*/?>
+								</a>
 							</div>
 						<?php }}?>
 						</div>
@@ -139,6 +165,29 @@
 		<?php }?>
 	</div>
 </div>
+
+<div class="modal fade" id="show_ps" tabindex="-1" role="dialog" aria-labelledby="show product-service">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h3 class="modal-title"></h3>
+			</div>
+			<div class="modal-body">
+				<img class="prod_srv_image modal_ps_image" src="" alt="image"/>
+				<div class="caption">
+					<p class="description"></p>
+					<h4 class="sale_price">Prix : <span class="price_val"></span><sup> DNT</sup></h4>
+					<h4 class="rent_price">Prix de location : <span class="price_val"></span><sup> DNT</sup></h4>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <!-- custom page script -->
 <script src="<?php echo url_root;?>/pages/company/script_1<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
