@@ -1,7 +1,5 @@
 page_script({
 	init: function () {
-
-		$('.js-masonry').masonry().masonry('layout');
 		/*
 		$("#search_form .autocomplete").tagit({
 			placeholderText: $("#search_form .autocomplete").attr("placeholder"),

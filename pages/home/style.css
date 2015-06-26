@@ -31,6 +31,7 @@
 	color:#000 !important;
 	margin-bottom: 0px;
 }
+
 .item p{
 	height: 9ex;
   	overflow: hidden;
@@ -40,17 +41,13 @@
 	overflow: hidden;
 }
 
-/** view_2 **/
-.new_post textarea{
-	width: 100%;
-	max-width: 100%;
-	min-width: 100%;
+.item>div.portlet{
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	-webkit-transition: border .2s ease-in-out;
+	-o-transition: border .2s ease-in-out;
+	transition: border .2s ease-in-out;
 }
-#new_post_form .form-actions{
-	 padding: 0;
-	 border-top: none;
- }
-#new_post_form .fileinput{
-	margin-top: 5px;
-	margin-bottom: 5px;
+.item>div.portlet:hover{
+	border-color: #337ab7;
 }

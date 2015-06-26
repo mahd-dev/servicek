@@ -19,7 +19,7 @@
             <div class="col-md-12">
             	<?php if(count($rslt)>0){?>
 
-	            <div class="row js-masonry">
+	            <div class="row">
 	            
 		            <?php foreach ($rslt as $r) {?>
 	            	
@@ -38,6 +38,11 @@
 										</div>
 									<?php }?>
 									<p><?php echo $r["content"];?></p>
+									<?php if(!$r["image_url"]){?>
+										<div class="aspectratio-container aspect-4-3 fit-width">
+											<div class="aspectratio-content"></div>
+										</div>
+									<?php }?>
 								</div>
 							</div>
 						</a>
