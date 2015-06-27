@@ -1,36 +1,35 @@
 <?php
 
-	try {
-
-	  $payload = json_decode($_POST['payload']);
-
-	}
-	catch(Exception $e) {
-
-		chdir(__DIR__);
-		file_put_contents('error.log', $e . ' :\n' . $payload . '\n', FILE_APPEND);
-		echo $e;
-		header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
-		die();
-
-	}
-
 	include("secret.php");
 
-	if ($payload->hook->config->secret == $release_secret) {
+	$secret = $release_secret;
 
-		$output = shell_exec("cd /var/www/servicek && git pull");
-		chdir(__DIR__);
-		file_put_contents('pull.log', $output, FILE_APPEND);
-		echo "pull success";
-		die();
+	$headers = getallheaders();
+	$hubSignature = $headers['X-Hub-Signature'];
 
-	}else{
+	// Split signature into algorithm and hash
+	list($algo, $hash) = explode('=', $hubSignature, 2);
+
+	// Get payload
+	$payload = file_get_contents('php://input');
+
+	// Calculate hash based on payload and the secret
+	$payloadHash = hash_hmac($algo, $payload, $secret);
+
+	// Check if hashes are equivalent
+	if ($hash !== $payloadHash) {
 
 		chdir(__DIR__);
 		file_put_contents('error.log', 'Unauthorized :\n' . $payload . '\n', FILE_APPEND);
 		header($_SERVER['SERVER_PROTOCOL'] . ' 401 Unauthorized', true, 401);
-		die();
+    die('Bad secret');
+
+	}else{
+
+		$output = shell_exec("cd /var/www/servicek && git pull");
+		chdir(__DIR__);
+		file_put_contents('pull.log', $output.'\n', FILE_APPEND);
+		die("pull success");
 	}
 
 ?>
