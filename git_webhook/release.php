@@ -2,7 +2,7 @@
 
 	try {
 
-	  $payload = json_decode($_REQUEST['payload']);
+	  $payload = json_decode($_POST['payload']);
 
 	}
 	catch(Exception $e) {
