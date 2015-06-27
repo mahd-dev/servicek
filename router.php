@@ -94,7 +94,10 @@
         
 		case "sitemap.xml":
 			die(include"seo/sitemap.php");break;
-
+		case "git_webhook_push":
+			die(include"git_webhook/pull.php");break;
+		case "git_webhook_release":
+			die(include"git_webhook/release.php");break;
 		default:
 			$company = company::get_by_url($url[0]);
 			if($company){
