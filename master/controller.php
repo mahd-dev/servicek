@@ -10,7 +10,7 @@
     $ogp->setTitle("Servicek.net");
     $ogp->setDescription($seo_description);
     $ogp->setType( 'website' );
-    $ogp->setURL( 'http://servicek.net/' );
+    $ogp->setURL( 'https://servicek.net/' );
     $ogp->setDeterminer( 'auto' );
 
     $ref=array(
