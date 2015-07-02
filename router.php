@@ -29,10 +29,10 @@
 			$req_page = "pages/home/controller.php";break;
 		case "about":
 			$req_page = "pages/about/controller.php";break;
-		
+
 		case "contact":
 			$req_page = "pages/contact/controller.php";break;
-		
+
         case "search":
 			if(isset($url[1]) && $url[1]!="autocomplete") $_GET["q"]=$url[1];
 			$req_page = "pages/search/controller.php";break;
@@ -50,7 +50,7 @@
 			$req_page = "pages/account/controller.php";break;
 		case "new":
 			if(!isset($url[1])){
-				$req_page="pages/404/controller.php";break;
+				$req_page="pages/newswitch/controller.php";break;
 			}else{
 				switch ($url[1]) {
 					case "company":
@@ -84,14 +84,14 @@
 			if(isset($url[1])) $_GET["id"]=$url[1];
 			$req_page = "pages/post/controller.php";
 			break;
-        
+
         /*
 		case "page_requires_parameters": // like http://loop.tn/post/123456789/897654321
 			if(isset($url[1])) $_GET["param_1"]=$url[1];
 			if(isset($url[2])) $_GET["param_2"]=$url[2];
 			$req_page = "pages/page/controller.php";break;
         */
-        
+
 		case "sitemap.xml":
 			die(include"seo/sitemap.php");break;
 		case "git_webhook_push":
