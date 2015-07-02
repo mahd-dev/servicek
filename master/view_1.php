@@ -140,6 +140,13 @@
 					</div>
 				</div>
 			</div>
+			<div class="footer-bar">
+				<a class="scroll-top">
+        	<div class="container center">
+            <i class="fa fa-angle-up"></i>
+        	</div>
+				</a>
+    	</div>
 		</div>
 	</div>
 
