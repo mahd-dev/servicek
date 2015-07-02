@@ -1,17 +1,9 @@
 <link href="<?php echo url_root;?>/pages/login/style<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css">
 
 <div class="row">
-	<div class="col-md-12">
-		<div class="page-head">
-			<div class="page-title">
-				<h1>Se connecter&nbsp;&nbsp;<small>Connectez à votre compte et gérer vos entreprises</small></h1>
-			</div>
-		</div>
-	</div>
-</div>
+	<div class="col-md-offset-2 col-md-4 col-sm-7">
+				<h2 class="page-header center">Se connecter<br><small>Connectez à votre compte et gérer vos entreprises</small></h2>
 
-<div class="row">
-	<div class="col-md-offset-1 col-md-3 col-sm-7">
         <div class="alert alert-danger username_error" style="display:none;">
             Nom d'utilisateur incorrect !
         </div>
@@ -27,24 +19,22 @@
         <div class="alert alert-danger unhandled_error" style="display:none;">
             <strong>Désolé!</strong> une erreur inattendue s'est intervenue :(
         </div>
-		<form id="login_form" method="post">
-			<div class="form-group">
-				<label for="username" class="control-label">Nom d'utilisateur</label>
-				<input type="text" class="form-control" name="username" placeholder="Entrer votre nom d'utilisateur" required>
-			</div>
-			<div class="form-group">
-				<label for="password" class="control-label">Mot de passe</label>
-				<input type="password" class="form-control" name="password" placeholder="Entrer votre mot de passe" required>
-			</div>
-			<div class="form-actions">
-				<button type="submit" class="btn btn-primary pull-right"><i class="icon-check"></i> Se connecter</button>
-			</div>
-		</form>
+				<div class="box">
+					<form id="login_form" method="post">
+						<div class="form-group">
+							<input type="text" class="form-control" name="username" placeholder="Nom d'utilisateur" required>
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
+						</div>
+							<button type="submit" class="btn"><i class="icon-check"></i> Se connecter</button>
+					</form>
+				</div>
 	</div>
-    <div class="col-md-3 col-sm-5">
-        <div class="note note-info">
-            <h4 class="block">Vous ne disposez pas de compte ?</h4>
-            <a href="<?php echo url_root;?>/register" class="btn green ajaxify">Créer mon compte</a>
+    <div class="col-md-4 col-sm-5">
+        <div class="alert alert-info">
+            <h4>Vous ne disposez pas de compte ?</h4>
+            <a href="<?php echo url_root;?>/register" class="btn ajaxify">Créer mon compte</a>
         </div>
     </div>
 </div>

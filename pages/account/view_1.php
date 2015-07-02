@@ -1,24 +1,15 @@
-<link rel="stylesheet" type="text/css" href="<?php echo cdn;?>/plugins/bootstrap-editable/bootstrap-editable/css/bootstrap-editable<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo cdn;?>/libraries/bootstrap-editable/bootstrap-editable/css/bootstrap-editable<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css"/>
 
 <link href="<?php echo url_root;?>/pages/account/style<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css">
-
-<div class="row">
-	<div class="col-md-12">
-		<div class="page-head">
-			<div class="page-title">
-				<h1>Mon compte&nbsp;&nbsp;<small>Gérer vos sociétés, modifier vos attributs...</small></h1>
-			</div>
-		</div>
-	</div>
-</div>
 
 <?php $ia = $user->is_agent;?>
 
 <div class="row">
 	<div class="col-md-12">
+		<h2 class="page-header">Mon compte <small> | Gérer vos sociétés, modifier vos attributs...</small></h2>
 		<div class="row">
 			<div class="profile-sidebar col-md-3">
-				<div class="portlet light profile-sidebar-portlet">
+				<div class="portlet light profile-sidebar-portlet box">
 					<div class="profile-usertitle">
 						<div class="profile-usertitle-name"><?php echo $user->displayname;?></div>
 					</div>
@@ -42,45 +33,38 @@
 					</div>
 				</div>
 			</div>
-			<div class="profile-content col-md-9">
+			<div class="profile-content col-md-9 box">
 				<div class="tab-content">
 
 					<?php if(!$ia){?>
 					<div class="tab-pane active" id="companies_tab">
 						<?php if($num_pages==0){?>
 
-							<div class="note note-info">
-								<h3 class="block">Démarrez ici ..</h3>
+							<div class="alert alert-info">
+								<h3>Démarrez ici ..</h3>
 								<p>
 									 <div class="btn-group btn-group-solid margin-bottom-20">
-										<a type="button" class="btn btn-lg btn-default ajaxify" href="<?php echo url_root;?>/new/company"><i class="icon-flag"></i> Créer ma Société</a>
-										<a type="button" class="btn btn-lg btn-default ajaxify" href="<?php echo url_root;?>/new/job"><i class="icon-pointer"></i> Créer mon travail</a>
+										<a type="button" class="btn btn-xl ajaxify" href="<?php echo url_root;?>/new/company"><i class="icon-flag"></i> Créer ma Société</a>
+										<a type="button" class="btn btn-xl ajaxify" href="<?php echo url_root;?>/new/job"><i class="icon-pointer"></i> Créer mon travail</a>
 									</div>
 								</p>
 							</div>
 
 						<?php }else{?>
-							<div class="portlet light">
-								<div class="portlet-title">
-									<div class="btn-group btn-group-solid pull-right">
-										<a type="button" class="btn btn-default ajaxify" href="<?php echo url_root;?>/new/company"><i class="icon-flag"></i> Créer une autre Société</a>
-										<a type="button" class="btn btn-default ajaxify" href="<?php echo url_root;?>/new/job"><i class="icon-pointer"></i> Créer un autre travail</a>
-									</div>
-								</div>
-								<div class="portlet-body">
-									<div class="list-group">
-										<?php foreach($pages as $p){?>
-											<a href="<?php echo $p["url"];?>" class="ajaxify list-group-item">
-												<h4>
-													<i class="icon-<?php echo($p["type"]=="company" ? "flag" : "pointer");?>"></i>
-													<?php echo $p["name"];?>
-												</h4>
-											</a>
-										<?php }?>
-									</div>
-								</div>
+							<div class="list-group">
+								<?php foreach($pages as $p){?>
+									<a href="<?php echo $p["url"];?>" class="ajaxify list-group-item">
+										<h4>
+											<i class="icon-<?php echo($p["type"]=="company" ? "flag" : "pointer");?>"></i>
+											<?php echo $p["name"];?>
+										</h4>
+									</a>
+								<?php }?>
 							</div>
-
+							<div class="btn-group btn-group-solid pull-right">
+								<a type="button" class="btn ajaxify" href="<?php echo url_root;?>/new/company"><i class="icon-flag"></i> Créer une autre Société</a>
+								<a type="button" class="btn ajaxify" href="<?php echo url_root;?>/new/job"><i class="icon-pointer"></i> Créer un autre travail</a>
+							</div>
 						<?php }?>
 
 					</div>
@@ -89,7 +73,7 @@
 					<div class="tab-pane<?php if($ia){?> active<?php }?>" id="settings">
 						<div class="portlet light">
 							<div class="portlet-title tabbable-line">
-								<ul class="nav nav-tabs pull-left">
+								<ul class="nav nav-tabs">
 									<li class="active">
 										<a href="#personal_data" data-toggle="tab" aria-expanded="true">Données personnelles</a>
 									</li>
@@ -114,7 +98,7 @@
 										<a href="javascript:;" id="mobile" data-type="tel" data-original-title="Entrer votre numéro de téléphone"><?php echo $user->mobile;?></a>
 									</p>
 									</div>
-									<div class="tab-pane" id="passoword_tab" style="height:350px;">
+									<div class="tab-pane" id="passoword_tab">
 										<div class="alert alert-success success_msg" style="display:none;">
 								            Votre mot de passe a été modifiée avec succès
 								        </div>
@@ -130,16 +114,13 @@
 										<form id="password_form" method="POST" role="form" class="col-md-6">
 											<div class="form-body">
 												<div class="form-group">
-													<label>Ancien mot de passe</label>
 													<input type="password" class="form-control" placeholder="Ancien mot de passe" name="old_password" pattern=".{8,}" title="Le mot de passe doit avoir au moin 8 caractères" required>
 												</div>
 												<div class="form-group">
-													<label>Nouveau mot de passe</label>
 													<input type="password" class="form-control" placeholder="Nouveau mot de passe" name="new_password" pattern=".{8,}" title="Le mot de passe doit avoir au moin 8 caractères" required>
 												</div>
 
 												<div class="form-group">
-													<label>Confirmation du mot de passe</label>
 													<input type="password" class="form-control" placeholder="Confirmer le nouveau mot de passe" pattern=".{8,}" title="Le mot de passe doit avoir au moin 8 caractères" required>
 												</div>
 

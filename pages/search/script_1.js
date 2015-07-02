@@ -28,8 +28,8 @@ page_script({
 		// process search form submit event
 		$("#search_form").submit(function (e) {
 			e.preventDefault();
-			//Layout.ajaxify(location.origin + "/search?q=" + $(this).find("ul.autocomplete").tagit("assignedTags").join(" "));
-			Layout.ajaxify(location.origin + "/search?q=" + $(this).find(".query").val());
+			//app.ajaxify(location.origin + "/search?q=" + $(this).find("ul.autocomplete").tagit("assignedTags").join(" "));
+			app.ajaxify(location.origin + "/search?q=" + $(this).find(".query").val());
 		});
 		
 	}

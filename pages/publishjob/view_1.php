@@ -37,7 +37,7 @@
 							<div class="tab-content">
 								
 								<div class="tab-pane active" id="contract_details">
-									<h4 class="block">Choix de l'offre</h4>
+									<h4>Choix de l'offre</h4>
 
 									<div class="form-group">
 										<label class="control-label col-md-3">Offre</label>
@@ -51,7 +51,7 @@
 										</div>
 									</div>
 									
-									<h4 class="block">Termes du contrat</h4>
+									<h4>Termes du contrat</h4>
 
 									<div class="form-group">
 										<label class="control-label col-md-3">Contrat</label>
@@ -87,7 +87,7 @@
 
 								<div class="tab-pane" id="payment_informations">
 
-									<h4 class="block">Informations de paiement</h4>
+									<h4>Informations de paiement</h4>
 
 									<div class="tabbable-line">
 										<ul class="nav nav-tabs ">
@@ -99,8 +99,8 @@
 
 												<div class="row">
 													<div class="col-md-offset-3 col-md-6">
-														<div class="note note-info">
-															<h4 class="block"><i class="icon-lock" style="font-size:150%;"></i> Ce paiement est sécurisé</h4>
+														<div class="alert alert-info">
+															<h4><i class="icon-lock" style="font-size:150%;"></i> Ce paiement est sécurisé</h4>
 														</div>
 													</div>
 												</div>
@@ -141,14 +141,14 @@
 											<div class="tab-pane active" id="local_pay">
 												<div class="row">
 													<div class="col-md-offset-3 col-md-6">
-														<div class="note note-info agent_warning">
-															<h4 class="block"><i class="icon-info" style="font-size:150%;"></i> Cette méthode requit un agent agrée</h4>
+														<div class="alert alert-info agent_warning">
+															<h4><i class="icon-info" style="font-size:150%;"></i> Cette méthode requit un agent agrée</h4>
 															<p>
 																Si vous n'êtes pas accompagné d'un de nos agents agrées, <a class="get_agent">demander un agent</a> immédiatement, ou <a class="ajaxify" href="<?php echo url_root;?>/contact">contactez nous</a> pour avoir un support direct.
 															</p>
 														</div>
-														<div class="note note-success agent_request_success" style="display:none;">
-															<h4 class="block"><i class="icon-like" style="font-size:150%;"></i> Merci,</h4>
+														<div class="alert alert-success agent_request_success" style="display:none;">
+															<h4><i class="icon-like" style="font-size:150%;"></i> Merci,</h4>
 															<p>
 																on a bien reçu votre demande, on vous contactera très bientôt.
 															</p>
@@ -214,8 +214,8 @@
 		</div>
 
 		<div id="success_msg" style="display:none;">
-			<div class="note note-success">
-				<h4 class="block"><i class="icon-trophy" style="font-size:150%;"></i>&nbsp;&nbsp;Félicitations, le travail é été bien publié</h4>
+			<div class="alert alert-success">
+				<h4><i class="icon-trophy" style="font-size:150%;"></i>&nbsp;&nbsp;Félicitations, le travail é été bien publié</h4>
 				<p>
 					Accusé de paiment:
 					<strong class="payment_recipt"></strong>
@@ -227,8 +227,8 @@
 		</div>
 
 		<div id="already_done_msg" style="display:none;">
-			<div class="note note-info">
-				<h4 class="block"><i class="icon-info" style="font-size:150%;"></i>&nbsp;&nbsp;Vous avez déja publié le travail</h4>
+			<div class="alert alert-info">
+				<h4><i class="icon-info" style="font-size:150%;"></i>&nbsp;&nbsp;Vous avez déja publié le travail</h4>
 				<p>
 					Accusé de paiment:
 					<strong class="payment_recipt"></strong>

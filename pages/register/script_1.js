@@ -95,7 +95,7 @@ page_script({
 						$(".top-menu .user-btn .username").text(parsed.params.displayname);
 						$(".top-menu .login-btn").hide();
 						$(".top-menu .user-btn").show();
-						Layout.ajaxify(location.origin + "/account");
+						app.ajaxify(location.origin + "/account");
 					} else if (res.status == 'username_exists') {
 						var input = $("#register_form input[name=username]");
 						input.closest('.form-group').removeClass('has-success').addClass('has-error');

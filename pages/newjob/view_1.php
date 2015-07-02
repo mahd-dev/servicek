@@ -21,7 +21,7 @@
 								Vous avez des champs invalides, SVP vérifier ci-dessous.
 							</div>
 							
-							<h4 class="block">Informations d'identité</h4>
+							<h4>Informations d'identité</h4>
 
 							<div class="form-group">
 								<label class="control-label col-md-3">Nom <span class="required">*</span></label>
@@ -49,7 +49,7 @@
 							</div>
 						</div>
 
-							<h4 class="block">Contact du travail</h4>
+							<h4>Contact du travail</h4>
 
 							<div class="form-group">
 								<label class="control-label col-md-3">Adresse <span class="required">*</span></label>
@@ -100,8 +100,8 @@
 		</div>
 
 		<div id="success_msg" style="display:none;">
-			<div class="note note-success">
-				<h4 class="block"><i class="icon-trophy" style="font-size:150%;"></i>&nbsp;&nbsp;Félicitations, le travail é été bien crée</h4>
+			<div class="alert alert-success">
+				<h4><i class="icon-trophy" style="font-size:150%;"></i>&nbsp;&nbsp;Félicitations, le travail é été bien crée</h4>
 				<p>
 				<a class="btn btn-success ajaxify goto_job" href="<?php echo url_root;?>/account"><i class="icon-link"></i>&nbsp;&nbsp;Accéder au travail crée</a>
 				</p>

@@ -173,4 +173,19 @@
 	color: #5b9bd1;
 }
 
+.info{
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
 
+.tab-content{
+	margin-top: 20px;
+}
+
+.sp-navbar{
+	margin-bottom: 0 !important;
+}
+
+.thumbnail{
+	overflow: hidden;
+}

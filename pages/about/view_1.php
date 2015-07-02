@@ -2,17 +2,8 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<div class="page-head">
-			<div class="page-title">
-				<h1>A propos de Servicek</h1>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-md-12">
-		<div class="portlet light">
+		<h2 class="page-header">A propos de Servicek.net</h2>
+		<div class="portlet light box">
 			<div class="portlet-body">
 				<div class="row margin-bottom-30">
 					<div class="col-md-12" style="font-size:120%">

@@ -6,7 +6,7 @@ page_script({
 		  	zoom: 13,
 		  	center: myLatlng
 		}
-		var map = new google.maps.Map($("#map")[0], mapOptions);
+		var map = new google.maps.Map($("#contactmap")[0], mapOptions);
 		var marker = new google.maps.Marker({
 		    position: myLatlng
 		});

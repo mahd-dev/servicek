@@ -1,5 +1,5 @@
 <?php
-	
+
 	session_start();
 
 	// autoload required core classes
@@ -14,7 +14,7 @@
 		}
 	}
 
-	define("debug",FALSE);
+	define("debug",TRUE);
 
 	// root url constants
 	define("cdn","http".(!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "off"?"s":"")."://".$_SERVER["HTTP_HOST"]."/assets");
@@ -35,7 +35,7 @@
 	$user = (isset($_SESSION["user"]) ? unserialize($_SESSION["user"]) : null);
 
 	// var_dump(gf::search("aa bb"));
-	
+
 	// routing url
 	include "router.php";
 ?>

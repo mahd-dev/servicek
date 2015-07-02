@@ -2,24 +2,15 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<div class="page-head">
-			<div class="page-title">
-				<h1>Nous contacter</h1>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-md-12">
-		<div class="portlet light">
+		<h2 class="page-header">Nous contacter</h2>
+		<div class="portlet light box">
 			<div class="portlet-body">
 				<div class="row">
 					<div class="col-md-6">
 						<div class="space20"></div>
 						<h3 class="form-section">Map</h3>
 						<div class="aspectratio-container aspect-4-3 fit-width">
-							<div id="map" class="aspectratio-content gmaps margin-bottom-40" style="height:100%;"></div>
+							<div id="contactmap" class="aspectratio-content gmaps margin-bottom-40" style="height:100%;"></div>
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -37,11 +28,6 @@
 							<a href="mailto:contact@servicek.net">
 							contact@servicek.net</a>
 							</address>
-							<ul class="social-icons margin-bottom-10">
-								<li>
-									<a href="https://www.facebook.com/www.servicek.net" data-original-title="facebook" class="facebook"></a>
-								</li>
-							</ul>
 						</div>
 					</div>
 					<!--
