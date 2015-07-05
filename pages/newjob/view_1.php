@@ -14,86 +14,55 @@
 		<div class="portlet light" id="page_wizard">
 			<div class="portlet-body form">
 				<form action="javascript:;" class="form-horizontal" id="submit_form" method="POST">
-					
+
 						<div class="form-body">
-							
+
 							<div class="alert alert-danger form-error hide">
 								Vous avez des champs invalides, SVP vérifier ci-dessous.
 							</div>
-							
-							<h4>Informations d'identité</h4>
 
 							<div class="form-group">
-								<label class="control-label col-md-3">Nom <span class="required">*</span></label>
-								<div class="col-md-6">
-									<input type="text" class="form-control" name="name" data-msg-required="Ce champ est obligatoire"/>
-									<span class="help-block">Saisir le nom du travail </span>
-								</div>
+								<input type="text" class="form-control" name="name" placeholder="Nom du travail" data-msg-required="Ce champ est obligatoire"/>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-md-3">Détails <span class="required">*</span></label>
-								<div class="col-md-6">
-									<textarea class="form-control" name="description" data-msg-required="Ce champ est obligatoire" style="max-width:100%; min-with:100%;" rows="5"></textarea>
-									<span class="help-block">Expliquez brièvement le travail</span>
-								</div>
+								<textarea class="form-control" name="description" placeholder="Expliquez brièvement le travail" data-msg-required="Ce champ est obligatoire" style="max-width:100%; min-with:100%;" rows="5"></textarea>
 							</div>
 							<div class="form-group">
-							<label class="control-label col-md-3">Domaines d'activité <span class="required">*</span></label>
-							<div class="col-md-6">
-								<select name="categories[]" class="form-control select2" multiple>
-									<?php foreach ($available_categories as $c) {?>
-										<option value="<?php echo $c->id;?>"><?php echo $c->name;?></option>
-									<?php }?>
-								</select>
-								<span class="help-block">Sélectionnez vos domaines d'activité</span>
-							</div>
+							<select name="categories[]" placeholder="Domaines d'activité" class="form-control select2" multiple>
+								<?php foreach ($available_categories as $c) {?>
+									<option value="<?php echo $c->id;?>"><?php echo $c->name;?></option>
+								<?php }?>
+							</select>
 						</div>
 
-							<h4>Contact du travail</h4>
+							<div class="form-group">
+								<div class="input-group">
+									<input type="text" placeholder="Adresse" class="form-control" name="address" data-msg-required="Ce champ est obligatoire"/>
+									<span class="input-group-btn">
+										<a class="btn btn-default" id="find_my_position" data-toggle="tooltip" title="Rechercher ma position"><i class="icon-target"></i></a>
+									</span>
+								</div>
 
-							<div class="form-group">
-								<label class="control-label col-md-3">Adresse <span class="required">*</span></label>
-								<div class="col-md-6">
 
-									<div class="input-group">
-										<input type="text" class="form-control" name="address" data-msg-required="Ce champ est obligatoire"/>
-										<span class="input-group-btn">
-											<a class="btn btn-default" id="find_my_position" data-toggle="tooltip" title="Rechercher ma position"><i class="icon-target"></i></a>
-										</span>
-									</div>
+								<span class="help-block">Recherchez vorte adresse et précisez là en déplaçant le pointeur sur la carte</span>
+								<div class="aspectratio-container aspect-4-3 fit-width">
+									<div id="geolocation" class="aspectratio-content"></div>
+								</div>
+								<input type="hidden" name="latitude">
+								<input type="hidden" name="longitude">
+							</div>
+							<div class="form-group">
+								<input type="tel" placeholder="Numéro de téléphone fixe" class="form-control" name="tel" data-msg-required="Ce champ est obligatoire"/>
+							</div>
+							<div class="form-group">
+								<input type="tel" placeholder="Numéro du téléphone mobile" class="form-control" name="mobile"/>
+							</div>
+							<div class="form-group">
+								<input type="email" placeholder="E-mail" class="form-control" name="email" data-msg-required="Ce champ est obligatoire"/>
+							</div>
 
-									
-									<span class="help-block">Recherchez vorte adresse et précisez là en déplaçant le pointeur sur la carte</span>
-									<div class="aspectratio-container aspect-4-3 fit-width">
-										<div id="geolocation" class="aspectratio-content"></div>
-									</div>
-									<input type="hidden" name="latitude">
-									<input type="hidden" name="longitude">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-md-3">Tel fixe <span class="required">*</span></label>
-								<div class="col-md-6">
-									<input type="tel" class="form-control" name="tel" data-msg-required="Ce champ est obligatoire"/>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-md-3">Tel mobile</label>
-								<div class="col-md-6">
-									<input type="tel" class="form-control" name="mobile"/>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-md-3">E-mail <span class="required">*</span></label>
-								<div class="col-md-6">
-									<input type="email" class="form-control" name="email" data-msg-required="Ce champ est obligatoire"/>
-								</div>
-							</div>
-							
 						</div>
-						<div class="form-actions">
-							<button type="submit" class="btn btn-success pull-right">Créer le travail <i class="icon-check"></i></button>
-						</div>
+						<button type="submit" class="btn btn-success pull-right">Créer le travail <i class="icon-check"></i></button>
 
 				</form>
 			</div>

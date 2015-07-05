@@ -364,6 +364,153 @@ p.text {
   line-height: 30px;
 }
 
+/* select2 */
+.select2-container {
+    vertical-align: middle !important;
+}
+
+.select2-container .select2-choice,
+.select2-container-multi .select2-choices {
+    height: 28px !important;
+    line-height: 29px !important;
+    border: none !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+    background: none !important;
+    background-color: #fff !important;
+    filter: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.select2-container .select2-choice div,
+.select2-container.select2-container-disabled .select2-choice div {
+    border-left: none !important;
+    background: none !important;
+    filter: none !important;
+}
+
+.control-group.error [class^="select2-choice"] {
+    border-color: #B94A48 !important;
+}
+
+.select2-container-multi .select2-choices .select2-search-field {
+    height: 28px !important;
+    line-height: 27px !important;
+}
+
+.select2-container-active .select2-choice,
+.select2-container-multi.select2-container-active .select2-choices,
+.select2-drop.select2-drop-active {
+    border-color: rgba(82, 168, 236, 0.8) !important;
+    outline: none !important;
+}
+
+.select2-container .select2-choices .select2-search-choice {
+  display: inline-block !important;
+  padding: 3px 8px 4px 18px !important;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  line-height: 19px !important;
+  color: #fff !important;
+  vertical-align: baseline !important;
+  white-space: nowrap !important;
+  text-shadow: none !important;
+  background: #E91E63 !important;
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  border-radius: 0 !important;
+  border: 0 !important;
+}
+.select2-search-choice-close{
+  top: 2px !important;
+}
+.select2-container .select2-choices .select2-search-choice-focus {
+    opacity: 0.5 !important;
+}
+
+.select2-search-choice-close, .select2-search-choice-close:hover  {
+    background: none !important;
+    font: inherit !important;
+    font-size: 15px !important;
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+.select2-search-choice-close:hover {
+    opacity: 0.7 !important;
+}
+
+.select2-search-choice-close:after {
+    content: "\00D7" !important;
+}
+
+.select2-container .select2-choices .select2-search-field .select2-input {
+    padding: 0 5px !important;
+}
+
+[class^="input-"] .select2-container {
+    font-size: 14px !important;
+}
+
+.input-prepend [class^="select2-choice"] {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.input-append [class^="select2-choice"] {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.select2-dropdown-open [class^="select2-choice"] {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.select2-dropdown-open.select2-drop-above [class^="select2-choice"] {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+[class^="input-"] [class^="select2-choice"] > div {
+    display: none !important;
+}
+
+[class^="input-"] .select2-offscreen {
+    position: absolute !important;
+}
+
+.select2-drop {
+  padding: 0 !important;
+    border: none !important;
+    border-top: 0 !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+    background-color: #eee !important;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08) !important;
+}
+
+.select2-results {
+  margin: 0 !important;
+}
+
+/**
+ * This stops the quick flash when a native selectbox is shown and
+ * then replaced by a select2 input when javascript kicks in. This can be
+ * removed if javascript is not present
+ */
+select.select2 {
+    height: 28px !important;
+    visibility: hidden !important;
+}
+.select2-results .select2-highlighted{
+  background-color: #e91e63 !important;
+}
+
 /*------------------------------------------------------------------
 [ 6. Basic Elements ]
 */
@@ -1088,7 +1235,7 @@ p.text {
   background-color: #1E88E5;
 }
 .header-inner {
-  padding: 0 0 50px;
+  padding: 0 0 30px;
   position: relative;
 }
 .header-standard .header-inner {
@@ -1098,8 +1245,8 @@ p.text {
   padding: 10px 0px;
 }
 .header-large .header-main {
-  margin-top: 35px;
-  height: 70px;
+  margin-top: 0px;
+  height: 66px;
   display: inline-table;
 }
 .header-call-to-action-wrapper .header-main {

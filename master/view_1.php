@@ -113,7 +113,7 @@
 						</div>
 					</div>
 
-					<a class="btn btn-fab header-action ajaxify" href="properties-submit.html" title="Add New Property">
+					<a class="btn btn-fab header-action ajaxify" href="<?php echo url_root;?>/new" title="Ajouter nouveau">
 						<i class="fa fa-plus"></i>
 					</a>
 				</div>
