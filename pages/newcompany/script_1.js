@@ -41,7 +41,7 @@ page_script({
 			errorClass: 'help-block help-block-error',
 			focusInvalid: true,
 			rules: {
-				
+
 				name: {minlength: 3, maxlength: 255, required: true},
 				description: {minlength: 50, maxlength: 4095, required: true},
 				categories: {required: true},
@@ -63,10 +63,10 @@ page_script({
 				latitude: {required: true},
 				tel: {required: true},
 				email: {required: true}
-				
+
 			},
 
-			invalidHandler: function (event, validator) { //display error alert on form submit 
+			invalidHandler: function (event, validator) { //display error alert on form submit
 				error.show();
 			},
 
@@ -81,12 +81,12 @@ page_script({
 			},
 
 			success: function (label) {
-				
+
 			},
 			errorPlacement: function (error, element) {
 
 				switch($(element).attr("name")){
-					case "url": 
+					case "url":
 						error.appendTo($(element.parents(".form-group")[0]).find(".error_msg"));
 					break;
 					default:
@@ -99,9 +99,9 @@ page_script({
 			}
 
 		});
-		
+
 		$("[name='categories[]']", form).select2();
-		
+
 		form.submit(function (e){
 			if(!form.valid()){
 				e.preventDefault();

@@ -20,10 +20,10 @@ page_script({
 			var m = $("#show_ps");
 
 			m.find(".modal-title").text(b.attr("data-name"));
-			
+
 			if(b.find(".prod_srv_image").length) m.find(".prod_srv_image").attr("src", b.find(".prod_srv_image").attr("src")).show();
 			else m.find(".prod_srv_image").hide();
-			
+
 			if(b.attr("data-description")!="") m.find(".description").text(b.attr("data-description")).show();
 			else m.find(".description").hide();
 
