@@ -4,7 +4,7 @@
 		$company=new company($_GET['id']);
 		if (!$company->isvalid) {include __DIR__."/../404/controller.php";goto skip_this_page;}
 	}
-	
+
 	$s=$company->seats[0];
 	$geolocation=json_decode($s->geolocation);
 	$is_contracted=$company->is_contracted;
@@ -19,8 +19,8 @@
 	$categories = implode(", ", $categories);
 
 	if ($user!=null && ($company->is_assigned_to_admin($user) || $user->is_master)) {
-		if (isset($_POST['for']) && isset($_POST['pk']) && isset($_POST['name']) && isset($_POST['value'])) {
-			switch ($_POST['for']) {
+		if (isset($_POST['element']) && isset($_POST['pk']) && isset($_POST['name']) && isset($_POST['value'])) {
+			switch ($_POST['element']) {
 				case 'company':
 					switch ($_POST['name']) {
 						case 'name': $company->name=$_POST['value']; break;
@@ -73,9 +73,9 @@
 			$seat = new company_seat($_POST["geolocation"]);
 			$seat->geolocation = json_encode(array("longitude"=>$_POST["longitude"], "latitude"=>$_POST["latitude"]));
 			die("success");
-			
+
 		}elseif (isset($_POST['new_service'])) {
-			
+
 			$service=service::create($company);
 			die(json_encode(array("status"=>"success", "id"=>$service->id)));
 
@@ -85,70 +85,70 @@
 			die(json_encode(array("status"=>"success", "id"=>$product->id)));
 
 		}elseif (isset($_POST['delete_service'])) {
-			
+
 			$service=new service($_POST['delete_service']);
 			$service->delete();
-			
+
 			die(json_encode(array("status"=>"success")));
 
 		}elseif (isset($_POST['delete_product'])) {
-			
+
 			$product=new product($_POST['delete_product']);
 			$product->delete();
-			
+
 			die(json_encode(array("status"=>"success")));
 
 		}elseif(isset($_POST["file"]) && $_POST["file"]=="logo"){
-			
+
 			$oldname=$paths->company_logo->dir.$company->logo;
 
 			if(file_exists($oldname) && is_file($oldname)) unlink($oldname);
-			
+
 			$name=gf::generate_guid().".".end((explode(".", $_FILES["logo"]["name"])));
 			move_uploaded_file($_FILES["logo"]["tmp_name"], $paths->company_logo->dir.$name);
-			
+
 			$company->logo=$name;
-			
+
 			die("success");
 		}elseif(isset($_POST["file"]) && $_POST["file"]=="cover"){
-			
+
 			$oldname=$paths->company_cover->dir.$company->cover;
 
 			if(file_exists($oldname) && is_file($oldname)) unlink($oldname);
-			
+
 			$name=gf::generate_guid().".".end((explode(".", $_FILES["cover"]["name"])));
 			move_uploaded_file($_FILES["cover"]["tmp_name"], $paths->company_cover->dir.$name);
-			
+
 			$company->cover=$name;
-			
+
 			die("success");
 		}elseif(isset($_POST["file"]) && $_POST["file"]=="service_image" && isset($_POST["pk"])){
-			
+
 			$service=new service($_POST["pk"]);
 
 			$oldname=$paths->service_image->dir.$service->image;
 
 			if(file_exists($oldname) && is_file($oldname)) unlink($oldname);
-			
+
 			$name=gf::generate_guid().".".end((explode(".", $_FILES["image"]["name"])));
 			move_uploaded_file($_FILES["image"]["tmp_name"], $paths->service_image->dir.$name);
-			
+
 			$service->image=$name;
-			
+
 			die("success");
 		}elseif(isset($_POST["file"]) && $_POST["file"]=="product_image" && isset($_POST["pk"])){
-			
+
 			$product=new product($_POST["pk"]);
 
 			$oldname=$paths->product_image->dir.$product->image;
 
 			if(file_exists($oldname) && is_file($oldname)) unlink($oldname);
-			
+
 			$name=gf::generate_guid().".".end((explode(".", $_FILES["image"]["name"])));
 			move_uploaded_file($_FILES["image"]["tmp_name"], $paths->product_image->dir.$name);
-			
+
 			$product->image=$name;
-			
+
 			die("success");
 		}
 
@@ -176,7 +176,7 @@
 
 	            $ref["twitter:image:src"] = $paths->company_logo->url.$seo_img;
 	        }
-	        
+
 	        $article = new OpenGraphProtocolArticle();
 	        $article->setPublishedTime( date(DATE_ISO8601, strtotime($company->creation_time)) );
 	        $article->setModifiedTime( new DateTime( 'now', new DateTimeZone( 'Africa/Tunis' ) ) );
@@ -185,13 +185,13 @@
 
 	        $ref["twitter:title"] = $company->name;
             $ref["twitter:description"] = $company->description;
-	        
+
 	    }
 
 		include "view_1.php";
 	}else{
 		include __DIR__."/../404/controller.php";goto skip_this_page;
 	}
-			
+
 	skip_this_page:
 ?>

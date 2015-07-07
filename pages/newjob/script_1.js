@@ -18,7 +18,7 @@ page_script({
 			inputBinding: {
 				locationNameInput: $('#submit_form [name=address]'),
 				latitudeInput: $('#submit_form [name=latitude]'),
-				longitudeInput: $('#submit_form [name=longitude]'),
+				longitudeInput: $('#submit_form [name=longitude]')
 			}
 		});
 		$("#find_my_position").click(function (e) {
@@ -42,7 +42,7 @@ page_script({
 			errorClass: 'help-block help-block-error',
 			focusInvalid: true,
 			rules: {
-				
+
 				name: {minlength: 3, maxlength: 255, required: true},
 				description: {minlength: 50, maxlength: 4095, required: true},
 				categories: {required: true},
@@ -51,10 +51,10 @@ page_script({
 				latitude: {required: true},
 				tel: {required: true},
 				email: {required: true}
-				
+
 			},
 
-			invalidHandler: function (event, validator) { //display error alert on form submit   
+			invalidHandler: function (event, validator) { //display error alert on form submit
 				error.show();
 			},
 
@@ -69,7 +69,7 @@ page_script({
 			},
 
 			success: function (label) {
-				
+
 			},
 			errorPlacement: function (error, element) {
 
@@ -84,9 +84,9 @@ page_script({
 			}
 
 		});
-		
+
 		$("[name='categories[]']", form).select2();
-		
+
 		form.submit(function (e){
 			if(!form.valid()) {
 				e.preventDefault();
@@ -104,9 +104,7 @@ page_script({
 						p=JSON.parse(rslt);
 						switch(p.status){
 							case "success":
-								$("#success_msg .goto_job").attr("href", p.params.job_url);
-								$("#page_wizard").remove();
-								$("#success_msg").show();
+								app.ajaxify(p.params.job_url);
 							break;
 							default:
 								console.log(p);

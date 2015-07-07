@@ -9,20 +9,20 @@ page_script({
         $.fn.editable.defaults.url = location.href;
         $.fn.editable.defaults.onblur = 'submit';
         $.fn.editable.defaults.emptytext = 'Vide';
-        
-        $(".editable").editable({params:function (p) { p.for="company"; return p; }});
+
+        $(".editable").editable({params:function (p) { p.element="company"; return p; }});
         if($(".categories-editable").length>0){
 	        $('.categories-editable').editable({
 	        	mode: "popup",
 	        	inputclass: "input-medium",
-	        	params:function (p) { p.for="company"; return p; },
+	        	params:function (p) { p.element="company"; return p; },
 	        	select2: {multiple: true},
 	        	source: JSON.parse($('.categories-editable').attr("data-available"))
 	        });
 	    }
-		$(".seat_editable").editable({params:function (p) { p.for="seat"; return p; }});
-		$(".product_editable").editable({mode:"popup", params:function (p) { p.for="product"; return p; }});
-		$(".service_editable").editable({mode:"popup", params:function (p) { p.for="service"; return p; }});
+		$(".seat_editable").editable({params:function (p) { p.element="seat"; return p; }});
+		$(".product_editable").editable({mode:"popup", params:function (p) { p.element="product"; return p; }});
+		$(".service_editable").editable({mode:"popup", params:function (p) { p.element="service"; return p; }});
 
 		$(".map-canvas").each(function (){
 			$(this).locationpicker({
@@ -65,16 +65,16 @@ page_script({
 								var new_element = $("#new_service_template").clone();
 								new_element.removeAttr("id");
 								new_element.prependTo("#services_list").show();
-								
+
 								new_element.attr("data-id", p.id);
-								$(".service_editable", new_element).attr("data-pk", p.id).editable({value:null, mode:"popup", params:function (p) { p.for="service"; return p; }});
+								$(".service_editable", new_element).attr("data-pk", p.id).editable({value:null, mode:"popup", params:function (p) { p.element="service"; return p; }});
 								$(".delete", new_element).click(function (e) {service_delete(e, this);});
 								$("input[type=file]", new_element).change(function (e) {service_image_change(e, this);});
 								$(".price_checkbox", new_element).change(price_checkbox);
 								$(".rent_price_checkbox", new_element).change(rent_price_checkbox);
 
 								$("[href='#services_list']").click();
-								app.scrollTo(new_element, -200);
+								//app.scrollTo(new_element, -200);
 								$($(".thumbnail", new_element)[0]).pulsate({color: "#399bc3",repeat: 2});
 							break;
 							default:
@@ -104,16 +104,16 @@ page_script({
 								var new_element = $("#new_product_template").clone();
 								new_element.removeAttr("id");
 								new_element.prependTo("#products_list").show();
-								
+
 								new_element.attr("data-id", p.id);
-								$(".product_editable", new_element).attr("data-pk", p.id).editable({value:null, mode:"popup", params:function (p) { p.for="product"; return p; }});
+								$(".product_editable", new_element).attr("data-pk", p.id).editable({value:null, mode:"popup", params:function (p) { p.element="product"; return p; }});
 								$(".delete", new_element).click(function (e) {product_delete(e, this);});
 								$("input[type=file]", new_element).change(function (e) {product_image_change(e, this);});
 								$(".price_checkbox", new_element).change(price_checkbox);
 								$(".rent_price_checkbox", new_element).change(rent_price_checkbox);
 
 								$("[href='#products_list']").click();
-								app.scrollTo(new_element, -200);
+								//app.scrollTo(new_element, -200);
 								$($(".thumbnail", new_element)[0]).pulsate({color: "#399bc3",repeat: 2});
 							break;
 							default:
@@ -129,7 +129,7 @@ page_script({
 				}
 			});
 		});
-		
+
 		var price_checkbox = function (e) {
 			var container = $(this).parents("p");
 			var ed = $("[data-name=price]", container);
@@ -138,11 +138,11 @@ page_script({
 				ed.editable('enable');
 				unit.show();
 			}else{
-				$.post(location.href, {for: (ed.hasClass("product_editable")?"product":"service"), pk: ed.attr("data-pk"), name: "price", value: null}, function (rslt) {
+				$.post(location.href, {element: (ed.hasClass("product_editable")?"product":"service"), pk: ed.attr("data-pk"), name: "price", value: null}, function (rslt) {
 					ed.editable('setValue', null).editable('submit').editable('disable');
 					unit.hide();
 				});
-				
+
 			}
 		};
 		var rent_price_checkbox = function (e) {
@@ -153,11 +153,11 @@ page_script({
 				ed.editable('enable');
 				unit.show();
 			}else{
-				$.post(location.href, {for: (ed.hasClass("product_editable")?"product":"service"), pk: ed.attr("data-pk"), name: "rent_price", value: null}, function (rslt) {
+				$.post(location.href, {element: (ed.hasClass("product_editable")?"product":"service"), pk: ed.attr("data-pk"), name: "rent_price", value: null}, function (rslt) {
 					ed.editable('setValue', null).editable('submit').editable('disable');
 					unit.hide();
 				});
-				
+
 			}
 		};
 
@@ -289,7 +289,7 @@ page_script({
 					console.log(rslt);
 				}
             });
-        	
+
         });
 
         $(".cover input[type=file]").change(function (e) {
@@ -311,7 +311,7 @@ page_script({
 					console.log(rslt);
 				}
             });
-        	
+
         });
 
 	}

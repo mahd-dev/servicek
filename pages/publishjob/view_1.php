@@ -4,7 +4,7 @@
 	<div class="col-md-12">
 		<div class="page-head">
 			<div class="page-title">
-				<h1>Publication du travail</h1>
+				<h1>Publication du métier</h1>
 			</div>
 		</div>
 	</div>
@@ -171,7 +171,7 @@
 
 
 								<div class="tab-pane" id="validation">
-									<h4 class="form-section">informations du travail</h4>
+									<h4 class="form-section">informations du métier</h4>
 
 									<div class="form-group">
 										<label class="control-label col-md-3">Nom :</label>
@@ -215,26 +215,26 @@
 
 		<div id="success_msg" style="display:none;">
 			<div class="alert alert-success">
-				<h4><i class="icon-trophy" style="font-size:150%;"></i>&nbsp;&nbsp;Félicitations, le travail é été bien publié</h4>
+				<h4><i class="icon-trophy" style="font-size:150%;"></i>&nbsp;&nbsp;Félicitations, le métier é été bien publié</h4>
 				<p>
 					Accusé de paiment:
 					<strong class="payment_recipt"></strong>
 				</p>
 				<p>
-					<a class="btn btn-success ajaxify goto_job" href="<?php echo url_root;?>/account"><i class="icon-link"></i>&nbsp;&nbsp;Accéder au travail publié</a>
+					<a class="btn btn-success ajaxify goto_job" href="<?php echo url_root;?>/account"><i class="icon-link"></i>&nbsp;&nbsp;Accéder au métier publié</a>
 				</p>
 			</div>
 		</div>
 
 		<div id="already_done_msg" style="display:none;">
 			<div class="alert alert-info">
-				<h4><i class="icon-info" style="font-size:150%;"></i>&nbsp;&nbsp;Vous avez déja publié le travail</h4>
+				<h4><i class="icon-info" style="font-size:150%;"></i>&nbsp;&nbsp;Vous avez déja publié le métier</h4>
 				<p>
 					Accusé de paiment:
 					<strong class="payment_recipt"></strong>
 				</p>
 				<p>
-					<a class="btn btn-success ajaxify goto_job" href="<?php echo url_root;?>/account"><i class="icon-link"></i>&nbsp;&nbsp;Accéder au travail publié</a>
+					<a class="btn btn-success ajaxify goto_job" href="<?php echo url_root;?>/account"><i class="icon-link"></i>&nbsp;&nbsp;Accéder au métier publié</a>
 				</p>
 			</div>
 		</div>

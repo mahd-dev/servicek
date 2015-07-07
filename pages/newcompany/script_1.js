@@ -18,7 +18,7 @@ page_script({
 			inputBinding: {
 				locationNameInput: $('#submit_form [name=address]'),
 				latitudeInput: $('#submit_form [name=latitude]'),
-				longitudeInput: $('#submit_form [name=longitude]'),
+				longitudeInput: $('#submit_form [name=longitude]')
 			}
 		});
 		$("#find_my_position").click(function (e) {
@@ -108,20 +108,18 @@ page_script({
 				return false;
 			}
 
-			app.blockUI({iconOnly:true, animate:true});
+			//app.blockUI({iconOnly:true, animate:true});
 			$.ajax({
 				url: location.href,
 				type: "POST",
 				data: $(form).serialize(),
 				success: function (rslt) {
-					app.unblockUI();
+					//app.unblockUI();
 					try{
 						p=JSON.parse(rslt);
 						switch(p.status){
 							case "success":
-								$("#success_msg .goto_company").attr("href", p.params.company_url);
-								$("#page_wizard").remove();
-								$("#success_msg").show();
+								app.ajaxify(p.params.company_url);
 							break;
 							default:
 								console.log(p);
@@ -134,7 +132,7 @@ page_script({
 					}
 				},
 				error: function (rslt) {
-					app.unblockUI();
+					//app.unblockUI();
 					console.log(rslt);
 					return false;
 				}

@@ -173,7 +173,7 @@
 
 								<div class="tab-pane" id="validation">
 
-									<h4 class="form-section">Identité du travail</h4>
+									<h4 class="form-section">Identité du métier</h4>
 
 									<div class="form-group">
 										<label class="control-label col-md-3">Nom :</label>

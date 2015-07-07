@@ -1,7 +1,7 @@
 page_script({
 	init: function () {
 		$("#register_form input[name=displayname]").focus();
-		
+
 		$("#register_form input[name=username]").change(function () {
 			var input = $(this);
 
@@ -24,7 +24,7 @@ page_script({
 
 				if (res.status == 'available') {
 					$('.icon-ban', input.closest('.form-group')).remove();
-					input.closest('.form-group').removeClass('has-error').removeClass('has-success');	
+					input.closest('.form-group').removeClass('has-error').removeClass('has-success');
 				} else if (res.status == 'not_available') {
 					input.closest('.form-group').removeClass('has-success').addClass('has-error');
 					$('.fa-check', input.closest('.form-group')).remove();
@@ -51,7 +51,7 @@ page_script({
 			});
 
 		});
-	
+
 		var check_password_confirmation = function () {
 			var input = $("#register_form input[name=password]");
 			if($("#register_form input[name=password]").val().length < 8){
@@ -88,7 +88,7 @@ page_script({
 				if($("#password_confirmation").val() != $("#register_form input[name=password]").val()) return false;
 			},
 			success: function (rslt) {
-			
+
 				try{
 					parsed=JSON.parse(rslt);
 					if ( parsed.status == "logged_in" ) {
@@ -96,14 +96,14 @@ page_script({
 						$(".top-menu .login-btn").hide();
 						$(".top-menu .user-btn").show();
 						app.ajaxify(location.origin + "/account");
-					} else if (res.status == 'username_exists') {
+					} else if (parsed.status == 'username_exists') {
 						var input = $("#register_form input[name=username]");
 						input.closest('.form-group').removeClass('has-success').addClass('has-error');
 						$('.fa-check', input.closest('.form-group')).remove();
 						input.before('<i class="icon-ban"></i>');
 						$("#username_unvailable_msg").show();
 						input.focus();
-					} else if (res.status == 'password_min_length_error') {
+					} else if (parsed.status == 'password_min_length_error') {
 						var input = $("#register_form input[name=password]");
 						input.closest('.form-group').removeClass('has-success').addClass('has-error');
 						$('.fa-check', input.closest('.form-group')).remove();
@@ -114,12 +114,12 @@ page_script({
 						console.log(rslt);
 						$(".unhandled_error").show();
 					}
-					
+
 				}catch(ex){
 					console.log(rslt);
 					$(".unhandled_error").show();
 				}
-				
+
 			},
 			error: function () {
 				console.log(rslt);

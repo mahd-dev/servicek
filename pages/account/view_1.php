@@ -45,7 +45,7 @@
 								<p>
 									 <div class="btn-group btn-group-solid margin-bottom-20">
 										<a type="button" class="btn btn-xl ajaxify" href="<?php echo url_root;?>/new/company"><i class="icon-flag"></i> Créer ma Société</a>
-										<a type="button" class="btn btn-xl ajaxify" href="<?php echo url_root;?>/new/job"><i class="icon-pointer"></i> Créer mon travail</a>
+										<a type="button" class="btn btn-xl ajaxify" href="<?php echo url_root;?>/new/job"><i class="icon-pointer"></i> Créer mon métier</a>
 									</div>
 								</p>
 							</div>
@@ -63,7 +63,7 @@
 							</div>
 							<div class="btn-group btn-group-solid pull-right">
 								<a type="button" class="btn ajaxify" href="<?php echo url_root;?>/new/company"><i class="icon-flag"></i> Créer une autre Société</a>
-								<a type="button" class="btn ajaxify" href="<?php echo url_root;?>/new/job"><i class="icon-pointer"></i> Créer un autre travail</a>
+								<a type="button" class="btn ajaxify" href="<?php echo url_root;?>/new/job"><i class="icon-pointer"></i> Créer un autre métier</a>
 							</div>
 						<?php }?>
 

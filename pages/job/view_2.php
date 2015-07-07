@@ -13,7 +13,7 @@
 		<div class="alert alert-danger">
 			<h4>La période d'essai a expiré</h4>
 			<p>
-				 Ce travail n'est plus disponible au public, vous seul vous pouvez y accéder.<br>
+				 Ce métier n'est plus disponible au public, vous seul vous pouvez y accéder.<br>
 				 <a class="btn green ajaxify" href="<?php echo url_root."/".$job->url;?>/publish"><i class="icon-rocket"></i> Publier maintenant</a>
 			</p>
 		</div>
@@ -23,9 +23,9 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="alert alert-danger">
-			<h4>Ce travail n'est pas publiée</h4>
+			<h4>Ce métier n'est pas publiée</h4>
 			<p>
-				 Ce travail n'est plus disponible au public, vous seul vous pouvez y accéder.<br>
+				 Ce métier n'est plus disponible au public, vous seul vous pouvez y accéder.<br>
 				 <a class="btn green ajaxify" href="<?php echo url_root."/".$job->url;?>/publish"><i class="icon-rocket"></i> Publier maintenant</a>
 			</p>
 		</div>
@@ -40,11 +40,11 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="alert alert-warning">
-			<h4>Ce travail est en période d'essai gratuit</h4>
+			<h4>Ce métier est en période d'essai gratuit</h4>
 			<p>
-				 Vous pouvez essayer toutes les fonctionnalités pendant 1 mois à partir de la date de création du travail,<br>
-				 <span class="text-danger">Au bout de <?php echo $rd;?> jours, ce travail ne sera plus disponible au public.</span><br>
-				 Afin d'assurer la disponibilité du travail, créez un contrat de publication avant la fin de la période d'essai.<br><br>
+				 Vous pouvez essayer toutes les fonctionnalités pendant 1 mois à partir de la date de création du métier,<br>
+				 <span class="text-danger">Au bout de <?php echo $rd;?> jours, ce métier ne sera plus disponible au public.</span><br>
+				 Afin d'assurer la disponibilité du métier, créez un contrat de publication avant la fin de la période d'essai.<br><br>
 				 <a class="btn green ajaxify" href="<?php echo url_root."/".$job->url;?>/publish"><i class="icon-rocket"></i> Créer un contrat de publication</a><br>
 				 <span class="text-success">La date de début contrat de publication sera initialisée à la date fin de la période d'essai.</span>
 			</p>
@@ -57,8 +57,8 @@
 		<div class="alert alert-danger">
 			<h4>La période d'essai est presque finit</h4>
 			<p>
-				 <span class="text-danger">Au bout de <?php echo $rd;?> jours, ce travail ne sera plus disponible au public.</span><br>
-				 Afin d'assurer la disponibilité du travail, créez un contrat de publication avant la fin de la période d'essai.<br><br>
+				 <span class="text-danger">Au bout de <?php echo $rd;?> jours, ce métier ne sera plus disponible au public.</span><br>
+				 Afin d'assurer la disponibilité du métier, créez un contrat de publication avant la fin de la période d'essai.<br><br>
 				 <a class="btn green ajaxify" href="<?php echo url_root."/".$job->url;?>/publish"><i class="icon-rocket"></i> Créer un contrat de publication</a><br>
 				 <span class="text-success">La date de début contrat de publication sera initialisée à la date fin de la période d'essai.</span>
 			</p>
@@ -71,7 +71,7 @@
 		<div class="alert alert-danger">
 			<h4>Le contrat de publication expirera bienôt</h4>
 			<p>
-				 <span class="text-danger">Au bout de <?php echo $rd;?> jours, ce travail ne sera plus disponible au public.</span><br><br>
+				 <span class="text-danger">Au bout de <?php echo $rd;?> jours, ce métier ne sera plus disponible au public.</span><br><br>
 				 <a class="btn green ajaxify" href="<?php echo url_root."/".$job->url;?>/publish"><i class="icon-rocket"></i> Renouveler le contrat</a><br>
 				 <span class="text-success">La date de début du nouveau contrat de publication sera initialisée à la date fin du contrat existant.</span>
 			</p>

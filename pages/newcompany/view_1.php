@@ -73,13 +73,13 @@
 
 		<div id="success_msg" style="display:none;">
 			<div class="alert alert-success">
-				<h4><i class="fa fa-trophy" style="font-size:150%;"></i>&nbsp;&nbsp;Félicitations, le travail é été bien crée</h4>
+				<h4><i class="fa fa-trophy" style="font-size:150%;"></i>&nbsp;&nbsp;Félicitations, le métier é été bien crée</h4>
 				<p>
 					Accusé de paiment:
 					<strong class="payment_recipt"></strong>
 				</p>
 				<p>
-				<a class="btn btn-success ajaxify goto_company" href="<?php echo url_root;?>/account"><i class="fa fa-link"></i>&nbsp;&nbsp;Accéder au travail crée</a>
+				<a class="btn btn-success ajaxify goto_company" href="<?php echo url_root;?>/account"><i class="fa fa-link"></i>&nbsp;&nbsp;Accéder au métier crée</a>
 				</p>
 			</div>
 		</div>

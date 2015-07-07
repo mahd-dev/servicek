@@ -4,7 +4,7 @@
 	<div class="col-md-12">
 		<div class="page-head">
 			<div class="page-title">
-				<h1>Création d'un nouveau travail</h1>
+				<h1>Création d'un nouveau métier</h1>
 			</div>
 		</div>
 	</div>
@@ -22,10 +22,10 @@
 							</div>
 
 							<div class="form-group">
-								<input type="text" class="form-control" name="name" placeholder="Nom du travail" data-msg-required="Ce champ est obligatoire"/>
+								<input type="text" class="form-control" name="name" placeholder="Nom du métier" data-msg-required="Ce champ est obligatoire"/>
 							</div>
 							<div class="form-group">
-								<textarea class="form-control" name="description" placeholder="Expliquez brièvement le travail" data-msg-required="Ce champ est obligatoire" style="max-width:100%; min-with:100%;" rows="5"></textarea>
+								<textarea class="form-control" name="description" placeholder="Expliquez brièvement le métier" data-msg-required="Ce champ est obligatoire" style="max-width:100%; min-with:100%;" rows="5"></textarea>
 							</div>
 							<div class="form-group">
 							<select name="categories[]" placeholder="Domaines d'activité" class="form-control select2" multiple>
@@ -62,7 +62,7 @@
 							</div>
 
 						</div>
-						<button type="submit" class="btn btn-success pull-right">Créer le travail <i class="icon-check"></i></button>
+						<button type="submit" class="btn btn-success pull-right">Créer le métier <i class="icon-check"></i></button>
 
 				</form>
 			</div>
@@ -70,9 +70,9 @@
 
 		<div id="success_msg" style="display:none;">
 			<div class="alert alert-success">
-				<h4><i class="icon-trophy" style="font-size:150%;"></i>&nbsp;&nbsp;Félicitations, le travail é été bien crée</h4>
+				<h4><i class="icon-trophy" style="font-size:150%;"></i>&nbsp;&nbsp;Félicitations, le métier é été bien crée</h4>
 				<p>
-				<a class="btn btn-success ajaxify goto_job" href="<?php echo url_root;?>/account"><i class="icon-link"></i>&nbsp;&nbsp;Accéder au travail crée</a>
+				<a class="btn btn-success ajaxify goto_job" href="<?php echo url_root;?>/account"><i class="icon-link"></i>&nbsp;&nbsp;Accéder au métier crée</a>
 				</p>
 			</div>
 		</div>

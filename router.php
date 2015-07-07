@@ -50,7 +50,7 @@
 			$req_page = "pages/account/controller.php";break;
 		case "new":
 			if(!isset($url[1])){
-				$req_page="pages/newswitch/controller.php";break;
+				$req_page="pages/new/controller.php";break;
 			}else{
 				switch ($url[1]) {
 					case "company":
