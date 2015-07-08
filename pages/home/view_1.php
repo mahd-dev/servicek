@@ -22,7 +22,7 @@
 							<?php }?>
             </div>
             <div class="property-box-content">
-								<h1><?php echo $r["title"];?></h1>
+								<h3><?php echo $r["title"];?></h3>
 								<p><?php echo $r["content"];?></p>
             </div>
             <div class="property-box-bottom">
