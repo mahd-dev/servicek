@@ -13,7 +13,7 @@ page_script({
 			    position: myLatlng
 			});
 			marker.setMap(map);
-        });
+    });
 
 		$(".ps").click(function (argument) {
 			var b = $(this);

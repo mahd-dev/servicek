@@ -225,11 +225,11 @@ page_script({
 
 		var product_image_change = function (e, input) {
 			if(input.files.length == 0) return;
-        	var form = $(".product form");
-        	var fd = new FormData(form[0]);
-            fd.append("file", "product_image");
-            fd.append("pk", $(input).parents(".product").attr("data-id"));
-            $.ajax({
+    	var form = $(".product form");
+    	var fd = new FormData(form[0]);
+      fd.append("file", "product_image");
+      fd.append("pk", $(input).parents(".product").attr("data-id"));
+      $.ajax({
 				url: location.href,
 				type: "POST",
 				data: fd,
@@ -242,16 +242,16 @@ page_script({
 				error: function (rslt) {
 					console.log(rslt);
 				}
-            });
+      });
 		};
 
 		var service_image_change = function (e, input) {
 			if(input.files.length == 0) return;
-        	var form = $(".service form");
-        	var fd = new FormData(form[0]);
-            fd.append("file", "service_image");
-            fd.append("pk", $(input).parents(".service").attr("data-id"));
-            $.ajax({
+    	var form = $(".service form");
+    	var fd = new FormData(form[0]);
+      fd.append("file", "service_image");
+      fd.append("pk", $(input).parents(".service").attr("data-id"));
+      $.ajax({
 				url: location.href,
 				type: "POST",
 				data: fd,
@@ -264,18 +264,18 @@ page_script({
 				error: function (rslt) {
 					console.log(rslt);
 				}
-            });
+      });
 		};
 
 		$(".service input[type=file]").change(function (e) {service_image_change(e, this);});
 		$(".product input[type=file]").change(function (e) {product_image_change(e, this);});
 
 		$(".logo input[type=file]").change(function (e) {
-        	if(this.files.length == 0) return;
-        	var form = $(".logo form");
-        	var fd = new FormData(form[0]);
-            fd.append("file", "logo");
-            $.ajax({
+    	if(this.files.length == 0) return;
+    	var form = $(".logo form");
+    	var fd = new FormData(form[0]);
+      fd.append("file", "logo");
+      $.ajax({
 				url: location.href,
 				type: "POST",
 				data: fd,
@@ -288,16 +288,16 @@ page_script({
 				error: function (rslt) {
 					console.log(rslt);
 				}
-            });
+      });
 
-        });
+    });
 
-        $(".cover input[type=file]").change(function (e) {
-        	if(this.files.length == 0) return;
-        	var form = $(".cover form");
-        	var fd = new FormData(form[0]);
-            fd.append("file", "cover");
-            $.ajax({
+    $(".cover input[type=file]").change(function (e) {
+    	if(this.files.length == 0) return;
+    	var form = $(".cover form");
+    	var fd = new FormData(form[0]);
+      fd.append("file", "cover");
+      $.ajax({
 				url: location.href,
 				type: "POST",
 				data: fd,
@@ -310,9 +310,7 @@ page_script({
 				error: function (rslt) {
 					console.log(rslt);
 				}
-            });
-
-        });
-
+      });
+    });
 	}
 });

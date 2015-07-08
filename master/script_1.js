@@ -5,5 +5,6 @@ page_script({
 			e.preventDefault();
 			app.ajaxify(location.origin + "/search?q=" + $(this).find("input[name=q]").val());
 		});
+
 	}
 });
