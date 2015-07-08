@@ -6,20 +6,20 @@ page_script({
 		$.fn.editable.defaults.pk = 1;
 		$.fn.editable.defaults.mode = 'inline';
 		$.fn.editable.defaults.inputclass = 'form-control';
-        $.fn.editable.defaults.url = location.href;
-        $.fn.editable.defaults.onblur = 'submit';
-        $.fn.editable.defaults.emptytext = 'Vide';
+    $.fn.editable.defaults.url = location.href;
+    $.fn.editable.defaults.onblur = 'submit';
+    $.fn.editable.defaults.emptytext = 'Vide';
 
-        $(".editable").editable({params:function (p) { p.element="company"; return p; }});
-        if($(".categories-editable").length>0){
-	        $('.categories-editable').editable({
-	        	mode: "popup",
-	        	inputclass: "input-medium",
-	        	params:function (p) { p.element="company"; return p; },
-	        	select2: {multiple: true},
-	        	source: JSON.parse($('.categories-editable').attr("data-available"))
-	        });
-	    }
+    $(".editable").editable({params:function (p) { p.element="company"; return p; }});
+    if($(".categories-editable").length>0){
+      $('.categories-editable').editable({
+      	mode: "popup",
+      	inputclass: "input-medium",
+      	params:function (p) { p.element="company"; return p; },
+      	select2: {multiple: true},
+      	source: JSON.parse($('.categories-editable').attr("data-available"))
+      });
+    }
 		$(".seat_editable").editable({params:function (p) { p.element="seat"; return p; }});
 		$(".product_editable").editable({mode:"popup", params:function (p) { p.element="product"; return p; }});
 		$(".service_editable").editable({mode:"popup", params:function (p) { p.element="service"; return p; }});
