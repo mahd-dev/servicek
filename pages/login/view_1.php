@@ -27,14 +27,14 @@
 						<div class="form-group">
 							<input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
 						</div>
-							<button type="submit" class="btn"><i class="icon-check"></i> Se connecter</button>
+							<button type="submit" class="btn btn-primary btn-raised"><i class="icon-check"></i> Se connecter</button>
 					</form>
 				</div>
 	</div>
     <div class="col-md-4 col-sm-5">
         <div class="alert alert-info">
             <h4>Vous ne disposez pas de compte ?</h4>
-            <a href="<?php echo url_root;?>/register" class="btn ajaxify">Créer mon compte</a>
+            <a href="<?php echo url_root;?>/register" class="btn btn-primary btn-raised ajaxify">Créer mon compte</a>
         </div>
     </div>
 </div>

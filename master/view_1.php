@@ -32,7 +32,6 @@
 	<link href="<?php echo cdn;?>/libraries/Font-Awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link href="<?php echo cdn;?>/libraries/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">
 	<link href="<?php echo cdn;?>/libraries/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet" type="text/css">
-	<link href="<?php echo cdn;?>/libraries/nvd3/nv.d3.min.css" rel="stylesheet" type="text/css">
 	<link href="<?php echo cdn;?>/libraries/OwlCarousel/owl-carousel/owl.carousel.css" rel="stylesheet" type="text/css">
 	<link href="<?php echo cdn;?>/css/style.css" rel="stylesheet" type="text/css">
 
@@ -172,12 +171,7 @@
 	<script src="<?php echo cdn;?>/libraries/jquery-google-map/markerclusterer.js" type="text/javascript"></script>
 	<script src="<?php echo cdn;?>/libraries/jquery-google-map/jquery-google-map.js" type="text/javascript"></script>
 
-	<script src="<?php echo cdn;?>/libraries/nvd3/lib/d3.v3.js" type="text/javascript"></script>
-	<script src="<?php echo cdn;?>/libraries/nvd3/lib/d3.v3.js" type="text/javascript"></script>
-	<script src="<?php echo cdn;?>/libraries/nvd3/nv.d3.min.js" type="text/javascript"></script>
-
 	<!--<script src="<?php echo cdn;?>/js/app.js" type="text/javascript"></script>-->
-	<script src="<?php echo cdn;?>/js/charts.js" type="text/javascript"></script>
 	<script src="<?php echo cdn;?>/js/map.js" type="text/javascript"></script>
 
 	<script src="<?php echo cdn;?>/libraries/jquery-migrate.min.js" type="text/javascript"></script>

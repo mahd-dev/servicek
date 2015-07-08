@@ -40,7 +40,7 @@ page_script({
 			$("#username_unvailable_msg").hide();
 			$("#username_error_msg").hide();
 
-			$.post($("#register_form input").attr("action"), { check_username: input.val() }, function (res) {
+			$.post($("#register_form").attr("action"), { check_username: input.val() }, function (res) {
 				input.attr("readonly", false).
 				attr("disabled", false).
 				removeClass("spinner");
@@ -117,6 +117,7 @@ page_script({
 						$(".top-menu .user-btn .username").text(parsed.params.displayname);
 						$(".top-menu .login-btn").hide();
 						$(".top-menu .user-btn").show();
+						$("#register_form").remove();
 						current_form.submit();
 					} else if (parsed.status == 'username_exists') {
 						var input = $("#register_form input[name=username]");
@@ -166,17 +167,17 @@ page_script({
 			enableAutocomplete: true,
 			scrollwheel: false,
 			inputBinding: {
-				locationNameInput: $('#job_submit_form [name=job_address]'),
-				latitudeInput: $('#job_submit_form [name=job_latitude]'),
-				longitudeInput: $('#job_submit_form [name=job_longitude]')
+				locationNameInput: $('#job_submit_form [name=address]'),
+				latitudeInput: $('#job_submit_form [name=latitude]'),
+				longitudeInput: $('#job_submit_form [name=longitude]')
 			}
 		});
 		$("#job_find_my_position").click(function (e) {
 			e.preventDefault();
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function (position) {
-					$('#job_submit_form [name=job_latitude]').val(position.coords.latitude).change();
-					$('#job_submit_form [name=job_longitude]').val(position.coords.longitude).change();
+					$('#job_submit_form [name=latitude]').val(position.coords.latitude).change();
+					$('#job_submit_form [name=longitude]').val(position.coords.longitude).change();
 				});
 			}
 		});
@@ -235,7 +236,7 @@ page_script({
 
 		});
 
-		$("[name='job_categories[]']", job_form).select2();
+		$("[name='categories[]']", job_form).select2();
 
 		job_form.submit(function (e){
 			if(!job_form.valid()) {
@@ -293,17 +294,17 @@ page_script({
 			enableAutocomplete: true,
 			scrollwheel: false,
 			inputBinding: {
-				locationNameInput: $('#company_submit_form [name=company_address]'),
-				latitudeInput: $('#company_submit_form [name=company_latitude]'),
-				longitudeInput: $('#company_submit_form [name=company_longitude]')
+				locationNameInput: $('#company_submit_form [name=address]'),
+				latitudeInput: $('#company_submit_form [name=latitude]'),
+				longitudeInput: $('#company_submit_form [name=longitude]')
 			}
 		});
 		$("#company_find_my_position").click(function (e) {
 			e.preventDefault();
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function (position) {
-					$('#company_submit_form [name=company_latitude]').val(position.coords.latitude).change();
-					$('#company_submit_form [name=company_longitude]').val(position.coords.longitude).change();
+					$('#company_submit_form [name=latitude]').val(position.coords.latitude).change();
+					$('#company_submit_form [name=longitude]').val(position.coords.longitude).change();
 				});
 			}
 		});
@@ -325,11 +326,11 @@ page_script({
 				url: {
 					minlength: 5,
 					remote: {
-						url: $("#register_form input").attr("action"),
+						url: $("#register_form").attr("action"),
 						type: "post",
 						data: {
 							check_url: function() {
-								return $("[name=company_url]",company_).val();
+								return $("[name=url]",company_).val();
 							}
 						}
 					}
@@ -377,7 +378,7 @@ page_script({
 
 		});
 
-		$("[name='company_categories[]']", company_form).select2();
+		$("[name='categories[]']", company_form).select2();
 
 		company_form.submit(function (e){
 			if(!company_form.valid()){

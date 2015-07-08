@@ -10,11 +10,11 @@
 ?>
 <div class="row">
 	<div class="col-md-12">
-		<div class="alert alert-danger">
+		<div class="box">
 			<h4>La période d'essai a expiré</h4>
 			<p>
 				 Cette société n'est plus disponible au public, vous seul vous pouvez y accéder.<br>
-				 <a class="btn green ajaxify" href="<?php echo url_root."/".$company->url;?>/publish"><i class="icon-rocket"></i> Publier maintenant</a>
+				 <a class="btn btn-primary btn-raised ajaxify" href="<?php echo url_root."/".$company->url;?>/publish"><i class="icon-rocket"></i> Publier maintenant</a>
 			</p>
 		</div>
 	</div>
@@ -22,11 +22,11 @@
 <?php }else{?>
 <div class="row">
 	<div class="col-md-12">
-		<div class="alert alert-danger">
+		<div class="box">
 			<h4>Cette société n'est pas publiée</h4>
 			<p>
 				 Cette société n'est plus disponible au public, vous seul vous pouvez y accéder.<br>
-				 <a class="btn green ajaxify" href="<?php echo url_root."/".$company->url;?>/publish"><i class="icon-rocket"></i> Publier maintenant</a>
+				 <a class="btn btn-primary btn-raised ajaxify" href="<?php echo url_root."/".$company->url;?>/publish"><i class="icon-rocket"></i> Publier maintenant</a>
 			</p>
 		</div>
 	</div>
@@ -39,13 +39,13 @@
 ?>
 <div class="row">
 	<div class="col-md-12">
-		<div class="alert alert-warning">
+		<div class="box">
 			<h4>Cette société est en période d'essai gratuit</h4>
 			<p>
 				 Vous pouvez essayer toutes les fonctionnalités pendant 1 mois à partir de la date de création de la société,<br>
 				 <span class="text-danger">Au bout de <?php echo $rd;?> jours, cette société ne sera plus disponible au public.</span><br>
 				 Afin d'assurer la disponibilité de la société, créez un contrat de publication avant la fin de la période d'essai.<br><br>
-				 <a class="btn green ajaxify" href="<?php echo url_root."/".$company->url;?>/publish"><i class="icon-rocket"></i> Créer un contrat de publication</a><br>
+				 <a class="btn btn-primary btn-raised ajaxify" href="<?php echo url_root."/".$company->url;?>/publish"><i class="icon-rocket"></i> Créer un contrat de publication</a><br>
 				 <span class="text-success">La date de début contrat de publication sera initialisée à la date fin de la période d'essai.</span>
 			</p>
 		</div>
@@ -54,12 +54,12 @@
 <?php }else{?>
 <div class="row">
 	<div class="col-md-12">
-		<div class="alert alert-danger">
+		<div class="box">
 			<h4>La période d'essai est presque finit</h4>
 			<p>
 				 <span class="text-danger">Au bout de <?php echo $rd;?> jours, cette société ne sera plus disponible au public.</span><br>
 				 Afin d'assurer la disponibilité de la société, créez un contrat de publication avant la fin de la période d'essai.<br><br>
-				 <a class="btn green ajaxify" href="<?php echo url_root."/".$company->url;?>/publish"><i class="icon-rocket"></i> Créer un contrat de publication</a><br>
+				 <a class="btn btn-primary btn-raised ajaxify" href="<?php echo url_root."/".$company->url;?>/publish"><i class="icon-rocket"></i> Créer un contrat de publication</a><br>
 				 <span class="text-success">La date de début contrat de publication sera initialisée à la date fin de la période d'essai.</span>
 			</p>
 		</div>
@@ -68,11 +68,11 @@
 <?php }}elseif($rd<=10){?>
 <div class="row">
 	<div class="col-md-12">
-		<div class="alert alert-danger">
+		<div class="box">
 			<h4>Le contrat de publication expirera bienôt</h4>
 			<p>
 				 <span class="text-danger">Au bout de <?php echo $rd;?> jours, cette société ne sera plus disponible au public.</span><br><br>
-				 <a class="btn green ajaxify" href="<?php echo url_root."/".$company->url;?>/publish"><i class="icon-rocket"></i> Renouveler le contrat</a><br>
+				 <a class="btn btn-primary btn-raised ajaxify" href="<?php echo url_root."/".$company->url;?>/publish"><i class="icon-rocket"></i> Renouveler le contrat</a><br>
 				 <span class="text-success">La date de début du nouveau contrat de publication sera initialisée à la date fin du contrat existant.</span>
 			</p>
 		</div>
@@ -157,8 +157,8 @@
 					<li><a href="#products_list" class="sp_tabs" data-toggle="tab" aria-expanded="false">Produits</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="javascript:;" class="new_service">Ajouter un Service</a></li>
-					<li><a href="javascript:;" class="new_product">Ajouter un Produit</a></li>
+					<li><a href="javascript:;" class="new_service"><i class="fa fa-plus"></i> Ajouter un Service</a></li>
+					<li><a href="javascript:;" class="new_product"><i class="fa fa-plus"></i> Ajouter un Produit</a></li>
 				</ul>
 			</div>
 		</div>

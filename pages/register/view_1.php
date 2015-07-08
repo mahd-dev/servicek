@@ -49,14 +49,14 @@
 						<input type="tel" class="form-control" placeholder="Téléphone" name="mobile" required>
 					</div>
 				</div>
-				<button type="submit" class="btn"><i class="icon-check"></i> S'inscrire</button>
+				<button type="submit" class="btn btn-primary btn-raised"><i class="icon-check"></i> S'inscrire</button>
 			</form>
 		</div>
 	</div>
 	<div class="col-md-4">
 		<div class="alert alert-info">
 			<h4>Vous avez déja un compte ?</h4>
-			<a href="<?php echo url_root;?>/login" class="btn green ajaxify">Se connecter</a>
+			<a href="<?php echo url_root;?>/login" class="btn btn-primary btn-raised ajaxify">Se connecter</a>
 		</div>
 	</div>
 </div>

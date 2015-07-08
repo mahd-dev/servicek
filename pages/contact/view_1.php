@@ -3,20 +3,20 @@
 <div class="row">
 	<div class="col-md-12">
 		<h2 class="page-header">Nous contacter</h2>
-		<div class="portlet light box">
+		<div class="portlet light">
 			<div class="portlet-body">
 				<div class="row">
 					<div class="col-md-6">
 						<div class="space20"></div>
 						<h3 class="form-section">Map</h3>
-						<div class="aspectratio-container aspect-4-3 fit-width">
+						<div class="aspectratio-container aspect-4-3 fit-width box">
 							<div id="contactmap" class="aspectratio-content gmaps margin-bottom-40" style="height:100%;"></div>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="space20"></div>
 						<h3 class="form-section">Informations de contact</h3>
-						<div class="well">
+						<div class="box">
 							<h4>Address</h4>
 							<address>
 							<strong>Société tunisienne des services.</strong><br>

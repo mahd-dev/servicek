@@ -1,5 +1,4 @@
 <link rel="stylesheet" type="text/css" href="<?php echo cdn;?>/libraries/bootstrap-editable/bootstrap-editable/css/bootstrap-editable<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css"/>
-<link href="<?php echo cdn;?>/libraries/bootstrap-fileinput/js/fileinput<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css"/>
 
 <link href="<?php echo url_root;?>/pages/job/style<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css">
 
@@ -10,11 +9,11 @@
 ?>
 <div class="row">
 	<div class="col-md-12">
-		<div class="alert alert-danger">
+		<div class="box">
 			<h4>La période d'essai a expiré</h4>
 			<p>
 				 Ce métier n'est plus disponible au public, vous seul vous pouvez y accéder.<br>
-				 <a class="btn green ajaxify" href="<?php echo url_root."/".$job->url;?>/publish"><i class="icon-rocket"></i> Publier maintenant</a>
+				 <a class="btn btn-primary btn-raised ajaxify" href="<?php echo url_root."/".$job->url;?>/publish"><i class="icon-rocket"></i> Publier maintenant</a>
 			</p>
 		</div>
 	</div>
@@ -22,11 +21,11 @@
 <?php }else{?>
 <div class="row">
 	<div class="col-md-12">
-		<div class="alert alert-danger">
+		<div class="box">
 			<h4>Ce métier n'est pas publiée</h4>
 			<p>
 				 Ce métier n'est plus disponible au public, vous seul vous pouvez y accéder.<br>
-				 <a class="btn green ajaxify" href="<?php echo url_root."/".$job->url;?>/publish"><i class="icon-rocket"></i> Publier maintenant</a>
+				 <a class="btn btn-primary btn-raised ajaxify" href="<?php echo url_root."/".$job->url;?>/publish"><i class="icon-rocket"></i> Publier maintenant</a>
 			</p>
 		</div>
 	</div>
@@ -39,13 +38,13 @@
 ?>
 <div class="row">
 	<div class="col-md-12">
-		<div class="alert alert-warning">
+		<div class="box">
 			<h4>Ce métier est en période d'essai gratuit</h4>
 			<p>
 				 Vous pouvez essayer toutes les fonctionnalités pendant 1 mois à partir de la date de création du métier,<br>
 				 <span class="text-danger">Au bout de <?php echo $rd;?> jours, ce métier ne sera plus disponible au public.</span><br>
 				 Afin d'assurer la disponibilité du métier, créez un contrat de publication avant la fin de la période d'essai.<br><br>
-				 <a class="btn green ajaxify" href="<?php echo url_root."/".$job->url;?>/publish"><i class="icon-rocket"></i> Créer un contrat de publication</a><br>
+				 <a class="btn btn-primary btn-raised ajaxify" href="<?php echo url_root."/".$job->url;?>/publish"><i class="icon-rocket"></i> Créer un contrat de publication</a><br>
 				 <span class="text-success">La date de début contrat de publication sera initialisée à la date fin de la période d'essai.</span>
 			</p>
 		</div>
@@ -54,12 +53,12 @@
 <?php }else{?>
 <div class="row">
 	<div class="col-md-12">
-		<div class="alert alert-danger">
+		<div class="box">
 			<h4>La période d'essai est presque finit</h4>
 			<p>
 				 <span class="text-danger">Au bout de <?php echo $rd;?> jours, ce métier ne sera plus disponible au public.</span><br>
 				 Afin d'assurer la disponibilité du métier, créez un contrat de publication avant la fin de la période d'essai.<br><br>
-				 <a class="btn green ajaxify" href="<?php echo url_root."/".$job->url;?>/publish"><i class="icon-rocket"></i> Créer un contrat de publication</a><br>
+				 <a class="btn btn-primary btn-raised ajaxify" href="<?php echo url_root."/".$job->url;?>/publish"><i class="icon-rocket"></i> Créer un contrat de publication</a><br>
 				 <span class="text-success">La date de début contrat de publication sera initialisée à la date fin de la période d'essai.</span>
 			</p>
 		</div>
@@ -68,11 +67,11 @@
 <?php }}elseif($rd<=10){?>
 <div class="row">
 	<div class="col-md-12">
-		<div class="alert alert-danger">
+		<div class="box">
 			<h4>Le contrat de publication expirera bienôt</h4>
 			<p>
 				 <span class="text-danger">Au bout de <?php echo $rd;?> jours, ce métier ne sera plus disponible au public.</span><br><br>
-				 <a class="btn green ajaxify" href="<?php echo url_root."/".$job->url;?>/publish"><i class="icon-rocket"></i> Renouveler le contrat</a><br>
+				 <a class="btn btn-primary btn-raised ajaxify" href="<?php echo url_root."/".$job->url;?>/publish"><i class="icon-rocket"></i> Renouveler le contrat</a><br>
 				 <span class="text-success">La date de début du nouveau contrat de publication sera initialisée à la date fin du contrat existant.</span>
 			</p>
 		</div>

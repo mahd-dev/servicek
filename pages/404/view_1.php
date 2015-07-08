@@ -3,21 +3,12 @@
 	<div class="col-md-12 page-404">
 		<div class="number">404</div>
 		<div class="details">
-			<h3>Oops! You're lost.</h3>
+			<h3>Oops! Vous êtes perdu.</h3>
 			<p>
-				We can not find the page you're looking for.<br/>
+				on n'a pas pu trouver la page gue vous demandez.<br/>
 				<a href="<?php echo url_root;?>" class="ajaxify">
-				Return home </a>
-				or try the search bar below.
+				Retour à l'accueil </a>
 			</p>
-			<form id="search_form">
-				<div class="input-group input-medium">
-					<input type="text" class="form-control query" placeholder="keyword...">
-					<span class="input-group-btn">
-					<button type="submit" class="btn btn-default"><i class="icon-magnifier"></i></button>
-					</span>
-				</div>
-			</form>
 		</div>
 	</div>
 </div>

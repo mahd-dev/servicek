@@ -1,4 +1,3 @@
-<link href="<?php echo cdn;?>/libraries/bootstrap-fileinput/js/fileinput<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css"/>
 <link href="<?php echo url_root;?>/pages/job/style<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css">
 
 <div class="row">
