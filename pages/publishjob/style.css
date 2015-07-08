@@ -3,7 +3,7 @@
 	margin-bottom: 50px;
 }
 .auto-scroll{
-	overflow: auto;
+	overflow-y: scroll;
 }
 .offer-list>.list-group-item{
 	cursor: pointer;
