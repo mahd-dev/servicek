@@ -3,7 +3,6 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<button type="button" class="btn btn-lg btn-danger popover-elm" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
 		<div class="row">
 
 			<?php foreach ($rslt as $r) {?>
