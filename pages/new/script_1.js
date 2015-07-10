@@ -399,7 +399,7 @@ page_script({
 						p=JSON.parse(rslt);
 						switch(p.status){
 							case "success":
-								app.ajaify(p.params.company_url);
+								app.ajaxify(p.params.company_url);
 							break;
 							default:
 								console.log(p);
