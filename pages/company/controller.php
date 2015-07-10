@@ -158,35 +158,71 @@
 		include "view_2.php";
 	}elseif($is_contracted){
 
+		if(isset($_GET["product"])) $ps=new product($_GET["product"]);
+		elseif(isset($_GET["service"])) $ps=new service($_GET["service"]);
+
 		// defining seo parameters
 		if(isset($ogp)){
-	        $ogp->setTitle( $company->name );
-	        $ogp->setDescription( $company->description );
-	        $ogp->setURL( url_root."/".$company->url );
+			if(isset($ps)){
+				$ogp->setTitle( $ps->name );
+        $ogp->setDescription( $ps->description );
+        $ogp->setURL( url_root."/".$company->url."/".get_class($ps)."/".$ps->id );
 
-	        $ogp->setType( 'article' );
+        $ogp->setType( 'article' );
 
-	        $seo_img = $company->logo;
-	        if($seo_img){
-	            $image = new OpenGraphProtocolImage();
-	            $image->setURL( $paths->company_logo->url.$seo_img );
-	            $image->setSecureURL( $paths->company_logo->url.$seo_img );
-	            $image->setType( 'image/jpeg' );
-	            $ogp->addImage($image);
+        $seo_img = $ps->image;
+        if($seo_img){
+					switch (get_class($ps)) {
+						case 'product': $img_path=$paths->product_image->url.$seo_img; break;
+						case 'service': $img_path=$paths->service_image->url.$seo_img; break;
+					}
+          $image = new OpenGraphProtocolImage();
+          $image->setURL( $img_path );
+          $image->setSecureURL( $img_path );
+          $image->setType( 'image/jpeg' );
+          $ogp->addImage($image);
 
-	            $ref["twitter:image:src"] = $paths->company_logo->url.$seo_img;
-	        }
+          $ref["twitter:image:src"] = $img_path;
+        }
 
-	        $article = new OpenGraphProtocolArticle();
-	        $article->setPublishedTime( date(DATE_ISO8601, strtotime($company->creation_time)) );
-	        $article->setModifiedTime( new DateTime( 'now', new DateTimeZone( 'Africa/Tunis' ) ) );
-	        $article->setSection( 'Company' );
-	        foreach(array_filter(explode(",",$categories)) as $c) $article->addTag( $c );
+        $article = new OpenGraphProtocolArticle();
+        $article->setPublishedTime( date(DATE_ISO8601, strtotime($company->creation_time)) );
+        $article->setModifiedTime( new DateTime( 'now', new DateTimeZone( 'Africa/Tunis' ) ) );
+        $article->setSection( get_class($ps) );
 
-	        $ref["twitter:title"] = $company->name;
-            $ref["twitter:description"] = $company->description;
+        foreach(array_filter(explode(",",$categories)) as $c) $article->addTag( $c );
 
-	    }
+        $ref["twitter:title"] = $ps->name;
+        $ref["twitter:description"] = $ps->description;
+			}else{
+        $ogp->setTitle( $company->name );
+        $ogp->setDescription( $company->description );
+        $ogp->setURL( url_root."/".$company->url );
+
+        $ogp->setType( 'article' );
+
+        $seo_img = $company->logo;
+        if($seo_img){
+            $image = new OpenGraphProtocolImage();
+            $image->setURL( $paths->company_logo->url.$seo_img );
+            $image->setSecureURL( $paths->company_logo->url.$seo_img );
+            $image->setType( 'image/jpeg' );
+            $ogp->addImage($image);
+
+            $ref["twitter:image:src"] = $paths->company_logo->url.$seo_img;
+        }
+
+        $article = new OpenGraphProtocolArticle();
+        $article->setPublishedTime( date(DATE_ISO8601, strtotime($company->creation_time)) );
+        $article->setModifiedTime( new DateTime( 'now', new DateTimeZone( 'Africa/Tunis' ) ) );
+        $article->setSection( 'Company' );
+
+        foreach(array_filter(explode(",",$categories)) as $c) $article->addTag( $c );
+
+        $ref["twitter:title"] = $company->name;
+        $ref["twitter:description"] = $company->description;
+			}
+    }
 
 		include "view_1.php";
 	}else{

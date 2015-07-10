@@ -83,6 +83,7 @@
 						<?php if($cs>0){?>
 							<div class="tab-pane row active" id="services">
 							<?php foreach ($services as $p) {
+								$id=$p->id;
 								$name=$p->name;
 								$image=$p->image;
 								$description=$p->description;
@@ -91,6 +92,7 @@
 							?>
 								<div class="col-xs-12 col-sm-6 col-md-4">
 									<a class="thumbnail ps"
+										data-id="<?php echo $id; ?>"
 										data-name="<?php if($name){ echo $name; }?>"
 										data-description="<?php echo $description; ?>"
 										data-sale-price="<?php if($price){ echo $price; }?>"
@@ -122,6 +124,7 @@
 						<?php if($cp>0){?>
 							<div class="tab-pane row <?php if($cs==0){?> active<?php }?>" id="products" data-columns>
 							<?php foreach ($products as $p) {
+								$id=$p->id;
 								$name=$p->name;
 								$image=$p->image;
 								$description=$p->description;
@@ -131,6 +134,7 @@
 							?>
 								<div class="col-xs-12 col-sm-6 col-md-4">
 									<a class="thumbnail ps"
+										data-id="<?php echo $id; ?>"
 										data-name="<?php if($name){ echo $name; }?>"
 										data-description="<?php echo $description; ?>"
 										data-sale-price="<?php if($price){ echo $price; }?>"
@@ -172,10 +176,11 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h3 class="modal-title"></h3>
+				<button class="btn pull-right next"><i class="fa fa-arrow-right"></i></button>
+				<button class="btn previous"><i class="fa fa-arrow-left"></i></button>
 			</div>
 			<div class="modal-body">
+				<h2 class="modal-title"></h2>
 				<img class="prod_srv_image modal_ps_image" src="" alt="image"/>
 				<div class="caption">
 					<p class="description"></p>
@@ -190,6 +195,12 @@
 	</div>
 </div>
 
+<input type="hidden" name="root_url" value="<?php echo url_root.'/'.$company->url; ?>"/>
+
+<?php if(isset($ps)){ ?>
+<input type="hidden" name="ps_id" value="<?php echo $ps->id; ?>"/>
+<input type="hidden" name="ps_type" value="<?php echo get_class($ps); ?>"/>
+<?php } ?>
 
 <!-- custom page script -->
 <script src="<?php echo url_root;?>/pages/company/script_1<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>

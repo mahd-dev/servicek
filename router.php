@@ -70,7 +70,10 @@
         case "company":
 			if(isset($url[1])) $_GET["id"]=$url[1];
 			if(isset($url[2]) && $url[2]=="publish") $req_page = "pages/publishcompany/controller.php";
-			else $req_page = "pages/company/controller.php";
+			else {
+				if(isset($url[2]) && isset($url[3]) && in_array($url[2], array("product","service"))) $_GET[$url[2]]=$url[3];
+					$req_page = "pages/company/controller.php";
+			}
 			break;
         case "product":
 			if(isset($url[1])) $_GET["id"]=$url[1];
@@ -103,7 +106,10 @@
 			if($company){
 				$_GET["id"]=$company->id;
 				if(isset($url[1]) && $url[1]=="publish") $req_page = "pages/publishcompany/controller.php";
-				else $req_page = "pages/company/controller.php";
+				else {
+					if(isset($url[1]) && isset($url[2]) && in_array($url[1], array("product","service"))) $_GET[$url[1]]=$url[2];
+					$req_page = "pages/company/controller.php";
+				}
 				break;
 			} else $req_page="pages/404/controller.php";
 			break;
