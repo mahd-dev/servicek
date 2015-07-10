@@ -15,7 +15,7 @@ page_script({
 			marker.setMap(map);
     });
 
-		var current_item;
+		var current_item = undefined;
 
 		$(".ps").click(function () {
 			var b = $(this);
@@ -59,6 +59,15 @@ page_script({
 			else current_item.parent().children().eq(p-1).find('.ps').click();
 		});
 
+		$(window).keydown(function (e) {
+			if(current_item){
+				switch (e.keyCode) {
+					case 39: $(".modal .next").click(); break;
+					case 37: $(".modal .previous").click(); break;
+				}
+			}
+		});
+
 		if($("input[name=ps_id]").length==1){
 			setTimeout(function () {
 				switch ($("input[name=ps_type]").val()) {
@@ -70,6 +79,7 @@ page_script({
 
 		$("#show_ps").on("hide.bs.modal", function () {
 			history.pushState(undefined, document.title, $("input[name=root_url]").val());
+			current_item = undefined;
 		});
 
 	}
