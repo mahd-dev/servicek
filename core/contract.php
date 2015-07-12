@@ -28,6 +28,7 @@
                     case "page":
                         switch ($this->page_type) {
                             case "company": return new company($this->id_page); break;
+                            case "shop": return new shop($this->id_page); break;
                             case "job": return new job($this->id_page); break;
                             default: return null; break;
                         }

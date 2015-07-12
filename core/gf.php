@@ -2,8 +2,49 @@
 
 	class gf {
 
+		public static function check_url($url){
+			global $db;
+			global $reserved_urls;
+			if(in_array($url, $reserved_urls)) return false;
+			$t = 0;
+			$q=$db->query("select count(*) from company where (url='".$url."')");
+			$r=$q->fetch_row();
+			$t+=$r[0];
+			$q=$db->query("select count(*) from shop where (url='".$url."')");
+			$r=$q->fetch_row();
+			$t+=$r[0];
+			$q=$db->query("select count(*) from job where (url='".$url."')");
+			$r=$q->fetch_row();
+			$t+=$r[0];
+			return $t==0;
+		}
+
+		public static function get_by_url($url){
+			global $db;
+			$q=$db->query("select id from company where (url='".$url."')");
+			if($q->num_rows==1) {
+				$r=$q->fetch_row();
+				return new company($r[0]);
+			}else{
+				$q=$db->query("select id from shop where (url='".$url."')");
+				if($q->num_rows==1) {
+					$r=$q->fetch_row();
+					return new shop($r[0]);
+				}else{
+					$q=$db->query("select id from job where (url='".$url."')");
+					if($q->num_rows==1) {
+						$r=$q->fetch_row();
+						return new job($r[0]);
+					}else{
+						return null;
+					}
+				}
+			}
+		}
+
+
 		public static function pay($method, $card_number, $card_password, $amount){
-			
+
 			switch ($method) {
 				case 'e_dinar_smart_tunisian_post':
 
@@ -27,7 +68,7 @@
 
 					$payment_recipt="ignored_payment";
 					$payment_error="unhandled";
-					
+
 					break;
 				default:
 					$payment_error = "invalid_method";
@@ -50,11 +91,11 @@
 			global $db;
 
 			$q = $db->real_escape_string($q);
-			
+
 			$rslt = array();
-			
+
 			$q_company=$db->query("
-				SELECT id, 
+				SELECT id,
 				(((MATCH (name) AGAINST ('$q')) + (MATCH (slogan, description) AGAINST ('$q'))) / 2)
 				AS score
     			FROM company WHERE (MATCH (name, slogan, description) AGAINST ('$q'))
@@ -87,7 +128,7 @@
 				$e = new job($r[0]);
 				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => 1);
 			}
-			
+
 			$q_product=$db->query("
 				SELECT id, MATCH (name, description) AGAINST ('$q') AS score
     			FROM product WHERE MATCH (name, description) AGAINST ('$q')
@@ -96,7 +137,7 @@
 				$e = new product($r[0]);
 				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => 1);
 			}
-			
+
 			$q_service=$db->query("
 				SELECT id, MATCH (name, description) AGAINST ('$q') AS score
     			FROM service WHERE MATCH (name, description) AGAINST ('$q')
@@ -119,9 +160,9 @@
 						else $rslt[] = array("obj" => $child, "score" => 1);
 					}
 				}
-				
+
 			}
-			
+
 			usort($rslt, function($a, $b) {
 			    return $a['score'] - $b['score'];
 			});
@@ -134,9 +175,9 @@
 			global $db;
 
 			$q = $db->real_escape_string($q);
-			
+
 			$rslt = array();
-			
+
 			$q_company=$db->query("
 				SELECT id
 				FROM company WHERE (concat(IFNULL(name,''),' ',IFNULL(slogan,''),' ',IFNULL(description,'')) like '%".str_replace(" ","%",$q)."%')
@@ -176,7 +217,7 @@
 				$e = new product($r[0]);
 				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => 1);
 			}
-			
+
 			$q_service=$db->query("
 				SELECT id
     			FROM service WHERE (concat(IFNULL(name,''),' ',IFNULL(description,'')) like '%".str_replace(" ","%",$q)."%')
@@ -199,9 +240,9 @@
 						else $rslt[] = array("obj" => $child, "score" => 1);
 					}
 				}
-				
+
 			}
-			
+
 			usort($rslt, function($a, $b) {
 			    return $a['score'] - $b['score'];
 			});
@@ -213,25 +254,34 @@
 			global $db;
 
 			$rslt = array();
-			
+
 			$q_company=$db->query("
 				SELECT id
-				FROM company ORDER BY RAND() LIMIT 50
+				FROM company ORDER BY RAND()
     		") or die("q_company : ".$db->error);
 			while ($r=$q_company->fetch_row()) {
 				$e = new company($r[0]);
 				if($e->is_contracted) $rslt[] = $e;
 			}
 
+			$q_shop=$db->query("
+				SELECT id
+				FROM shop ORDER BY RAND()
+			") or die("q_shop : ".$db->error);
+			while ($r=$q_shop->fetch_row()) {
+				$e = new shop($r[0]);
+				if($e->is_contracted) $rslt[] = $e;
+			}
+
 			$q_job=$db->query("
 				SELECT id
-				FROM job ORDER BY RAND() LIMIT 50
+				FROM job ORDER BY RAND()
 			") or die("q_job : ".$db->error);
 			while ($r=$q_job->fetch_row()) {
 				$e = new job($r[0]);
 				if($e->is_contracted) $rslt[] = $e;
 			}
-			
+
 			shuffle($rslt);
 
 			return $rslt;
@@ -240,11 +290,11 @@
 		public static function getClientIP(){
 
 			if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)){
-		        return  $_SERVER["HTTP_X_FORWARDED_FOR"];  
-		    }else if (array_key_exists('REMOTE_ADDR', $_SERVER)) { 
-		        return $_SERVER["REMOTE_ADDR"]; 
+		        return  $_SERVER["HTTP_X_FORWARDED_FOR"];
+		    }else if (array_key_exists('REMOTE_ADDR', $_SERVER)) {
+		        return $_SERVER["REMOTE_ADDR"];
 		    }else if (array_key_exists('HTTP_CLIENT_IP', $_SERVER)) {
-		        return $_SERVER["HTTP_CLIENT_IP"]; 
+		        return $_SERVER["HTTP_CLIENT_IP"];
 		    }
 		    return null;
 		}
@@ -259,7 +309,7 @@
 	            return $uuid;
 	        }
 		}
-		
+
 		public static function randomString($length = 10) {
 		    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$£*-+=)_-(&!:?;.,<>#~[]@|{}';
 		    $charactersLength = strlen($characters);

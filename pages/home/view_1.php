@@ -8,27 +8,26 @@
 			<?php foreach ($rslt as $r) {?>
 
 				<div class="col-sm-6 col-md-4">
-	        <div class="property-box">
-            <div class="property-box-image">
-							<?php if($r["image_url"]){?>
-								<div class="aspectratio-container aspect-4-3 fit-width">
-									<div class="aspectratio-content image" style="background-image:url('<?php echo $r["image_url"];?>');"></div>
-								</div>
-							<?php }?>
-							<?php if(!$r["image_url"]){?>
-								<div class="aspectratio-container aspect-4-3 fit-width">
-									<div class="aspectratio-content"></div>
-								</div>
-							<?php }?>
-            </div>
-            <div class="property-box-content">
-								<h3><?php echo $r["title"];?></h3>
-								<p><?php echo $r["content"];?></p>
-            </div>
-            <div class="property-box-bottom">
-							<a href="<?php echo $r["url"];?>" class="ajaxify">Afficher plus</a>
-            </div>
-	        </div>
+					<a href="<?php echo $r["url"];?>" class="ajaxify item">
+		        <div class="property-box">
+	            <div class="property-box-image">
+								<?php if($r["image_url"]){?>
+									<div class="aspectratio-container aspect-4-3 fit-width">
+										<div class="aspectratio-content image" style="background-image:url('<?php echo $r["image_url"];?>');"></div>
+									</div>
+								<?php }?>
+								<?php if(!$r["image_url"]){?>
+									<div class="aspectratio-container aspect-4-3 fit-width">
+										<div class="aspectratio-content"></div>
+									</div>
+								<?php }?>
+	            </div>
+	            <div class="property-box-content">
+									<h3><?php echo $r["title"];?></h3>
+									<p><?php echo $r["content"];?></p>
+	            </div>
+		        </div>
+					</a>
 		    </div>
 
       <?php } ?>

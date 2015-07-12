@@ -43,8 +43,7 @@
 								<h3>Démarrez ici ..</h3>
 								<p>
 									 <div class="btn-group btn-group-solid margin-bottom-20">
-										<a type="button" class="btn btn-primary btn-raised btn-lg ajaxify" href="<?php echo url_root;?>/new/company"><i class="icon-flag"></i> Créer ma Société</a>
-										<a type="button" class="btn btn-primary btn-raised btn-lg ajaxify" href="<?php echo url_root;?>/new/job"><i class="icon-pointer"></i> Créer mon métier</a>
+										<a type="button" class="btn btn-primary btn-raised btn-lg ajaxify" href="<?php echo url_root;?>/new"><i class="icon-pointer"></i> Créer mon entreprise</a>
 									</div>
 								</p>
 							<?php }else{?>
@@ -52,15 +51,13 @@
 									<?php foreach($pages as $p){?>
 										<a href="<?php echo $p["url"];?>" class="ajaxify list-group-item">
 											<h4>
-												<i class="icon-<?php echo($p["type"]=="company" ? "flag" : "pointer");?>"></i>
 												<?php echo $p["name"];?>
 											</h4>
 										</a>
 									<?php }?>
 								</div>
 								<div class="btn-group btn-group-solid pull-right">
-									<a type="button" class="btn btn-primary btn-raised ajaxify" href="<?php echo url_root;?>/new/company"><i class="icon-flag"></i> Créer une autre Société</a>
-									<a type="button" class="btn btn-primary btn-raised ajaxify" href="<?php echo url_root;?>/new/job"><i class="icon-pointer"></i> Créer un autre métier</a>
+									<a type="button" class="btn btn-primary btn-raised ajaxify" href="<?php echo url_root;?>/new"><i class="icon-pointer"></i> Créer une autre entreprise</a>
 								</div>
 							<?php }?>
 

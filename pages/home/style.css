@@ -3,6 +3,28 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+.item{
+	text-decoration: none !important;
+	color: #000;
+}
+.item .image{
+	-webkit-transform: scale(1.03);
+	-moz-transform: scale(1.03);
+	-o-transform: scale(1.03);
+	-ms-transform: scale(1.03);
+	transform: scale(1.03);
+	-webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+}
+.item:hover .image {
+  -webkit-transform: scale(1.06);
+  -moz-transform: scale(1.06);
+  -o-transform: scale(1.06);
+  -ms-transform: scale(1.06);
+  transform: scale(1.06);
+}
 .property-box-content>h3{
 	margin: 0 0 15px;
 	white-space: nowrap;
@@ -12,4 +34,5 @@
 .property-box-content>p{
 	height: 9ex;
 	overflow: hidden;
+	text-decoration: none;
 }

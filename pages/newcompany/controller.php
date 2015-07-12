@@ -5,7 +5,7 @@
 	}
 
 
-	if(isset($_POST["check_url"])) die((company::check_url($_POST["check_url"])?"true":"false"));
+	if(isset($_POST["check_url"])) die((gf::check_url($_POST["check_url"])?"true":"false"));
 	if(
 		isset($_POST["name"]) &&
 		isset($_POST["slogan"]) &&
@@ -31,23 +31,23 @@
 			!$_POST["email"]
 		)  die(json_encode(array("status"=>"error_empty_parameter")));
 
-		if(!company::check_url($_POST["url"])) die(json_encode(array("status"=>"unvailable_url")));
-		
+		if(!gf::check_url($_POST["url"])) die(json_encode(array("status"=>"unvailable_url")));
+
 		foreach ($_POST["categories"] as $c){
 			$c = new category($c);
 			if(!$c->isvalid) die(json_encode(array("status"=>"error_invalid_parameter")));
 		}
-		
+
 		// create company é contract
 		$company=company::create($user);
 		$seat=company_seat::create($company);
-		
+
 		$company->name=$_POST["name"];
 		$company->slogan=$_POST["slogan"];
 		$company->description=$_POST["description"];
 		foreach ($_POST["categories"] as $c) $company->assign_to_category(new category($c));
-		
-		if(company::check_url($_POST["url"])) $company->url=$_POST["url"];
+
+		if(gf::check_url($_POST["url"])) $company->url=$_POST["url"];
 
 		$seat->name="Siège social"; // to translate
 		$seat->type="master";
@@ -58,7 +58,7 @@
 		$seat->email=$_POST["email"];
 
 		$contract=contract::create($company);
-		
+
 		$contract->type=0;
 		$contract->amount=0;
 		$contract->duration=1;
@@ -71,15 +71,7 @@
 		)));
 	}
 
-	// definig SEO parameters
-	// ...
-
-	// process required data
-	$available_categories = category::get_roots();
-	
-	// select and display right view
-	// ...
-	include "view_1.php";
+	include __DIR__."/../404/controller.php";
 
 	skip_this_page:
 ?>

@@ -15,6 +15,7 @@
 		"account",
 		"new",
 		"job",
+		"shop",
 		"company",
 		"product",
 		"service",
@@ -33,67 +34,65 @@
 		case "contact":
 			$req_page = "pages/contact/controller.php";break;
 
-        case "search":
+    case "search":
 			if(isset($url[1]) && $url[1]!="autocomplete") $_GET["q"]=$url[1];
 			$req_page = "pages/search/controller.php";break;
-        case "login":
+    case "login":
 			$req_page = "pages/login/controller.php";break;
-        case "logout":
-            session_destroy();
-            $user=null;
-            $logout=true;
+    case "logout":
+      session_destroy();
+      $user=null;
+      $logout=true;
 			$req_page = "pages/home/controller.php";break;
-        case "register":
+    case "register":
 			$req_page = "pages/register/controller.php";break;
-        case "account":
-        	if(isset($url[1]) && $url[1]=="set_user_attrib") $set_user_attrib=true;
+    case "account":
+    	if(isset($url[1]) && $url[1]=="set_user_attrib") $set_user_attrib=true;
 			$req_page = "pages/account/controller.php";break;
 		case "new":
-			if(!isset($url[1])){
+			if(!isset($url[1])) {
 				$req_page="pages/new/controller.php";break;
 			}else{
 				switch ($url[1]) {
-					case "company":
-						$req_page = "pages/newcompany/controller.php";break;
-					case "job":
-						$req_page = "pages/newjob/controller.php";break;
-					default:
-						$req_page="pages/404/controller.php";break;
+					case 'company': die(include "pages/newcompany/controller.php"); break;
+					case 'shop': die(include "pages/newshop/controller.php"); break;
+					case 'job': die(include "pages/newjob/controller.php"); break;
+					default: $req_page="pages/404/controller.php"; break;
 				}
-				break;
 			}
-        case "job":
+    case "job":
 			if(isset($url[1])) $_GET["id"]=$url[1];
 			if(isset($url[2]) && $url[2]=="publish") $req_page = "pages/publishjob/controller.php";
 			else $req_page = "pages/job/controller.php";
-			break;
-        case "company":
+		break;
+		case "shop":
+			if(isset($url[1])) $_GET["id"]=$url[1];
+			if(isset($url[2]) && $url[2]=="publish") $req_page = "pages/publishshop/controller.php";
+			else {
+				if(isset($url[2]) && isset($url[3]) && in_array($url[2], array("product","service"))) $_GET[$url[2]]=$url[3];
+					$req_page = "pages/shop/controller.php";
+			}
+		break;
+    case "company":
 			if(isset($url[1])) $_GET["id"]=$url[1];
 			if(isset($url[2]) && $url[2]=="publish") $req_page = "pages/publishcompany/controller.php";
 			else {
 				if(isset($url[2]) && isset($url[3]) && in_array($url[2], array("product","service"))) $_GET[$url[2]]=$url[3];
 					$req_page = "pages/company/controller.php";
 			}
-			break;
-        case "product":
+		break;
+    case "product":
 			if(isset($url[1])) $_GET["id"]=$url[1];
 			$req_page = "pages/product/controller.php";
-			break;
-        case "service":
+		break;
+    case "service":
 			if(isset($url[1])) $_GET["id"]=$url[1];
 			$req_page = "pages/service/controller.php";
-			break;
-        case "post":
+		break;
+    case "post":
 			if(isset($url[1])) $_GET["id"]=$url[1];
 			$req_page = "pages/post/controller.php";
-			break;
-
-        /*
-		case "page_requires_parameters": // like http://loop.tn/post/123456789/897654321
-			if(isset($url[1])) $_GET["param_1"]=$url[1];
-			if(isset($url[2])) $_GET["param_2"]=$url[2];
-			$req_page = "pages/page/controller.php";break;
-        */
+		break;
 
 		case "sitemap.xml":
 			die(include"seo/sitemap.php");break;
@@ -102,13 +101,14 @@
 		case "git_webhook_release":
 			die(include"git_webhook/release.php");break;
 		default:
-			$company = company::get_by_url($url[0]);
-			if($company){
-				$_GET["id"]=$company->id;
-				if(isset($url[1]) && $url[1]=="publish") $req_page = "pages/publishcompany/controller.php";
+			$page = gf::get_by_url($url[0]);
+			if($page){
+				$type=get_class($page);
+				$_GET["id"]=$page->id;
+				if(isset($url[1]) && $url[1]=="publish") $req_page = "pages/publish".$type."/controller.php";
 				else {
 					if(isset($url[1]) && isset($url[2]) && in_array($url[1], array("product","service"))) $_GET[$url[1]]=$url[2];
-					$req_page = "pages/company/controller.php";
+					$req_page = "pages/".$type."/controller.php";
 				}
 				break;
 			} else $req_page="pages/404/controller.php";

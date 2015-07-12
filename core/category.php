@@ -31,7 +31,7 @@
                         return $r[0]==1;
                     break;
                     case "childrens":
-                        return array_merge($this->companies, $this->jobs, $this->products, $this->services);
+                        return array_merge($this->companies, $this->shops, $this->jobs, $this->products, $this->services);
                     case "subcategories_list":
                         return $this->subcategories_list();
                     case "subcategories_tree":
@@ -51,6 +51,12 @@
                         $list = array();
                         $q=$db->query("select id_children from category_children where (id_category='".$this->id."' and children_type='company')");
                         while($r=$q->fetch_row()) $list[] = new company($r[0]);
+                        return $list;
+                    break;
+                    case "shops":
+                        $list = array();
+                        $q=$db->query("select id_children from category_children where (id_category='".$this->id."' and children_type='shop')");
+                        while($r=$q->fetch_row()) $list[] = new shop($r[0]);
                         return $list;
                     break;
                     case "jobs":

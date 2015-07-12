@@ -37,22 +37,22 @@
 			if(!$c->isvalid) die(json_encode(array("status"=>"error_invalid_parameter")));
 		}
 
-		// create job é contract
-		$job=job::create($user);
+		// create shop é contract
+		$shop=shop::create($user);
 
-		$job->name=$_POST["name"];
-		$job->description=$_POST["description"];
-		foreach ($_POST["categories"] as $c) $job->assign_to_category(new category($c));
+		$shop->name=$_POST["name"];
+		$shop->description=$_POST["description"];
+		foreach ($_POST["categories"] as $c) $shop->assign_to_category(new category($c));
 
-		if(gf::check_url($_POST["url"])) $job->url=$_POST["url"];
+		if(gf::check_url($_POST["url"])) $shop->url=$_POST["url"];
 
-		$job->address=$_POST["address"];
-		$job->geolocation=json_encode(array("longitude"=>$_POST["longitude"], "latitude"=>$_POST["latitude"]));
-		$job->tel=$_POST["tel"];
-		$job->mobile=$_POST["mobile"];
-		$job->email=$_POST["email"];
+		$shop->address=$_POST["address"];
+		$shop->geolocation=json_encode(array("longitude"=>$_POST["longitude"], "latitude"=>$_POST["latitude"]));
+		$shop->tel=$_POST["tel"];
+		$shop->mobile=$_POST["mobile"];
+		$shop->email=$_POST["email"];
 
-		$contract=contract::create($job);
+		$contract=contract::create($shop);
 
 		$contract->type=0;
 		$contract->amount=0;
@@ -61,7 +61,7 @@
 		die(json_encode(array(
 			"status"=>"success",
 			"params"=>array(
-				"job_url"=>url_root."/".$job->url
+				"shop_url"=>url_root."/".$shop->url
 			)
 		)));
 	}

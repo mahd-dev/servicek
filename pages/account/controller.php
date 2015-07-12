@@ -52,17 +52,13 @@
 
 	$pages=array();
 	foreach ($user->pages as $p) {
-		if($p instanceOf company){
-			if($p->url != null) $url=url_root."/".$p->url;
-			else $url=url_root."/company/".$p->id;
-		}else $url=url_root."/job/".$p->id;
 		$pages[]=array(
-			"type"=>($p instanceOf company ? "company" : "job" ),
-			"url"=>$url,
+			"type"=>get_class($p),
+			"url"=>$p->url,
 			"name"=>$p->name
 		);
 	}
-	
+
 	// selecting and including view
 	include "view_1.php";
 

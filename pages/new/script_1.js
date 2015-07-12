@@ -11,6 +11,13 @@ page_script({
 					google.maps.event.trigger(map.map, 'resize');
 					map.map.setCenter(map.marker.position);
 				break;
+				case "2":
+					$('a[href="#title2"]').tab('show');
+					current_form = $('#title3 form');
+					var map = $("#shop_geolocation").locationpicker("map");
+					google.maps.event.trigger(map.map, 'resize');
+					map.map.setCenter(map.marker.position);
+				break;
 				case "3":
 					$('a[href="#title3"]').tab('show');
 					current_form = $('#title3 form');
@@ -197,6 +204,18 @@ page_script({
 				name: {minlength: 3, maxlength: 255, required: true},
 				description: {minlength: 50, maxlength: 4095, required: true},
 				categories: {required: true},
+				url: {
+					minlength: 5,
+					remote: {
+						url: $("#job_submit_form").attr("action"),
+						type: "post",
+						data: {
+							check_url: function() {
+								return $("[name=url]",shop_).val();
+							}
+						}
+					}
+				},
 				address: {required: true},
 				longitude: {required: true},
 				latitude: {required: true},
@@ -278,7 +297,7 @@ page_script({
 
 		// NEW JOB End
 
-		// NEW CAMPANY Start
+		// NEW COMPANY Start
 		// handling geolocation picker
 
 		if(!navigator.geolocation){
@@ -326,7 +345,7 @@ page_script({
 				url: {
 					minlength: 5,
 					remote: {
-						url: $("#register_form").attr("action"),
+						url: $("#company_submit_form").attr("action"),
 						type: "post",
 						data: {
 							check_url: function() {
@@ -417,7 +436,148 @@ page_script({
 				}
 			});
 		});
-		// NEW CAMPANY End
+		// NEW COMPANY End
+
+		// NEW shop Start
+		// handling geolocation picker
+
+		if(!navigator.geolocation){
+			var main = $("#shop_find_my_position").parents(".input-group");
+			main.before($("input",main));
+			main.remove();
+		}
+
+		$('#shop_geolocation').locationpicker({
+			location: {latitude: 33.881967, longitude: 9.560764},
+			radius: 0,
+			zoom: 6,
+			enableAutocomplete: true,
+			scrollwheel: false,
+			inputBinding: {
+				locationNameInput: $('#shop_submit_form [name=address]'),
+				latitudeInput: $('#shop_submit_form [name=latitude]'),
+				longitudeInput: $('#shop_submit_form [name=longitude]')
+			}
+		});
+		$("#shop_find_my_position").click(function (e) {
+			e.preventDefault();
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function (position) {
+					$('#shop_submit_form [name=latitude]').val(position.coords.latitude).change();
+					$('#shop_submit_form [name=longitude]').val(position.coords.longitude).change();
+				});
+			}
+		});
+
+		// handling wizard
+		var shop_form = $('#shop_submit_form');
+		var error = $('.alert-danger.form-error');
+
+		var formvalidator = shop_form.validate({
+			ignore: "",
+			errorElement: 'span',
+			errorClass: 'help-block help-block-error',
+			focusInvalid: true,
+			rules: {
+
+				name: {minlength: 3, maxlength: 255, required: true},
+				description: {minlength: 50, maxlength: 4095, required: true},
+				categories: {required: true},
+				url: {
+					minlength: 5,
+					remote: {
+						url: $("#shop_submit_form").attr("action"),
+						type: "post",
+						data: {
+							check_url: function() {
+								return $("[name=url]",shop_).val();
+							}
+						}
+					}
+				},
+
+				address: {required: true},
+				longitude: {required: true},
+				latitude: {required: true},
+				tel: {required: true},
+				email: {required: true}
+
+			},
+
+			invalidHandler: function (event, validator) { //display error alert on form submit
+				error.show();
+			},
+
+			highlight: function (element) { // hightlight error inputs
+				$(element)
+					.closest('.form-group').removeClass('has-success').addClass('has-error'); // set error class to the control group
+			},
+
+			unhighlight: function (element) { // revert the change done by hightlight
+				$(element)
+					.closest('.form-group').removeClass('has-error'); // set error class to the control group
+			},
+
+			success: function (label) {
+
+			},
+			errorPlacement: function (error, element) {
+
+				switch($(element).attr("shop_name")){
+					case "url":
+						error.appendTo($(element.parents(".form-group")[0]).find(".error_msg"));
+					break;
+					default:
+						error.insertAfter(element);
+					break;
+				}
+			},
+			submitHandler: function (shop_form) {
+				error.hide();
+			}
+
+		});
+
+		$("[name='categories[]']", shop_form).select2();
+
+		shop_form.submit(function (e){
+			if(!shop_form.valid()){
+				e.preventDefault();
+				return false;
+			}
+			if(e.originalEvent && $("#register_form").length==1){
+				$("#register_form").submit();
+				e.preventDefault();
+				return false;
+			}
+			$.ajax({
+				url: $(this).attr("action"),
+				type: "POST",
+				data: $(shop_form).serialize(),
+				success: function (rslt) {
+					try{
+						p=JSON.parse(rslt);
+						switch(p.status){
+							case "success":
+								app.ajaxify(p.params.shop_url);
+							break;
+							default:
+								console.log(p);
+								return false;
+							break;
+						}
+					}catch(ex){
+						console.log(rslt);
+						return false;
+					}
+				},
+				error: function (rslt) {
+					console.log(rslt);
+					return false;
+				}
+			});
+		});
+		// NEW shop End
 
 		$("#register_form input[name=displayname]").focus();
 

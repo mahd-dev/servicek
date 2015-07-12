@@ -1,24 +1,28 @@
 <?php
-	
+
     if($user!=null) { // already logged in
         include"view_2.php";
         goto skip_this_page;
     }
-    
+
     // Handling query
-    
+
     if(isset($_POST["username"]) && isset($_POST["password"])){
 
         $login_resp=user::login($_POST["username"], $_POST["password"], gf::getClientIP()); // checking login parameters
-        
+
         if ($login_resp instanceof user){ // login parameters are valid
-            
+
             $_SESSION["user"]=serialize($login_resp); // storing user to session
-            
+
+						if($login_resp->count_pages==1) $url = url_root."/".$login_resp->pages[0]->url;
+						else $url = url_root."/account";
+
             die(json_encode(array(
                 "status" => "logged_in",
                 "params" => array(
-                    "displayname" => $login_resp->displayname
+                    "displayname" => $login_resp->displayname,
+										"goto_page" => $url
                 )
             )));
         }elseif (is_array($login_resp)) {
@@ -42,13 +46,13 @@
             else die(json_encode(array("status"=>"unhandled_error")));
         }else die($login_resp); // username_error
     }
-    
+
     // definig page SEO parameters
 	// ...
-    
-    
+
+
 	// select and display right view
-	
+
 	include "view_1.php";
 
     skip_this_page: // jump to end for already logged in

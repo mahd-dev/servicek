@@ -1,5 +1,5 @@
 <?php
-	
+
 	if(!isset($_GET["q"])){
 		include __DIR__."/../404/controller.php";
 		goto skip_this_page;
@@ -20,6 +20,16 @@
 					"url"=>url_root."/".$e->url
 					);
 				break;
+			case 'shop':
+				$rslt[]=array(
+					"type"=>get_class($e),
+					"title"=>$e->name,
+					"sub_title"=>"",
+					"content"=>$e->description,
+					"image_url"=>($e->image ? $paths->shop_image->url.$e->image : null),
+					"url"=>url_root."/".$e->url
+					);
+				break;
 			case 'job':
 				$rslt[]=array(
 					"type"=>get_class($e),
@@ -27,29 +37,29 @@
 					"sub_title"=>"",
 					"content"=>$e->description,
 					"image_url"=>($e->image ? $paths->job_image->url.$e->image : null),
-					"url"=>url_root."/job/".$e->id
+					"url"=>url_root."/".$e->url
 					);
 				break;
 			case 'product':
-				$pc=$e->company;
+				$pc=$e->page;
 				$rslt[]=array(
 					"type"=>get_class($e),
 					"title"=>$e->name,
 					"sub_title"=>$pc->name,
 					"content"=>$e->description,
 					"image_url"=>($e->image ? $paths->product_image->url.$e->image : null),
-					"url"=>url_root."/".$pc->url
+					"url"=>url_root."/".$e->url
 					);
 				break;
 			case 'service':
-				$sc=$e->company;
+				$sc=$e->page;
 				$rslt[]=array(
 					"type"=>get_class($e),
 					"title"=>$e->name,
 					"sub_title"=>$sc->name,
 					"content"=>$e->description,
 					"image_url"=>($e->image ? $paths->service_image->url.$e->image : null),
-					"url"=>url_root."/".$sc->url
+					"url"=>url_root."/".$e->url
 					);
 				break;
 		}

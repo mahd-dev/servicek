@@ -1320,6 +1320,7 @@ select.select2 {
   float: right;
   margin-left: 237px;
   width: 550px;
+  margin-top: 28px;
 }
 
 @media (max-width: 1199px) {

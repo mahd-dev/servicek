@@ -35,12 +35,18 @@
 						return $this->type=="agent";
 					break;
 					case "pages":
-						return array_merge($this->companies, $this->jobs);
+						return array_merge($this->companies, $this->shops, $this->jobs);
 					break;
 					case "companies":
 						$list = array();
 						$q=$db->query("select id_company from user_admin where (id_user='".$this->id."')");
 						while($r=$q->fetch_row()) $list[] = new company($r[0]);
+						return $list;
+					break;
+					case "shops":
+						$list = array();
+						$q=$db->query("select id from shop where (id_admin='".$this->id."')");
+						while($r=$q->fetch_row()) $list[] = new shop($r[0]);
 						return $list;
 					break;
 					case "jobs":
@@ -52,22 +58,24 @@
 					case "count_pages":
 						$q=$db->query("select count(*) from job where (id_admin='".$this->id."')");
 						$r1=$q->fetch_row();
-						$q=$db->query("select count(*) from user_admin where (id_user='".$this->id."')");
+						$q=$db->query("select count(*) from shop where (id_admin='".$this->id."')");
 						$r2=$q->fetch_row();
-						return $r1[0] + $r2[0];
+						$q=$db->query("select count(*) from user_admin where (id_user='".$this->id."')");
+						$r3=$q->fetch_row();
+						return $r1[0] + $r2[0] + $r3[0];
 					break;
 
 					case "has_agent_requests":
-                        $q=$db->query("select count(*) from agent_request where (id_for='".$this->id."' and rel_type='user')");
-                        $r=$q->fetch_row();
-                        return $r[0]>0;
-                    break;
-                    case "agent_requests":
-                        $list = array();
-                        $q=$db->query("select id, creation_time from agent_request where (id_for='".$this->id."' and rel_type='user')");
-                        while($r=$q->fetch_row()) $list[] = array("id"=>$r[0], "creation_time"=>$r[1]);
-                        return $list;
-                    break;
+              $q=$db->query("select count(*) from agent_request where (id_for='".$this->id."' and rel_type='user')");
+              $r=$q->fetch_row();
+              return $r[0]>0;
+          break;
+          case "agent_requests":
+              $list = array();
+              $q=$db->query("select id, creation_time from agent_request where (id_for='".$this->id."' and rel_type='user')");
+              while($r=$q->fetch_row()) $list[] = array("id"=>$r[0], "creation_time"=>$r[1]);
+              return $list;
+          break;
 
 					default:
 						$q=$db->query("select ".$name." from user where (id='".$this->id."')");
@@ -105,9 +113,9 @@
 
 		public static function login($username, $password, $ip){
 			global $db;
-			
+
 			// security params
-			$allowed_attempts = 5; 
+			$allowed_attempts = 5;
 			$waiting_minutes = 15;
 
 			if( $ip == NULL ) return array("status"=>"restricted_host");
@@ -143,15 +151,15 @@
 
 		public static function agent_code($code, $ip){
 			global $db;
-			
+
 			// security params
-			$allowed_attempts = 5; 
+			$allowed_attempts = 5;
 			$waiting_minutes = 15;
 
 			if( $ip == NULL ) return array("status"=>"restricted_host");
 
 			$q=$db->query("select id, username, password from user where (('".$code."' like concat(IFNULL(username,''),'%')) and (type='agent'))");
-			
+
 			$db->query("delete from restricted_ip where (TIMESTAMPDIFF(MINUTE,restriction_time,NOW())>=".$waiting_minutes.")");
 
 			$ch_ip=$db->query("select attempts, TIMESTAMPDIFF(MINUTE,NOW(),DATE_ADD(restriction_time, INTERVAL ".$waiting_minutes." MINUTE)) from restricted_ip where (ip_address='".$ip."')");
@@ -164,7 +172,7 @@
 				while ($r=$q->fetch_row()) {
 					if(substr($code, 0, strlen($r[1]))==$r[1] && hash_equals($r[2], crypt(substr($code, strlen($r[1])), $r[2]))){
 						$db->query("delete from restricted_ip where (ip_address='".$ip."')");
-						return new user($r[0]);	
+						return new user($r[0]);
 					}
 				}
 				$db->query("INSERT INTO restricted_ip (ip_address) values('".$ip."') ON DUPLICATE KEY UPDATE attempts=attempts+1, restriction_time=NOW()");
@@ -176,14 +184,14 @@
 		}
 
 		public function request_agent(){
-            global $db;
-            $db->query("insert into agent_request (id_for, rel_type) values('".$this->id."', 'user')");
-        }
+        global $db;
+        $db->query("insert into agent_request (id_for, rel_type) values('".$this->id."', 'user')");
+    }
 
-        public function clear_agent_requests(){
-            global $db;
-            $db->query("delete from agent_request where (id_for = '".$this->id."' and rel_type = 'user')");
-        }
-		
+    public function clear_agent_requests(){
+        global $db;
+        $db->query("delete from agent_request where (id_for = '".$this->id."' and rel_type = 'user')");
+    }
+
 	}
 ?>

@@ -25,11 +25,25 @@
                     case "id":
                         return $this->id;
                     break;
-                    case "company":
-                        return new company($this->id_company);
+                    case "page":
+                        switch ($this->page_type) {
+                            case "company": return new company($this->id_page); break;
+                            case "shop": return new shop($this->id_page); break;
+                            case "job": return new job($this->id_page); break;
+                            default: return null; break;
+                        }
+                    break;
+                    case "is_contracted":
+                        return $this->page->is_contracted;
+                    break;
+
+                    case 'url':
+                      return $this->page->url.'/offer/'.$this->id;
+                    break;
+
                     default:
                         $q=$db->query("select ".$name." from offer where (id='".$this->id."')");
-			            $r=$q->fetch_row();
+                        $r=$q->fetch_row();
                         return $r[0];
                     break;
                 }
@@ -38,9 +52,9 @@
             }
         }
 
-        public static function create($company){
+        public static function create($page){
             global $db;
-            $db->query("insert into offer (id_company) values('".$company->id."')");
+            $db->query("insert into offer (id_page, page_type) values('".$page->id."', '".get_class($page)."')");
             return new offer($db->insert_id);
         }
 

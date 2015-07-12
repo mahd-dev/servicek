@@ -6,6 +6,8 @@
 			"company_logo"=>"/content/company/logo/",
 			"company_cover"=>"/content/company/cover/",
 			"job_image"=>"/content/job/image/",
+			"shop_image"=>"/content/shop/image/",
+			"shop_cover"=>"/content/shop/cover/",
 			"offer_image"=>"/content/offer/image/",
 			"product_image"=>"/content/product/image/",
 			"service_image"=>"/content/service/image/"
@@ -27,17 +29,19 @@
 		public function __get($name){
 			switch ($name) {
 				case 'dir':
-					return dirname(__DIR__).$this->path;
+					$p=dirname(__DIR__).$this->path;
+					if(!file_exists($p)) mkdir($p);
+					return $p;
 					break;
 				case 'url':
 					return url_root.$this->path;
 					break;
-				
+
 				default:
 					return null;
 					break;
 			}
-        }	
+        }
 	}
 
 ?>

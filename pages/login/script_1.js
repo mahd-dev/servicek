@@ -23,7 +23,7 @@ page_script({
                         $(".top-menu .user-btn .username").text(parsed.params.displayname);
                         $(".top-menu .login-btn").hide();
                         $(".top-menu .user-btn").show();
-                        app.ajaxify(location.origin + "/account");
+                        app.ajaxify(parsed.params.goto_page);
                     } else if (parsed.status == "username_error") {
                         $(".username_error").show();
                         $("#login_form input[name=password]").val("");

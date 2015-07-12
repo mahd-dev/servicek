@@ -2,53 +2,46 @@
 
 <div class="row">
 	<div class="col-md-12">
-        <div class="row">
-            <div class="col-md-12">
-            	<?php if(count($rslt)>0){?>
+  	<?php if(count($rslt)>0){?>
+	    <div class="row">
 
-	            <div class="row">
+	      <?php foreach ($rslt as $r) {?>
 
-		            <?php foreach ($rslt as $r) {?>
+					<div class="col-sm-6 col-md-4">
+						<a href="<?php echo $r["url"];?>" class="ajaxify item">
+			        <div class="property-box">
+		            <div class="property-box-image">
+									<?php if($r["image_url"]){?>
+										<div class="aspectratio-container aspect-4-3 fit-width">
+											<div class="aspectratio-content image" style="background-image:url('<?php echo $r["image_url"];?>');"></div>
+										</div>
+									<?php }?>
+									<?php if(!$r["image_url"]){?>
+										<div class="aspectratio-container aspect-4-3 fit-width">
+											<div class="aspectratio-content"></div>
+										</div>
+									<?php }?>
+		            </div>
+		            <div class="property-box-content">
+										<h3><?php echo $r["title"];?></h3>
+										<p><?php echo $r["content"];?></p>
+		            </div>
+			        </div>
+						</a>
+			    </div>
 
-									<div class="col-sm-6 col-md-4">
-						        <div class="property-box">
-					            <div class="property-box-image">
-												<?php if($r["image_url"]){?>
-													<div class="aspectratio-container aspect-4-3 fit-width">
-														<div class="aspectratio-content image" style="background-image:url('<?php echo $r["image_url"];?>');"></div>
-													</div>
-												<?php }?>
-												<?php if(!$r["image_url"]){?>
-													<div class="aspectratio-container aspect-4-3 fit-width">
-														<div class="aspectratio-content"></div>
-													</div>
-												<?php }?>
-					            </div>
-					            <div class="property-box-content">
-													<h3><?php echo $r["title"];?></h3>
-													<p><?php echo $r["content"];?></p>
-					            </div>
-					            <div class="property-box-bottom">
-												<a href="<?php echo $r["url"];?>" class="ajaxify">Afficher plus</a>
-					            </div>
-						        </div>
-							    </div>
+	      <?php } ?>
 
-		            <?php } ?>
+	    </div>
 
-	            </div>
+	  <?php }else{ ?>
 
-		        <?php }else{ ?>
+		  <div class="alert alert-warning">
 
-		        <div class="alert alert-warning">
+				<h4><i class="icon-ban" style="font-size:150%;"></i>&nbsp;&nbsp;&nbsp;&nbsp;Aucun résultat trouvé pour votre requête</h4>
+			</div>
 
-					<h4><i class="icon-ban" style="font-size:150%;"></i>&nbsp;&nbsp;&nbsp;&nbsp;Aucun résultat trouvé pour votre requête</h4>
-				</div>
-
-		        <?php } ?>
-
-            </div>
-        </div>
+		<?php } ?>
 	</div>
 </div>
 
