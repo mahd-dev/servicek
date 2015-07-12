@@ -5,7 +5,7 @@
 		goto skip_this_page;
 	}
 
-	$r=array_slice(gf::legacy_search($_GET["q"]), 0, 50);
+	$r=array_slice(gf::search($_GET["q"]), 0, 50);
 	$rslt=array();
 	foreach ($r as $e) {
 		$e=$e["obj"];

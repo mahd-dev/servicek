@@ -118,6 +118,17 @@
 				}
 			}
 
+			$q_shop=$db->query("
+				SELECT id,
+				(((MATCH (name) AGAINST ('$q')) + (MATCH (description, address, tel, mobile, email) AGAINST ('$q'))) / 2)
+				AS score
+    			FROM shop WHERE MATCH (name, description, address, tel, mobile, email) AGAINST ('$q')
+			") or die("q_shop : ".$db->error);
+			while ($r=$q_shop->fetch_row()) {
+				$e = new shop($r[0]);
+				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => 1);
+			}
+
 			$q_job=$db->query("
 				SELECT id,
 				(((MATCH (name) AGAINST ('$q')) + (MATCH (description, address, tel, mobile, email) AGAINST ('$q'))) / 2)
@@ -198,6 +209,15 @@
 					if($ex!==false) $rslt[$ex]["score"] += 1;
 					else $rslt[] = array("obj" => $c, "score" => 1);
 				}
+			}
+
+			$q_shop=$db->query("
+				SELECT id
+				FROM shop WHERE (concat(IFNULL(name,''),' ',IFNULL(description,''),' ',IFNULL(address,''),' ',IFNULL(tel,''),' ',IFNULL(mobile,''),' ',IFNULL(email,'')) like '%".str_replace(" ","%",$q)."%')
+			") or die("q_shop : ".$db->error);
+			while ($r=$q_shop->fetch_row()) {
+				$e = new shop($r[0]);
+				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => 1);
 			}
 
 			$q_job=$db->query("
