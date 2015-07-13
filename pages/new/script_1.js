@@ -211,7 +211,7 @@ page_script({
 						type: "post",
 						data: {
 							check_url: function() {
-								return $("[name=url]",shop_).val();
+								return $("[name=url]",job_form).val();
 							}
 						}
 					}
@@ -349,7 +349,7 @@ page_script({
 						type: "post",
 						data: {
 							check_url: function() {
-								return $("[name=url]",company_).val();
+								return $("[name=url]",company_form).val();
 							}
 						}
 					}
@@ -490,7 +490,7 @@ page_script({
 						type: "post",
 						data: {
 							check_url: function() {
-								return $("[name=url]",shop_).val();
+								return $("[name=url]",shop_form).val();
 							}
 						}
 					}
