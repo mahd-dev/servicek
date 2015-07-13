@@ -270,11 +270,11 @@ page_script({
 		$(".service input[type=file]").change(function (e) {service_image_change(e, this);});
 		$(".product input[type=file]").change(function (e) {product_image_change(e, this);});
 
-		$(".logo input[type=file]").change(function (e) {
+		$(".image input[type=file]").change(function (e) {
     	if(this.files.length == 0) return;
-    	var form = $(".logo form");
+    	var form = $(".image form");
     	var fd = new FormData(form[0]);
-      fd.append("file", "logo");
+      fd.append("file", "image");
       $.ajax({
 				url: location.href,
 				type: "POST",

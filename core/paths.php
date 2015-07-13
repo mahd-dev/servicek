@@ -30,7 +30,7 @@
 			switch ($name) {
 				case 'dir':
 					$p=dirname(__DIR__).$this->path;
-					if(!file_exists($p)) mkdir($p);
+					if(!file_exists($p)) mkdir($p, 0777, true);
 					return $p;
 					break;
 				case 'url':
