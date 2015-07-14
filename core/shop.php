@@ -44,19 +44,19 @@
 
                     case "products":
           						$list = array();
-          						$q=$db->query("select id from product where (id_page='".$this->id."' and page_type='shop')");
+          						$q=$db->query("select id from product where (id_page='".$this->id."' and page_type='shop') order by creation_time desc");
           						while($r=$q->fetch_row()) $list[] = new product($r[0]);
           						return $list;
           					break;
           					case "services":
           						$list = array();
-          						$q=$db->query("select id from service where (id_page='".$this->id."' and page_type='shop')");
+          						$q=$db->query("select id from service where (id_page='".$this->id."' and page_type='shop') order by creation_time desc");
           						while($r=$q->fetch_row()) $list[] = new service($r[0]);
           						return $list;
           					break;
           					case "offers":
           						$list = array();
-          						$q=$db->query("select id from offer where (id_page='".$this->id."' and page_type='shop')");
+          						$q=$db->query("select id from offer where (id_page='".$this->id."' and page_type='shop') order by creation_time desc");
           						while($r=$q->fetch_row()) $list[] = new offer($r[0]);
           						return $list;
           					break;

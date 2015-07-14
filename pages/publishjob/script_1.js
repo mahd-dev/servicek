@@ -17,17 +17,17 @@ page_script({
 
 				offer: {required: true},
 				accept_contract: {required: true},
-				
+
 				credit_card_number: {required: true, creditcard: true},
 				credit_card_password: {required: true}
-				
+
 			},
 
-			invalidHandler: function (event, validator) { //display error alert on form submit   
+			invalidHandler: function (event, validator) { //display error alert on form submit
 				var cr = $(validator.currentElements[0]);
 				$('#page_wizard').bootstrapWizard("show", $(cr.parents(".tab-pane")[0]).index());
 				error.show();
-				app.scrollTo(cr, -200);
+				//app.scrollTo(cr, -200);
 			},
 
 			highlight: function (element) { // hightlight error inputs
@@ -41,7 +41,7 @@ page_script({
 			},
 
 			success: function (label) {
-				
+
 			},
 			errorPlacement: function (error, element) {
 
@@ -60,7 +60,7 @@ page_script({
 			}
 
 		});
-		
+
 		form.submit(function (e){ e.preventDefault(); });
 
 		var displayConfirm = function() {
@@ -112,7 +112,7 @@ page_script({
 				$('#page_wizard').find('.button-next').show();
 				$('#page_wizard').find('.button-submit').hide();
 			}
-			app.scrollTo($('.page-title'));
+			//app.scrollTo($('.page-title'));
 		}
 
 		$('#page_wizard').bootstrapWizard({
@@ -144,13 +144,13 @@ page_script({
 		$('#page_wizard .button-submit').click(function (e){
 			if(!form.valid()) return false;
 
-			app.blockUI({iconOnly:true, animate:true});
+			//app.blockUI({iconOnly:true, animate:true});
 			$.ajax({
 				url: location.href,
 				type: "POST",
 				data: $(form).serialize(),
 				success: function (rslt) {
-					app.unblockUI();
+					//app.unblockUI();
 					try{
 						p=JSON.parse(rslt);
 						switch(p.status){
@@ -192,7 +192,7 @@ page_script({
 		                        $('#page_wizard').bootstrapWizard("show",1); // goto payment page
 								formvalidator.showErrors({agent_code: p.msg});
 							break;
-							
+
 							case "unhandled_payment_error":
 								$('#page_wizard').bootstrapWizard("show",1); // goto payment page
 								payment_error.show();
@@ -208,13 +208,13 @@ page_script({
 					}
 				},
 				error: function (rslt) {
-					app.unblockUI();
+					//app.unblockUI();
 					console.log(rslt);
 					return false;
 				}
 			});
 		}).hide();
-		
+
 		$('a[data-toggle="tab"].payment_type').on('shown.bs.tab', function (e) {
 			var target = $(e.target).attr("href");
 			switch(target){

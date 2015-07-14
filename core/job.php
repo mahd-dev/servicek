@@ -42,9 +42,29 @@
                         return $list;
                     break;
 
+                    case 'skills':
+                      $list = array();
+                      $q=$db->query("select id from job_skill where (id_job='".$this->id."') order by percent desc");
+                      while($r=$q->fetch_row()) $list[] = new job_skill($r[0]);
+                      return $list;
+                    break;
+
+                    case 'cv':
+                      $list = array();
+                      $tmp_list = array();
+                      $q=$db->query("select c.id, (select ifnull(max(ifnull(i.date_to, NOW())),NOW()) from job_cv_item i where i.id_cv=c.id) as dte from job_cv c where (c.id_job='".$this->id."')") or die ($db->error);
+                      while($r=$q->fetch_row()) $tmp_list[] = array(new job_cv($r[0]), $r[1]);
+                      usort($tmp_list, function($a, $b){
+                        return strtotime($b[1]) - strtotime($a[1]);
+                      });
+                      foreach ($tmp_list as $value) $list[] = $value[0];
+                      unset($tmp_list);
+                      return $list;
+                    break;
+
                     case "offers":
           						$list = array();
-          						$q=$db->query("select id from offer where (id_page='".$this->id."' and page_type='shop')");
+          						$q=$db->query("select id from offer where (id_page='".$this->id."' and page_type='shop') order by creation_time desc");
           						while($r=$q->fetch_row()) $list[] = new offer($r[0]);
           						return $list;
           					break;
