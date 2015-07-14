@@ -52,8 +52,14 @@
 		$job->mobile=$_POST["mobile"];
 		$job->email=$_POST["email"];
 
-		$contract=contract::create($job);
+		$experiences = job_cv::create($job);
+		$experiences->title = "Expériences";
+		$studies = job_cv::create($job);
+		$studies->title = "Études";
+		$stages = job_cv::create($job);
+		$stages->title = "Stages";
 
+		$contract=contract::create($job);
 		$contract->type=0;
 		$contract->amount=0;
 		$contract->duration=1;
