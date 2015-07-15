@@ -98,7 +98,7 @@ page_script({
 			});
 		});
 
-		$(".add_skill").click(function () {
+		$(".add_skill").live('click', function () {
 			var container = $(".skill_container");
 			$.post(location.href, {add:"skill"}, function(rslt){
 				try{
@@ -119,7 +119,7 @@ page_script({
 				}
 			});
 		});
-		$(".add_cv").click(function () {
+		$(".add_cv").live('click', function () {
 			var container = $(".cv_container");
 			$.post(location.href, {add:"cv"}, function(rslt){
 				try{
@@ -140,7 +140,7 @@ page_script({
 				}
 			});
 		});
-		$(".add_cv_item").click(function () {
+		$(".add_cv_item").live('click', function () {
 			var container = $(this).parents(".cv_item").children(".panel-body").children(".cv_item_container");
 			$.post(location.href, {add:"cv_item", cv: $(this).parents("[data-id]").attr("data-id")}, function(rslt){
 				try{
@@ -161,7 +161,7 @@ page_script({
 				}
 			});
 		});
-		$(".add_cv_item_project").click(function () {
+		$(".add_cv_item_project").live('click', function () {
 			var container = $(this).parents(".cv_item_item").children(".list-group").children(".cv_item_project_container");
 			$.post(location.href, {add:"cv_item_project", cv_item: $(this).parents("[data-id]").attr("data-id")}, function(rslt){
 				try{
