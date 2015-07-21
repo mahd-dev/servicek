@@ -38,7 +38,7 @@
 	</div>
 <?php } ?>
 
-<input type="hidden" name="map_elements" value='<?php echo json_encode($map); ?>'/>
+<input type="hidden" name="map_elements" value='<?php echo htmlspecialchars(json_encode($map), ENT_QUOTES, 'UTF-8'); ?>'/>
 
 <!-- custom page scripts -->
 <script src="<?php echo url_root;?>/pages/home/script_1<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
