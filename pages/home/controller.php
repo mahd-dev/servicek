@@ -12,7 +12,9 @@
 				$c = $e->categories;
 				if(count($c)) $c=$c[0];
 				else break;
-				$s = $e->seats[0];
+				$s = $e->seats;
+				if(count($s)) $s=$s[0];
+				else break;
 				$geolocation=json_decode($s->geolocation);
 				$itm = array(
 					"type"=>get_class($e),
@@ -197,6 +199,7 @@
 	}
 
 	usort($rslt, function($a, $b){
+		if($b["childrens"][0]["requests"] == $a["childrens"][0]["requests"]) return count($b["childrens"]) - count($a["childrens"]);
 		return $b["childrens"][0]["requests"] - $a["childrens"][0]["requests"];
 	});
 
