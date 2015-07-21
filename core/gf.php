@@ -277,7 +277,7 @@
 
 			$q_company=$db->query("
 				SELECT id
-				FROM company ORDER BY RAND()
+				FROM company ORDER BY requests desc, RAND()
     		") or die("q_company : ".$db->error);
 			while ($r=$q_company->fetch_row()) {
 				$e = new company($r[0]);
@@ -286,7 +286,7 @@
 
 			$q_shop=$db->query("
 				SELECT id
-				FROM shop ORDER BY RAND()
+				FROM shop ORDER BY requests desc, RAND()
 			") or die("q_shop : ".$db->error);
 			while ($r=$q_shop->fetch_row()) {
 				$e = new shop($r[0]);
@@ -295,7 +295,7 @@
 
 			$q_job=$db->query("
 				SELECT id
-				FROM job ORDER BY RAND()
+				FROM job ORDER BY requests desc, RAND()
 			") or die("q_job : ".$db->error);
 			while ($r=$q_job->fetch_row()) {
 				$e = new job($r[0]);

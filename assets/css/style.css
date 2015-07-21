@@ -1405,6 +1405,11 @@ select.select2 {
 .header-action i{
   top: -7.5px !important;
 }
+.header-action img{
+  position: absolute;
+  bottom: 30px;
+  right: 40px;
+}
 .header-call-to-action {
   margin: 84px 0px;
   text-align: center;
@@ -2654,7 +2659,7 @@ select.select2 {
 }
 .property-box-image:before {
   color: rgba(0, 0, 0, 0.2);
-  content: "\f219";
+  content: "\f0c1";
   display: block;
   font-family: 'FontAwesome';
   font-size: 50px;
@@ -2780,6 +2785,9 @@ select.select2 {
 @media (max-width: 991px) {
   .property-medium-image {
     margin-bottom: 16px;
+  }
+  .header-inner {
+    padding: 0 0 70px;
   }
 }
 .property-medium-title {

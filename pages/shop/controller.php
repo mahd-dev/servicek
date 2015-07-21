@@ -219,6 +219,8 @@
 			}
     }
 
+		$shop->requests += 1;
+
 		include "view_1.php";
 	}else{
 		include __DIR__."/../404/controller.php";goto skip_this_page;

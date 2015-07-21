@@ -36,3 +36,44 @@
 	overflow: hidden;
 	text-decoration: none;
 }
+
+
+.map{
+	padding-top: 33.3333333%;
+	display: block;
+	content: '';
+}
+@media (max-width: 1199px) {
+	.map{
+		padding-top: 56.25%;
+	}
+}
+@media (max-width: 767px) {
+	.map{
+		padding-top: 100%;
+	}
+}
+.labels i {
+	width: 40px;
+	height: 40px;
+	white-space: nowrap;
+	color: #e91e63;
+}
+.labels i::before {
+	margin: 0;
+	font-size: 30px;
+	text-align: center;
+	white-space: nowrap;
+}
+.content{
+	margin-top: 25px;
+}
+
+.category-icon::before{
+	color: #e91e63;
+	font-size: 150%;
+	margin-left: 0;
+}
+.property-carousel-wrapper .property-box{
+	margin-bottom: 3px;
+}

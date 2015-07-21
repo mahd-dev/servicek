@@ -39,12 +39,12 @@
                     case "parents":
                         $list = array();
                         $q=$db->query("select id_category from category_children where (id_children='".$this->id."' and children_type='category')");
-                        while($r=$q->fetch_row()) $list[] = new company($r[0]);
+                        while($r=$q->fetch_row()) $list[] = new category($r[0]);
                         return $list;
                     case "first_level_categories":
                         $list = array();
                         $q=$db->query("select id_children from category_children where (id_category='".$this->id."' and children_type='category')");
-                        while($r=$q->fetch_row()) $list[] = new company($r[0]);
+                        while($r=$q->fetch_row()) $list[] = new category($r[0]);
                         return $list;
                     break;
                     case "companies":

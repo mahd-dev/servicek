@@ -30,6 +30,7 @@
 		<link href="<?php echo cdn;?>/fonts/default/default<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css">
 		<link href="<?php echo cdn;?>/libraries/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 		<link href="<?php echo cdn;?>/libraries/Font-Awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="<?php echo cdn;?>/libraries/flaticon/flaticon.css" rel="stylesheet" type="text/css">
 		<link href="<?php echo cdn;?>/libraries/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">
 		<link href="<?php echo cdn;?>/libraries/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet" type="text/css">
 		<link href="<?php echo cdn;?>/libraries/OwlCarousel/owl-carousel/owl.carousel.css" rel="stylesheet" type="text/css">
@@ -114,6 +115,7 @@
 
 						<a class="btn btn-fab header-action ajaxify" href="<?php echo url_root;?>/new" title="Ajouter nouveau">
 							<i class="fa fa-plus"></i>
+							<img src="<?php echo cdn;?>/img/plus_help.svg">
 						</a>
 					</div>
 				</div>
@@ -173,6 +175,7 @@
 
 		<!--<script src="<?php echo cdn;?>/js/app.js" type="text/javascript"></script>-->
 		<script src="<?php echo cdn;?>/js/map.js" type="text/javascript"></script>
+		<script src="<?php echo cdn;?>/js/map_markerwithlabel.js" type="text/javascript"></script>
 
 		<script src="<?php echo cdn;?>/libraries/jquery-migrate.min.js" type="text/javascript"></script>
 		<script src="<?php echo cdn;?>/libraries/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
