@@ -235,5 +235,7 @@ page_script({
         });
 
     });
+
+		window.fbAsyncInit();
 	}
 });

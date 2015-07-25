@@ -18,6 +18,7 @@
 				<div class="profile-usertitle-job">
 					<?php echo $company->slogan;?>
 				</div>
+				<div class="fb-like" data-href="<?php echo url_root."/".$company->url; ?>" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 			</div>
 
 		</div>
@@ -108,6 +109,7 @@
 										<?php }?>
 											</div>
 										</div>
+										<div class="fb-like" data-href="<?php echo url_root."/".$p->url;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 										<?php /*
 										<?php if($description||$price){?>
 											<div class="caption">
@@ -150,6 +152,7 @@
 										<?php }?>
 											</div>
 										</div>
+										<div class="fb-like" data-href="<?php echo url_root."/".$p->url;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 										<?php /*
 										<?php if($description||$price||$rent_price){?>
 											<div class="caption">
@@ -181,6 +184,9 @@
 			</div>
 			<div class="modal-body">
 				<h2 class="modal-title"></h2>
+				<p>
+					<div class="fb-like" data-href="<?php echo url_root;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+				</p>
 				<img class="prod_srv_image modal_ps_image" src="" alt="image"/>
 				<div class="caption">
 					<p class="description"></p>

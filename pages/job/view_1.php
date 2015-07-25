@@ -15,7 +15,7 @@
 						<div class="profile-usertitle-name">
 							 <?php echo $job->name;?>
 						</div>
-
+						<div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 					</div>
 				</div>
 				<div class="portlet light box">

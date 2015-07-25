@@ -72,12 +72,12 @@
 		}elseif (isset($_POST['new_service'])) {
 
 			$service=service::create($shop);
-			die(json_encode(array("status"=>"success", "id"=>$service->id)));
+			die(json_encode(array("status"=>"success", "id"=>$service->id, "url"=>url_root."/".$service->url)));
 
 		}elseif (isset($_POST['new_product'])) {
 
 			$product=product::create($shop);
-			die(json_encode(array("status"=>"success", "id"=>$product->id)));
+			die(json_encode(array("status"=>"success", "id"=>$product->id, "url"=>url_root."/".$product->url)));
 
 		}elseif (isset($_POST['delete_service'])) {
 

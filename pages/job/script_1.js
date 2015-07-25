@@ -14,6 +14,7 @@ page_script({
 			});
 			marker.setMap(map);
         });
-        
+
+		window.fbAsyncInit();
 	}
 });

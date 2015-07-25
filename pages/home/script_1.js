@@ -178,6 +178,7 @@ page_script({
 						.append($("<h3>", {"text": markers[i].title}))
 						.append($("<p>", {"text": markers[i].content}))
 						.append($("<hr>"))
+						.append($("<div>", {"data-href": markers[i].url, "data-layout": "button_count", "data-action": "like", "data-show-faces": "false", "data-share": "true"}))
 						.append($("<a>", {"class": "ajaxify", "href": markers[i].url, "text": "Voir plus"}))
 					;
           infoWindow.setContent(content[0].innerHTML);
@@ -193,5 +194,6 @@ page_script({
 
 		var mc = new MarkerClusterer(map, clusterer_markers);
 
+		window.fbAsyncInit();
 	}
 });

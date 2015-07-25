@@ -12,7 +12,7 @@ page_script({
 			},
 			tagSource: function( request, response ) {
 	            $.ajax({
-	                url: location.origin + "/search/autocomplete", 
+	                url: location.origin + "/search/autocomplete",
 	                data: { term:request.term },
 	                dataType: "json",
 	                success: function( data ) {
@@ -24,7 +24,7 @@ page_script({
 	        }
 		});
 		*/
-		
+
 		// process search form submit event
 		$("#search_form").submit(function (e) {
 			e.preventDefault();
@@ -32,5 +32,6 @@ page_script({
 			app.ajaxify(location.origin + "/search?q=" + $(this).find(".query").val());
 		});
 		
+		window.fbAsyncInit();
 	}
 });

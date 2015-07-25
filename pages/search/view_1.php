@@ -25,6 +25,7 @@
 		            <div class="property-box-content">
 										<h3><?php echo $r["title"];?></h3>
 										<p><?php echo $r["content"];?></p>
+										<div class="fb-like" data-href="<?php echo $r["url"];?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 		            </div>
 			        </div>
 						</a>

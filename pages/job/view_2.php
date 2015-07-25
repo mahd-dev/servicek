@@ -91,6 +91,7 @@
 				<div class="profile-usertitle-name">
 					 <a href="javascript:;" class="editable" data-name="name" data-type="text" ><?php echo $job->name;?></a>
 				</div>
+				<div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 			</div>
 		</div>
 

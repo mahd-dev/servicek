@@ -41,8 +41,11 @@ page_script({
 				case "products": ps="product"; break;
 				case "services": ps="service"; break;
 			}
-			history.pushState(undefined, document.title, $("input[name=root_url]").val() + "/" + ps + "/" + b.attr("data-id"));
-
+			var url = $("input[name=root_url]").val() + "/" + ps + "/" + b.attr("data-id");
+			history.pushState(undefined, document.title, url);
+			m.find(".fb-like").attr("data-href", url);
+			window.fbAsyncInit();
+			
 			m.modal("show");
 		});
 
@@ -81,6 +84,8 @@ page_script({
 			history.pushState(undefined, document.title, $("input[name=root_url]").val());
 			current_item = undefined;
 		});
+
+		window.fbAsyncInit();
 
 	}
 });

@@ -95,6 +95,7 @@
 				<div class="profile-usertitle-company">
 					<a class="editable" data-name="slogan" data-type="text" ><?php echo $company->slogan;?></a>
 				</div>
+				<div class="fb-like" data-href="<?php echo url_root."/".$company->url; ?>" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 			</div>
 		</div>
 
@@ -182,6 +183,7 @@
 									<div class="caption">
 										<p>Description :<br><a class="service_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="textarea" ><?php echo $p->description; ?></a></p>
 										<p>Prix : <a class="service_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a><sup> DNT</sup></p>
+										<div class="fb-like" data-href="<?php echo url_root."/".$p->url;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 									</div>
 								</div>
 							</div>
@@ -210,6 +212,7 @@
 												<p><label><span><input type="checkbox" class="price_checkbox"<?php if($price!=null){?> checked<?php }?>></span>Vente </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number"<?php if($price==null){?> data-disabled='true'<?php }?>><?php echo $price; ?></a><sup class="unit"<?php if($price==null){?> style='display:none;'<?php }?>> DNT</sup></p>
 												<p><label><span><input type="checkbox" class="rent_price_checkbox"<?php if($rent_price!=null){?> checked<?php }?>></span>Location </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="rent_price" data-pk="<?php echo $p->id; ?>" data-type="number"<?php if($rent_price==null){?> data-disabled='true'<?php }?>><?php echo $rent_price; ?></a><sup class="unit"<?php if($rent_price==null){?> style='display:none;'<?php }?>> DNT</sup></p>
 											</p>
+											<div class="fb-like" data-href="<?php echo url_root."/".$p->url;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 										</div>
 									</div>
 								</div>
@@ -240,6 +243,7 @@
 		<div class="caption">
 			<p>Description :<br><a class="service_editable description" data-name="description" data-pk="" data-type="textarea" ></a></p>
 			<p>Prix : <a class="service_editable" data-name="price" data-pk="" data-type="number" ></a><sup> DNT</sup></p>
+			<div class="fb-like" data-href="<?php echo url_root;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 		</div>
 	</div>
 </div>
@@ -262,6 +266,7 @@
 			<p>Prix :<br>
 				<p><label><span><input type="checkbox" class="price_checkbox" checked></span>Vente </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="price" data-pk="" data-type="number" ></a><sup class="unit"> DNT</sup></p>
 				<p><label><span><input type="checkbox" class="rent_price_checkbox"></span>Location </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="rent_price" data-pk="" data-type="number" data-disabled='true'></a><sup class="unit" style='display:none;'> DNT</sup></p>
+				<div class="fb-like" data-href="<?php echo url_root;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 			</p>
 		</div>
 	</div>
