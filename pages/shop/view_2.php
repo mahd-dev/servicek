@@ -1,8 +1,5 @@
 <link href="<?php echo url_root;?>/pages/shop/style<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css">
 
-<link rel="stylesheet" type="text/css" href="<?php echo cdn;?>/libraries/bootstrap-editable/bootstrap-editable/css/bootstrap-editable<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css"/>
-
-
 <?php
 	if(!$is_contracted){
 		$lc=$shop->last_contract;

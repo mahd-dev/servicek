@@ -16,7 +16,8 @@
 		isset($_POST["latitude"]) &&
 		isset($_POST["tel"]) &&
 		isset($_POST["mobile"]) &&
-		isset($_POST["email"])
+		isset($_POST["email"]) &&
+		isset($_POST["user_id"])
 	){
 
 		if(
@@ -38,7 +39,7 @@
 		}
 
 		// create shop é contract
-		$shop=shop::create($user);
+		$shop=shop::create(($_POST["user_id"]?new user($_POST["user_id"]):$user));
 
 		$shop->name=$_POST["name"];
 		$shop->description=$_POST["description"];

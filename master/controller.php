@@ -13,6 +13,8 @@
     $ogp->setURL( 'https://servicek.net/' );
     $ogp->setDeterminer( 'auto' );
 
+		// service produit métier job boutique shop société company marketing ad advertise publicité
+
     $ref=array(
         "twitter:title"=>"Servicek.net",
         "twitter:description"=>$seo_description,

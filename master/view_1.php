@@ -46,6 +46,8 @@
 
 		<link href="<?php echo cdn;?>/libraries/aspectratio/aspectratio<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
 
+		<link href="<?php echo cdn;?>/libraries/bootstrap-editable/bootstrap-editable/css/bootstrap-editable<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css"  rel="stylesheet" type="text/css"/>
+
 		<!-- Material design -->
 		<link href="<?php echo cdn;?>/libraries/bootstrap-materialdesign/css/roboto<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
 		<link href="<?php echo cdn;?>/libraries/bootstrap-materialdesign/css/material<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />

@@ -16,7 +16,8 @@
 		isset($_POST["latitude"]) &&
 		isset($_POST["tel"]) &&
 		isset($_POST["mobile"]) &&
-		isset($_POST["email"])
+		isset($_POST["email"]) &&
+		isset($_POST["user_id"])
 	){
 
 		if(
@@ -38,7 +39,7 @@
 		}
 
 		// create job é contract
-		$job=job::create($user);
+		$job=job::create(($_POST["user_id"]?new user($_POST["user_id"]):$user));
 
 		$job->name=$_POST["name"];
 		$job->description=$_POST["description"];

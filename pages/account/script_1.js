@@ -1,14 +1,15 @@
 page_script({
 	init: function () {
-		
+
 		// personal informations tab
 		$.fn.editable.defaults.ajaxOptions = {type: "POST"};
 		$.fn.editable.defaults.type = 'text';
 		$.fn.editable.defaults.pk = 1;
 		$.fn.editable.defaults.mode = 'inline';
 		$.fn.editable.defaults.inputclass = 'form-control';
-        $.fn.editable.defaults.url = location.origin + '/account/set_user_attrib';
-        $.fn.editable.defaults.onblur = 'submit';
+    $.fn.editable.defaults.url = location.origin + '/account/set_user_attrib';
+    $.fn.editable.defaults.onblur = 'submit';
+		$.fn.editable.defaults.emptytext = 'Vide';
 
         $('#displayname').editable({ name: 'displayname', success: function (response, newValue) {
         	$(".top-menu .user-btn .username").text(newValue);

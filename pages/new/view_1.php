@@ -4,7 +4,7 @@
 		<div class="alert alert-danger form-error hide">
 			Vous avez des champs invalides, SVP vérifier ci-dessous.
 		</div>
-			<?php if($user==NULL){ ?>
+			<?php if($user==NULL || $user->is_master || $user->is_agent){ ?>
 				<form id="register_form" method="post" role="form" action="<?php echo url_root;?>/register">
 					<div class="form-body">
 						<h2 class="page-header">Informations personelles</h2>
@@ -99,7 +99,7 @@
 								</div>
 								<div class="form-group">
 									<select name="categories[]" placeholder="Domaines d'activité" class="form-control select2" multiple>
-										<?php foreach ($available_categories as $c) {?>
+										<?php foreach ($available_job_categories as $c) {?>
 											<option value="<?php echo $c->id;?>"><?php echo $c->name;?></option>
 										<?php }?>
 									</select>
@@ -125,15 +125,13 @@
 									<input type="hidden" name="latitude">
 									<input type="hidden" name="longitude">
 								</div>
-								<div class="form-group">
-									<input type="tel" placeholder="Numéro de téléphone fixe" class="form-control" name="tel" data-msg-required="Ce champ est obligatoire"/>
-								</div>
-								<div class="form-group">
-									<input type="tel" placeholder="Numéro du téléphone mobile" class="form-control" name="mobile"/>
-								</div>
-								<div class="form-group">
-									<input type="email" placeholder="E-mail" class="form-control" name="email" data-msg-required="Ce champ est obligatoire"/>
-								</div>
+
+								<input type="hidden" placeholder="Numéro de téléphone fixe" class="form-control" name="tel" data-msg-required="Ce champ est obligatoire"/>
+								<input type="hidden" placeholder="Numéro du téléphone mobile" class="form-control" name="mobile"/>
+								<input type="hidden" placeholder="E-mail" class="form-control" name="email" data-msg-required="Ce champ est obligatoire"/>
+
+								<input type="hidden" name="user_id" value="">
+
 								<button type="submit" class="btn btn-primary btn-raised btn-lg">Créer le métier <i class="fa fa-check"></i></button>
 							</form>
 						</div>
@@ -148,7 +146,7 @@
 								</div>
 								<div class="form-group">
 									<select name="categories[]" placeholder="Domaines d'activité" class="form-control select2" multiple>
-										<?php foreach ($available_categories as $c) {?>
+										<?php foreach ($available_shop_categories as $c) {?>
 											<option value="<?php echo $c->id;?>"><?php echo $c->name;?></option>
 										<?php }?>
 									</select>
@@ -174,15 +172,13 @@
 									<input type="hidden" name="latitude">
 									<input type="hidden" name="longitude">
 								</div>
-								<div class="form-group">
-									<input type="tel" class="form-control" name="tel" placeholder="Numéro de téléphone fixe" data-msg-required="Ce champ est obligatoire"/>
-								</div>
-								<div class="form-group">
-									<input type="tel" class="form-control" name="mobile" placeholder="Numéro de téléphone mobile"/>
-								</div>
-								<div class="form-group">
-									<input type="email" class="form-control" name="email" placeholder="E-mail" data-msg-required="Ce champ est obligatoire"/>
-								</div>
+
+								<input type="hidden" class="form-control" name="tel" placeholder="Numéro de téléphone fixe" data-msg-required="Ce champ est obligatoire"/>
+								<input type="hidden" class="form-control" name="mobile" placeholder="Numéro de téléphone mobile"/>
+								<input type="hidden" class="form-control" name="email" placeholder="E-mail" data-msg-required="Ce champ est obligatoire"/>
+
+								<input type="hidden" name="user_id" value="">
+
 								<button type="submit" class="btn btn-primary btn-raised btn-lg">Créer la boutique <i class="fa fa-check"></i></button>
 							</form>
 
@@ -201,7 +197,7 @@
 								</div>
 								<div class="form-group">
 									<select name="categories[]" placeholder="Domaines d'activité" class="form-control select2" multiple>
-										<?php foreach ($available_categories as $c) {?>
+										<?php foreach ($available_company_categories as $c) {?>
 											<option value="<?php echo $c->id;?>"><?php echo $c->name;?></option>
 										<?php }?>
 									</select>
@@ -227,15 +223,13 @@
 									<input type="hidden" name="latitude">
 									<input type="hidden" name="longitude">
 								</div>
-								<div class="form-group">
-									<input type="tel" class="form-control" name="tel" placeholder="Numéro de téléphone fixe" data-msg-required="Ce champ est obligatoire"/>
-								</div>
-								<div class="form-group">
-									<input type="tel" class="form-control" name="mobile" placeholder="Numéro de téléphone mobile"/>
-								</div>
-								<div class="form-group">
-									<input type="email" class="form-control" name="email" placeholder="E-mail" data-msg-required="Ce champ est obligatoire"/>
-								</div>
+
+								<input type="hidden" class="form-control" name="tel" placeholder="Numéro de téléphone fixe" data-msg-required="Ce champ est obligatoire"/>
+								<input type="hidden" class="form-control" name="mobile" placeholder="Numéro de téléphone mobile"/>
+								<input type="hidden" class="form-control" name="email" placeholder="E-mail" data-msg-required="Ce champ est obligatoire"/>
+
+								<input type="hidden" name="user_id" value="">
+
 								<button type="submit" class="btn btn-primary btn-raised btn-lg">Créer la société <i class="fa fa-check"></i></button>
 							</form>
 						</div>

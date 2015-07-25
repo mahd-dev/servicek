@@ -27,7 +27,6 @@ page_script({
 				break;
 			}
 
-
 		});
 
 		// register_form
@@ -113,6 +112,18 @@ page_script({
 		$("#register_form input[name=password]").change(check_password_confirmation);
 		$("#password_confirmation").change(check_password_confirmation);
 
+		$("#register_form input[name=email]").change(function(e) {
+			$("#job_submit_form input[name=email]").val($(this).val());
+			$("#shop_submit_form input[name=email]").val($(this).val());
+			$("#company_submit_form input[name=email]").val($(this).val());
+		});
+
+		$("#register_form input[name=mobile]").change(function(e) {
+			$("#job_submit_form input[name=mobile]").val($(this).val());
+			$("#shop_submit_form input[name=mobile]").val($(this).val());
+			$("#company_submit_form input[name=mobile]").val($(this).val());
+		});
+
 		$("#register_form").ajaxForm({
 			beforeSubmit: function () {
 				if($("#password_confirmation").val() != $("#register_form input[name=password]").val()) return false;
@@ -124,6 +135,10 @@ page_script({
 						$(".top-menu .user-btn .username").text(parsed.params.displayname);
 						$(".top-menu .login-btn").hide();
 						$(".top-menu .user-btn").show();
+						$("#register_form").remove();
+						current_form.submit();
+					}else if ( parsed.status == "registered" ) {
+						$("input[name=user_id]").val(parsed.params.user_id);
 						$("#register_form").remove();
 						current_form.submit();
 					} else if (parsed.status == 'username_exists') {
@@ -218,10 +233,7 @@ page_script({
 				},
 				address: {required: true},
 				longitude: {required: true},
-				latitude: {required: true},
-				tel: {required: true},
-				email: {required: true}
-
+				latitude: {required: true}
 			},
 
 			invalidHandler: function (event, validator) { //display error alert on form submit
@@ -357,10 +369,7 @@ page_script({
 
 				address: {required: true},
 				longitude: {required: true},
-				latitude: {required: true},
-				tel: {required: true},
-				email: {required: true}
-
+				latitude: {required: true}
 			},
 
 			invalidHandler: function (event, validator) { //display error alert on form submit
@@ -498,10 +507,7 @@ page_script({
 
 				address: {required: true},
 				longitude: {required: true},
-				latitude: {required: true},
-				tel: {required: true},
-				email: {required: true}
-
+				latitude: {required: true}
 			},
 
 			invalidHandler: function (event, validator) { //display error alert on form submit

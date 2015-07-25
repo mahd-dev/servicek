@@ -1,9 +1,6 @@
 <?php
-	if($user==null){ // must be connected to access account page
+	if($user==null || !$user->is_master){ // must be connected to access account page
 		include __DIR__."/../404/controller.php";
-		goto skip_this_page;
-	}elseif ($user->is_master) {
-		include __DIR__."/../../pages_admin/account/controller.php";
 		goto skip_this_page;
 	}
 
@@ -47,22 +44,39 @@
         }else die("unhandled_error");
 	}
 
-	// definig SEO parameters
-	// ...
+	$job = job::get_all();
+	$shops = shop::get_all();
+	$companies = company::get_all();
 
-	// init page variables to display
-	$num_pages = $user->count_pages;
-
-	$pages=array();
-	foreach ($user->pages as $p) {
-		$pages[]=array(
-			"type"=>get_class($p),
-			"url"=>$p->url,
-			"name"=>$p->name
-		);
+	$count_all_jobs = count($job);
+	$count_contracted_jobs = 0;
+	$count_visible_jobs = 0;
+	for ($i=0; $i < $count_all_jobs; $i++) {
+		if($job[$i]->is_contracted) {
+			$count_visible_jobs++;
+			if ($job[$i]->current_contract->type != 0) $count_contracted_jobs++;;
+		}
 	}
 
-	// selecting and including view
+	$count_all_shops = count($shops);
+	$count_contracted_shops = 0;
+	$count_visible_shops = 0;
+	for ($i=0; $i < $count_all_shops; $i++) {
+		if($shops[$i]->is_contracted) {
+			$count_visible_shops++;
+			if ($shops[$i]->current_contract->type != 0) $count_contracted_shops++;;
+		}
+	}
+
+	$count_all_companies = count($companies);
+	$count_contracted_companies = 0;
+	$count_visible_companies = 0;
+	for ($i=0; $i < $count_all_companies; $i++) {
+		if($companies[$i]->is_contracted) {
+			$count_visible_companies++;
+			if ($companies[$i]->current_contract->type != 0) $count_contracted_companies++;;
+		}
+	}
 	include "view_1.php";
 
 	skip_this_page:

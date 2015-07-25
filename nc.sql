@@ -1,3 +1,3 @@
-ALTER TABLE  `company` ADD  `requests` BIGINT NULL DEFAULT  '0' AFTER  `cover` ;
-ALTER TABLE  `shop` ADD  `requests` BIGINT NULL DEFAULT  '0' AFTER  `email` ;
-ALTER TABLE  `job` ADD  `requests` BIGINT NULL DEFAULT  '0' AFTER  `email` ;
+ALTER TABLE  `category` ADD  `id_parent` BIGINT NULL AFTER  `id` ;
+ALTER TABLE  `category` ADD  `service` BOOLEAN NULL AFTER  `job_publish_price` ;
+ALTER TABLE  `category` ADD  `product` BOOLEAN NULL AFTER  `service` ;

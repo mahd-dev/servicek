@@ -1,10 +1,10 @@
-<link href="<?php echo url_root;?>/pages/account/style<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="<?php echo cdn;?>/libraries/bootstrap-editable/bootstrap-editable/css/bootstrap-editable<?php echo(rtl?"-rtl":"");?><?php if(!debug) echo ".min";?>.css"/>
 
-<?php $ia = $user->is_agent;?>
+<link href="<?php echo url_root;?>/pages_admin/account/style<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css">
 
 <div class="row">
 	<div class="col-md-12">
-		<h2 class="page-header">Mon compte <small> | Gérer vos sociétés, modifier vos attributs...</small></h2>
+		<h2 class="page-header">Mon compte <small> | Gérer servicek...</small></h2>
 		<div class="row">
 			<div class="profile-sidebar col-md-3">
 				<div class="portlet light profile-sidebar-portlet box">
@@ -13,15 +13,13 @@
 					</div>
 					<div class="profile-usermenu">
 						<ul class="nav">
-							<?php if(!$ia){?>
 							<li class="active">
-								<a href="#companies_tab" data-toggle="tab" aria-expanded="true">
+								<a href="#dashboard_tab" data-toggle="tab" aria-expanded="true">
 									<i class="icon-badge"></i>
-									Pages administées
+									Tableau de bord
 								</a>
 							</li>
-							<?php }?>
-							<li<?php if($ia){?> class="active"<?php }?>>
+							<li>
 								<a href="#settings" data-toggle="tab" aria-expanded="false">
 									<i class="icon-settings"></i>
 									Paramètres
@@ -35,33 +33,46 @@
 				<div class="box">
 					<div class="tab-content">
 
-						<?php if(!$ia){?>
-							<div class="tab-pane active" id="companies_tab">
-								<?php if($num_pages==0){?>
-									<h3>Démarrez ici ..</h3>
-									<p>
-										 <div class="btn-group btn-group-solid margin-bottom-20">
-											<a type="button" class="btn btn-primary btn-raised btn-lg ajaxify" href="<?php echo url_root;?>/new"><i class="icon-pointer"></i> Créer mon entreprise</a>
-										</div>
-									</p>
-								<?php }else{?>
-									<div class="list-group">
-										<?php foreach($pages as $p){?>
-											<a href="<?php echo $p["url"];?>" class="ajaxify list-group-item">
-												<h4>
-													<?php echo $p["name"];?>
-												</h4>
-											</a>
-										<?php }?>
+						<div class="tab-pane active" id="dashboard_tab">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="panel panel-danger">
+								    <div class="panel-heading" style="text-align:center;">
+							        <h3 class="panel-title" style="font-size: 200%;">Métiers</h3>
+											<span>Contractés / Visibles / Total</span>
+								    </div>
+								    <div class="panel-body">
+							        <p style="font-size:35px;text-align: center;"><?php echo $count_contracted_jobs." / ".$count_visible_jobs." / ".$count_all_jobs; ?></p>
+								    </div>
 									</div>
-									<div class="btn-group btn-group-solid pull-right">
-										<a type="button" class="btn btn-primary btn-raised ajaxify" href="<?php echo url_root;?>/new"><i class="icon-pointer"></i> Créer une autre entreprise</a>
+								</div>
+								<div class="col-md-4">
+									<div class="panel panel-success">
+										<div class="panel-heading" style="text-align:center;">
+							        <h3 class="panel-title" style="font-size: 200%;">Boutiques</h3>
+											<span>Contractés / Visibles / Total</span>
+								    </div>
+								    <div class="panel-body">
+							        <p style="font-size:35px;text-align: center;"><?php echo $count_contracted_shops." / ".$count_visible_shops." / ".$count_all_shops; ?></p>
+								    </div>
 									</div>
-								<?php }?>
+								</div>
+								<div class="col-md-4">
+									<div class="panel panel-info">
+										<div class="panel-heading" style="text-align:center;">
+							        <h3 class="panel-title" style="font-size: 200%;">Sociétés</h3>
+											<span>Contractés / Visibles / Total</span>
+								    </div>
+								    <div class="panel-body">
+							        <p style="font-size:35px;text-align: center;"><?php echo $count_contracted_companies." / ".$count_visible_companies." / ".$count_all_companies; ?></p>
+								    </div>
+									</div>
+								</div>
 							</div>
-						<?php }?>
+							<a href="/admin/categories" class="btn btn-primary btn-raised ajaxify">Gérer les catégories</a>
+						</div>
 
-						<div class="tab-pane<?php if($ia){?> active<?php }?>" id="settings">
+						<div class="tab-pane" id="settings">
 							<ul class="nav nav-tabs">
 								<li class="active">
 									<a href="#personal_data" data-toggle="tab" aria-expanded="true">Données personnelles</a>
@@ -126,4 +137,4 @@
 	</div>
 </div>
 
-<script src="<?php echo url_root;?>/pages/account/script_1<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
+<script src="<?php echo url_root;?>/pages_admin/account/script_1<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>

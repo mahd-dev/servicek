@@ -26,6 +26,14 @@
 	// selecting page based on url
 	switch($url[0]){
 
+		case "admin":
+			switch ($url[1]) {
+				case 'categories': $req_page="pages_admin/categories/controller.php"; break;
+
+				default: $req_page="pages/404/controller.php"; break;
+			}
+		break;
+
 		case "":
 			$req_page = "pages/home/controller.php";break;
 		case "about":
@@ -100,6 +108,7 @@
 			die(include"git_webhook/pull.php");break;
 		case "git_webhook_release":
 			die(include"git_webhook/release.php");break;
+
 		default:
 			$page = gf::get_by_url($url[0]);
 			if($page){

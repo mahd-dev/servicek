@@ -170,7 +170,7 @@
 		}
 
 		$available_categories = array();
-		foreach (category::get_roots() as $c) $available_categories[] = array("id"=>intval($c->id), "text"=>$c->name);
+		foreach (category::get_available_for('job') as $c) $available_categories[] = array("id"=>intval($c->id), "text"=>$c->name);
 
 		include "view_2.php";
 	}elseif($is_contracted){
