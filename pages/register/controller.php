@@ -15,7 +15,7 @@
 			$new_user->email = $_POST["email"];
 			$new_user->mobile = $_POST["mobile"];
 
-			if($master) {
+			if(!$master) {
 				$_SESSION["user"]=serialize($new_user); // storing user to session
 	      die(json_encode(array(
 	          "status" => "logged_in",

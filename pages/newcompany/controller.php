@@ -28,7 +28,6 @@
 			!$_POST["address"] ||
 			!$_POST["longitude"] ||
 			!$_POST["latitude"] ||
-			!$_POST["tel"] ||
 			!$_POST["email"]
 		)  die(json_encode(array("status"=>"error_empty_parameter")));
 
