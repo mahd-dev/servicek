@@ -1,5 +1,5 @@
 <?php
-	$master = $user->is_master || $user->is_agent;
+	$master = $user!=null && ($user->is_master || $user->is_agent);
 	if($user!=null && !$master) { // already logged in
         include"view_2.php";
         goto skip_this_page;
