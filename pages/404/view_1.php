@@ -5,7 +5,7 @@
 		<div class="details">
 			<h3>Oops! Vous êtes perdu.</h3>
 			<p>
-				on n'a pas pu trouver la page gue vous demandez.<br/>
+				on n'a pas pu trouver la page que vous demandez.<br/>
 				<a href="<?php echo url_root;?>" class="ajaxify">
 				Retour à l'accueil </a>
 			</p>
