@@ -100,7 +100,7 @@
 			<?php if($is_contracted && !$is_trial){?>
 				<?php echo $categories;?>
 			<?php }else{?>
-				<a class="categories-editable" data-name="categories" data-type="select2" data-value='<?php echo json_encode($categories_json);?>' data-available='<?php echo json_encode($available_categories);?>'></a>
+				<a class="categories-editable" data-name="categories" data-type="select2" data-value='<?php echo json_encode($categories_json);?>' data-available='<?php echo str_replace("'", "\u0027", json_encode($available_categories));?>'></a>
 			<?php }?>
 			<hr>
 			<p class="margin-bottom-30">
