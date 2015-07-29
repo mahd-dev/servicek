@@ -54,7 +54,7 @@
 
 			<div class="row hidden-sm">
 				<div class="col-md-12 margin-bottom-20">
-					<div class="cover ps_image aspectratio-container aspect-3-1 fit-width">
+					<div class="cover ps_image aspectratio-container aspect-3-1 fit-width box" style="padding:0;">
 						<div class="aspectratio-content">
 							<img src="<?php echo $paths->company_cover->url.$cover;?>" alt="cover"/>
 						</div>
@@ -63,114 +63,83 @@
 			</div>
 
 		<?php }?>
-		<?php
-			$products = $company->products;
-			$services = $company->services;
-			$cp=count($products);
-			$cs=count($services);
-			if(($cp+$cs)>0){
-		?>
 
-		<div class="sp-navbar navbar navbar-default">
-			<ul class="nav navbar-nav nav-tabs">
-				<?php if($cs>0){?><li class="active"><a href="#services" data-toggle="tab" aria-expanded="true">Services</a></li><?php }?>
-				<?php if($cp>0){?><li<?php if($cs==0){?> class="active"<?php }?>><a href="#products" data-toggle="tab" aria-expanded="false">Produits</a></li><?php }?>
-			</ul>
-		</div>
-		<div class="box">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="tab-content">
-						<?php if($cs>0){?>
-							<div class="tab-pane row active" id="services">
-							<?php foreach ($services as $p) {
-								$id=$p->id;
-								$name=$p->name;
-								$image=$p->image;
-								$description=$p->description;
-								$price=$p->price;
-								if($name||$image||$description||$price){
-							?>
-								<div class="col-xs-12 col-sm-6 col-md-4">
-									<a class="thumbnail ps"
-										data-id="<?php echo $id; ?>"
-										data-name="<?php if($name){ echo $name; }?>"
-										data-description="<?php echo $description; ?>"
-										data-sale-price="<?php if($price){ echo $price; }?>"
-										data-rent-price=""
-									>
-										<?php /*
-										<?php if($name){?><div class="caption"><h3><?php echo $name; ?></h3></div><?php }?>
-										*/ ?>
-										<div class="ps_image aspectratio-container aspect-4-3 fit-width">
-											<div class="aspectratio-content">
-										<?php if($image){?>
-											<img class="prod_srv_image" src="<?php echo $paths->service_image->url.$image;?>" alt="image"/>
-										<?php }?>
+		<?php foreach ($ps_organized as $item) { $c = $item["category"]; ?>
+			<div class="property-carousel-wrapper box">
+				<h3><i class="category-icon <?php echo $c->icon; ?>"></i> <?php echo $c->name; ?></h3>
+				<hr>
+			  <div class="property-carousel">
+					<?php foreach ($item["childrens"] as $r) { ?>
+						<div class="property-carousel-item">
+							<a href="<?php echo $r["url"];?>" class="ajaxify item">
+				        <div class="property-box">
+			            <div class="property-box-image">
+										<?php if($r["image"]){?>
+											<div class="aspectratio-container aspect-4-3 fit-width">
+												<div class="aspectratio-content image" style="background-image:url('<?php echo $r["image"];?>');"></div>
 											</div>
-										</div>
-										<div class="fb-like" data-href="<?php echo url_root."/".$p->url;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
-										<?php /*
-										<?php if($description||$price){?>
-											<div class="caption">
-												<p><?php echo $description; ?></p>
-												<?php if($price){?><h4>Prix : <?php echo $price ; ?><sup> DNT</sup></h4><?php }?>
+										<?php }else{ ?>
+											<div class="aspectratio-container aspect-4-3 fit-width">
+												<div class="aspectratio-content"></div>
 											</div>
 										<?php }?>
-										*/ ?>
-									</a>
-								</div>
-							<?php }}?>
-							</div>
-						<?php }?>
-						<?php if($cp>0){?>
-							<div class="tab-pane row <?php if($cs==0){?> active<?php }?>" id="products" data-columns>
-							<?php foreach ($products as $p) {
-								$id=$p->id;
-								$name=$p->name;
-								$image=$p->image;
-								$description=$p->description;
-								$price=$p->price;
-								$rent_price=$p->rent_price;
-								if($name||$image||$description||$price||$rent_price){
-							?>
-								<div class="col-xs-12 col-sm-6 col-md-4">
-									<a class="thumbnail ps"
-										data-id="<?php echo $id; ?>"
-										data-name="<?php if($name){ echo $name; }?>"
-										data-description="<?php echo $description; ?>"
-										data-sale-price="<?php if($price){ echo $price; }?>"
-										data-rent-price="<?php if($rent_price){ echo $rent_price ; }?>"
-									>
-										<?php /*
-										<?php if($name){?><div class="caption"><h3><?php echo $name; ?></h3></div><?php }?>
-										*/?>
-										<div class="ps_image aspectratio-container aspect-4-3 fit-width">
-											<div class="aspectratio-content">
-										<?php if($image){?>
-											<img class="prod_srv_image" src="<?php echo $paths->product_image->url.$image;?>" alt="image"/>
-										<?php }?>
-											</div>
-										</div>
-										<div class="fb-like" data-href="<?php echo url_root."/".$p->url;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
-										<?php /*
-										<?php if($description||$price||$rent_price){?>
-											<div class="caption">
-												<p><?php echo $description; ?></p>
-												<?php if($price){?><h4>Prix : <?php echo $price ; ?><sup> DNT</sup></h4><?php }?>
-												<?php if($rent_price){?><h4>Prix de location : <?php echo $rent_price ; ?><sup> DNT</sup></h4><?php }?>
-											</div>
-										<?php }?>
-										*/?>
-									</a>
-								</div>
-							<?php }}?>
-							</div>
-						<?php }?>
-					</div>
-				</div>
+			            </div>
+			            <div class="property-box-content">
+										<h3><?php echo $r["name"];?></h3>
+										<div class="fb-like" data-href="<?php echo $r["url"];?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+			            </div>
+				        </div>
+							</a>
+		      	</div>
+					<?php } ?>
+			  </div>
 			</div>
-		</div>
+		<?php } ?>
+
+
+		<?php if(count($ps_list)) { ?>
+
+			<h3>Services et Produits</h3>
+			<div class="row">
+				<?php foreach ($ps_list as $p) {
+					if($p["name"]||$p["image"]){
+				?>
+					<div class="col-xs-12 col-sm-6 col-md-4">
+						<a class="item ps"
+							data-type="<?php echo $p["type"]; ?>"
+							data-id="<?php echo $p["id"]; ?>"
+							data-name="<?php if($p["name"]){ echo $p["name"]; }?>"
+							data-description="<?php echo $p["description"]; ?>"
+							data-sale-price="<?php if($p["price"]){ echo $p["price"]; }?>"
+							data-rent-price="<?php if($p["rent_price"]){ echo $p["rent_price"]; }?>"
+							data-url="<?php if($p["url"]){ echo $p["url"]; }?>"
+						>
+
+							<div class="property-box">
+								<div class="property-box-image">
+									<?php if($p["image"]){?>
+										<div class="ps_image ps_public_image aspectratio-container aspect-4-3 fit-width">
+											<div class="aspectratio-content">
+												<img class="prod_srv_image" src="<?php echo $p["image"];?>" alt="image"/>
+											</div>
+										</div>
+									<?php }else{ ?>
+										<div class="aspectratio-container aspect-4-3 fit-width">
+											<div class="aspectratio-content"></div>
+										</div>
+									<?php }?>
+								</div>
+								<div class="property-box-content">
+									<h3><?php echo $p["name"]; ?></h3>
+									<div class="fb-like" data-href="<?php echo url_root."/".$p["url"];?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+								</div>
+							</div>
+
+						</a>
+					</div>
+				<?php }}?>
+			</div>
+
 		<?php }?>
 	</div>
 </div>

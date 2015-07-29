@@ -1,6 +1,17 @@
 page_script({
 	init: function () {
 
+		$('.property-carousel').owlCarousel({
+			items: 3,
+			itemsDesktop: [1199, 4],
+			itemsDesktopSmall: [979, 3],
+			itemsTablet: [768, 2],
+			itemsTabletSmall: [1, 2],
+			itemsMobile: false,
+			navigation: true,
+			navigationText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>']
+		});
+
 		$(".map-canvas").each(function () {
         	var myLatlng = new google.maps.LatLng($(this).attr("data-latitude"), $(this).attr("data-longitude"));
 			var mapOptions = {

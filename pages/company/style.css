@@ -26,6 +26,10 @@
 	margin: auto;
 }
 
+.select2-container{
+	min-width: 200px;
+}
+
 .fb-like{
 	margin-top: 25px;
 }
@@ -35,6 +39,12 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+
+.fileinput .thumbnail{
+	margin-bottom: 0;
+	cursor: pointer;
+}
+
 .prod_srv_image{
 	width: 100%;
 }
@@ -48,6 +58,52 @@
 	height: 9ex;
 	text-overflow: ellipsis;
 	overflow: hidden;
+}
+
+.item{
+	text-decoration: none !important;
+	color: #000;
+	cursor: pointer;
+}
+.item .ps_public_image{
+	-webkit-transform: scale(1.03);
+	-moz-transform: scale(1.03);
+	-o-transform: scale(1.03);
+	-ms-transform: scale(1.03);
+	transform: scale(1.03);
+	-webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+}
+.item:hover .ps_public_image {
+  -webkit-transform: scale(1.06);
+  -moz-transform: scale(1.06);
+  -o-transform: scale(1.06);
+  -ms-transform: scale(1.06);
+  transform: scale(1.06);
+}
+
+.property-box-content>h3{
+	height: 3ex;
+	margin: 0 0 15px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.property-box-content>p{
+	height: 6ex;
+	overflow: hidden;
+	text-decoration: none;
+}
+
+.property-carousel-wrapper .property-box{
+	margin-bottom: 3px;
+}
+
+
+.item .fb-like{
+	margin-top: 0;
 }
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{

@@ -81,7 +81,7 @@
 	<div class="profile-sidebar col-md-3">
 		<div class="portlet light profile-sidebar-portlet box">
 
-			<div class="image fileinput col-sm-offset-3 col-sm-6 col-md-offset-0 col-md-12 fileinput-new" data-provides="fileinput">
+			<div class="image fileinput col-sm-offset-3 col-sm-6 col-md-offset-0 col-md-12 fileinput-new box" style="padding:0;" data-provides="fileinput">
 				<a class="fileinput-preview thumbnail" data-trigger="fileinput">
 					<img src="<?php $image=$shop->image; if($image) echo $paths->shop_image->url.$image; else {?>http://www.placehold.it/400x300/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
 				</a>
@@ -175,6 +175,7 @@
 
 										<div class="caption">
 											<p>Description :<br><a class="product_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="textarea" ><?php echo $p->description; ?></a></p>
+											<p>Catégories :<br><a class="product_categories_editable" data-name="categories" data-pk="<?php echo $p->id; ?>" data-type="select2" data-value='<?php echo json_encode($products_categories_json);?>'></a></p>
 											<p>Prix :<br>
 												<?php $price=$p->price; $rent_price=$p->rent_price;?>
 												<p><label><span><input type="checkbox" class="price_checkbox"<?php if($price!=null){?> checked<?php }?>></span>Vente </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number"<?php if($price==null){?> data-disabled='true'<?php }?>><?php echo $price; ?></a><sup class="unit"<?php if($price==null){?> style='display:none;'<?php }?>> DNT</sup></p>
@@ -209,6 +210,7 @@
 
 		<div class="caption">
 			<p>Description :<br><a class="product_editable description" data-name="description" data-pk="" data-type="textarea" ></a></p>
+			<p>Catégories :<br><a class="product_categories_editable" data-name="categories" data-type="select2" data-value='[]'></a></p>
 			<p>Prix :<br>
 				<p><label><span><input type="checkbox" class="price_checkbox" checked></span>Vente </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="price" data-pk="" data-type="number" ></a><sup class="unit"> DNT</sup></p>
 				<p><label><span><input type="checkbox" class="rent_price_checkbox"></span>Location </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="rent_price" data-pk="" data-type="number" data-disabled='true'></a><sup class="unit" style='display:none;'> DNT</sup></p>
@@ -217,6 +219,8 @@
 		</div>
 	</div>
 </div>
+
+<input type="hidden" name="available_product_categories" value='<?php echo str_replace("'", "\u0027", json_encode($available_product_categories));?>'>
 
 <!-- custom page script -->
 <script src="<?php echo url_root;?>/pages/shop/script_2<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>

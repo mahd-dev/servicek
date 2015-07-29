@@ -148,10 +148,26 @@
 
     public static function get_available_for($type){
       global $db;
-      $rslt=array();
-      $q=$db->query("select id from category where ifnull(".$type."_publish_price, 0) > 0");
-      while ($r=$q->fetch_row()) $rslt[] = new category($r[0]);
-      return $rslt;
+      switch ($type) {
+        case 'product':
+          $rslt=array();
+          $q=$db->query("select id from category where ifnull(product, 0) > 0");
+          while ($r=$q->fetch_row()) $rslt[] = new category($r[0]);
+          return $rslt;
+          break;
+        case 'service':
+          $rslt=array();
+          $q=$db->query("select id from category where ifnull(service, 0) > 0");
+          while ($r=$q->fetch_row()) $rslt[] = new category($r[0]);
+          return $rslt;
+          break;
+        default:
+          $rslt=array();
+          $q=$db->query("select id from category where ifnull(".$type."_publish_price, 0) > 0");
+          while ($r=$q->fetch_row()) $rslt[] = new category($r[0]);
+          return $rslt;
+          break;
+      }
     }
 
     public static function create(){

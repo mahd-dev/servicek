@@ -22,7 +22,25 @@ page_script({
     }
 		$(".seat_editable").editable({params:function (p) { p.element="seat"; return p; }});
 		$(".product_editable").editable({mode:"popup", params:function (p) { p.element="product"; return p; }});
+		$(".product_categories_editable").editable({
+			mode:"popup",
+			params:function (p) { p.element="product"; return p; },
+			source: JSON.parse($("input[name=available_product_categories]").val()),
+			select2: {
+           multiple: true
+        }
+		});
 		$(".service_editable").editable({mode:"popup", params:function (p) { p.element="service"; return p; }});
+		$(".service_categories_editable").editable({
+			mode:"popup",
+			params:function (p) { p.element="service"; return p; },
+			source: JSON.parse($("input[name=available_service_categories]").val()),
+			select2: {
+           multiple: true
+        }
+		});
+
+		console.log(JSON.parse($("input[name=available_service_categories]").val()));
 
 		$(".map-canvas").each(function (){
 			$(this).locationpicker({
@@ -68,6 +86,15 @@ page_script({
 
 								new_element.attr("data-id", p.id);
 								$(".service_editable", new_element).attr("data-pk", p.id).editable({value:null, mode:"popup", params:function (p) { p.element="service"; return p; }});
+								$(".service_categories_editable", new_element).attr("data-pk", p.id).editable({
+									value: [],
+									mode:"popup",
+									params:function (p) { p.element="service"; return p; },
+									source: JSON.parse($("input[name=available_service_categories]").val()),
+									select2: {
+						           multiple: true
+						        }
+								});
 								$(".delete", new_element).click(function (e) {service_delete(e, this);});
 								$("input[type=file]", new_element).change(function (e) {service_image_change(e, this);});
 								$(".price_checkbox", new_element).change(price_checkbox);
@@ -109,13 +136,22 @@ page_script({
 
 								new_element.attr("data-id", p.id);
 								$(".product_editable", new_element).attr("data-pk", p.id).editable({value:null, mode:"popup", params:function (p) { p.element="product"; return p; }});
+								$(".product_categories_editable", new_element).attr("data-pk", p.id).editable({
+									value: [],
+									mode:"popup",
+									params:function (p) { p.element="product"; return p; },
+									source: JSON.parse($("input[name=available_product_categories]").val()),
+									select2: {
+						           multiple: true
+						        }
+								});
 								$(".delete", new_element).click(function (e) {product_delete(e, this);});
 								$("input[type=file]", new_element).change(function (e) {product_image_change(e, this);});
 								$(".price_checkbox", new_element).change(price_checkbox);
 								$(".rent_price_checkbox", new_element).change(rent_price_checkbox);
 								$(".fb-like", new_element).attr("data-href", p.url);
 								window.fbAsyncInit();
-								
+
 								$("[href='#products_list']").click();
 								//app.scrollTo(new_element, -200);
 								$($(".thumbnail", new_element)[0]).pulsate({color: "#399bc3",repeat: 2});

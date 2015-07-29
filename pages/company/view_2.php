@@ -132,12 +132,18 @@
 	<div class="col-md-9">
 		<div class="row hidden-sm">
 			<div class="col-md-12">
-				<div class="cover ps_image aspectratio-container aspect-3-1 fit-width fileinput fileinput-new" data-provides="fileinput">
+				<div class="cover ps_image aspectratio-container aspect-3-1 fit-width fileinput fileinput-new box" style="padding:0;" data-provides="fileinput">
 					<a class="aspectratio-content thumbnail fileinput-preview" data-trigger="fileinput">
 						<img src="<?php $cover=$company->cover; if($cover) echo $paths->company_cover->url.$cover; else {?>http://www.placehold.it/600x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+photo+de+couverture<?php }?>" alt="cover"/>
 					</a>
 					<form class="hide"><input type="file" name="cover"></form>
 				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+
 			</div>
 		</div>
 
@@ -160,40 +166,49 @@
 				</ul>
 			</div>
 		</div>
-		<div class="box">
+		<div class="">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="tab-content">
 						<div class="tab-pane row active" id="services_list">
-						<?php foreach ($company->services as $p) { ?>
-							<div class="col-xs-12 col-sm-6 col-md-4 item service" data-id="<?php echo $p->id; ?>">
-								<div class="thumbnail">
-									<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
-									<div class="caption">
-										<h3><a class="service_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
-									</div>
 
-									<div class="service_image ps_image aspectratio-container aspect-4-3 fit-width fileinput fileinput-new" data-provides="fileinput">
-										<a class="aspectratio-content fileinput-preview thumbnail" data-trigger="fileinput">
-											<img src="<?php $image=$p->image; if($image) echo $paths->service_image->url.$image; else {?>http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
-										</a>
-										<form class="hide"><input type="file" name="image"></form>
-									</div>
+							<?php foreach ($company->services as $p) {
+								$services_categories_json = array();
+								foreach ($p->categories as $cat) $services_categories_json[] = intval($cat->id);
+							?>
+								<div class="col-xs-12 col-sm-6 col-md-4 item service" data-id="<?php echo $p->id; ?>">
+									<div class="box">
+										<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
+										<div class="caption">
+											<h3><a class="service_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
+										</div>
 
-									<div class="caption">
-										<p>Description :<br><a class="service_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="textarea" ><?php echo $p->description; ?></a></p>
-										<p>Prix : <a class="service_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a><sup> DNT</sup></p>
-										<div class="fb-like" data-href="<?php echo url_root."/".$p->url;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+										<div class="service_image ps_image aspectratio-container aspect-4-3 fit-width fileinput fileinput-new" data-provides="fileinput">
+											<a class="aspectratio-content fileinput-preview thumbnail" data-trigger="fileinput">
+												<img src="<?php $image=$p->image; if($image) echo $paths->service_image->url.$image; else {?>http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
+											</a>
+											<form class="hide"><input type="file" name="image"></form>
+										</div>
+
+										<div class="caption">
+											<p>Description :<br><a class="service_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="textarea" ><?php echo $p->description; ?></a></p>
+											<p>Catégories :<br><a class="service_categories_editable" data-name="categories" data-pk="<?php echo $p->id; ?>" data-type="select2" data-value='<?php echo json_encode($services_categories_json);?>'></a></p>
+											<p>Prix : <a class="service_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a><sup> DNT</sup></p>
+											<div class="fb-like" data-href="<?php echo url_root."/".$p->url;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+										</div>
 									</div>
 								</div>
-							</div>
-						<?php }?>
+							<?php }?>
 
 						</div>
 						<div class="tab-pane row" id="products_list">
-							<?php foreach ($company->products as $p) {?>
+
+							<?php foreach ($company->products as $p) {
+								$products_categories_json = array();
+								foreach ($p->categories as $cat) $products_categories_json[] = intval($cat->id);
+							?>
 								<div class="col-xs-12 col-sm-6 col-md-4 item product" data-id="<?php echo $p->id; ?>">
-									<div class="thumbnail">
+									<div class="box">
 										<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
 										<div class="caption">
 											<h3><a class="product_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
@@ -207,6 +222,7 @@
 
 										<div class="caption">
 											<p>Description :<br><a class="product_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="textarea" ><?php echo $p->description; ?></a></p>
+											<p>Catégories :<br><a class="product_categories_editable" data-name="categories" data-pk="<?php echo $p->id; ?>" data-type="select2" data-value='<?php echo json_encode($products_categories_json);?>'></a></p>
 											<p>Prix :<br>
 												<?php $price=$p->price; $rent_price=$p->rent_price;?>
 												<p><label><span><input type="checkbox" class="price_checkbox"<?php if($price!=null){?> checked<?php }?>></span>Vente </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number"<?php if($price==null){?> data-disabled='true'<?php }?>><?php echo $price; ?></a><sup class="unit"<?php if($price==null){?> style='display:none;'<?php }?>> DNT</sup></p>
@@ -228,7 +244,7 @@
 
 
 <div class="col-xs-12 col-sm-6 col-md-4 item service" data-id="" id="new_service_template" style="display:none;">
-	<div class="thumbnail">
+	<div class="box">
 		<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
 		<div class="caption">
 			<h3><a class="service_editable name" data-name="name" data-pk="" data-type="text" ></a></h3>
@@ -242,6 +258,7 @@
 
 		<div class="caption">
 			<p>Description :<br><a class="service_editable description" data-name="description" data-pk="" data-type="textarea" ></a></p>
+			<p>Catégories :<br><a class="service_categories_editable" data-name="categories" data-type="select2" data-value='[]'></a></p>
 			<p>Prix : <a class="service_editable" data-name="price" data-pk="" data-type="number" ></a><sup> DNT</sup></p>
 			<div class="fb-like" data-href="<?php echo url_root;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 		</div>
@@ -249,7 +266,7 @@
 </div>
 
 <div class="col-xs-12 col-sm-6 col-md-4 item product" data-id="" id="new_product_template" style="display:none;">
-	<div class="thumbnail">
+	<div class="box">
 		<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
 		<div class="caption">
 			<h3><a class="product_editable name" data-name="name" data-pk="" data-type="text" ></a></h3>
@@ -263,6 +280,7 @@
 
 		<div class="caption">
 			<p>Description :<br><a class="product_editable description" data-name="description" data-pk="" data-type="textarea" ></a></p>
+			<p>Catégories :<br><a class="product_categories_editable" data-name="categories" data-type="select2" data-value='[]'></a></p>
 			<p>Prix :<br>
 				<p><label><span><input type="checkbox" class="price_checkbox" checked></span>Vente </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="price" data-pk="" data-type="number" ></a><sup class="unit"> DNT</sup></p>
 				<p><label><span><input type="checkbox" class="rent_price_checkbox"></span>Location </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="rent_price" data-pk="" data-type="number" data-disabled='true'></a><sup class="unit" style='display:none;'> DNT</sup></p>
@@ -271,6 +289,9 @@
 		</div>
 	</div>
 </div>
+
+<input type="hidden" name="available_product_categories" value='<?php echo str_replace("'", "\u0027", json_encode($available_product_categories));?>'>
+<input type="hidden" name="available_service_categories" value='<?php echo str_replace("'", "\u0027", json_encode($available_service_categories));?>'>
 
 <!-- custom page script -->
 <script src="<?php echo url_root;?>/pages/company/script_2<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>

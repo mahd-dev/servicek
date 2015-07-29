@@ -52,15 +52,12 @@
 						case 'description': $product->description=$_POST['value']; break;
 						case 'price': $product->price=$_POST['value']; break;
 						case 'rent_price': $product->rent_price=$_POST['value']; break;
-					}
-					break;
-				case 'service':
-					$service = new service($_POST['pk']);
-					switch ($_POST['name']) {
-						case 'name': $service->name=$_POST['value']; break;
-						case 'description': $service->description=$_POST['value']; break;
-						case 'price': $service->price=$_POST['value']; break;
-						case 'rent_price': $service->rent_price=$_POST['value']; break;
+						case 'categories' :
+							$product->unassign_from_all_categories();
+							foreach ($_POST['value'] as $value) {
+								$product->assign_to_category(new category(intval($value)));
+							}
+						break;
 					}
 					break;
 			}
@@ -150,6 +147,9 @@
 		$available_categories = array();
 		foreach (category::get_available_for('shop') as $c) $available_categories[] = array("id"=>intval($c->id), "text"=>$c->name);
 
+		$available_product_categories = array();
+		foreach (category::get_available_for('product') as $c) $available_product_categories[] = array("id"=>intval($c->id), "text"=>$c->name);
+
 		include "view_2.php";
 	}elseif($is_contracted){
 
@@ -159,8 +159,11 @@
 		// defining seo parameters
 		if(isset($ogp)){
 			if(isset($ps)){
-				$ogp->setTitle( $ps->name );
-        $ogp->setDescription( $ps->description );
+				$ps_name = $ps->name;
+				$ogp->setTitle( ($ps_name? $ps_name : $shop->name ) );
+				$ps_description = $ps->description;
+				$ogp->setDescription( ($ps_description? $ps_description : $shop->description ) );
+
         $ogp->setURL( url_root."/".$shop->url."/".get_class($ps)."/".$ps->id );
 
         $ogp->setType( 'article' );
@@ -220,6 +223,76 @@
     }
 
 		$shop->requests += 1;
+
+		$ps_list = array();
+		$ps_organized = array();
+
+		foreach ($shop->products as $e) {
+			$itm = array(
+				"id"=>$e->id,
+				"type"=>get_class($e),
+				"name"=>$e->name,
+				"description"=>$e->description,
+				"price"=>$e->price,
+				"rent_price"=>$e->rent_price,
+				"image"=>($e->image ? $paths->product_image->url.$e->image : null),
+				"url"=>url_root."/".$e->url,
+				"categories"=>$e->categories,
+				"creation_time"=>$e->creation_time
+			);
+
+			if(count($itm["categories"])){
+				foreach ($itm["categories"] as $c) {
+					if(array_key_exists($c->id, $ps_organized)) {
+						$ps_organized[$c->id]["childrens"][] = array(
+							"id"=>$itm["id"],
+							"type"=>$itm["type"],
+							"name"=>$itm["name"],
+							"description"=>$itm["description"],
+							"price"=>$itm["price"],
+							"rent_price"=>$itm["rent_price"],
+							"image"=>$itm["image"],
+							"url"=>$itm["url"],
+							"creation_time"=>$itm["creation_time"]
+						);
+					}else{
+						$ps_organized[$c->id] = array(
+							"category" => $c,
+							"childrens" => array(
+								array(
+									"id"=>$itm["id"],
+									"type"=>$itm["type"],
+									"name"=>$itm["name"],
+									"description"=>$itm["description"],
+									"price"=>$itm["price"],
+									"rent_price"=>$itm["rent_price"],
+									"image"=>$itm["image"],
+									"url"=>$itm["url"],
+									"creation_time"=>$itm["creation_time"]
+								)
+							)
+						);
+					}
+				}
+			}else{
+				$ps_list[] = $itm;
+			}
+
+		}
+
+		foreach ($ps_organized as &$item) {
+			usort($item["childrens"], function($a, $b){
+				return $b["creation_time"] - $a["creation_time"];
+			});
+		}
+
+		usort($ps_organized, function($a, $b){
+			return $b["childrens"][0]["creation_time"] - $a["childrens"][0]["creation_time"];
+		});
+
+		usort($ps_list, function($a, $b){
+			return $b["creation_time"] - $a["creation_time"];
+		});
 
 		include "view_1.php";
 	}else{
