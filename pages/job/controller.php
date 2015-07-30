@@ -8,7 +8,7 @@
 	if(isset($_POST["email"]) && isset($_POST["subject"]) && isset($_POST["message"])){
 		$headers  = 'MIME-Version: 1.0'."\r\n";
     $headers .= 'Content-type: text/html; charset=utf-8'."\r\n";
-		$headers .= 'From: '.$_POST["email"]."\r\n";
+		$headers .= 'From: noreply@servicek.net\r\n';
 		$headers .= 'Reply-To: '.$_POST["email"];
 		if(mail($job->email, $_POST["subject"], $_POST["message"])){
 			die(json_encode(array("status"=>"success")));
