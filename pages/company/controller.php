@@ -12,7 +12,7 @@
     $headers .= 'Content-type: text/html; charset=utf-8'."\r\n";
     $headers .= 'From: noreply@servicek.net\r\n';
 		$headers .= 'Reply-To: '.$_POST["email"];
-		if(mail($s->email, $_POST["subject"], $_POST["message"])){
+		if(mail($s->email, $_POST["email"]." : ".$_POST["subject"], $_POST["message"])){
 			die(json_encode(array("status"=>"success")));
 		}else {
 			die(json_encode(array("status"=>"error")));

@@ -98,6 +98,7 @@ page_script({
           parsed=JSON.parse(rslt);
           if (parsed.status == "success") {
           	$(".success_msg", $("#message_form")).show();
+						$("#message_form")[0].reset();
       		} else {
           	console.log(rslt);
             $(".unhandled_error", $("#message_form")).show();
