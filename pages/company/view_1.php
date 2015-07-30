@@ -18,6 +18,7 @@
 				<div class="profile-usertitle-job">
 					<?php echo $company->slogan;?>
 				</div>
+				<button class="btn btn-primary btn-raised btn-sm message" data-toggle="modal" data-target="#message_modal"><i class="fa fa-envelope"></i> Envoyer un message</button>
 				<div class="fb-like" data-href="<?php echo url_root."/".$company->url; ?>" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 			</div>
 
@@ -71,12 +72,22 @@
 			  <div class="property-carousel">
 					<?php foreach ($item["childrens"] as $r) { ?>
 						<div class="property-carousel-item">
-							<a href="<?php echo $r["url"];?>" class="ajaxify item">
+							<a class="item ps"
+								data-type="<?php echo $r["type"]; ?>"
+								data-id="<?php echo $r["id"]; ?>"
+								data-name="<?php if($r["name"]){ echo $r["name"]; }?>"
+								data-description="<?php echo $r["description"]; ?>"
+								data-sale-price="<?php if($r["price"]){ echo $r["price"]; }?>"
+								data-rent-price="<?php if(isset($r["rent_price"])){ echo $r["rent_price"]; }?>"
+								data-url="<?php if($r["url"]){ echo $r["url"]; }?>"
+							>
 				        <div class="property-box">
 			            <div class="property-box-image">
 										<?php if($r["image"]){?>
-											<div class="aspectratio-container aspect-4-3 fit-width">
-												<div class="aspectratio-content image" style="background-image:url('<?php echo $r["image"];?>');"></div>
+											<div class="ps_image ps_public_image aspectratio-container aspect-4-3 fit-width">
+												<div class="aspectratio-content">
+													<img class="prod_srv_image" src="<?php echo $r["image"];?>" alt="image"/>
+												</div>
 											</div>
 										<?php }else{ ?>
 											<div class="aspectratio-container aspect-4-3 fit-width">
@@ -144,30 +155,78 @@
 	</div>
 </div>
 
-<div class="modal fade" id="show_ps" tabindex="-1" role="dialog" aria-labelledby="show product-service">
-	<div class="modal-dialog">
+<div class="modal ps_modal fade bs-example-modal-lg" id="show_ps" tabindex="-1" role="dialog" aria-labelledby="show product-service">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
-			<div class="modal-header">
-				<button class="btn pull-right next"><i class="fa fa-arrow-right"></i></button>
-				<button class="btn previous"><i class="fa fa-arrow-left"></i></button>
-			</div>
-			<div class="modal-body">
-				<h2 class="modal-title"></h2>
-				<p>
-					<div class="fb-like" data-href="<?php echo url_root;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
-				</p>
-				<img class="prod_srv_image modal_ps_image" src="" alt="image"/>
-				<div class="caption">
-					<p class="description"></p>
-					<h4 class="sale_price">Prix : <span class="price_val"></span><sup> DNT</sup></h4>
-					<h4 class="rent_price">Prix de location : <span class="price_val"></span><sup> DNT</sup></h4>
+			<div class="row">
+				<div class="col-md-9 col-sm-8">
+					<div class="ps_image aspectratio-container">
+						<div class="aspectratio-content">
+							<img class="prod_srv_image" src="<?php echo $paths->company_cover->url.$cover;?>" alt="cover"/>
+						</div>
+					</div>
 				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+				<div class="col-md-3 col-sm-4">
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-12">
+								<button class="btn btn-flat pull-right" data-dismiss="modal"><i class="fa fa-times"></i></button>
+								<button class="btn btn-flat previous"><i class="fa fa-arrow-left"></i></button>
+								<button class="btn btn-flat next"><i class="fa fa-arrow-right"></i></button>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<h2 class="modal-title"></h2>
+								<p><div class="fb-like" data-href="<?php echo url_root;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div></p>
+								<div class="caption">
+									<p class="description"></p>
+									<h4 class="sale_price">Prix : <span class="price_val"></span><sup> DNT</sup></h4>
+									<h4 class="rent_price">Prix de location : <span class="price_val"></span><sup> DNT</sup></h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+</div>
+
+<div class="modal fade" id="message_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Envoyez un messag à <?php echo $company->name; ?></h4>
+      </div>
+      <div class="modal-body">
+				<form id="message_form" method="post">
+					<div class="alert alert-success success_msg" style="display: none;">
+					    <strong>Merci, </strong> votre message a été envoyé avec succès.
+					</div>
+					<div class="alert alert-danger unhandled_error" style="display: none;">
+					    <strong>Désolé, </strong> une erreur s'est parvenue lors de l'envoi du message.
+					</div>
+			    <fieldset>
+						<div class="form-group">
+              <input type="email" class="form-control" name="email" placeholder="E-mail" required>
+		        </div>
+		        <div class="form-group">
+              <input type="text" class="form-control" name="subject" placeholder="Sujet" required>
+		        </div>
+		        <div class="form-group">
+              <textarea class="form-control" rows="10" name="message" style="max-width:100%;" placeholder="Message" required></textarea>
+		        </div>
+			    </fieldset>
+				</form>
+      </div>
+      <div class="modal-footer">
+        <button type="reset" form="message_form" class="btn btn-default" data-dismiss="modal">Annuler</button>
+        <button type="submit" form="message_form" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Envoyer</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <input type="hidden" name="root_url" value="<?php echo url_root.'/'.$company->url; ?>"/>

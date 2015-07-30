@@ -5,13 +5,25 @@
 		if (!$shop->isvalid) {include __DIR__."/../404/controller.php";goto skip_this_page;}
 	}
 
+	if(isset($_POST["email"]) && isset($_POST["subject"]) && isset($_POST["message"])){
+		$headers  = 'MIME-Version: 1.0'."\r\n";
+    $headers .= 'Content-type: text/html; charset=utf-8'."\r\n";
+    $headers .= 'From: '.$_POST["email"];
+		if(mail($shop->email, $_POST["subject"], $_POST["message"])){
+			die(json_encode(array("status"=>"success")));
+		}else {
+			die(json_encode(array("status"=>"error")));
+		}
+	}
+
 	$geolocation=json_decode($shop->geolocation);
 	$is_contracted=$shop->is_contracted;
 	if($is_contracted) $is_trial = ($shop->current_contract->type == 0);
 	$categories = array();
 	$nb_categories = count($categories);
 	$categories_json = array();
-	foreach ($shop->categories as $cat){
+	$categories_obj = $shop->categories;
+	foreach ($categories_obj as $cat){
 		$categories_json[] = intval($cat->id);
 		$categories[] = $cat->name;
 	}
@@ -148,7 +160,7 @@
 		foreach (category::get_available_for('shop') as $c) $available_categories[] = array("id"=>intval($c->id), "text"=>$c->name);
 
 		$available_product_categories = array();
-		foreach (category::get_available_for('product') as $c) $available_product_categories[] = array("id"=>intval($c->id), "text"=>$c->name);
+		foreach (category::get_available_for('product', $categories_obj) as $c) $available_product_categories[] = array("id"=>intval($c->id), "text"=>$c->name);
 
 		include "view_2.php";
 	}elseif($is_contracted){

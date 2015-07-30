@@ -146,27 +146,74 @@
       return $rslt;
     }
 
-    public static function get_available_for($type){
-      global $db;
-      switch ($type) {
-        case 'product':
-          $rslt=array();
-          $q=$db->query("select id from category where ifnull(product, 0) > 0");
-          while ($r=$q->fetch_row()) $rslt[] = new category($r[0]);
-          return $rslt;
-          break;
-        case 'service':
-          $rslt=array();
-          $q=$db->query("select id from category where ifnull(service, 0) > 0");
-          while ($r=$q->fetch_row()) $rslt[] = new category($r[0]);
-          return $rslt;
-          break;
-        default:
-          $rslt=array();
-          $q=$db->query("select id from category where ifnull(".$type."_publish_price, 0) > 0");
-          while ($r=$q->fetch_row()) $rslt[] = new category($r[0]);
-          return $rslt;
-          break;
+    public static function get_available_for($type, $in=null){
+      if($in){
+        $rslt = array();
+        foreach ($in as $c) {
+          if(!in_array($c, $rslt)){
+            switch ($type) {
+              case 'product':
+                if($c->product) $rslt[]=$c;
+                break;
+              case 'service':
+                if($c->product) $rslt[]=$c;
+                break;
+              case 'job':
+                if($c->job_publish_price) $rslt[]=$c;
+                break;
+              case 'shop':
+                if($c->shop_publish_price) $rslt[]=$c;
+                break;
+              case 'company':
+                if($c->company_publish_price) $rslt[]=$c;
+                break;
+            }
+          }
+          foreach ($c->get_subcategories_list() as $sc) {
+            if(!in_array($sc, $rslt)){
+              switch ($type) {
+                case 'product':
+                  if($sc->product) $rslt[]=$sc;
+                  break;
+                case 'service':
+                  if($sc->product) $rslt[]=$sc;
+                  break;
+                case 'job':
+                  if($sc->job_publish_price) $rslt[]=$sc;
+                  break;
+                case 'shop':
+                  if($sc->shop_publish_price) $rslt[]=$sc;
+                  break;
+                case 'company':
+                  if($sc->company_publish_price) $rslt[]=$sc;
+                  break;
+              }
+            }
+          }
+        }
+        return $rslt;
+      }else{
+        global $db;
+        switch ($type) {
+          case 'product':
+            $rslt=array();
+            $q=$db->query("select id from category where ifnull(product, 0) > 0");
+            while ($r=$q->fetch_row()) $rslt[] = new category($r[0]);
+            return $rslt;
+            break;
+          case 'service':
+            $rslt=array();
+            $q=$db->query("select id from category where ifnull(service, 0) > 0");
+            while ($r=$q->fetch_row()) $rslt[] = new category($r[0]);
+            return $rslt;
+            break;
+          default:
+            $rslt=array();
+            $q=$db->query("select id from category where ifnull(".$type."_publish_price, 0) > 0");
+            while ($r=$q->fetch_row()) $rslt[] = new category($r[0]);
+            return $rslt;
+            break;
+        }
       }
     }
 

@@ -6,13 +6,26 @@
 	}
 
 	$s=$company->seats[0];
+
+	if(isset($_POST["email"]) && isset($_POST["subject"]) && isset($_POST["message"])){
+		$headers  = 'MIME-Version: 1.0'."\r\n";
+    $headers .= 'Content-type: text/html; charset=utf-8'."\r\n";
+    $headers .= 'From: '.$_POST["email"];
+		if(mail($s->email, $_POST["subject"], $_POST["message"])){
+			die(json_encode(array("status"=>"success")));
+		}else {
+			die(json_encode(array("status"=>"error")));
+		}
+	}
+
 	$geolocation=json_decode($s->geolocation);
 	$is_contracted=$company->is_contracted;
 	if($is_contracted) $is_trial = ($company->current_contract->type == 0);
 	$categories = array();
 	$nb_categories = count($categories);
 	$categories_json = array();
-	foreach ($company->categories as $cat){
+	$categories_obj = $company->categories;
+	foreach ($categories_obj as $cat){
 		$categories_json[] = intval($cat->id);
 		$categories[] = $cat->name;
 	}
@@ -168,10 +181,10 @@
 		foreach (category::get_available_for('company') as $c) $available_categories[] = array("id"=>intval($c->id), "text"=>$c->name);
 
 		$available_product_categories = array();
-		foreach (category::get_available_for('product') as $c) $available_product_categories[] = array("id"=>intval($c->id), "text"=>$c->name);
+		foreach (category::get_available_for('product', $categories_obj) as $c) $available_product_categories[] = array("id"=>intval($c->id), "text"=>$c->name);
 
 		$available_service_categories = array();
-		foreach (category::get_available_for('service') as $c) $available_service_categories[] = array("id"=>intval($c->id), "text"=>$c->name);
+		foreach (category::get_available_for('service', $categories_obj) as $c) $available_service_categories[] = array("id"=>intval($c->id), "text"=>$c->name);
 
 		include "view_2.php";
 	}elseif($is_contracted){
@@ -359,6 +372,7 @@
 		}
 
 		usort($ps_organized, function($a, $b){
+			if($b["childrens"][0]["creation_time"] == $a["childrens"][0]["creation_time"]) return count($b["childrens"]) - count($a["childrens"]);
 			return $b["childrens"][0]["creation_time"] - $a["childrens"][0]["creation_time"];
 		});
 

@@ -47,14 +47,8 @@ page_script({
 			if(b.attr("data-rent-price")!="") m.find(".rent_price>.price_val").text(b.attr("data-rent-price"));
 			else m.find(".rent_price").hide();
 
-			var ps;
-			switch (current_item.parent(".tab-pane").attr("id")) {
-				case "products": ps="product"; break;
-				case "services": ps="service"; break;
-			}
-			var url = $("input[name=root_url]").val() + "/" + ps + "/" + b.attr("data-id");
-			history.pushState(undefined, document.title, url);
-			m.find(".fb-like").attr("data-href", url);
+			history.pushState(undefined, document.title, b.attr("data-url"));
+			m.find(".fb-like").attr("data-href", b.attr("data-url"));
 			window.fbAsyncInit();
 
 			m.modal("show");
@@ -84,16 +78,40 @@ page_script({
 
 		if($("input[name=ps_id]").length==1){
 			setTimeout(function () {
-				switch ($("input[name=ps_type]").val()) {
-					case 'product': $("a[href=#products]").click(); $("#products .ps[data-id=" + $("input[name=ps_id]").val() + "]").click(); break;
-					case 'service': $("a[href=#services]").click(); $("#services .ps[data-id=" + $("input[name=ps_id]").val() + "]").click(); break;
-				}
+				$(".ps[data-id=" + $("input[name=ps_id]").val() + "]").click();
 			},1000);
 		}
 
 		$("#show_ps").on("hide.bs.modal", function () {
 			history.pushState(undefined, document.title, $("input[name=root_url]").val());
 			current_item = undefined;
+		});
+
+
+		$("#message_form").ajaxForm({
+			beforeSubmit: function () {
+				$(".success_msg", $("#message_form")).hide();
+				$(".unhandled_error", $("#message_form")).hide();
+			},
+			success: function (rslt) {
+				try{
+          parsed=JSON.parse(rslt);
+          if (parsed.status == "success") {
+          	$(".success_msg", $("#message_form")).show();
+      		} else {
+          	console.log(rslt);
+            $(".unhandled_error", $("#message_form")).show();
+          }
+	      }catch(ex){
+	        console.log(rslt);
+	        $(".unhandled_error", $("#message_form")).show();
+	      }
+			}
+		});
+		$("#message_modal").on("hide.bs.modal", function () {
+			$("#message_form")[0].reset();
+			$(".success_msg", $("#message_form")).hide();
+			$(".unhandled_error", $("#message_form")).hide();
 		});
 
 		window.fbAsyncInit();

@@ -15,6 +15,7 @@
 						<div class="profile-usertitle-name">
 							 <?php echo $job->name;?>
 						</div>
+						<button class="btn btn-primary btn-raised btn-sm message" data-toggle="modal" data-target="#message_modal"><i class="fa fa-envelope"></i> Envoyer un message</button>
 						<div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 					</div>
 				</div>
@@ -104,6 +105,41 @@
 	</div>
 </div>
 
+<div class="modal fade" id="message_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Envoyez un messag à <?php echo $company->name; ?></h4>
+      </div>
+      <div class="modal-body">
+				<form id="message_form" method="post">
+					<div class="alert alert-success success_msg" style="display: none;">
+					    <strong>Merci, </strong> votre message a été envoyé avec succès.
+					</div>
+					<div class="alert alert-danger unhandled_error" style="display: none;">
+					    <strong>Désolé, </strong> une erreur s'est parvenue lors de l'envoi du message.
+					</div>
+			    <fieldset>
+						<div class="form-group">
+              <input type="email" class="form-control" name="email" placeholder="E-mail" required>
+		        </div>
+		        <div class="form-group">
+              <input type="text" class="form-control" name="subject" placeholder="Sujet" required>
+		        </div>
+		        <div class="form-group">
+              <textarea class="form-control" rows="10" name="message" style="max-width:100%;" placeholder="Message" required></textarea>
+		        </div>
+			    </fieldset>
+				</form>
+      </div>
+      <div class="modal-footer">
+        <button type="reset" form="message_form" class="btn btn-default" data-dismiss="modal">Annuler</button>
+        <button type="submit" form="message_form" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Envoyer</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- custom page script -->
 <script src="<?php echo url_root;?>/pages/company/script_1<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>

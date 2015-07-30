@@ -5,6 +5,17 @@
 		if (!$job->isvalid) {include __DIR__."/../404/controller.php";goto skip_this_page;}
 	}
 
+	if(isset($_POST["email"]) && isset($_POST["subject"]) && isset($_POST["message"])){
+		$headers  = 'MIME-Version: 1.0'."\r\n";
+    $headers .= 'Content-type: text/html; charset=utf-8'."\r\n";
+    $headers .= 'From: '.$_POST["email"];
+		if(mail($job->email, $_POST["subject"], $_POST["message"])){
+			die(json_encode(array("status"=>"success")));
+		}else {
+			die(json_encode(array("status"=>"error")));
+		}
+	}
+
 	$geolocation=json_decode($job->geolocation);
 	$is_contracted = $job->is_contracted;
 	if($is_contracted) $is_trial = ($job->current_contract->type == 0);
