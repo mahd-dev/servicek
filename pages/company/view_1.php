@@ -122,7 +122,7 @@
 							data-name="<?php if($p["name"]){ echo $p["name"]; }?>"
 							data-description="<?php echo $p["description"]; ?>"
 							data-sale-price="<?php if($p["price"]){ echo $p["price"]; }?>"
-							data-rent-price="<?php if($p["rent_price"]){ echo $p["rent_price"]; }?>"
+							data-rent-price="<?php if(isset($p["rent_price"])){ echo $p["rent_price"]; }?>"
 							data-url="<?php if($p["url"]){ echo $p["url"]; }?>"
 						>
 
