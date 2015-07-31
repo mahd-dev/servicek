@@ -156,7 +156,7 @@
                 if($c->product) $rslt[]=$c;
                 break;
               case 'service':
-                if($c->product) $rslt[]=$c;
+                if($c->service) $rslt[]=$c;
                 break;
               case 'job':
                 if($c->job_publish_price) $rslt[]=$c;
@@ -176,7 +176,7 @@
                   if($sc->product) $rslt[]=$sc;
                   break;
                 case 'service':
-                  if($sc->product) $rslt[]=$sc;
+                  if($sc->service) $rslt[]=$sc;
                   break;
                 case 'job':
                   if($sc->job_publish_price) $rslt[]=$sc;

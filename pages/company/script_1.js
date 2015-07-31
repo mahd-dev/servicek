@@ -30,7 +30,7 @@ page_script({
 
 		$(".ps").click(function () {
 			var b = $(this);
-			current_item = b.parent();
+			current_item = b.parent().parent();
 			var m = $("#show_ps");
 
 			m.find(".modal-title").text(b.attr("data-name"));

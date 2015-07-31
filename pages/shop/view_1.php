@@ -108,43 +108,45 @@
 
 			<h3>Produits</h3>
 			<div class="row">
-				<?php foreach ($ps_list as $p) {
-					if($p["name"]||$p["image"]){
-				?>
-					<div class="col-xs-12 col-sm-6 col-md-4">
-						<a class="item ps"
-							data-type="<?php echo $p["type"]; ?>"
-							data-id="<?php echo $p["id"]; ?>"
-							data-name="<?php if($p["name"]){ echo $p["name"]; }?>"
-							data-description="<?php echo $p["description"]; ?>"
-							data-sale-price="<?php if($p["price"]){ echo $p["price"]; }?>"
-							data-rent-price="<?php if(isset($p["rent_price"])){ echo $p["rent_price"]; }?>"
-							data-url="<?php if($p["url"]){ echo $p["url"]; }?>"
-						>
+				<div>
+					<?php foreach ($ps_list as $p) {
+						if($p["name"]||$p["image"]){
+					?>
+						<div class="col-xs-12 col-sm-6 col-md-4">
+							<a class="item ps"
+								data-type="<?php echo $p["type"]; ?>"
+								data-id="<?php echo $p["id"]; ?>"
+								data-name="<?php if($p["name"]){ echo $p["name"]; }?>"
+								data-description="<?php echo $p["description"]; ?>"
+								data-sale-price="<?php if($p["price"]){ echo $p["price"]; }?>"
+								data-rent-price="<?php if(isset($p["rent_price"])){ echo $p["rent_price"]; }?>"
+								data-url="<?php if($p["url"]){ echo $p["url"]; }?>"
+							>
 
-							<div class="property-box">
-								<div class="property-box-image">
-									<?php if($p["image"]){?>
-										<div class="ps_image ps_public_image aspectratio-container aspect-4-3 fit-width">
-											<div class="aspectratio-content">
-												<img class="prod_srv_image" src="<?php echo $p["image"];?>" alt="image"/>
+								<div class="property-box">
+									<div class="property-box-image">
+										<?php if($p["image"]){?>
+											<div class="ps_image ps_public_image aspectratio-container aspect-4-3 fit-width">
+												<div class="aspectratio-content">
+													<img class="prod_srv_image" src="<?php echo $p["image"];?>" alt="image"/>
+												</div>
 											</div>
-										</div>
-									<?php }else{ ?>
-										<div class="aspectratio-container aspect-4-3 fit-width">
-											<div class="aspectratio-content"></div>
-										</div>
-									<?php }?>
+										<?php }else{ ?>
+											<div class="aspectratio-container aspect-4-3 fit-width">
+												<div class="aspectratio-content"></div>
+											</div>
+										<?php }?>
+									</div>
+									<div class="property-box-content">
+										<h3><?php echo $p["name"]; ?></h3>
+										<div class="fb-like" data-href="<?php echo url_root."/".$p["url"];?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+									</div>
 								</div>
-								<div class="property-box-content">
-									<h3><?php echo $p["name"]; ?></h3>
-									<div class="fb-like" data-href="<?php echo url_root."/".$p["url"];?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
-								</div>
-							</div>
 
-						</a>
-					</div>
-				<?php }}?>
+							</a>
+						</div>
+					<?php }}?>
+				</div>
 			</div>
 
 		<?php }?>
