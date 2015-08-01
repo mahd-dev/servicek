@@ -30,15 +30,6 @@ page_script({
            multiple: true
         }
 		});
-		$(".service_editable").editable({mode:"popup", params:function (p) { p.element="service"; return p; }});
-		$(".service_categories_editable").editable({
-			mode:"popup",
-			params:function (p) { p.element="service"; return p; },
-			source: JSON.parse($("input[name=available_service_categories]").val()),
-			select2: {
-           multiple: true
-        }
-		});
 
 		$(".map-canvas").each(function (){
 			$(this).locationpicker({
