@@ -1,5 +1,5 @@
 <?php
-	if($user==null || $user->is_agent){
+	if(!$_POST["user_id"] && ($user==null || $user->is_agent)){
 		include __DIR__."/../404/controller.php";
 		goto skip_this_page;
 	}
