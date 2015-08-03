@@ -42,7 +42,9 @@
 }
 
 .prod_srv_image{
-	width: 100%;
+	background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
 }
 
 .item .caption h3{

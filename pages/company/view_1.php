@@ -163,9 +163,7 @@
 			<div class="row">
 				<div class="col-md-9 col-sm-8">
 					<div class="ps_image aspectratio-container">
-						<div class="aspectratio-content">
-							<img class="prod_srv_image" src="<?php echo $paths->company_cover->url.$cover;?>" alt="cover"/>
-						</div>
+						<div class="aspectratio-content prod_srv_image"></div>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-4">
