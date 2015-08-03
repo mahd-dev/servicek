@@ -175,12 +175,15 @@
 						<div class="row">
 							<div class="col-md-12">
 								<h2 class="modal-title"></h2>
-								<p><div class="fb-like" data-href="<?php echo url_root;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div></p>
 								<div class="caption">
 									<p class="description"></p>
 									<h4 class="sale_price">Prix : <span class="price_val"></span><sup> DNT</sup></h4>
 									<h4 class="rent_price">Prix de location : <span class="price_val"></span><sup> DNT</sup></h4>
 								</div>
+								<p>
+									<div class="fb-like" data-href="<?php echo url_root;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div></p>
+									<div class="fb-comments" data-href="<?php echo url_root;?>" data-width="100%" data-numposts="5"></div>
+								</p>
 							</div>
 						</div>
 					</div>

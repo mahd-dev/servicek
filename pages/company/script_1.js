@@ -49,6 +49,7 @@ page_script({
 
 			history.pushState(undefined, document.title, b.attr("data-url"));
 			m.find(".fb-like").attr("data-href", b.attr("data-url"));
+			m.find(".fb-comments").attr("data-href", b.attr("data-url"));
 			window.fbAsyncInit();
 
 			m.modal("show");
