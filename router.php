@@ -71,13 +71,16 @@
     case "job":
 			if(isset($url[1])) $_GET["id"]=$url[1];
 			if(isset($url[2]) && $url[2]=="publish") $req_page = "pages/publishjob/controller.php";
-			else $req_page = "pages/job/controller.php";
+			else {
+				if(isset($url[2]) && isset($url[3])) $_GET["portfolio"]=$url[3];
+					$req_page = "pages/job/controller.php";
+			}
 		break;
 		case "shop":
 			if(isset($url[1])) $_GET["id"]=$url[1];
 			if(isset($url[2]) && $url[2]=="publish") $req_page = "pages/publishshop/controller.php";
 			else {
-				if(isset($url[2]) && isset($url[3]) && in_array($url[2], array("product","service"))) $_GET[$url[2]]=$url[3];
+				if(isset($url[2]) && isset($url[3])) $_GET["product"]=$url[3];
 					$req_page = "pages/shop/controller.php";
 			}
 		break;
@@ -116,7 +119,7 @@
 				$_GET["id"]=$page->id;
 				if(isset($url[1]) && $url[1]=="publish") $req_page = "pages/publish".$type."/controller.php";
 				else {
-					if(isset($url[1]) && isset($url[2]) && in_array($url[1], array("product","service"))) $_GET[$url[1]]=$url[2];
+					if(isset($url[1]) && isset($url[2]) && in_array($url[1], array("product","service","portfolio"))) $_GET[$url[1]]=$url[2];
 					$req_page = "pages/".$type."/controller.php";
 				}
 				break;

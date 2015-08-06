@@ -82,7 +82,7 @@
 		<div class="portlet light profile-sidebar-portlet box">
 
 			<div class="image fileinput col-sm-offset-3 col-sm-6 col-md-offset-0 col-md-12 fileinput-new box" style="padding:0;" data-provides="fileinput">
-				<a class="fileinput-preview thumbnail" data-trigger="fileinput">
+				<a style="max-width: 100%;" class="fileinput-preview thumbnail" data-trigger="fileinput">
 					<img src="<?php $image=$shop->image; if($image) echo $paths->shop_image->url.$image; else {?>http://www.placehold.it/400x300/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
 				</a>
 				<form class="hide"><input type="file" name="image"></form>
@@ -159,7 +159,10 @@
 				<div class="col-md-12">
 					<div class="tab-content">
 						<div class="tab-pane row active" id="products_list">
-							<?php foreach ($shop->products as $p) {?>
+							<?php foreach ($shop->products as $p) {
+								$product_categories_json = array();
+								foreach ($p->categories as $cat) $product_categories_json[] = intval($cat->id);
+							?>
 								<div class="col-xs-12 col-sm-6 col-md-4 item product" data-id="<?php echo $p->id; ?>">
 									<div class="thumbnail">
 										<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
@@ -175,7 +178,7 @@
 
 										<div class="caption">
 											<p>Description :<br><a class="product_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="textarea" ><?php echo $p->description; ?></a></p>
-											<p>Catégories :<br><a class="product_categories_editable" data-name="categories" data-pk="<?php echo $p->id; ?>" data-type="select2" data-value='<?php echo json_encode($products_categories_json);?>'></a></p>
+											<p>Catégories :<br><a class="product_categories_editable" data-name="categories" data-pk="<?php echo $p->id; ?>" data-type="select2" data-value='<?php echo json_encode($product_categories_json);?>'></a></p>
 											<p>Prix :<br>
 												<?php $price=$p->price; $rent_price=$p->rent_price;?>
 												<p><label><span><input type="checkbox" class="price_checkbox"<?php if($price!=null){?> checked<?php }?>></span>Vente </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number"<?php if($price==null){?> data-disabled='true'<?php }?>><?php echo $price; ?></a><sup class="unit"<?php if($price==null){?> style='display:none;'<?php }?>> DNT</sup></p>

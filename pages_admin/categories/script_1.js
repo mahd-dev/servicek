@@ -26,7 +26,7 @@ page_script({
 						if(r != "success") console.log(r);
 					});
 				}
-			});
+			}).nestable('collapseAll');
 		});
 
 		$(".add_category").click(function () {
@@ -104,12 +104,20 @@ page_script({
 			$.post(location.href, {element: "category", pk: $($(this).parents("[data-id]")[0]).attr("data-id"), name: "product", value: (this.checked?"1":"0")});
 		});
 
+		$(".portfolio_able").live('change', function(event) {
+			$.post(location.href, {element: "category", pk: $($(this).parents("[data-id]")[0]).attr("data-id"), name: "portfolio", value: (this.checked?"1":"0")});
+		});
+
 		$(".category_icon input").live('change', function(event) {
 			var icon = $('i', $($(this).parents('.category_icon')[0]));
 			var input = $(this);
 			$.post(location.href, {element: "category", pk: $($(this).parents("[data-id]")[0]).attr("data-id"), name: "icon", value: $(this).val()}, function (r){
 				icon.attr("class", input.val());
 			});
+		});
+
+		$(".show_hide_inputs").click(function () {
+			$(this).parent().children('.toggle_inputs').toggleClass('hide');
 		});
 
 	}

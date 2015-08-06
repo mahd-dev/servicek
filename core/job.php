@@ -49,6 +49,13 @@
                       return $list;
                     break;
 
+                    case 'portfolio':
+                      $list = array();
+                      $q=$db->query("select id from portfolio where (id_job='".$this->id."') order by creation_time desc");
+                      while($r=$q->fetch_row()) $list[] = new portfolio($r[0]);
+                      return $list;
+                    break;
+
                     case 'cv':
                       $list = array();
                       $tmp_list = array();

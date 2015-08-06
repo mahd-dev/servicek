@@ -10,7 +10,8 @@
 			"shop_cover"=>"/content/shop/cover/",
 			"offer_image"=>"/content/offer/image/",
 			"product_image"=>"/content/product/image/",
-			"service_image"=>"/content/service/image/"
+			"service_image"=>"/content/service/image/",
+			"portfolio_image"=>"/content/portfolio/image/",
 		);
 
 		public function __get($name){

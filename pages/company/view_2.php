@@ -82,7 +82,7 @@
 		<div class="portlet light profile-sidebar-portlet box">
 
 			<div class="logo fileinput col-sm-offset-3 col-sm-6 col-md-offset-0 col-md-12 fileinput-new" data-provides="fileinput">
-				<a class="fileinput-preview thumbnail" data-trigger="fileinput">
+				<a style="max-width: 100%;" class="fileinput-preview thumbnail" data-trigger="fileinput">
 					<img src="<?php $logo=$company->logo; if($logo) echo $paths->company_logo->url.$logo; else {?>http://www.placehold.it/400x300/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="logo"/>
 				</a>
 				<form class="hide"><input type="file" name="logo"></form>

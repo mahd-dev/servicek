@@ -6,7 +6,7 @@
 			<div class="profile-sidebar col-md-3">
 
 				<?php $image=$job->image; if($image){?>
-					<img class="public_image" src="<?php echo $paths->job_image->url.$image;?>" alt="image"/>
+					<img style="max-width: 100%;" class="public_image" src="<?php echo $paths->job_image->url.$image;?>" alt="image"/>
 				<?php }?>
 
 				<div class="portlet light profile-sidebar-portlet box">
@@ -18,6 +18,24 @@
 						<button class="btn btn-primary btn-raised btn-sm message" data-toggle="modal" data-target="#message_modal"><i class="fa fa-envelope"></i> Envoyer un message</button>
 						<div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 					</div>
+
+					<div class="profile-usermenu">
+						<ul class="nav">
+							<li class="active">
+								<a href="#portfolio" data-toggle="tab" aria-expanded="true">
+									<i class="fa fa-suitcase"></i>
+									Portefeuille
+								</a>
+							</li>
+							<li>
+								<a href="#cv" data-toggle="tab" aria-expanded="false">
+									<i class="fa fa-trophy"></i>
+									CV
+								</a>
+							</li>
+						</ul>
+					</div>
+
 				</div>
 				<div class="portlet light box">
 					<strong><h5>Domaine<?php if($nb_categories>1) echo "s";?>  d'activité :</h5></strong>
@@ -56,6 +74,7 @@
 					</div>
 					<?php $skills = $job->skills; if(count($skills)) { ?>
 					<div class="panel-body skills">
+						<h4>Compétences :</h4>
 						<table class="table">
 							<tbody>
 								<?php foreach ($skills as $skill) { ?>
@@ -73,33 +92,129 @@
 					</div>
 					<?php } ?>
 				</div>
-				<?php foreach ($job->cv as $cv) { $items = $cv->items; ?>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h2><?php echo $cv->title; ?></h2>
-						<p><?php echo $cv->description; ?></p>
-					</div>
-					<div class="panel-body">
-						<?php foreach ($items as $item) { $projects = $item->projects; ?>
-							<h3><?php echo $item->title; $at=$item->at; if($at) {?> <small> à <?php echo $at; ?></small> <?php } ?></h3>
-							<p><?php echo $item->description; ?></p>
-							<p>Depuis <?php echo date("j M Y", strtotime($item->date_from)); $to = $item->date_to; $loc = $item->location; if($to) {?> jusqu'à <?php echo date("j M Y", strtotime($to)); } if($loc){ ?> - <small><?php echo $loc; ?></small><?php } ?></p>
-							<?php if(count($projects)){ ?>
-								<h4>Projet<?php if(count($projects)>1) echo "s";?> :</h4>
 
-								<div class="list-group">
-									<?php foreach ($projects as $project) { ?>
-								    <div class="list-group-item">
-						            <h5 class="list-group-item-heading"><?php echo $project->title; ?> <small> <?php echo $project->description; ?></small></h5>
-								    </div>
-								    <?php if (next($items)==true) { ?><div class="list-group-separator"></div><?php } ?>
+				<div class="tab-content">
+
+					<?php if($count_p_list) { ?>
+						<div class="tab-pane active" id="portfolio">
+							<h3>Portefeuille :</h3>
+							<div class="btn-toolbar">
+								<div class="btn-group">
+								  <button class="btn btn-default filter-button" data-filter="*">Tout</button>
+								  <?php foreach ($p_list_categories as $c) { ?>
+										<button class="btn btn-default filter-button" data-filter=".<?php echo $c->id; ?>"><?php echo $c->name; ?></button>
 									<?php } ?>
 								</div>
-							<?php } ?>
-						<?php if (next($items)!=true) echo "<hr>";} ?>
+							</div>
+							<div class="row grid">
+								<?php foreach ($p_list as $p) {
+									if( $p["name"] || $p["image"] ){
+								?>
+									<div class="col-xs-12 col-sm-6 col-md-4 element-item<?php foreach($p["categories"] as $c) echo " ".$c; ?>">
+										<a class="item po"
+											data-type="<?php echo $p["type"]; ?>"
+											data-id="<?php echo $p["id"]; ?>"
+											data-name="<?php if($p["name"]){ echo $p["name"]; }?>"
+											data-description="<?php echo $p["description"]; ?>"
+											data-url="<?php if($p["url"]){ echo $p["url"]; }?>"
+										>
+
+											<div class="property-box">
+												<div class="property-box-image">
+													<?php if($p["image"]){?>
+														<div class="po_image po_public_image aspectratio-container aspect-4-3 fit-width">
+															<div class="aspectratio-content">
+																<img class="prod_srv_image" src="<?php echo $p["image"];?>" alt="image"/>
+															</div>
+														</div>
+													<?php }else{ ?>
+														<div class="aspectratio-container aspect-4-3 fit-width">
+															<div class="aspectratio-content"></div>
+														</div>
+													<?php }?>
+												</div>
+												<div class="property-box-content">
+													<h3><?php echo $p["name"]; ?></h3>
+													<p><?php echo $p["description"]; ?></p>
+													<div class="fb-like" data-href="<?php echo url_root."/".$p["url"];?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+												</div>
+											</div>
+
+										</a>
+									</div>
+								<?php }}?>
+							</div>
+						</div>
+					<?php }?>
+
+					<div class="tab-pane" id="cv">
+						<?php foreach ($job->cv as $cv) { $items = $cv->items; ?>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h2><?php echo $cv->title; ?></h2>
+								<p><?php echo $cv->description; ?></p>
+							</div>
+							<div class="panel-body">
+								<?php foreach ($items as $item) { $projects = $item->projects; ?>
+									<h3><?php echo $item->title; $at=$item->at; if($at) {?> <small> à <?php echo $at; ?></small> <?php } ?></h3>
+									<p><?php echo $item->description; ?></p>
+									<p>Depuis <?php echo date("j M Y", strtotime($item->date_from)); $to = $item->date_to; $loc = $item->location; if($to) {?> jusqu'à <?php echo date("j M Y", strtotime($to)); } if($loc){ ?> - <small><?php echo $loc; ?></small><?php } ?></p>
+									<?php if(count($projects)){ ?>
+										<h4>Projet<?php if(count($projects)>1) echo "s";?> :</h4>
+
+										<div class="list-group">
+											<?php foreach ($projects as $project) { ?>
+										    <div class="list-group-item">
+								            <h5 class="list-group-item-heading"><?php echo $project->title; ?> <small> <?php echo $project->description; ?></small></h5>
+										    </div>
+										    <?php if (next($items)==true) { ?><div class="list-group-separator"></div><?php } ?>
+											<?php } ?>
+										</div>
+									<?php } ?>
+								<?php if (next($items)!=true) echo "<hr>";} ?>
+							</div>
+						</div>
+						<?php } ?>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal po_modal fade bs-example-modal-lg" id="show_po" tabindex="-1" role="dialog" aria-labelledby="show product-service">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="row">
+				<div class="col-md-9 col-sm-8">
+					<div class="po_image aspectratio-container">
+						<div class="aspectratio-content prod_srv_image"></div>
 					</div>
 				</div>
-				<?php } ?>
+				<div class="col-md-3 col-sm-4">
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-12">
+								<button class="btn btn-flat pull-right" data-dismiss="modal"><i class="fa fa-times"></i></button>
+								<button class="btn btn-flat previous"><i class="fa fa-arrow-left"></i></button>
+								<button class="btn btn-flat next"><i class="fa fa-arrow-right"></i></button>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<h2 class="modal-title"></h2>
+								<div class="caption">
+									<p class="description"></p>
+								</div>
+								<p>
+									<div class="fb-like" data-href="<?php echo url_root;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div></p>
+									<div class="fb-comments" data-href="<?php echo url_root;?>" data-width="100%" data-numposts="5"></div>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -141,5 +256,13 @@
   </div>
 </div>
 
+<input type="hidden" name="root_url" value="<?php echo url_root.'/'.$job->url; ?>"/>
+
+<?php if(isset($po)){ ?>
+<input type="hidden" name="po_id" value="<?php echo $po->id; ?>"/>
+<input type="hidden" name="po_type" value="<?php echo get_class($po); ?>"/>
+<?php } ?>
+
+<script src="<?php echo cdn;?>/libraries/isotope/dist/isotope.pkgd.min.js" type="text/javascript"></script>
 <!-- custom page script -->
-<script src="<?php echo url_root;?>/pages/company/script_1<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
+<script src="<?php echo url_root;?>/pages/job/script_1<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>

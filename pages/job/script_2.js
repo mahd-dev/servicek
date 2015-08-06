@@ -19,11 +19,119 @@ page_script({
       });
    	}
 
+		$(".portfolio_editable").editable({mode:"popup", params:function (p) { p.element="portfolio"; return p; }});
+		$(".portfolio_categories_editable").editable({
+			mode:"popup",
+			params:function (p) { p.element="portfolio"; return p; },
+			source: JSON.parse($("input[name=available_portfolio_categories]").val()),
+			select2: {
+           multiple: true
+        }
+		});
 
 		$(".skill_editable").editable({ params:function (p) { p.element="skill"; return p; }});
 		$(".cv_editable").editable({ params:function (p) { p.element="cv"; return p; }});
 		$(".cv_item_editable").editable({ params:function (p) { p.element="cv_item"; return p; }});
 		$(".cv_item_project_editable").editable({ params:function (p) { p.element="cv_item_project"; return p; }});
+
+		$(".new_portfolio").click(function (e) {
+			$.ajax({
+				url: location.href,
+				type: "POST",
+				data: {new_portfolio:true},
+				success: function (rslt) {
+					try{
+						var p = JSON.parse(rslt);
+						switch(p.status){
+							case "success":
+								var new_element = $("#new_portfolio_template").clone();
+								new_element.removeAttr("id");
+								new_element.prependTo(".portfolio_container").show();
+
+								new_element.attr("data-id", p.id);
+								$(".portfolio_editable", new_element).attr("data-pk", p.id).editable({value:null, mode:"popup", params:function (p) { p.element="portfolio"; return p; }});
+								$(".portfolio_categories_editable", new_element).attr("data-pk", p.id).editable({
+									value: [],
+									mode:"popup",
+									params:function (p) { p.element="portfolio"; return p; },
+									source: JSON.parse($("input[name=available_portfolio_categories]").val()),
+									select2: {
+					          multiple: true
+					        }
+								});
+								$(".delete", new_element).click(function (e) {portfolio_delete(e, this);});
+								$("input[type=file]", new_element).change(function (e) {portfolio_image_change(e, this);});
+								$(".price_checkbox", new_element).change(price_checkbox);
+								$(".rent_price_checkbox", new_element).change(rent_price_checkbox);
+								$(".fb-like", new_element).attr("data-href", p.url);
+								window.fbAsyncInit();
+
+								//app.scrollTo(new_element, -200);
+								$($(".thumbnail", new_element)[0]).pulsate({color: "#399bc3",repeat: 2});
+							break;
+							default:
+								console.log(rslt);
+							break;
+						}
+					}catch(ex){
+						console.log(rslt);
+					}
+				},
+				error: function (rslt) {
+					console.log(rslt);
+				}
+			});
+		});
+		var portfolio_delete = function (e, btn) {
+			e.preventDefault();
+			var container = $(btn).parents(".portfolio");
+			$.ajax({
+				url: location.href,
+				type: "POST",
+				data: {delete_portfolio : container.attr("data-id")},
+				success: function (rslt) {
+					try{
+						var p = JSON.parse(rslt);
+						switch(p.status){
+							case "success":
+								container.remove();
+							break;
+							default:
+								console.log(rslt);
+							break;
+						}
+					}catch(ex){
+						console.log(rslt);
+					}
+				},
+				error: function (rslt) {
+					console.log(rslt);
+				}
+			});
+		};
+		$(".portfolio .delete").click(function (e) {portfolio_delete(e, this);});
+		var portfolio_image_change = function (e, input) {
+			if(input.files.length == 0) return;
+    	var form = $(".portfolio form");
+    	var fd = new FormData(form[0]);
+      fd.append("file", "portfolio_image");
+      fd.append("pk", $(input).parents(".portfolio").attr("data-id"));
+      $.ajax({
+				url: location.href,
+				type: "POST",
+				data: fd,
+				enctype: 'multipart/form-data',
+				processData: false,
+				contentType: false,
+				success: function (rslt) {
+					if(rslt!="success") console.log(rslt);
+				},
+				error: function (rslt) {
+					console.log(rslt);
+				}
+      });
+		};
+		$(".portfolio input[type=file]").change(function (e) {portfolio_image_change(e, this);});
 
 		$(".remove_skill").live("click", function () {
 			var container = $(this).parents(".skill_item");

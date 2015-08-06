@@ -2,7 +2,7 @@
 	if (!isset($_GET['id'])) {include __DIR__."/../404/controller.php";goto skip_this_page;}
 	else{
 		$shop=new shop($_GET['id']);
-		if (!$shop->isvalid || $shop->admin!=$user) {include __DIR__."/../404/controller.php";goto skip_this_page;}
+		if ((!$shop->isvalid || $user==null || ($shop->admin!=$user && !$user->is_master))) {include __DIR__."/../404/controller.php";goto skip_this_page;}
 	}
 
 	if(isset($_POST["request_agent"])){

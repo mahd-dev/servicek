@@ -2,7 +2,7 @@
 	if (!isset($_GET['id'])) {include __DIR__."/../404/controller.php";goto skip_this_page;}
 	else{
 		$job=new job($_GET['id']);
-		if (!$job->isvalid || $job->admin!=$user) {include __DIR__."/../404/controller.php";goto skip_this_page;}
+		if (!$job->isvalid || $user==null || ($job->admin!=$user && !$user->is_master)) {include __DIR__."/../404/controller.php";goto skip_this_page;}
 	}
 
 	if(isset($_POST["request_agent"])){
@@ -24,7 +24,7 @@
 		"2" => array("duration" => "12", "amount" => $prices_list[1], "text" => "12 mois : <strong>".$prices_list[1]." DT</strong>", "help" => '<span class="label label-success pull-right" style="padding:10px;margin:-4px;"><i class="icon-check"></i> Recommandé</span>', "default" => true),
 		"3" => array("duration" => "36", "amount" => $prices_list[2], "text" => "3 ans : <strong>".$prices_list[2]." DT</strong>", "help" => '<span class="label label-primary pull-right" style="padding:10px;margin:-4px;"><i class="icon-star"></i> Inscription longue terme</span>', "default" => false)
 	);
-	
+
 	if(
 		isset($_POST["token"]) &&
 		isset($_POST["offer"]) &&
@@ -59,7 +59,7 @@
 		) die(json_encode(array("status"=>"error_empty_parameter")));
 
 		if(!array_key_exists($_POST["offer"], $offers))  die(json_encode(array("status"=>"invalid_offer")));
-		
+
 		if($_POST["credit_card_number"]){
 			$payment=gf::pay($_POST["method"], $_POST["credit_card_number"], $_POST["credit_card_password"], $offers[$_POST["offer"]]["amount"]);
 			if($payment["status"]!="success") die(json_encode($payment));
@@ -87,7 +87,7 @@
 			$contract->creation_time=$cc->expiration;
 		}
 		$contract->payment_from=$_POST["method"];
-		
+
 		if(isset($payment)) $contract->payment_recipt=$payment["params"]["payment_recipt"];
 		else $contract->id_agent = $agent->id;
 
@@ -108,7 +108,7 @@
 	// ...
 
 	// select right view
-	
+
 	// process required data
 	$new_job_token = gf::generate_guid();
 	$_SESSION["new_job_token"] = $new_job_token;

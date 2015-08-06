@@ -5,7 +5,7 @@
 		<?php $logo=$company->logo; if($logo){?>
 			<div class="row">
 				<div class="logo col-sm-offset-3 col-sm-6 col-md-offset-0 col-md-12">
-					<img class="public_logo" src="<?php echo $paths->company_logo->url.$logo;?>" alt="logo"/>
+					<img style="max-width: 100%;" class="public_logo" src="<?php echo $paths->company_logo->url.$logo;?>" alt="logo"/>
 				</div>
 			</div>
 		<?php }?>

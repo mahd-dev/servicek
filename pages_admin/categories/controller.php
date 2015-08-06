@@ -47,6 +47,9 @@
 					case 'product':
 						$c->product = $_POST["value"];
 						break;
+					case 'portfolio':
+						$c->portfolio = $_POST["value"];
+						break;
 					case 'icon':
 						$c->icon = $_POST["value"];
 						break;

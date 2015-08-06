@@ -47,7 +47,7 @@
             return !!$r[0];
           break;
           case "childrens":
-            return array_merge($this->companies, $this->shops, $this->jobs, $this->products, $this->services);
+            return array_merge($this->companies, $this->shops, $this->jobs, $this->products, $this->services, $this->portfolios);
           break;
 
           case "parent":
@@ -105,6 +105,12 @@
             while($r=$q->fetch_row()) $list[] = new service($r[0]);
             return $list;
           break;
+          case "portfolios":
+            $list = array();
+            $q=$db->query("select id_children from category_children where (id_category='".$this->id."' and children_type='portfolio')");
+            while($r=$q->fetch_row()) $list[] = new portfolio($r[0]);
+            return $list;
+          break;
 
           default:
             $q=$db->query("select ".$name." from category where (id='".$this->id."')");
@@ -158,6 +164,9 @@
               case 'service':
                 if($c->service) $rslt[]=$c;
                 break;
+              case 'portfolio':
+                if($c->portfolio) $rslt[]=$c;
+                break;
               case 'job':
                 if($c->job_publish_price) $rslt[]=$c;
                 break;
@@ -177,6 +186,9 @@
                   break;
                 case 'service':
                   if($sc->service) $rslt[]=$sc;
+                  break;
+                case 'portfolio':
+                  if($sc->portfolio) $rslt[]=$sc;
                   break;
                 case 'job':
                   if($sc->job_publish_price) $rslt[]=$sc;
@@ -204,6 +216,12 @@
           case 'service':
             $rslt=array();
             $q=$db->query("select id from category where ifnull(service, 0) > 0");
+            while ($r=$q->fetch_row()) $rslt[] = new category($r[0]);
+            return $rslt;
+            break;
+          case 'portfolio':
+            $rslt=array();
+            $q=$db->query("select id from category where ifnull(portfolio, 0) > 0");
             while ($r=$q->fetch_row()) $rslt[] = new category($r[0]);
             return $rslt;
             break;

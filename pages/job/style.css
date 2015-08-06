@@ -8,6 +8,15 @@
 	width: 100%;
 }
 
+.select2-container{
+	min-width: 200px;
+}
+
+.portfolio_image img{
+	max-width: 100%;
+	max-height: 200px;
+}
+
 .skills .progress{
 	margin: 8px 0;
 	background-color: transparent;
@@ -26,6 +35,102 @@
 	border: none;
 	padding: 0 25px;
 }
+
+.item .caption h3{
+	height: 25px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.item .caption>p:first-child{
+	height: 9ex;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.item{
+	text-decoration: none !important;
+	color: #000;
+	cursor: pointer;
+}
+.item .po_public_image{
+	-webkit-transform: scale(1.03);
+	-moz-transform: scale(1.03);
+	-o-transform: scale(1.03);
+	-ms-transform: scale(1.03);
+	transform: scale(1.03);
+	-webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+}
+.item:hover .po_public_image {
+  -webkit-transform: scale(1.06);
+  -moz-transform: scale(1.06);
+  -o-transform: scale(1.06);
+  -ms-transform: scale(1.06);
+  transform: scale(1.06);
+}
+.property-box-content>h3{
+	height: 3ex;
+	margin: 0 0 15px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.property-box-content>p{
+	height: 6ex;
+	overflow: hidden;
+	text-decoration: none;
+}
+
+.property-carousel-wrapper .property-box{
+	margin-bottom: 3px;
+}
+
+
+.item .fb-like{
+	margin-top: 0;
+}
+
+/*
+.modal.ps_modal{
+	overflow: hidden;
+}
+
+.ps_modal .modal-dialog {
+  width: 100%;
+  height: 100%;
+  padding: 25px;
+	margin: 0;
+}
+
+.ps_modal .modal-content {
+  height: 100%;
+	border-radius: 0;
+}
+
+.ps_modal .modal-body{
+	background-color: #fff;
+	padding-left: 0 !important;
+}
+@media screen and (max-width: 767px) {
+	.ps_modal .modal-body{
+		margin-bottom: 25px;
+		box-shadow: 0px 2px 32px rgba(0, 0, 0, 0.3);
+		padding-left: 24px !important;
+	}
+}
+*/
+.modal-content .row .col-md-9, .modal-content .row .col-md-9 .ps_image{
+	height: 500px;
+}
+.ps_modal .modal-content .row .col-md-9 .ps_image{
+	display: block;
+}
+.ps_modal .modal-content .aspectratio-content{
+  background-color: #000;
+}
+
 
 html,
 body,

@@ -103,7 +103,7 @@
 .item .fb-like{
 	margin-top: 0;
 }
-
+/*
 .modal.ps_modal{
 	overflow: hidden;
 }
@@ -131,9 +131,9 @@
 		padding-left: 24px !important;
 	}
 }
-
-.ps_modal .modal-content .row, .modal-content .row .col-md-9, .modal-content .row .col-md-9 .ps_image{
-	height: 100%;
+*/
+.modal-content .row .col-md-9, .modal-content .row .col-md-9 .ps_image{
+	height: 500px;
 }
 .ps_modal .modal-content .row .col-md-9 .ps_image{
 	display: block;

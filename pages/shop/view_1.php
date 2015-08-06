@@ -5,7 +5,7 @@
 		<?php $image=$shop->image; if($image){?>
 			<div class="row">
 				<div class="image col-sm-offset-3 col-sm-6 col-md-offset-0 col-md-12">
-					<img class="public_image" src="<?php echo $paths->shop_image->url.$image;?>" alt="image"/>
+					<img style="max-width: 100%;" class="public_image" src="<?php echo $paths->shop_image->url.$image;?>" alt="image"/>
 				</div>
 			</div>
 		<?php }?>

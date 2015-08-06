@@ -177,7 +177,7 @@
 				$ps_description = $ps->description;
 				$ogp->setDescription( ($ps_description? $ps_description : $shop->description ) );
 
-        $ogp->setURL( url_root."/".$shop->url."/".get_class($ps)."/".$ps->id );
+        $ogp->setURL( url_root."/".$ps->url );
 
         $ogp->setType( 'article' );
 
@@ -197,7 +197,7 @@
         }
 
         $article = new OpenGraphProtocolArticle();
-        $article->setPublishedTime( date(DATE_ISO8601, strtotime($shop->creation_time)) );
+        $article->setPublishedTime( date(DATE_ISO8601, strtotime($ps->creation_time)) );
         $article->setModifiedTime( new DateTime( 'now', new DateTimeZone( 'Africa/Tunis' ) ) );
         $article->setSection( get_class($ps) );
 

@@ -23,7 +23,8 @@
 	$categories = array();
 	$categories_json = array();
 	$nb_categories = 0;
-	foreach ($job->categories as $c){
+	$categories_obj = $job->categories;
+	foreach ($categories_obj as $c){
 		$categories_json[] = intval($c->id);
 		$categories[] = $c->name;
 		$nb_categories+=1;
@@ -77,7 +78,20 @@
 						case 'description': $s->description = $_POST['value']; break;
 						case 'percent': $s->percent = $_POST['value']; break;
 					}
-				break;
+					break;
+				case 'portfolio':
+					$portfolio = new portfolio($_POST['pk']);
+					switch ($_POST['name']) {
+						case 'name': $portfolio->name=$_POST['value']; break;
+						case 'description': $portfolio->description=$_POST['value']; break;
+						case 'categories' :
+							$portfolio->unassign_from_all_categories();
+							foreach ($_POST['value'] as $value) {
+								$portfolio->assign_to_category(new category(intval($value)));
+							}
+						break;
+					}
+					break;
 				case 'cv':
 					$c=new job_cv($_POST['pk']);
 					switch ($_POST['name']) {
@@ -123,6 +137,18 @@
 			$job->geolocation = json_encode(array("longitude"=>$_POST["longitude"], "latitude"=>$_POST["latitude"]));
 			die("success");
 
+		}elseif (isset($_POST['new_portfolio'])) {
+
+			$portfolio=portfolio::create($job);
+			die(json_encode(array("status"=>"success", "id"=>$portfolio->id, "url"=>url_root."/".$portfolio->url)));
+
+		}elseif (isset($_POST['delete_portfolio'])) {
+
+			$portfolio=new portfolio($_POST['delete_portfolio']);
+			$portfolio->delete();
+
+			die(json_encode(array("status"=>"success")));
+
 		}elseif(isset($_POST["file"]) && $_POST["file"]=="image"){
 
 			$oldname=$paths->job_image->dir.$job->image;
@@ -133,6 +159,20 @@
 			move_uploaded_file($_FILES["image"]["tmp_name"], $paths->job_image->dir.$name);
 
 			$job->image=$name;
+
+			die("success");
+		}elseif(isset($_POST["file"]) && $_POST["file"]=="portfolio_image" && isset($_POST["pk"])){
+
+			$portfolio=new portfolio($_POST["pk"]);
+
+			$oldname=$paths->portfolio_image->dir.$portfolio->image;
+
+			if(file_exists($oldname) && is_file($oldname)) unlink($oldname);
+
+			$name=gf::generate_guid().".".end((explode(".", $_FILES["image"]["name"])));
+			move_uploaded_file($_FILES["image"]["tmp_name"], $paths->portfolio_image->dir.$name);
+
+			$portfolio->image=$name;
 
 			die("success");
 		}elseif(isset($_POST["add"])){
@@ -184,40 +224,97 @@
 		$available_categories = array();
 		foreach (category::get_available_for('job') as $c) $available_categories[] = array("id"=>intval($c->id), "text"=>$c->name);
 
+		$available_portfolio_categories = array();
+		foreach (category::get_available_for('portfolio', $categories_obj) as $c) $available_portfolio_categories[] = array("id"=>intval($c->id), "text"=>$c->name);
+
 		include "view_2.php";
 	}elseif($is_contracted){
 
+		if(isset($_GET["portfolio"])) $po=new portfolio($_GET["portfolio"]);
 		// defining seo parameters
 		if(isset($ogp)){
-	        $ogp->setTitle( $job->name );
-	        $ogp->setDescription( $job->description );
-	        $ogp->setURL( url_root."/".$job->url );
+			if(isset($po)){
+				$po_name = $po->name;
+				$ogp->setTitle( ($po_name? $po_name : $job->name ) );
+				$po_description = $po->description;
+				$ogp->setDescription( ($po_description? $po_description : $job->description ) );
 
-	        $ogp->setType( 'article' );
+        $ogp->setURL( url_root."/".$po->url );
 
-	        $seo_img = $job->image;
-	        if($seo_img){
-	            $image = new OpenGraphProtocolImage();
-	            $image->setURL( $paths->job_image->url.$seo_img );
-	            $image->setSecureURL( $paths->job_image->url.$seo_img );
-	            $image->setType( 'image/jpeg' );
-	            $ogp->addImage($image);
+        $ogp->setType( 'article' );
 
-	            $ref["twitter:image:src"] = $paths->job_image->url.$seo_img;
-	        }
+        $seo_img = $po->image;
+        if($seo_img){
+					$img_path=$paths->portfolio_image->url.$seo_img; break;
+					$image = new OpenGraphProtocolImage();
+          $image->setURL( $img_path );
+          $image->setSecureURL( $img_path );
+          $image->setType( 'image/jpeg' );
+          $ogp->addImage($image);
 
-	        $article = new OpenGraphProtocolArticle();
-	        $article->setPublishedTime( date(DATE_ISO8601, strtotime($job->creation_time)) );
-	        $article->setModifiedTime( new DateTime( 'now', new DateTimeZone( 'Africa/Tunis' ) ) );
-	        $article->setSection( 'Job' );
-	        foreach(array_filter(explode(",",$categories)) as $c) $article->addTag( $c );
+          $ref["twitter:image:src"] = $img_path;
+        }
 
-	        $ref["twitter:title"]=$job->name;
-            $ref["twitter:description"]=$job->description;
+        $article = new OpenGraphProtocolArticle();
+        $article->setPublishedTime( date(DATE_ISO8601, strtotime($po->creation_time)) );
+        $article->setModifiedTime( new DateTime( 'now', new DateTimeZone( 'Africa/Tunis' ) ) );
+        $article->setSection( get_class($po) );
 
+        foreach(array_filter(explode(",",$categories)) as $c) $article->addTag( $c );
+
+        $ref["twitter:title"] = $po->name;
+        $ref["twitter:description"] = $po->description;
+			}else{
+	      $ogp->setTitle( $job->name );
+	      $ogp->setDescription( $job->description );
+	      $ogp->setURL( url_root."/".$job->url );
+
+	      $ogp->setType( 'article' );
+
+	      $seo_img = $job->image;
+	      if($seo_img){
+          $image = new OpenGraphProtocolImage();
+          $image->setURL( $paths->job_image->url.$seo_img );
+          $image->setSecureURL( $paths->job_image->url.$seo_img );
+          $image->setType( 'image/jpeg' );
+          $ogp->addImage($image);
+
+          $ref["twitter:image:src"] = $paths->job_image->url.$seo_img;
+	      }
+
+	      $article = new OpenGraphProtocolArticle();
+	      $article->setPublishedTime( date(DATE_ISO8601, strtotime($job->creation_time)) );
+	      $article->setModifiedTime( new DateTime( 'now', new DateTimeZone( 'Africa/Tunis' ) ) );
+	      $article->setSection( 'Job' );
+	      foreach(array_filter(explode(",",$categories)) as $c) $article->addTag( $c );
+
+	      $ref["twitter:title"]=$job->name;
+        $ref["twitter:description"]=$job->description;
 	    }
-
+		}
 		$job->requests += 1;
+
+		$p_list = array();
+		$p_list_categories = array();
+
+		foreach ($job->portfolio as $e) {
+			$p_categories = array();
+			foreach ($e->categories as $c) {
+				$p_categories[] = $c->id;
+				if(!in_array($c, $p_list_categories)) $p_list_categories[] = $c;
+			}
+			$p_list[] = array(
+				"id"=>$e->id,
+				"type"=>get_class($e),
+				"name"=>$e->name,
+				"description"=>$e->description,
+				"image"=>($e->image ? $paths->portfolio_image->url.$e->image : null),
+				"url"=>url_root."/".$e->url,
+				"categories"=>$p_categories,
+				"creation_time"=>$e->creation_time
+			);
+		}
+		$count_p_list = count($p_list);
 
 		include "view_1.php";
 	}else{
