@@ -19,6 +19,7 @@
 						<div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 					</div>
 
+					<?php if($count_p_list && $count_cv) { ?>
 					<div class="profile-usermenu">
 						<ul class="nav">
 							<li class="active">
@@ -35,7 +36,7 @@
 							</li>
 						</ul>
 					</div>
-
+					<?php } ?>
 				</div>
 				<div class="portlet light box">
 					<strong><h5>Domaine<?php if($nb_categories>1) echo "s";?>  d'activité :</h5></strong>
@@ -146,37 +147,37 @@
 							</div>
 						</div>
 					<?php }?>
+					<?php if($count_cv){ ?>
+						<div class="tab-pane<?php if(!$count_p_list) echo " active"; ?>" id="cv">
+							<?php foreach ($cv_list as $cv) { $items = $cv->items; ?>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h2><?php echo $cv->title; ?></h2>
+									<p><?php echo $cv->description; ?></p>
+								</div>
+								<div class="panel-body">
+									<?php foreach ($items as $item) { $projects = $item->projects; ?>
+										<h3><?php echo $item->title; $at=$item->at; if($at) {?> <small> à <?php echo $at; ?></small> <?php } ?></h3>
+										<p><?php echo $item->description; ?></p>
+										<p>Depuis <?php echo date("j M Y", strtotime($item->date_from)); $to = $item->date_to; $loc = $item->location; if($to) {?> jusqu'à <?php echo date("j M Y", strtotime($to)); } if($loc){ ?> - <small><?php echo $loc; ?></small><?php } ?></p>
+										<?php if(count($projects)){ ?>
+											<h4>Projet<?php if(count($projects)>1) echo "s";?> :</h4>
 
-					<div class="tab-pane" id="cv">
-						<?php foreach ($job->cv as $cv) { $items = $cv->items; ?>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h2><?php echo $cv->title; ?></h2>
-								<p><?php echo $cv->description; ?></p>
+											<div class="list-group">
+												<?php foreach ($projects as $project) { ?>
+											    <div class="list-group-item">
+									            <h5 class="list-group-item-heading"><?php echo $project->title; ?> <small> <?php echo $project->description; ?></small></h5>
+											    </div>
+											    <?php if (next($items)==true) { ?><div class="list-group-separator"></div><?php } ?>
+												<?php } ?>
+											</div>
+										<?php } ?>
+									<?php if (next($items)!=true) echo "<hr>";} ?>
+								</div>
 							</div>
-							<div class="panel-body">
-								<?php foreach ($items as $item) { $projects = $item->projects; ?>
-									<h3><?php echo $item->title; $at=$item->at; if($at) {?> <small> à <?php echo $at; ?></small> <?php } ?></h3>
-									<p><?php echo $item->description; ?></p>
-									<p>Depuis <?php echo date("j M Y", strtotime($item->date_from)); $to = $item->date_to; $loc = $item->location; if($to) {?> jusqu'à <?php echo date("j M Y", strtotime($to)); } if($loc){ ?> - <small><?php echo $loc; ?></small><?php } ?></p>
-									<?php if(count($projects)){ ?>
-										<h4>Projet<?php if(count($projects)>1) echo "s";?> :</h4>
-
-										<div class="list-group">
-											<?php foreach ($projects as $project) { ?>
-										    <div class="list-group-item">
-								            <h5 class="list-group-item-heading"><?php echo $project->title; ?> <small> <?php echo $project->description; ?></small></h5>
-										    </div>
-										    <?php if (next($items)==true) { ?><div class="list-group-separator"></div><?php } ?>
-											<?php } ?>
-										</div>
-									<?php } ?>
-								<?php if (next($items)!=true) echo "<hr>";} ?>
-							</div>
+							<?php } ?>
 						</div>
-						<?php } ?>
-					</div>
-
+					<?php } ?>
 				</div>
 			</div>
 		</div>

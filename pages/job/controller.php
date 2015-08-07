@@ -316,6 +316,8 @@
 		}
 		$count_p_list = count($p_list);
 
+		$cv_list = $job->cv;
+		$count_cv = count($cv_list);
 		include "view_1.php";
 	}else{
 		include __DIR__."/../404/controller.php";goto skip_this_page;
