@@ -34,13 +34,15 @@
                         }
                     break;
                     case "remaining_days":
+                        $except_remain = ceil(abs(mktime(0,0,0,1,1,2016) - time()) / 86400);
                         $q=$db->query("select TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration MONTH)) from contract where (id='".$this->id."')");
                         $r=$q->fetch_row();
-                        return ($r[0] < 0 ? false : $r[0]);
+                        return (($r[0] < 0) && ($except_remain<=0) ? false : max($r[0], $except_remain));
                     case "expiration":
                         $q=$db->query("select DATE_ADD(creation_time, INTERVAL duration MONTH) from contract where (id='".$this->id."')");
                         $r=$q->fetch_row();
-                        return $r[0];
+                        if(strtotime($r[0]) < mktime(0,0,0,1,1,2016)) return date(mktime(0,0,0,1,1,2016));
+                        else $r[0];
                     case "is_expired":
                         return $this->remaining_days == false;
                     break;
