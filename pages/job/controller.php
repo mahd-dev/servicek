@@ -245,7 +245,7 @@
 
         $seo_img = $po->image;
         if($seo_img){
-					$img_path=$paths->portfolio_image->url.$seo_img; break;
+					$img_path=$paths->portfolio_image->url.$seo_img;
 					$image = new OpenGraphProtocolImage();
           $image->setURL( $img_path );
           $image->setSecureURL( $img_path );
