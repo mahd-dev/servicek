@@ -109,10 +109,7 @@
 	border-radius: 0;
 }
 
-.po_modal .modal-body{
-	background-color: #fff;
-	padding-left: 0 !important;
-}
+
 @media screen and (max-width: 767px) {
 	.po_modal .modal-body{
 		margin-bottom: 25px;
@@ -121,6 +118,10 @@
 	}
 }
 */
+.po_modal .modal-body{
+	background-color: #fff;
+	padding-left: 0 !important;
+}
 .modal-content .row .col-md-9, .modal-content .row .col-md-9 .po_image{
 	height: 500px;
 }
