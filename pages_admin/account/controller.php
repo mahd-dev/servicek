@@ -54,7 +54,7 @@
 	for ($i=0; $i < $count_all_jobs; $i++) {
 		if($job[$i]->is_contracted) {
 			$count_visible_jobs++;
-			if ($job[$i]->current_contract->type != 0) $count_contracted_jobs++;;
+			if ($job[$i]->current_contract->type != 0) $count_contracted_jobs++;
 		}
 	}
 
@@ -64,7 +64,7 @@
 	for ($i=0; $i < $count_all_shops; $i++) {
 		if($shops[$i]->is_contracted) {
 			$count_visible_shops++;
-			if ($shops[$i]->current_contract->type != 0) $count_contracted_shops++;;
+			if ($shops[$i]->current_contract->type != 0) $count_contracted_shops++;
 		}
 	}
 
@@ -74,7 +74,7 @@
 	for ($i=0; $i < $count_all_companies; $i++) {
 		if($companies[$i]->is_contracted) {
 			$count_visible_companies++;
-			if ($companies[$i]->current_contract->type != 0) $count_contracted_companies++;;
+			if ($companies[$i]->current_contract->type != 0) $count_contracted_companies++;
 		}
 	}
 	include "view_1.php";

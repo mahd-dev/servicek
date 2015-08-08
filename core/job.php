@@ -77,18 +77,13 @@
           					break;
 
                     case "is_contracted":
-                        $q=$db->query("select count(id) from contract where (id_page='".$this->id."' and page_type='job' and TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration MONTH)) >= 0)");
-                        $r=$q->fetch_row();
-                        return $r[0]>0;
-                    break;
-                    case "current_contract":
-                        $q=$db->query("select id from contract where (id_page='".$this->id."' and page_type='job' and TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration MONTH)) >= 0) ORDER BY DATE_ADD(creation_time, INTERVAL duration MONTH) DESC LIMIT 1");
-                        if($q->num_rows==0) return null;
-                        else{
-                            $r=$q->fetch_row();
-                            return new contract($r[0]);
-                        }
-                    break;
+          						return !!$this->current_contract;
+          					break;
+          					case "current_contract":
+          						$lc = $this->last_contract;
+          						if($lc && !$lc->is_expired) return $lc;
+          						else return null;
+          					break;
                     case "last_contract":
                         $q=$db->query("select id from contract where (id_page='".$this->id."' and page_type='job') ORDER BY DATE_ADD(creation_time, INTERVAL duration MONTH) DESC LIMIT 1");
                         if($q->num_rows==0) return null;
