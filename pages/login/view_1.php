@@ -34,7 +34,7 @@
     <div class="col-md-4 col-sm-5">
         <div class="alert alert-info">
             <h4>Vous ne disposez pas de compte ?</h4>
-            <a href="<?php echo url_root;?>/register" class="btn btn-primary btn-raised ajaxify">Créer mon compte</a>
+            <a href="<?php echo url_root;?>/new" class="btn btn-primary btn-raised ajaxify">Créer mon compte</a>
         </div>
     </div>
 </div>
