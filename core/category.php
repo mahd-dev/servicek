@@ -46,6 +46,11 @@
             $r=$q->fetch_row();
             return !!$r[0];
           break;
+          case "has_pages":
+            $q=$db->query("select count(*) from category_children where (id_category='".$this->id."' and (children_type='company' or children_type='shop' or children_type='job'))");
+            $r=$q->fetch_row();
+            return !!$r[0];
+          break;
           case "childrens":
             return array_merge($this->companies, $this->shops, $this->jobs, $this->products, $this->services, $this->portfolios);
           break;

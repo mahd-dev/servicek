@@ -13,6 +13,14 @@
                 switch($name){
                     case "admin":
                         $this->id_admin=$value->id;
+                    case 'locality':
+          						$this->id_locality = $value->id;
+          						break;
+                    case 'geolocation':
+                      $geo = json_decode($value);
+                      locality::fill($geo->latitude, $geo->longitude, $this);
+                      $db->query("update job set geolocation=".($value===null?"NULL":"'".$db->real_escape_string($value)."'")." where (id='".$this->id."')");
+                      break;
                     default :
                         $db->query("update job set ".$name."=".($value===null?"NULL":"'".$db->real_escape_string($value)."'")." where (id='".$this->id."')");
                     break;
@@ -40,6 +48,10 @@
                         $q=$db->query("select id_category from category_children where (id_children='".$this->id."' and children_type='job')");
                         while($r=$q->fetch_row()) $list[] = new category($r[0]);
                         return $list;
+                    break;
+
+                    case 'locality':
+                      return new locality($this->id_locality);
                     break;
 
                     case 'skills':

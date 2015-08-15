@@ -35,7 +35,7 @@
 					return $p;
 					break;
 				case 'url':
-					return url_root.$this->path;
+					return $this->path;
 					break;
 
 				default:

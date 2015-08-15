@@ -1,15 +1,8 @@
 page_script({
 	init: function () {
 
-		$('.property-carousel').owlCarousel({
-			items: 4,
-			itemsDesktop: [1199, 5],
-			itemsDesktopSmall: [979, 3],
-			itemsTablet: [768, 2],
-			itemsTabletSmall: [1, 2],
-			itemsMobile: false,
-			navigation: true,
-			navigationText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>']
+		$(".tree .dropdown-toggle").click(function () {
+			$($(this).parents('li')[0]).children('ul').toggleClass('collapsed');
 		});
 
 		// process search form submit event
@@ -19,181 +12,66 @@ page_script({
 			app.ajaxify(location.origin + "/search?q=" + $(this).find(".query").val());
 		});
 
-		$("[data-displayin]").prependTo($("[data-displayin]").attr("data-displayin")).show();
+		$(".tree input[type=checkbox], .type input[type=checkbox]").change(function (e) {
+			if(e.originalEvent) $($(this).parents('li')[0]).children('ul').find('input[type=checkbox]').attr("checked", $(this).is(":checked"));
 
-		var map;
-    var bounds = new google.maps.LatLngBounds();
-		var map_styles = [
-	    {
-	        "featureType": "administrative",
-	        "elementType": "labels.text.fill",
-	        "stylers": [
-	            {
-	                "color": "#444444"
-	            }
-	        ]
-	    },
-	    {
-	        "featureType": "landscape",
-	        "elementType": "all",
-	        "stylers": [
-	            {
-	                "color": "#f2f2f2"
-	            }
-	        ]
-	    },
-	    {
-	        "featureType": "poi",
-	        "elementType": "all",
-	        "stylers": [
-	            {
-	                "visibility": "off"
-	            }
-	        ]
-	    },
-	    {
-	        "featureType": "road",
-	        "elementType": "all",
-	        "stylers": [
-	            {
-	                "saturation": -100
-	            },
-	            {
-	                "lightness": 45
-	            }
-	        ]
-	    },
-	    {
-	        "featureType": "road",
-	        "elementType": "geometry.fill",
-	        "stylers": [
-	            {
-	                "visibility": "on"
-	            },
-	            {
-	                "color": "#f1b5c9"
-	            }
-	        ]
-	    },
-	    {
-	        "featureType": "road.highway",
-	        "elementType": "all",
-	        "stylers": [
-	            {
-	                "visibility": "simplified"
-	            }
-	        ]
-	    },
-	    {
-	        "featureType": "road.arterial",
-	        "elementType": "labels.icon",
-	        "stylers": [
-	            {
-	                "visibility": "off"
-	            }
-	        ]
-	    },
-	    {
-	        "featureType": "transit",
-	        "elementType": "all",
-	        "stylers": [
-	            {
-	                "visibility": "off"
-	            }
-	        ]
-	    },
-	    {
-	        "featureType": "water",
-	        "elementType": "all",
-	        "stylers": [
-	            {
-	                "color": "#46bcec"
-	            },
-	            {
-	                "visibility": "on"
-	            }
-	        ]
-	    },
-	    {
-	        "featureType": "water",
-	        "elementType": "geometry.fill",
-	        "stylers": [
-	            {
-	                "color": "#1e88e5"
-	            }
-	        ]
-	    },
-	    {
-	        "featureType": "water",
-	        "elementType": "labels.text.fill",
-	        "stylers": [
-	            {
-	                "color": "#ffffff"
-	            }
-	        ]
-	    },
-	    {
-	        "featureType": "water",
-	        "elementType": "labels.text.stroke",
-	        "stylers": [
-	            {
-	                "color": "#555555"
-	            }
-	        ]
-	    }
-		]
-    var mapOptions = {
-			styles: map_styles,
-			scrollwheel: false,
-      mapTypeId: 'roadmap'
-    };
+			var params = {
+				ca : [],
+				lo : []
+			};
+			if(!$(".type .job").is(":checked") || !$(".type .shop").is(":checked") || !$(".type .company").is(":checked")){
+				if($(".type .job").is(":checked")) params.jo = 1;
+				if($(".type .shop").is(":checked")) params.sh = 1;
+				if($(".type .company").is(":checked")) params.co = 1;
+			}
 
-    // Display a map on the page
-    map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+			$(".categories input[type=checkbox]").each(function(index, el) {
+				var p = $(this);
+				var check = p.is(":checked");
+				do {
+					p = $($("input[type=checkbox]", $(p.parents('li')[1]))[0]);
+					if(p.is(":checked")) check = false;
+				} while(p.length && check);
 
-    // Multiple Markers
-    var markers = JSON.parse($("[name=map_elements]").val());
-		var clusterer_markers = [];
-    // Display multiple markers on a map
-    var infoWindow = new google.maps.InfoWindow(), marker, i;
+				if(check) params.ca.push($(this).attr("data-id"));
+			});
+			$(".localities input[type=checkbox]").each(function(index, el) {
+				var p = $(this);
+				var check = p.is(":checked");
+				do {
+					p = $($("input[type=checkbox]", $(p.parents('li')[1]))[0]);
+					if(p.is(":checked")) check = false;
+				} while(p.length && check);
 
-    // Loop through our array of markers & place each one on the map
-    for( i = 0; i < markers.length; i++ ) {
-      var position = new google.maps.LatLng(markers[i].latitude, markers[i].longitude);
-      bounds.extend(position);
-      marker = new MarkerWithLabel({
-        position: position,
-        map: map,
-				icon: ' ',
-				labelContent: '<i class="' + markers[i].icon + '"></i>',
-       	labelAnchor: new google.maps.Point(20, 20),
-				labelClass: "labels"
-      });
-
-      // Allow each marker to have an info window
-      google.maps.event.addListener(marker, 'click', (function(marker, i) {
-        return function() {
-					var content = $("<div>")
-						.append($("<img>", {"src": markers[i].image_url, "style": "max-width:100%; max-height: 300px;"}))
-						.append($("<h3>", {"text": markers[i].title}))
-						.append($("<p>", {"text": markers[i].content}))
-						.append($("<hr>"))
-						.append($("<div>", {"data-href": markers[i].url, "data-layout": "button_count", "data-action": "like", "data-show-faces": "false", "data-share": "true"}))
-						.append($("<a>", {"class": "ajaxify", "href": markers[i].url, "text": "Voir plus"}))
-					;
-          infoWindow.setContent(content[0].innerHTML);
-          infoWindow.open(map, marker);
-        }
-      })(marker, i));
-
-			clusterer_markers.push(marker);
-
-      // Automatically center the map fitting all markers on the screen
-      map.fitBounds(bounds);
-    }
-
-		var mc = new MarkerClusterer(map, clusterer_markers);
-
-		window.fbAsyncInit();
+				if(check) params.lo.push($(this).attr("data-id"));
+			});
+			$(".items_container").empty();
+			var req_params = $.param(params);
+			history.pushState({href: "/",method: "GET",params: req_params}, document.title, "/" + (req_params?"?":"") + req_params);
+			params.fetchdata=true;
+			$.get("/",$.param(params), function (r) {
+				try {
+					var p = JSON.parse(r);
+					$(".filter-title").text(p.title);
+					if(p.rslt.length){
+						p.rslt.forEach(function(el) {
+							var itm = $("#item_template").clone().removeAttr('id');
+							itm.find('[href]').attr('href', el.url);
+							itm.find('[data-href]').attr('data-href', el.url);
+							itm.find('.image').attr('style', "background-image:url('" + el.image_url + "');");
+							itm.find('.title-text').text(el.title);
+							itm.find('.content-text').text(el.content);
+							itm.appendTo('.items_container').show();
+						});
+						window.fbAsyncInit();
+						$(".home").hide();
+					}else{
+						$(".home").show();
+					}
+				} catch (e) {
+					console.log(r);
+				}
+			});
+		});
 	}
 });

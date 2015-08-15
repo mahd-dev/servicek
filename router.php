@@ -105,6 +105,9 @@
 			$req_page = "pages/post/controller.php";
 		break;
 
+		case "setlocations":
+			die(include"pages/setlocations/controller.php");break;
+
 		case "sitemap.xml":
 			die(include"seo/sitemap.php");break;
 		case "git_webhook_push":
@@ -128,5 +131,6 @@
 	}
 
 	// running selected page
-	include (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH']=="XMLHttpRequest" ? $req_page : "master/controller.php");
+	$is_ajax = (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH']=="XMLHttpRequest");
+	include ($is_ajax ? $req_page : "master/controller.php");
 ?>

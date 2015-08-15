@@ -77,6 +77,10 @@
 						return $list;
 					break;
 
+					case 'locality':
+						return new locality($this->id_locality);
+					break;
+
 					case "is_contracted":
 						return !!$this->current_contract;
 					break;

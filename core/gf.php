@@ -2,6 +2,17 @@
 
 	class gf {
 
+		public static function utf8ize($mixed) {
+    if (is_array($mixed)) {
+        foreach ($mixed as $key => $value) {
+            $mixed[$key] = gf::utf8ize($value);
+        }
+    } else if (is_string ($mixed)) {
+        return utf8_encode($mixed);
+    }
+    return $mixed;
+}
+
 		public static function check_url($url){
 			global $db;
 			global $reserved_urls;
