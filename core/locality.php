@@ -111,14 +111,19 @@
     }
 
     public static function fill($latitude, $longitude, $for){
-      $resp = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?latlng=".$latitude.",".$longitude."&sensor=false"))->results[0]->address_components;
-      $parent = null;
-      foreach (array_reverse($resp) as $comp) {
-        if(!is_numeric($comp->short_name) && (!$parent || ($comp->short_name != $parent->short_name))){
-          $parent = locality::create($comp->short_name, $comp->long_name, $parent);
+      try {
+        $r=file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?latlng=".$latitude.",".$longitude."&sensor=false");
+        $resp = json_decode($r)->results[0]->address_components;
+        $parent = null;
+        foreach (array_reverse($resp) as $comp) {
+          if(!is_numeric($comp->short_name) && (!$parent || ($comp->short_name != $parent->short_name))){
+            $parent = locality::create($comp->short_name, $comp->long_name, $parent);
+          }
         }
+        $for->locality = $parent;
+      } catch (Exception $e) {
+        echo "<br>".get_class($for)." : ".$for->id." : ".$for->name." : ".$latitude.", ".$longitude."<br>Google maps response : ".$r;
       }
-      $for->locality = $parent;
     }
 
     public static function get_all(){
