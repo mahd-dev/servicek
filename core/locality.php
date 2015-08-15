@@ -111,9 +111,9 @@
     }
 
     public static function fill($latitude, $longitude, $for){
-      try {
-        $r=file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?latlng=".$latitude.",".$longitude."&sensor=false");
-        $resp = json_decode($r)->results[0]->address_components;
+      $r=file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?latlng=".$latitude.",".$longitude."&sensor=false");
+      $resp = json_decode($r)->results[0]->address_components;
+      if(isset($resp) && $resp){
         $parent = null;
         foreach (array_reverse($resp) as $comp) {
           if(!is_numeric($comp->short_name) && (!$parent || ($comp->short_name != $parent->short_name))){
@@ -121,7 +121,7 @@
           }
         }
         $for->locality = $parent;
-      } catch (Exception $e) {
+      }else{
         echo "<br>".get_class($for)." : ".$for->id." : ".$for->name." : ".$latitude.", ".$longitude."<br>Google maps response : ".$r;
       }
     }
