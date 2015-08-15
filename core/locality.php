@@ -122,7 +122,8 @@
         }
         $for->locality = $parent;
       }else{
-        echo "<br>".get_class($for)." : ".$for->id." : ".$for->name." : ".$latitude.", ".$longitude."<br>Google maps response : ".$r;
+        sleep(1);
+        locality::fill($latitude, $longitude, $for);
       }
     }
 
