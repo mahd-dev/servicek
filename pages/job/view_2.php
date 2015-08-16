@@ -148,6 +148,7 @@
 				<div class="map-canvas aspectratio-content" data-longitude="<?php echo $geolocation->longitude;?>" data-latitude="<?php echo $geolocation->latitude;?>"></div>
 			</div>
 		</div>
+	</div>
 
 	<div class="col-md-9">
 		<div class="panel panel-default">
