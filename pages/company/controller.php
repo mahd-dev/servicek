@@ -201,7 +201,7 @@
 				$ps_description = $ps->description;
 				$ogp->setDescription( ($ps_description? $ps_description : $company->description ) );
 
-        $ogp->setURL( url_root."/".$ps->url );
+        $ogp->setURL( urlencode(url_root."/".$ps->url) );
 
         $ogp->setType( 'article' );
 
@@ -232,7 +232,7 @@
 			}else{
         $ogp->setTitle( $company->name );
         $ogp->setDescription( $company->description );
-        $ogp->setURL( url_root."/".$company->url );
+        $ogp->setURL( urlencode(url_root."/".$company->url) );
 
         $ogp->setType( 'article' );
 
