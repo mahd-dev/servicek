@@ -66,9 +66,10 @@
 	white-space: nowrap;
 }
 
-[class^="flaticon-"]:before, [class*=" flaticon-"]:before, [class^="flaticon-"]:after, [class*=" flaticon-"]:after{
-	margin-left: 0;
-	color: #e91e63;
+i:before{
+	font-size: 20px !important;
+	margin: 0 !important;
+	color: #e91e63 !important;
 }
 
 .category-icon::before{
