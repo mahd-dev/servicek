@@ -163,7 +163,7 @@
 	}
 
 	if(isset($ogp) && $title){
-		$ogp->setTitle( "Servicek.net : "$title );
+		$ogp->setTitle( "Servicek.net : ".$title );
 		$ogp->setURL( url_root.$_SERVER["REQUEST_URI"] );
 	}
 
