@@ -213,7 +213,7 @@
 					}
           $image = new OpenGraphProtocolImage();
           $image->setURL( url_root.$img_path );
-          $image->setSecureURL( url_root.$img_path );
+          $image->setSecureURL( str_replace("http://", "https://", url_root.$img_path) );
           $image->setType( 'image/jpeg' );
           $ogp->addImage($image);
 
@@ -240,7 +240,7 @@
         if($seo_img){
             $image = new OpenGraphProtocolImage();
             $image->setURL( url_root.$paths->company_logo->url.$seo_img );
-            $image->setSecureURL( url_root.$paths->company_logo->url.$seo_img );
+            $image->setSecureURL( str_replace("http://", "https://", url_root.$paths->company_logo->url.$seo_img) );
             $image->setType( 'image/jpeg' );
             $ogp->addImage($image);
 
