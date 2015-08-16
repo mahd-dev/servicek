@@ -41,7 +41,7 @@
                     case "expiration":
                         $q=$db->query("select DATE_ADD(creation_time, INTERVAL duration MONTH) from contract where (id='".$this->id."')");
                         $r=$q->fetch_row();
-                        if(strtotime($r[0]) < mktime(0,0,0,1,1,2016)) return date(mktime(0,0,0,1,1,2016));
+                        if(strtotime($r[0]) < mktime(0,0,0,1,1,2016)) return date("d-m-Y h:i:s", mktime(0,0,0,1,1,2016));
                         else $r[0];
                     case "is_expired":
                         return $this->remaining_days == false;

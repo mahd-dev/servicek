@@ -84,7 +84,7 @@
 		$contract=contract::create($job,$_POST["token"]);
 		$cc = $job->current_contract;
 		if($cc){
-			$contract->creation_time=$cc->expiration;
+			$contract->creation_time=date("Y-m-d h:i:s", strtotime($cc->expiration));
 		}
 		$contract->payment_from=$_POST["method"];
 

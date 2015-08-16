@@ -87,7 +87,7 @@
 		$contract=contract::create($shop,$_POST["token"]);
 		$cc = $shop->current_contract;
 		if($cc){
-			$contract->creation_time=$cc->expiration;
+			$contract->creation_time=date("Y-m-d h:i:s", strtotime($cc->expiration));
 		}
 		$contract->payment_from=$_POST["method"];
 		if(isset($payment)) $contract->payment_recipt=$payment["params"]["payment_recipt"];

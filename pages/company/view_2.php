@@ -39,11 +39,15 @@
 		<div class="box">
 			<h4>Cette société est en période d'essai gratuit</h4>
 			<p>
-				 Vous pouvez essayer toutes les fonctionnalités pendant 1 mois à partir de la date de création de la société,<br>
-				 <span class="text-danger">Au bout de <?php echo $rd;?> jours, cette société ne sera plus disponible au public.</span><br>
-				 Afin d'assurer la disponibilité de la société, créez un contrat de publication avant la fin de la période d'essai.<br><br>
-				 <a class="btn btn-primary btn-raised ajaxify" href="<?php echo url_root."/".$company->url;?>/publish"><i class="icon-rocket"></i> Créer un contrat de publication</a><br>
-				 <span class="text-success">La date de début contrat de publication sera initialisée à la date fin de la période d'essai.</span>
+				<?php if(strtotime($cc->expiration) > strtotime(date("d-m-Y h:i:s", mktime(0,0,0,1,1,2016)))){ ?>
+					Vous pouvez essayer toutes les fonctionnalités pendant 1 mois à partir de la date de création de la société,<br>
+				<?php }else{ ?>
+					Vous pouvez essayer toutes les fonctionnalités jusqu'à fin 2015 (à l'occasion de développement de servicek.net),<br>
+				<?php } ?>
+				<span class="text-danger">Au bout de <?php echo $rd;?> jours, cette société ne sera plus disponible au public.</span><br>
+				Afin d'assurer la disponibilité de la société, créez un contrat de publication avant la fin de la période d'essai.<br><br>
+				<a class="btn btn-primary btn-raised ajaxify" href="<?php echo url_root."/".$company->url;?>/publish"><i class="icon-rocket"></i> Créer un contrat de publication</a><br>
+				<span class="text-success">La date de début contrat de publication sera initialisée à la date fin de la période d'essai.</span>
 			</p>
 		</div>
 	</div>
