@@ -247,12 +247,12 @@
         if($seo_img){
 					$img_path=$paths->portfolio_image->url.$seo_img;
 					$image = new OpenGraphProtocolImage();
-          $image->setURL( $img_path );
-          $image->setSecureURL( $img_path );
+          $image->setURL( url_root.$img_path );
+          $image->setSecureURL( url_root.$img_path );
           $image->setType( 'image/jpeg' );
           $ogp->addImage($image);
 
-          $ref["twitter:image:src"] = $img_path;
+          $ref["twitter:image:src"] = url_root.$img_path;
         }
 
         $article = new OpenGraphProtocolArticle();
@@ -274,12 +274,12 @@
 	      $seo_img = $job->image;
 	      if($seo_img){
           $image = new OpenGraphProtocolImage();
-          $image->setURL( $paths->job_image->url.$seo_img );
-          $image->setSecureURL( $paths->job_image->url.$seo_img );
+          $image->setURL( url_root.$paths->job_image->url.$seo_img );
+          $image->setSecureURL( url_root.$paths->job_image->url.$seo_img );
           $image->setType( 'image/jpeg' );
           $ogp->addImage($image);
 
-          $ref["twitter:image:src"] = $paths->job_image->url.$seo_img;
+          $ref["twitter:image:src"] = url_root.$paths->job_image->url.$seo_img;
 	      }
 
 	      $article = new OpenGraphProtocolArticle();

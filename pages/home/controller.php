@@ -162,8 +162,9 @@
 		die($a);
 	}
 
-	if(isset($ogp)){
-		$ogp->setDescription( $title );
+	if(isset($ogp) && $title){
+		$ogp->setTitle( "Servicek.net : "$title );
+		$ogp->setURL( url_root.$_SERVER["REQUEST_URI"] );
 	}
 
 	include "view_1.php";

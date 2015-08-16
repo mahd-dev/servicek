@@ -212,12 +212,12 @@
 						case 'service': $img_path=$paths->service_image->url.$seo_img; break;
 					}
           $image = new OpenGraphProtocolImage();
-          $image->setURL( $img_path );
-          $image->setSecureURL( $img_path );
+          $image->setURL( url_root.$img_path );
+          $image->setSecureURL( url_root.$img_path );
           $image->setType( 'image/jpeg' );
           $ogp->addImage($image);
 
-          $ref["twitter:image:src"] = $img_path;
+          $ref["twitter:image:src"] = url_root.$img_path;
         }
 
         $article = new OpenGraphProtocolArticle();
@@ -239,12 +239,12 @@
         $seo_img = $company->logo;
         if($seo_img){
             $image = new OpenGraphProtocolImage();
-            $image->setURL( $paths->company_logo->url.$seo_img );
-            $image->setSecureURL( $paths->company_logo->url.$seo_img );
+            $image->setURL( url_root.$paths->company_logo->url.$seo_img );
+            $image->setSecureURL( url_root.$paths->company_logo->url.$seo_img );
             $image->setType( 'image/jpeg' );
             $ogp->addImage($image);
 
-            $ref["twitter:image:src"] = $paths->company_logo->url.$seo_img;
+            $ref["twitter:image:src"] = url_root.$paths->company_logo->url.$seo_img;
         }
 
         $article = new OpenGraphProtocolArticle();

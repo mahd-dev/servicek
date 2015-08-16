@@ -188,12 +188,12 @@
 						case 'service': $img_path=$paths->service_image->url.$seo_img; break;
 					}
           $image = new OpenGraphProtocolImage();
-          $image->setURL( $img_path );
-          $image->setSecureURL( $img_path );
+          $image->setURL( url_root.$img_path );
+          $image->setSecureURL( url_root.$img_path );
           $image->setType( 'image/jpeg' );
           $ogp->addImage($image);
 
-          $ref["twitter:image:src"] = $img_path;
+          $ref["twitter:image:src"] = url_root.$img_path;
         }
 
         $article = new OpenGraphProtocolArticle();
@@ -206,8 +206,8 @@
         $ref["twitter:title"] = $ps->name;
         $ref["twitter:description"] = $ps->description;
 			}else{
-        $ogp->setTitle( $shop->name );
-        $ogp->setDescription( $shop->description );
+        $ogp->setTitle( url_root.$shop->name );
+        $ogp->setDescription( url_root.$shop->description );
         $ogp->setURL( url_root."/".$shop->url );
 
         $ogp->setType( 'article' );
@@ -215,12 +215,12 @@
         $seo_img = $shop->image;
         if($seo_img){
             $image = new OpenGraphProtocolImage();
-            $image->setURL( $paths->shop_image->url.$seo_img );
-            $image->setSecureURL( $paths->shop_image->url.$seo_img );
+            $image->setURL( url_root.$paths->shop_image->url.$seo_img );
+            $image->setSecureURL( url_root.$paths->shop_image->url.$seo_img );
             $image->setType( 'image/jpeg' );
             $ogp->addImage($image);
 
-            $ref["twitter:image:src"] = $paths->shop_image->url.$seo_img;
+            $ref["twitter:image:src"] = url_root.$paths->shop_image->url.$seo_img;
         }
 
         $article = new OpenGraphProtocolArticle();
