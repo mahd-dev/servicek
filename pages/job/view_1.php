@@ -63,8 +63,11 @@
 
 				</div>
 
-				<div class="tab-content aspectratio-container aspect-4-3 fit-width">
-					<div class="map-canvas aspectratio-content" data-longitude="<?php echo $geolocation->longitude;?>" data-latitude="<?php echo $geolocation->latitude;?>"></div>
+				<div class="map_portlet portlet light">
+					<a href="javascript:;" class="map_show" data-toggle="modal" data-target="#map_modal"></a>
+					<div class="map_container tab-content aspectratio-container aspect-4-3 fit-width">
+						<div class="map-canvas aspectratio-content" data-longitude="<?php echo $geolocation->longitude;?>" data-latitude="<?php echo $geolocation->latitude;?>"></div>
+					</div>
 				</div>
 
 			</div>
@@ -255,6 +258,18 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="modal fade" id="map_modal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+      <div class="modal-body">
+				<div class="aspectratio-container aspect-4-3 fit-width">
+					<div class="map-canvas aspectratio-content" data-longitude="<?php echo $geolocation->longitude;?>" data-latitude="<?php echo $geolocation->latitude;?>"></div>
+				</div>
+      </div>
+    </div>
+	</div>
 </div>
 
 <input type="hidden" name="root_url" value="<?php echo url_root.'/'.$job->url; ?>"/>

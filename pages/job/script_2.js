@@ -291,37 +291,6 @@ page_script({
 			});
 		});
 
-
-
-
-    $(".map-canvas").each(function (){
-			$(this).locationpicker({
-				location: {latitude: $(this).attr("data-latitude"), longitude: $(this).attr("data-longitude")},
-				radius: 0,
-				zoom: 13,
-				enableAutocomplete: true,
-				scrollwheel: false,
-				onchanged: function(currentLocation, radius, isMarkerDropped) {
-					$.ajax({
-						url: location.href,
-						type: "POST",
-						data: {geolocation:true, latitude:currentLocation.latitude, longitude:currentLocation.longitude},
-						success: function (rslt) {
-							try{
-								var p = JSON.parse(rslt);
-								if(p.status!="success") console.log(rslt);
-							}catch(ex){
-								console.log(rslt);
-							}
-						},
-						error: function (rslt) {
-							console.log(rslt);
-						}
-					});
-				}
-			});
-		});
-
     $(".image input[type=file]").change(function (e) {
     	if(this.files.length == 0) return;
     	var form = $(".image form");
@@ -343,6 +312,63 @@ page_script({
         });
 
     });
+
+		var map = $(".map_container .map-canvas");
+		var myLatlng = new google.maps.LatLng(map.attr("data-latitude"), map.attr("data-longitude"));
+		var mapOptions = {
+			scrollwheel: false,
+				zoom: 13,
+				center: myLatlng
+		}
+		var map = new google.maps.Map(map[0], mapOptions);
+		var marker = new google.maps.Marker({
+				position: myLatlng
+		});
+		marker.setMap(map);
+
+		$('#map_modal').on('shown.bs.modal', function (e) {
+			$("#map_modal .map-canvas").each(function (){
+				$(this).locationpicker({
+					location: {latitude: $(this).attr("data-latitude"), longitude: $(this).attr("data-longitude")},
+					radius: 0,
+					zoom: 12,
+					enableAutocomplete: true,
+					scrollwheel: true,
+					onchanged: function(currentLocation, radius, isMarkerDropped) {
+						$.ajax({
+							url: location.href,
+							type: "POST",
+							data: {geolocation:$(this).attr("data-pk"), latitude:currentLocation.latitude, longitude:currentLocation.longitude},
+							success: function (rslt) {
+								try{
+									if(rslt=="success"){
+										$(".map-canvas").attr("data-latitude", currentLocation.latitude);
+										$(".map-canvas").attr("data-longitude", currentLocation.longitude);
+										var map = $(".map_container .map-canvas");
+										var myLatlng = new google.maps.LatLng(map.attr("data-latitude"), map.attr("data-longitude"));
+										var mapOptions = {
+											scrollwheel: false,
+										  	zoom: 13,
+										  	center: myLatlng
+										}
+										var map = new google.maps.Map(map[0], mapOptions);
+										var marker = new google.maps.Marker({
+										    position: myLatlng
+										});
+										marker.setMap(map);
+									}else console.log(rslt);
+								}catch(ex){
+									console.log(rslt);
+								}
+							},
+							error: function (rslt) {
+								console.log(rslt);
+							}
+						});
+					}
+				});
+			});
+		});
 
 		window.fbAsyncInit();
 	}

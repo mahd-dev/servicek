@@ -1252,8 +1252,8 @@ select.select2 {
   padding: 10px 0px;
 }
 .header-large .header-main {
-  margin-top: 0px;
-  height: 66px;
+  margin-top: 20px;
+  height: 100px;
   display: inline-table;
 }
 .header-call-to-action-wrapper .header-main {
@@ -1327,7 +1327,7 @@ select.select2 {
   float: right;
   margin-left: 237px;
   width: 550px;
-  margin-top: 28px;
+  /*margin-top: 28px;*/
 }
 
 @media (max-width: 1199px) {

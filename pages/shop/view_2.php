@@ -120,8 +120,11 @@
 				<strong>Email:</strong> <a class="seat_editable" data-pk="<?php echo $shop->id;?>" data-name="email" data-type="text" ><?php echo $shop->email; ?></a>
 			</p>
 		</div>
-		<div class="aspectratio-container aspect-4-3 fit-width">
-			<div class="map-canvas aspectratio-content" data-pk="<?php echo $shop->id;?>" data-longitude="<?php echo $geolocation->longitude;?>" data-latitude="<?php echo $geolocation->latitude;?>"></div>
+		<div class="map_portlet portlet light">
+			<a href="javascript:;" class="map_show" data-toggle="modal" data-target="#map_modal"></a>
+			<div class="map_container aspectratio-container aspect-4-3 fit-width">
+				<div class="map-canvas aspectratio-content" data-pk="<?php echo $shop->id;?>" data-longitude="<?php echo $geolocation->longitude;?>" data-latitude="<?php echo $geolocation->latitude;?>"></div>
+			</div>
 		</div>
 
 	</div>
@@ -220,6 +223,18 @@
 			</p>
 			<div class="fb-like" data-href="<?php echo url_root;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="map_modal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+      <div class="modal-body">
+				<div class="aspectratio-container aspect-4-3 fit-width">
+					<div class="map-canvas aspectratio-content" data-pk="<?php echo $s->id;?>" data-longitude="<?php echo $geolocation->longitude;?>" data-latitude="<?php echo $geolocation->latitude;?>"></div>
+				</div>
+      </div>
+    </div>
 	</div>
 </div>
 

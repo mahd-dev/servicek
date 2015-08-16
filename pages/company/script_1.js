@@ -13,7 +13,7 @@ page_script({
 		});
 
 		$(".map-canvas").each(function () {
-        	var myLatlng = new google.maps.LatLng($(this).attr("data-latitude"), $(this).attr("data-longitude"));
+      var myLatlng = new google.maps.LatLng($(this).attr("data-latitude"), $(this).attr("data-longitude"));
 			var mapOptions = {
 				scrollwheel: false,
 			  	zoom: 13,
@@ -114,6 +114,22 @@ page_script({
 			$("#message_form")[0].reset();
 			$(".success_msg", $("#message_form")).hide();
 			$(".unhandled_error", $("#message_form")).hide();
+		});
+
+		$('#map_modal').on('shown.bs.modal', function (e) {
+			$(".map-canvas", $(this)).each(function () {
+	      var myLatlng = new google.maps.LatLng($(this).attr("data-latitude"), $(this).attr("data-longitude"));
+				var mapOptions = {
+					scrollwheel: true,
+				  	zoom: 12,
+				  	center: myLatlng
+				}
+				var map = new google.maps.Map($(this)[0], mapOptions);
+				var marker = new google.maps.Marker({
+				    position: myLatlng
+				});
+				marker.setMap(map);
+	    });
 		});
 
 		window.fbAsyncInit();

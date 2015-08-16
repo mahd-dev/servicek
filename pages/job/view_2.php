@@ -138,11 +138,13 @@
 				<a href="javascript:;" class="editable" data-name="email" data-type="text" ><?php echo $job->email;?></a>
 			</p>
 		</div>
-
-		<div class="tab-content aspectratio-container aspect-4-3 fit-width">
-			<div class="map-canvas aspectratio-content" data-longitude="<?php echo $geolocation->longitude;?>" data-latitude="<?php echo $geolocation->latitude;?>"></div>
+		<div class="map_portlet portlet light">
+			<a href="javascript:;" class="map_show" data-toggle="modal" data-target="#map_modal"></a>
+			<div class="map_container aspectratio-container aspect-4-3 fit-width">
+				<div class="map-canvas aspectratio-content" data-longitude="<?php echo $geolocation->longitude;?>" data-latitude="<?php echo $geolocation->latitude;?>"></div>
+			</div>
 		</div>
-	</div>
+
 	<div class="col-md-9">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -341,6 +343,18 @@
 			<small> <a href="javascript:;" class="cv_item_project_editable" data-name="description" data-type="text" data-emptytext="Description du projet" data-pk=""></a></small>
 		</h5>
 		<div class="list-group-separator"></div>
+	</div>
+</div>
+
+<div class="modal fade" id="map_modal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+      <div class="modal-body">
+				<div class="aspectratio-container aspect-4-3 fit-width">
+					<div class="map-canvas aspectratio-content" data-pk="<?php echo $s->id;?>" data-longitude="<?php echo $geolocation->longitude;?>" data-latitude="<?php echo $geolocation->latitude;?>"></div>
+				</div>
+      </div>
+    </div>
 	</div>
 </div>
 

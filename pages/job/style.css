@@ -118,6 +118,23 @@
 	}
 }
 */
+
+#map_modal .modal-body{
+	padding: 0;
+}
+
+.map_portlet{
+	position: relative;
+}
+.map_show{
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1;
+}
+
 .po_modal .modal-body{
 	background-color: #fff;
 	padding-left: 0 !important;

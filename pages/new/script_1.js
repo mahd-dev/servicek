@@ -29,6 +29,28 @@ page_script({
 
 		});
 
+		$("#job_submit_form input[name=name]").change(function(event) {
+			if(!$("#job_submit_form input[name=url]").val()){
+				$.post(location.href, { pick_url: $(this).val() }, function(rslt) {
+					$("#job_submit_form input[name=url]").val(rslt);
+				});
+			}
+		});
+		$("#shop_submit_form input[name=name]").change(function(event) {
+			if(!$("#shop_submit_form input[name=url]").val()){
+				$.post(location.href, { pick_url: $(this).val() }, function(rslt) {
+					$("#shop_submit_form input[name=url]").val(rslt);
+				});
+			}
+		});
+		$("#company_submit_form input[name=name]").change(function(event) {
+			if(!$("#company_submit_form input[name=url]").val()){
+				$.post(location.href, { pick_url: $(this).val() }, function(rslt) {
+					$("#company_submit_form input[name=url]").val(rslt);
+				});
+			}
+		});
+
 		// register_form
 
 		$("#register_form input[name=username]").change(function () {
