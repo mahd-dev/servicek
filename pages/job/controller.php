@@ -239,7 +239,7 @@
 				$po_description = $po->description;
 				$ogp->setDescription( ($po_description? $po_description : $job->description ) );
 
-        $ogp->setURL( urlencode(url_root."/".$po->url) );
+        $ogp->setURL( url_root."/".urlencode($po->url) );
 
         $ogp->setType( 'article' );
 
@@ -267,7 +267,7 @@
 			}else{
 	      $ogp->setTitle( $job->name );
 	      $ogp->setDescription( $job->description );
-	      $ogp->setURL( urlencode(url_root."/".$job->url) );
+	      $ogp->setURL( url_root."/".urlencode($job->url) );
 
 	      $ogp->setType( 'article' );
 

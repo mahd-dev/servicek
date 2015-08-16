@@ -177,7 +177,7 @@
 				$ps_description = $ps->description;
 				$ogp->setDescription( ($ps_description? $ps_description : $shop->description ) );
 
-        $ogp->setURL( urlencode(url_root."/".$ps->url) );
+        $ogp->setURL( url_root."/".urlencode($ps->url) );
 
         $ogp->setType( 'article' );
 
@@ -208,7 +208,7 @@
 			}else{
         $ogp->setTitle( url_root.$shop->name );
         $ogp->setDescription( url_root.$shop->description );
-        $ogp->setURL( urlencode(url_root."/".$shop->url) );
+        $ogp->setURL( url_root."/".urlencode($shop->url) );
 
         $ogp->setType( 'article' );
 
