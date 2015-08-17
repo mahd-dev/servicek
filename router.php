@@ -110,6 +110,9 @@
 
 		case "sitemap.xml":
 			die(include"seo/sitemap.php");break;
+		case "robots.txt":
+			die(include"seo/robots.txt");break;
+
 		case "git_webhook_push":
 			die(include"git_webhook/pull.php");break;
 		case "git_webhook_release":
