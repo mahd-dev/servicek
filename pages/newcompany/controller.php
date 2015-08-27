@@ -63,6 +63,8 @@
 		$contract->amount=0;
 		$contract->duration=1;
 
+		
+
 		die(json_encode(array(
 			"status"=>"success",
 			"params"=>array(

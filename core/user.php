@@ -66,16 +66,34 @@
 					break;
 
 					case "has_agent_requests":
-              $q=$db->query("select count(*) from agent_request where (id_for='".$this->id."' and rel_type='user')");
-              $r=$q->fetch_row();
-              return $r[0]>0;
+            $q=$db->query("select count(*) from agent_request where (id_for='".$this->id."' and rel_type='user')");
+            $r=$q->fetch_row();
+            return $r[0]>0;
           break;
           case "agent_requests":
-              $list = array();
-              $q=$db->query("select id, creation_time from agent_request where (id_for='".$this->id."' and rel_type='user')");
-              while($r=$q->fetch_row()) $list[] = array("id"=>$r[0], "creation_time"=>$r[1]);
-              return $list;
+            $list = array();
+            $q=$db->query("select id, creation_time from agent_request where (id_for='".$this->id."' and rel_type='user')");
+            while($r=$q->fetch_row()) $list[] = array("id"=>$r[0], "creation_time"=>$r[1]);
+            return $list;
           break;
+
+					case 'unseen_pages':
+						$list = array();
+						$last_seen_date = date("Y-m-d h:i:s", strtotime($this->seen_new_pages_until));
+						$q=$db->query("select id from company where (creation_time>='".$last_seen_date."')");
+						while($r=$q->fetch_row()) $list[] = new company($r[0]);
+						$q=$db->query("select id from shop where (creation_time>='".$last_seen_date."')");
+						while($r=$q->fetch_row()) $list[] = new shop($r[0]);
+						$q=$db->query("select id from job where (creation_time>='".$last_seen_date."')");
+						while($r=$q->fetch_row()) $list[] = new job($r[0]);
+						usort($list, function ($a, $b){
+							$ta = strtotime($a->creation_time);
+							$tb = strtotime($b->creation_time);
+							if($ta==$tb) return 0;
+							else return ($a<$b?-1:1);
+						});
+						return $list;
+					break;
 
 					default:
 						$q=$db->query("select ".$name." from user where (id='".$this->id."')");
@@ -86,6 +104,19 @@
 			}else{
 				return NULL;
 			}
+		}
+
+		public static function get_admins(){
+			global $db;
+			$list = array();
+			$q=$db->query("select id from user where (type='master')");
+			while($r=$q->fetch_row()) $list[] = new user($r[0]);
+			return $list;
+		}
+
+		public function new_pages_seen($until=null){
+			global $db;
+			$this->seen_new_pages_until = date("Y-m-d h:i:s", ($until?$until:time()));
 		}
 
 		public static function username_exists($username){

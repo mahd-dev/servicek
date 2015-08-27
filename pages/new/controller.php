@@ -1,7 +1,7 @@
 <?php
 
 	if(isset($_POST["pick_url"])){
-		$_POST["pick_url"] = urlencode(str_replace(array(" ", ":", "/", "\\", "&", "\"", "'", "(", ")", "-", "_", "", "", "=", "*", "°", "+", "~", "¬", "¹", "#", "{", "}", "[", "]", "|", "`", "^", "@", "<", ">", ",", ".", ":", "!", "%", "$", "?", "§"), "", $_POST["pick_url"]));
+		$_POST["pick_url"] = str_replace(array(" ", ":", "/", "\\", "&", "\"", "'", "(", ")", "-", "_", "", "", "=", "*", "°", "+", "~", "¬", "¹", "#", "{", "}", "[", "]", "|", "`", "^", "@", "<", ">", ",", ".", ":", "!", "%", "$", "?", "§"), "", $_POST["pick_url"]).str_replace(array("é", "è"), "e").str_replace(array("à", "â", "ä"), "a").str_replace(array("à", "â", "ä"), "a").str_replace(array("ç"), "c").str_replace(array("ù"), "u").str_replace(array("ô", "ö"), "o");
 		$i="";
 		while (!gf::check_url($_POST["pick_url"].$i)) {
 			$i++;

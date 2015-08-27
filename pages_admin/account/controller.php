@@ -44,6 +44,11 @@
         }else die("unhandled_error");
 	}
 
+	if(isset($_POST["pages_seen"])){
+		$user->new_pages_seen();
+		die(json_encode(array('status'=>'success')));
+	}
+
 	$job = job::get_all();
 	$shops = shop::get_all();
 	$companies = company::get_all();

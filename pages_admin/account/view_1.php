@@ -70,6 +70,16 @@
 								</div>
 							</div>
 							<a href="/admin/categories" class="btn btn-primary btn-raised ajaxify">Gérer les catégories</a>
+							<div class="row">
+								<div class="col-md-12">
+									<h3>Les dernières insertions <button class="btn btn-flat btn-default btn-xs mark_as_read">Marquer comme lu</button></h3>
+									<ul class="last_insertions_list">
+										<?php foreach ($user->unseen_pages as $page): ?>
+											<li><?php echo date("d/m/Y h:i:s", strtotime($page->creation_time))." : "; ?><a class="ajaxify" href="<?php echo "/".$page->url; ?>"><?php echo $page->name; ?></a></li>
+										<?php endforeach; ?>
+									</ul>
+								</div>
+							</div>
 						</div>
 
 						<div class="tab-pane" id="settings">

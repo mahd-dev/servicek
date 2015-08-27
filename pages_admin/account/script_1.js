@@ -60,5 +60,20 @@ page_script({
 			}
 		});
 
+		$(".mark_as_read").click(function () {
+			$.post(location.href, {pages_seen: true}, function (rslt) {
+				try{
+          parsed=JSON.parse(rslt);
+          if (parsed.status == "success") {
+          	$(".last_insertions_list").empty();
+          } else {
+        		console.log(rslt);
+          }
+        }catch(ex){
+          console.log(rslt);
+        }
+			});
+		});
+
 	}
 });
