@@ -30,7 +30,7 @@
                     break;
                     case "categories":
                         $list = array();
-                        $q=$db->query("select id_category from category_children where (id_children='".$this->id."' and children_type='portfolio')");
+                        $q=$db->query("select category_children.id_category from category_children, category where (category_children.id_children='".$this->id."' and category_children.children_type='portfolio' and category_children.id_category=category.id and ifnull(category.portfolio,0)>0)");
                         while($r=$q->fetch_row()) $list[] = new category($r[0]);
                         return $list;
                     break;
