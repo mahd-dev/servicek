@@ -39,7 +39,7 @@
 				category_children,
 				shop
 				where
-				ifnull(category.company_publish_price,0)>0
+				ifnull(category.shop_publish_price,0)>0
 				and
 				category.id=category_children.id_category
 				and
@@ -56,7 +56,7 @@
 				category_children,
 				job
 				where
-				ifnull(category.company_publish_price,0)>0
+				ifnull(category.job_publish_price,0)>0
 				and
 				category.id=category_children.id_category
 				and
