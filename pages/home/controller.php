@@ -15,10 +15,15 @@
 			$q_company = "select distinct
 				category_children.id_children
 				from
+				category,
 				category_children,
 				company,
 				company_seat
 				where
+				ifnull(category.company_publish_price,0)>0
+				and
+				category.id=category_children.id_category
+				and
 				category_children.children_type='company'
 				and
 				category_children.id_children=company.id
@@ -30,9 +35,14 @@
 			$q_shop = "select distinct
 				category_children.id_children
 				from
+				category,
 				category_children,
 				shop
 				where
+				ifnull(category.company_publish_price,0)>0
+				and
+				category.id=category_children.id_category
+				and
 				category_children.children_type='shop'
 				and
 				category_children.id_children=shop.id
@@ -42,9 +52,14 @@
 			$q_job = "select distinct
 				category_children.id_children
 				from
+				category,
 				category_children,
 				job
 				where
+				ifnull(category.company_publish_price,0)>0
+				and
+				category.id=category_children.id_category
+				and
 				category_children.children_type='job'
 				and
 				category_children.id_children=job.id
