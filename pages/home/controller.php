@@ -137,42 +137,45 @@
 	}
 
 	$title="";
+	$empty=false;
 	if((isset($_GET["ca"]) || isset($_GET["lo"])) && ($_GET["co"] || $_GET["sh"] || $_GET["jo"])){
-		if($_GET["co"] && $_GET["sh"] && $_GET["jo"]){
-			$title.="Les pages";
-		}else{
-			$title.="Les";
-			if($_GET["jo"]) $title.=" métiers";
-			if($_GET["sh"]) $title.=($_GET["jo"]?($_GET["co"]?", ":" et "):" ")."boutiques";
-			if($_GET["co"]) $title.=($_GET["jo"] || $_GET["sh"]?" et ":" ")."sociétés";
-		}
-		if(isset($_GET["ca"])){
-			$title.=" de";
-			$i=0;
-			$len=count($_GET["ca"]);
-			foreach ($_GET["ca"] as $ca) {
-				$ca = new category($ca);
-				$title.=($i==0?" ":($i<$len-1?", ":" et ")).strtolower($ca->name);
-				$i++;
+		if(count($rslt)){
+			if($_GET["co"] && $_GET["sh"] && $_GET["jo"]){
+				$title.="Les pages";
+			}else{
+				$title.="Les";
+				if($_GET["jo"]) $title.=" métiers";
+				if($_GET["sh"]) $title.=($_GET["jo"]?($_GET["co"]?", ":" et "):" ")."boutiques";
+				if($_GET["co"]) $title.=($_GET["jo"] || $_GET["sh"]?" et ":" ")."sociétés";
 			}
-		}
-		if(isset($_GET["lo"])){
-			$title.=" situés à";
-			$i=0;
-			$len=count($_GET["lo"]);
-			foreach ($_GET["lo"] as $lo) {
-				$lo = new locality($lo);
-				$title.=($i==0?" ":($i<$len-1?", ":" et ")).$lo->long_name;
-				$i++;
+			if(isset($_GET["ca"])){
+				$title.=" de";
+				$i=0;
+				$len=count($_GET["ca"]);
+				foreach ($_GET["ca"] as $ca) {
+					$ca = new category($ca);
+					$title.=($i==0?" ":($i<$len-1?", ":" et ")).strtolower($ca->name);
+					$i++;
+				}
 			}
-		}
-	}
+			if(isset($_GET["lo"])){
+				$title.=" situés à";
+				$i=0;
+				$len=count($_GET["lo"]);
+				foreach ($_GET["lo"] as $lo) {
+					$lo = new locality($lo);
+					$title.=($i==0?" ":($i<$len-1?", ":" et ")).$lo->long_name;
+					$i++;
+				}
+			}
+		}else $title="Désolé, aucun résultat pour cette combinaison";
+	}else $empty=true;
 
 	if(isset($_GET["fetchdata"])){
-		$a=json_encode(array("title"=>$title, "rslt"=>$rslt));
+		$a=json_encode(array("title"=>$title, "rslt"=>$rslt, "empty"=>$empty));
 		if (json_last_error() == JSON_ERROR_UTF8){
 			$rslt = gf::utf8ize($rslt);
-			$a=json_encode(array("title"=>$title, "rslt"=>$rslt));
+			$a=json_encode(array("title"=>$title, "rslt"=>$rslt, "empty"=>$empty));
 		}
 		die($a);
 	}

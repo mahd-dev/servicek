@@ -131,3 +131,8 @@
 .filter-title{
 	margin: 0;
 }
+
+.tree-title{
+	font-size: 30px !important;
+	margin: 0 0 20px 0;
+}

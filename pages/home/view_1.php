@@ -68,13 +68,13 @@
 
 <div class="row">
 	<div class="col-md-3 col-sm-6">
-		<div class="type">
+		<div class="type box">
 			<div class="togglebutton"><label><input type="checkbox"<?php echo (isset($_GET["jo"]) && $_GET["jo"]?" checked": "") ?> class="job"> Métier</label></div>
 			<div class="togglebutton"><label><input type="checkbox"<?php echo (isset($_GET["sh"]) && $_GET["sh"]?" checked": "") ?> class="shop"> Boutique</label></div>
 			<div class="togglebutton"><label><input type="checkbox"<?php echo (isset($_GET["co"]) && $_GET["co"]?" checked": "") ?> class="company"> Société</label></div>
 		</div>
-		<div class="categories tree">
-			<h2 class="visible-sm-block visible-xs-block">Catégories</h2>
+		<div class="categories tree box">
+			<h3 class="tree-title">Catégories</h3>
 			<ul>
 				<?php foreach (category::get_roots() as $c){
 					echo categories($c);
@@ -84,8 +84,8 @@
 		<hr>
 	</div>
 	<div class="col-md-3 col-sm-6 col-md-push-6">
-		<div class="localities tree">
-			<h2 class="visible-sm-block visible-xs-block">Adresses</h2>
+		<div class="localities tree box">
+			<h3 class="tree-title">Adresses</h3>
 			<ul>
 				<?php
 					$r = locality::get_roots();
@@ -104,7 +104,7 @@
 		<hr>
 	</div>
 	<div class="col-md-6 col-md-pull-3 col-sm-12" style="float:left;">
-		<div class="home hidden-xs hidden-sm"<?php if(count($rslt)) echo ' style="display:none;"'; ?>>
+		<div class="home hidden-xs hidden-sm"<?php if(!$empty) echo ' style="display:none;"'; ?>>
 			<div id="myCarousel" class="carousel slide" data-ride="carousel">
 
 			  <div class="carousel-inner" role="listbox">
@@ -129,9 +129,9 @@
 			  </a>
 			</div>
 		</div>
+
 		<div class="results">
-			<h2 class="filter-title"><?php echo $title; ?></h2>
-			<hr>
+			<h2 class="page-header filter-title"><?php echo $title; ?></h2>
 			<div class="row items_container">
 				<?php foreach ($rslt as $r) {?>
 

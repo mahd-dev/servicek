@@ -64,10 +64,10 @@ page_script({
 							itm.appendTo('.items_container').show();
 						});
 						window.fbAsyncInit();
-						$(".home").hide();
-					}else{
-						$(".home").show();
 					}
+					if(p.empty) $(".home").show();
+					else $(".home").hide();
+					
 				} catch (e) {
 					console.log(r);
 				}
