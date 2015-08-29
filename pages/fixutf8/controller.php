@@ -2,7 +2,7 @@
 
   function escapestr($value){
     global $db;
-    return ($value===null?"NULL":"'".$db->real_escape_string(Encoding::fixUTF8($value))."'");
+    return ($value===null?"NULL":"'".$db->real_escape_string(urldecode(Encoding::fixUTF8($value)))."'");
   }
 
   $q=$db->query("select id, name from category");
