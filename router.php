@@ -108,6 +108,9 @@
 		case "setlocations":
 			die(include"pages/setlocations/controller.php");break;
 
+		case "fixutf8":
+			die(include"pages/fixutf8/controller.php");break;
+
 		case "sitemap.xml":
 			die(include"seo/sitemap.php");break;
 		case "robots.txt":

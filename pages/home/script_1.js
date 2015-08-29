@@ -56,8 +56,8 @@ page_script({
 					if(p.rslt.length){
 						p.rslt.forEach(function(el) {
 							var itm = $("#item_template").clone().removeAttr('id');
-							itm.find('[href]').attr('href', el.url);
-							itm.find('[data-href]').attr('data-href', el.url);
+							itm.find('[href]').attr('href', decodeURI(el.url));
+							itm.find('[data-href]').attr('data-href', decodeURI(el.url));
 							itm.find('.image').attr('style', "background-image:url('" + el.image_url + "');");
 							itm.find('.title-text').text(el.title);
 							itm.find('.content-text').text(el.content);
