@@ -162,7 +162,14 @@
     public function delete(){
       global $db;
       $db->query("delete from locality where (id='".$this->id."')");
-      $db->query("delete from locality_children where (id_locality='".$this->id."')");
+    }
+
+    public function delete_if_empty() {
+      if(!$this->has_childrens && !$this->has_pages){
+        $parent = $this->parent;
+        $this->delete();
+        if($parent) $parent->delete_if_empty();
+      }
     }
 
     private function get_childrens_tree(){

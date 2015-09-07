@@ -34,12 +34,12 @@
 					break;
 					case "admins":
 						$list = array();
-						$q=$db->query("select id_user from user_admin where (id_page='".$this->id."')");
+						$q=$db->query("select id_user from user_admin where (id_company='".$this->id."')");
 						while($r=$q->fetch_row()) $list[] = new user($r[0]);
 						return $list;
 					break;
 					case "count_admins":
-						$q=$db->query("select count(*) from user_admin where (id_page='".$this->id."')");
+						$q=$db->query("select count(*) from user_admin where (id_company='".$this->id."')");
 						$r=$q->fetch_row();
 						return $r[0];
 					break;
@@ -142,13 +142,121 @@
 
 		public function delete(){
 			global $db;
-			foreach ($this->seats as $s) $s->delete();
-			foreach ($this->products as $s) $s->delete();
+			foreach ($this->seats as $s) {
+				$locality = $s->locality;
+				$s->delete();
+				$locality->delete_if_empty();
+			}
+			foreach ($this->products as $p) $p->delete();
 			foreach ($this->services as $s) $s->delete();
-			foreach ($this->offers as $s) $s->delete();
+			foreach ($this->offers as $o) $o->delete();
 			$db->query("delete from category_children where (id_children='".$this->id."' and children_type='company')");
 			$db->query("delete from user_admin where (id_page='".$this->id."')");
 			$db->query("delete from company where (id='".$this->id."')");
+		}
+
+		public function transform_to($to) {
+			global $paths;
+			switch ($to) {
+				case 'job':
+					$job=job::create($this->admins[0]);
+					$s = $this->seats[0];
+					$job->name=$this->name;
+					$job->image=$this->logo;
+					$job->description=$this->description;
+					$job->url=$this->url;
+					$job->geolocation=$s->geolocation;
+					$job->locality=$s->locality;
+					$job->address=$s->address;
+					$job->tel=$s->tel;
+					$job->mobile=$s->mobile;
+					$job->email=$s->email;
+					$job->requests=$this->requests;
+					$job->creation_time=$this->creation_time;
+					if($job->image) rename($paths->company_logo->dir.$job->image, $paths->job_image->dir.$job->image);
+
+					foreach ($this->all_contracts as $contract) {
+						$contract->id_page = $job->id;
+						$contract->page_type = "job";
+					}
+					foreach ($this->categories as $category) {
+						$job->assign_to_category($category);
+					}
+
+					foreach ($this->products as $product) {
+						$portfolio=portfolio::create($job);
+						$portfolio->name=$product->name;
+						$portfolio->image=$product->image;
+						$portfolio->description=$product->description;
+						$portfolio->creation_time=$product->creation_time;
+						if($portfolio->image) rename($paths->product_image->dir.$portfolio->image, $paths->portfolio_image->dir.$portfolio->image);
+					}
+					foreach ($this->services as $service) {
+						$portfolio=portfolio::create($job);
+						$portfolio->name=$service->name;
+						$portfolio->image=$service->image;
+						$portfolio->description=$service->description;
+						$portfolio->creation_time=$service->creation_time;
+						if($portfolio->image) rename($paths->service_image->dir.$portfolio->image, $paths->portfolio_image->dir.$portfolio->image);
+					}
+
+					foreach ($this->offers as $offer) {
+						$offer->id_page = $job->id;
+						$offer->page_type = "job";
+					}
+
+					$this->delete();
+					break;
+
+				case 'shop':
+					$shop=shop::create($this->admins[0]);
+					$s = $this->seats[0];
+					$shop->name=$this->name;
+					$shop->image=$this->logo;
+					$shop->cover=$this->cover;
+					$shop->description=$this->description;
+					$shop->url=$this->url;
+					$shop->geolocation=$s->geolocation;
+					$shop->locality=$s->locality;
+					$shop->address=$s->address;
+					$shop->tel=$s->tel;
+					$shop->mobile=$s->mobile;
+					$shop->email=$s->email;
+					$shop->requests=$this->requests;
+					$shop->creation_time=$this->creation_time;
+					if($shop->image) rename($paths->company_logo->dir.$shop->image, $paths->shop_image->dir.$shop->image);
+					if($shop->cover) rename($paths->company_cover->dir.$shop->cover, $paths->shop_cover->dir.$shop->cover);
+
+					foreach ($this->all_contracts as $contract) {
+						$contract->id_page = $shop->id;
+						$contract->page_type = "shop";
+					}
+					foreach ($this->categories as $category) {
+						$shop->assign_to_category($category);
+					}
+
+					foreach ($this->services as $service) {
+						$product=product::create($shop);
+						$product->name=$service->name;
+						$product->image=$service->image;
+						$product->description=$service->description;
+						$product->price=$service->price;
+						$product->creation_time=$service->creation_time;
+						if($product->image) rename($paths->product_image->dir.$product->image, $paths->service_image->dir.$product->image);
+					}
+					foreach ($this->products as $product) {
+						$product->id_page = $shop->id;
+						$product->page_type = "shop";
+					}
+
+					foreach ($this->offers as $offer) {
+						$offer->id_page = $shop->id;
+						$offer->page_type = "shop";
+					}
+
+					$this->delete();
+					break;
+			}
 		}
 
 		public static function create($user){

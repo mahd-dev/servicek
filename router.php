@@ -53,7 +53,7 @@
       $logout=true;
 			$req_page = "pages/home/controller.php";break;
     case "register":
-			$req_page = "pages/register/controller.php";break;
+			$req_page = "pages/new/controller.php";break;
     case "account":
     	if(isset($url[1]) && $url[1]=="set_user_attrib") $set_user_attrib=true;
 			$req_page = "pages/account/controller.php";break;

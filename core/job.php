@@ -155,10 +155,101 @@
 
         public function delete(){
             global $db;
+            foreach ($this->skills as $skill) $skill->delete();
+            foreach ($this->cv as $cv) $cv->delete();
+            $locality = $this->locality;
             $db->query("delete from category_children where (id_children='".$this->id."' and children_type='job')");
-            $db->query("delete from user_admin where (id_page='".$this->id."')");
             $db->query("delete from job where (id='".$this->id."')");
+            $locality->delete_if_empty();
         }
+
+        public function transform_to($to) {
+          global $paths;
+    			switch ($to) {
+            case 'shop':
+    					$shop=shop::create($this->admin);
+    					$shop->name=$this->name;
+    					$shop->image=$this->image;
+    					$shop->description=$this->description;
+    					$shop->url=$this->url;
+    					$shop->geolocation=$this->geolocation;
+    					$shop->locality=$this->locality;
+    					$shop->address=$this->address;
+    					$shop->tel=$this->tel;
+    					$shop->mobile=$this->mobile;
+    					$shop->email=$this->email;
+    					$shop->requests=$this->requests;
+    					$shop->creation_time=$this->creation_time;
+    					if($shop->image) rename($paths->job_image->dir.$shop->image, $paths->shop_image->dir.$shop->image);
+
+              foreach ($this->all_contracts as $contract) {
+    						$contract->id_page = $shop->id;
+    						$contract->page_type = "shop";
+    					}
+    					foreach ($this->categories as $category) {
+    						$shop->assign_to_category($category);
+    					}
+
+              foreach ($this->portfolio as $portfolio) {
+    						$product=product::create($shop);
+    						$product->name=$portfolio->name;
+    						$product->image=$portfolio->image;
+    						$product->description=$portfolio->description;
+    						$product->creation_time=$portfolio->creation_time;
+    						if($product->image) rename($paths->portfolio_image->dir.$product->image, $paths->product_image->dir.$product->image);
+    					}
+
+              foreach ($this->offers as $offer) {
+                $offer->id_page = $shop->id;
+                $offer->page_type = "shop";
+              }
+
+    					$this->delete();
+    					break;
+    				case 'company':
+    					$company=company::create($this->admin);
+              $seat=company_seat::create($company);
+    					$company->name=$this->name;
+    					$company->logo=$this->image;
+    					$company->description=$this->description;
+    					$company->url=$this->url;
+    					$seat->geolocation=$this->geolocation;
+    					$seat->locality=$this->locality;
+    					$seat->address=$this->address;
+    					$seat->tel=$this->tel;
+    					$seat->mobile=$this->mobile;
+    					$seat->email=$this->email;
+    					$company->requests=$this->requests;
+    					$company->creation_time=$this->creation_time;
+              $seat->creation_time=$this->creation_time;
+    					if($company->logo) rename($paths->job_image->dir.$company->logo, $paths->company_logo->dir.$company->logo);
+
+              foreach ($this->all_contracts as $contract) {
+    						$contract->id_page = $company->id;
+    						$contract->page_type = "company";
+    					}
+    					foreach ($this->categories as $category) {
+    						$company->assign_to_category($category);
+    					}
+
+              foreach ($this->portfolio as $portfolio) {
+    						$service=service::create($company);
+    						$service->name=$portfolio->name;
+    						$service->image=$portfolio->image;
+    						$service->description=$portfolio->description;
+    						$service->creation_time=$portfolio->creation_time;
+    						if($service->image) rename($paths->portfolio_image->dir.$service->image, $paths->service_image->dir.$service->image);
+    					}
+
+              foreach ($this->offers as $offer) {
+    						$offer->id_page = $company->id;
+    						$offer->page_type = "company";
+    					}
+
+    					$this->delete();
+    					break;
+    			}
+    		}
 
         public static function get_all(){
             global $db;

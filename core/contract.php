@@ -33,6 +33,12 @@
                             default: return null; break;
                         }
                     break;
+                    case 'agent':
+                      $ida = $this->id_agent;
+                      if($ida) return new user($ida);
+                      else return null;
+                      break;
+
                     case "remaining_days":
                         $except_remain = ceil(abs(mktime(0,0,0,1,1,2016) - time()) / 86400);
                         $q=$db->query("select TIMESTAMPDIFF(DAY,NOW(),DATE_ADD(creation_time, INTERVAL duration MONTH)) from contract where (id='".$this->id."')");
@@ -42,7 +48,7 @@
                         $q=$db->query("select DATE_ADD(creation_time, INTERVAL duration MONTH) from contract where (id='".$this->id."')");
                         $r=$q->fetch_row();
                         if(strtotime($r[0]) < mktime(0,0,0,1,1,2016)) return date("d-m-Y h:i:s", mktime(0,0,0,1,1,2016));
-                        else $r[0];
+                        else return $r[0];
                     case "is_expired":
                         return $this->remaining_days == false;
                     break;

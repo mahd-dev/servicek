@@ -301,3 +301,11 @@
 .thumbnail{
 	overflow: hidden;
 }
+
+.tab-content {
+    margin-top: 0;
+}
+
+.list-group .list-group-separator:before, .list-group .list-group-item .row-content{
+	width: 100%;
+}

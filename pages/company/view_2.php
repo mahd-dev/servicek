@@ -66,7 +66,7 @@
 		</div>
 	</div>
 </div>
-<?php }}elseif($rd<=10){?>
+<?php }}elseif($rd<=30){?>
 <div class="row">
 	<div class="col-md-12">
 		<div class="box">
@@ -99,6 +99,26 @@
 				<div class="profile-usertitle-company">
 					<a class="editable" data-name="slogan" data-type="text" ><?php echo $company->slogan;?></a>
 				</div>
+			</div>
+
+			<div class="profile-usermenu">
+				<ul class="nav">
+					<li class="active">
+						<a href="#home_tab" data-toggle="tab" aria-expanded="true">
+							<i class="fa fa-home"></i>
+							Accueil
+						</a>
+					</li>
+					<li>
+						<a href="#config_tab" data-toggle="tab" aria-expanded="false">
+							<i class="fa fa-cogs"></i>
+							Configuration
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="profile-usertitle">
 				<div class="fb-like" data-href="<?php echo url_root."/".$company->url; ?>" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 			</div>
 		</div>
@@ -137,114 +157,236 @@
 
 	</div>
 	<div class="col-md-9">
-		<div class="row hidden-sm">
-			<div class="col-md-12">
-				<div class="cover ps_image aspectratio-container aspect-3-1 fit-width fileinput fileinput-new box" style="padding:0;" data-provides="fileinput">
-					<a class="aspectratio-content thumbnail fileinput-preview" data-trigger="fileinput">
-						<img src="<?php $cover=$company->cover; if($cover) echo $paths->company_cover->url.$cover; else {?>http://www.placehold.it/600x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+photo+de+couverture<?php }?>" alt="cover"/>
-					</a>
-					<form class="hide"><input type="file" name="cover"></form>
-				</div>
-			</div>
-		</div>
 
-		<div class="row">
-			<div class="col-md-12">
-
-			</div>
-		</div>
-
-		<div class="sp-navbar navbar navbar-default">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-				</button>
-			</div>
-			<div class="navbar-collapse collapse navbar-responsive-collapse">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#services_list" class="sp_tabs" data-toggle="tab" aria-expanded="true">Services</a></li>
-					<li><a href="#products_list" class="sp_tabs" data-toggle="tab" aria-expanded="false">Produits</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="javascript:;" class="new_service"><i class="fa fa-plus"></i> Ajouter un Service</a></li>
-					<li><a href="javascript:;" class="new_product"><i class="fa fa-plus"></i> Ajouter un Produit</a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="tab-content">
-						<div class="tab-pane row active" id="services_list">
-
-							<?php foreach ($company->services as $p) {
-								$services_categories_json = array();
-								foreach ($p->categories as $cat) $services_categories_json[] = intval($cat->id);
-							?>
-								<div class="col-xs-12 col-sm-6 col-md-4 item service" data-id="<?php echo $p->id; ?>">
-									<div class="box">
-										<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
-										<div class="caption">
-											<h3><a class="service_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
-										</div>
-
-										<div class="service_image ps_image aspectratio-container aspect-4-3 fit-width fileinput fileinput-new" data-provides="fileinput">
-											<a class="aspectratio-content fileinput-preview thumbnail" data-trigger="fileinput">
-												<img src="<?php $image=$p->image; if($image) echo $paths->service_image->url.$image; else {?>http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
-											</a>
-											<form class="hide"><input type="file" name="image"></form>
-										</div>
-
-										<div class="caption">
-											<p>Description :<br><a class="service_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="textarea" ><?php echo $p->description; ?></a></p>
-											<p>Catégories :<br><a class="service_categories_editable" data-name="categories" data-pk="<?php echo $p->id; ?>" data-type="select2" data-value='<?php echo json_encode($services_categories_json);?>'></a></p>
-											<p>Prix : <a class="service_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a><sup> DNT</sup></p>
-											<div class="fb-like" data-href="<?php echo url_root."/".$p->url;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
-										</div>
-									</div>
-								</div>
-							<?php }?>
-
+		<div class="tab-content">
+			<div class="tab-pane active" id="home_tab">
+					<div class="row hidden-sm">
+					<div class="col-md-12">
+						<div class="cover ps_image aspectratio-container aspect-3-1 fit-width fileinput fileinput-new box" style="padding:0;" data-provides="fileinput">
+							<a class="aspectratio-content thumbnail fileinput-preview" data-trigger="fileinput">
+								<img src="<?php $cover=$company->cover; if($cover) echo $paths->company_cover->url.$cover; else {?>http://www.placehold.it/600x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+photo+de+couverture<?php }?>" alt="cover"/>
+							</a>
+							<form class="hide"><input type="file" name="cover"></form>
 						</div>
-						<div class="tab-pane row" id="products_list">
+					</div>
+				</div>
 
-							<?php foreach ($company->products as $p) {
-								$products_categories_json = array();
-								foreach ($p->categories as $cat) $products_categories_json[] = intval($cat->id);
-							?>
-								<div class="col-xs-12 col-sm-6 col-md-4 item product" data-id="<?php echo $p->id; ?>">
-									<div class="box">
-										<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
-										<div class="caption">
-											<h3><a class="product_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
-										</div>
-										<div class="product_image ps_image aspectratio-container aspect-4-3 fit-width fileinput fileinput-new" data-provides="fileinput">
-											<a class="aspectratio-content fileinput-preview thumbnail" data-trigger="fileinput">
-												<img src="<?php $image=$p->image; if($image) echo $paths->product_image->url.$image; else {?>http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
-											</a>
-											<form class="hide"><input type="file" name="image"></form>
-										</div>
+				<div class="row">
+					<div class="col-md-12">
 
-										<div class="caption">
-											<p>Description :<br><a class="product_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="textarea" ><?php echo $p->description; ?></a></p>
-											<p>Catégories :<br><a class="product_categories_editable" data-name="categories" data-pk="<?php echo $p->id; ?>" data-type="select2" data-value='<?php echo json_encode($products_categories_json);?>'></a></p>
-											<p>Prix :<br>
-												<?php $price=$p->price; $rent_price=$p->rent_price;?>
-												<p><label><span><input type="checkbox" class="price_checkbox"<?php if($price!=null){?> checked<?php }?>></span>Vente </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number"<?php if($price==null){?> data-disabled='true'<?php }?>><?php echo $price; ?></a><sup class="unit"<?php if($price==null){?> style='display:none;'<?php }?>> DNT</sup></p>
-												<p><label><span><input type="checkbox" class="rent_price_checkbox"<?php if($rent_price!=null){?> checked<?php }?>></span>Location </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="rent_price" data-pk="<?php echo $p->id; ?>" data-type="number"<?php if($rent_price==null){?> data-disabled='true'<?php }?>><?php echo $rent_price; ?></a><sup class="unit"<?php if($rent_price==null){?> style='display:none;'<?php }?>> DNT</sup></p>
-											</p>
-											<div class="fb-like" data-href="<?php echo url_root."/".$p->url;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+					</div>
+				</div>
+
+				<div class="sp-navbar navbar navbar-default">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+						</button>
+					</div>
+					<div class="navbar-collapse collapse navbar-responsive-collapse">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#services_list" class="sp_tabs" data-toggle="tab" aria-expanded="true">Services</a></li>
+							<li><a href="#products_list" class="sp_tabs" data-toggle="tab" aria-expanded="false">Produits</a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="javascript:;" class="new_service"><i class="fa fa-plus"></i> Ajouter un Service</a></li>
+							<li><a href="javascript:;" class="new_product"><i class="fa fa-plus"></i> Ajouter un Produit</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="tab-content">
+								<div class="tab-pane row active" id="services_list">
+
+									<?php foreach ($company->services as $p) {
+										$services_categories_json = array();
+										foreach ($p->categories as $cat) $services_categories_json[] = intval($cat->id);
+									?>
+										<div class="col-xs-12 col-sm-6 col-md-4 item service" data-id="<?php echo $p->id; ?>">
+											<div class="box">
+												<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
+												<div class="caption">
+													<h3><a class="service_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
+												</div>
+
+												<div class="service_image ps_image aspectratio-container aspect-4-3 fit-width fileinput fileinput-new" data-provides="fileinput">
+													<a class="aspectratio-content fileinput-preview thumbnail" data-trigger="fileinput">
+														<img src="<?php $image=$p->image; if($image) echo $paths->service_image->url.$image; else {?>http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
+													</a>
+													<form class="hide"><input type="file" name="image"></form>
+												</div>
+
+												<div class="caption">
+													<p>Description :<br><a class="service_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="textarea" ><?php echo $p->description; ?></a></p>
+													<p>Catégories :<br><a class="service_categories_editable" data-name="categories" data-pk="<?php echo $p->id; ?>" data-type="select2" data-value='<?php echo json_encode($services_categories_json);?>'></a></p>
+													<p>Prix : <a class="service_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a><sup> DNT</sup></p>
+													<div class="fb-like" data-href="<?php echo url_root."/".$p->url;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+												</div>
+											</div>
 										</div>
-									</div>
+									<?php }?>
+
 								</div>
-							<?php }?>
+								<div class="tab-pane row" id="products_list">
 
+									<?php foreach ($company->products as $p) {
+										$products_categories_json = array();
+										foreach ($p->categories as $cat) $products_categories_json[] = intval($cat->id);
+									?>
+										<div class="col-xs-12 col-sm-6 col-md-4 item product" data-id="<?php echo $p->id; ?>">
+											<div class="box">
+												<a class="delete btn btn-danger btn-xs pull-right margin-bottom-10"><i class="icon-close"></i> Supprimer</a>
+												<div class="caption">
+													<h3><a class="product_editable" data-name="name" data-pk="<?php echo $p->id; ?>" data-type="text" ><?php echo $p->name; ?></a></h3>
+												</div>
+												<div class="product_image ps_image aspectratio-container aspect-4-3 fit-width fileinput fileinput-new" data-provides="fileinput">
+													<a class="aspectratio-content fileinput-preview thumbnail" data-trigger="fileinput">
+														<img src="<?php $image=$p->image; if($image) echo $paths->product_image->url.$image; else {?>http://www.placehold.it/300x200/EFEFEF/AAAAAA&amp;text=Sélectionner+une+image<?php }?>" alt="image"/>
+													</a>
+													<form class="hide"><input type="file" name="image"></form>
+												</div>
+
+												<div class="caption">
+													<p>Description :<br><a class="product_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="textarea" ><?php echo $p->description; ?></a></p>
+													<p>Catégories :<br><a class="product_categories_editable" data-name="categories" data-pk="<?php echo $p->id; ?>" data-type="select2" data-value='<?php echo json_encode($products_categories_json);?>'></a></p>
+													<p>Prix :<br>
+														<?php $price=$p->price; $rent_price=$p->rent_price;?>
+														<p><label><span><input type="checkbox" class="price_checkbox"<?php if($price!=null){?> checked<?php }?>></span>Vente </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number"<?php if($price==null){?> data-disabled='true'<?php }?>><?php echo $price; ?></a><sup class="unit"<?php if($price==null){?> style='display:none;'<?php }?>> DNT</sup></p>
+														<p><label><span><input type="checkbox" class="rent_price_checkbox"<?php if($rent_price!=null){?> checked<?php }?>></span>Location </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="rent_price" data-pk="<?php echo $p->id; ?>" data-type="number"<?php if($rent_price==null){?> data-disabled='true'<?php }?>><?php echo $rent_price; ?></a><sup class="unit"<?php if($rent_price==null){?> style='display:none;'<?php }?>> DNT</sup></p>
+													</p>
+													<div class="fb-like" data-href="<?php echo url_root."/".$p->url;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+												</div>
+											</div>
+										</div>
+									<?php }?>
+
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			<div class="tab-pane" id="config_tab">
+
+				<?php if(isset($cc) && $cc->type!=0){ ?>
+				<div class="panel panel-default">
+			    <div class="panel-heading">
+						<h2 class="panel-title">Contrat actuel</h2>
+					</div>
+			    <div class="panel-body">
+						<div class="list-group">
+					    <div class="list-group-item">
+				        <div class="row-content">
+			            <h4 class="list-group-item-heading">
+										Numéro <?php echo $cc->id; ?>, durée
+										<?php switch ($cc->type) {
+											case 1:
+												echo "6 mois";
+												break;
+											case 2:
+												echo "1 an";
+												break;
+											case 3:
+												echo "3 ans";
+												break;
+										} ?>
+									</h4>
+			            <p class="list-group-item-text">
+										A partir de <?php echo date("d/m/Y h:i:s", strtotime($cc->creation_time)); ?><br>
+										Jusqu'à <?php echo date("d/m/Y h:i:s", strtotime($cc->expiration)); ?>
+									</p>
+									<p class="list-group-item-text">
+										<?php $ag = $cc->agent; if($ag){ ?>
+										Paiement effectué manuellement via l'agent <?php echo $ag->displayname; ?> au totalité de <?php echo $cc->amount; ?><sup>DT</sup>
+										<?php }else{
+											echo "Paiement effectué enligne via une carte ";
+											switch ($cc->payment_from) {
+												case 'e_dinar_smart_tunisian_post':
+													echo "E-DINAR SMART (LA POSTE TUNISIENNE)";
+													break;
+												case 'visa_electron_tunisian_post':
+													echo "VISA Electron (LA POSTE TUNISIENNE)";
+													break;
+												case 'visa':
+													echo "VISA";
+													break;
+												case 'mastercard':
+													echo "Mastercard";
+													break;
+											}
+											echo "au totalité de ".$cc->amount."<sup>DT</sup><br>";
+											echo "avec le reçu ".$cc->payment_recipt;
+										} ?>
+									</p>
+				        </div>
+					    </div>
+						</div>
+			    </div>
+				</div>
+				<?php } ?>
+
+				<?php if(!isset($cc) || $cc->type==0){ ?>
+				<div class="panel panel-default">
+			    <div class="panel-heading">
+						<h2 class="panel-title">Changement de type</h2>
+					</div>
+			    <div class="panel-body">
+						<div class="list-group">
+					    <div class="list-group-item">
+				        <div class="row-content">
+			            <h4 class="list-group-item-heading">Conversion en métier</h4>
+			            <p class="list-group-item-text text-warning">
+										<i class="fa fa-exclamation-triangle"></i><br>
+										Le slogan et la photo de couverture seront perdues car le type métier ne les possède pas.<br>
+										Les produits et services seront converties en éléments du portefeuille, leurs prix seront perdues et leurs adresses URL seront changés.<br>
+										Les domaines d'activités risquent d'être perdues selon leurs compatibilité avec le type métier.
+									</p>
+									<button class="btn btn-default pull-right transform_job">Convertir en métier</button>
+				        </div>
+					    </div>
+					    <div class="list-group-separator"></div>
+							<div class="list-group-item">
+				        <div class="row-content">
+			            <h4 class="list-group-item-heading">Conversion en boutique</h4>
+			            <p class="list-group-item-text text-warning">
+										<i class="fa fa-exclamation-triangle"></i><br>
+										Le slogan sera perdues car le type boutique ne le possède pas.<br>
+										Les services seron converties en produits et leurs adresses URL seront changés.<br>
+										Les domaines d'activités risquent d'être perdues selon leurs compatibilité avec le type boutique.
+									</p>
+									<button class="btn btn-default pull-right transform_shop">Convertir en boutique</button>
+				        </div>
+					    </div>
+						</div>
+			    </div>
+				</div>
+				<?php } ?>
+
+				<div class="panel panel-danger">
+			    <div class="panel-heading">
+		        <h2 class="panel-title">Zone dangeureuse</h2>
+			    </div>
+			    <div class="panel-body">
+						<div class="list-group">
+					    <div class="list-group-item">
+				        <div class="row-content">
+			            <h4 class="list-group-item-heading">Suppression de la société</h4>
+			            <p class="list-group-item-text text-warning">
+										<i class="fa fa-exclamation-triangle"></i><br>
+										La suppression est définitive et vos ne pouvez jamais restaurer le compte ou ses données suivant le "<a href="https://fr.wikipedia.org/wiki/Droit_%C3%A0_l%27oubli" target="_blank">Droit à l'oubli</a>", SVP soyez sûr.
+									</p>
+									<button class="btn btn-danger pull-right delete_page" data-confirm="Etes vous sûr de supprimer la société ">Supprimer la société définitivement</button>
+				        </div>
+					    </div>
+						</div>
+			    </div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 </div>

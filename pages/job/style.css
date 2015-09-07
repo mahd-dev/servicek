@@ -298,3 +298,11 @@ margin-bottom: 10px!important;
 	font-weight: 600;
 	color: #5b9bd1;
 }
+
+.tab-content {
+    margin-top: 0;
+}
+
+.list-group .list-group-separator:before, .list-group .list-group-item .row-content{
+	width: 100%;
+}

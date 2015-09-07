@@ -370,6 +370,45 @@ page_script({
 			});
 		});
 
+		$(".transform_shop").click(function() {
+			if(!confirm("Etes vous sûr ?")) return false;
+			$.post(location.href, {transform: "shop"}, function(rslt) {
+				try{
+					if(rslt=="success"){
+						app.ajaxify(location.href);
+					}else console.log(rslt);
+				}catch(ex){
+					console.log(rslt);
+				}
+			});
+		});
+
+		$(".transform_company").click(function() {
+			if(!confirm("Etes vous sûr ?")) return false;
+			$.post(location.href, {transform: "company"}, function(rslt) {
+				try{
+					if(rslt=="success"){
+						app.ajaxify(location.href);
+					}else console.log(rslt);
+				}catch(ex){
+					console.log(rslt);
+				}
+			});
+		});
+
+		$(".delete_page").click(function () {
+			if(!confirm($(this).attr("data-confirm") + $('.profile-usertitle-name a[data-name="name"]').text())) return false;
+			$.post(location.href, {remove_me: true}, function(rslt) {
+				try{
+					if(rslt=="success"){
+						app.ajaxify("/account");
+					}else console.log(rslt);
+				}catch(ex){
+					console.log(rslt);
+				}
+			});
+		});
+
 		window.fbAsyncInit();
 	}
 });

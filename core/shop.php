@@ -140,10 +140,100 @@
 
         public function delete(){
             global $db;
+            foreach ($this->products as $p) $p->delete();
+      			foreach ($this->services as $s) $s->delete();
+            foreach ($this->offers as $o) $o->delete();
+            $locality = $this->locality;
             $db->query("delete from category_children where (id_children='".$this->id."' and children_type='shop')");
-            $db->query("delete from user_admin where (id_page='".$this->id."')");
             $db->query("delete from shop where (id='".$this->id."')");
+            $locality->delete_if_empty();
         }
+
+        public function transform_to($to) {
+          global $paths;
+    			switch ($to) {
+            case 'job':
+    					$job=job::create($this->admin);
+    					$job->name=$this->name;
+    					$job->image=$this->image;
+    					$job->description=$this->description;
+    					$job->url=$this->url;
+    					$job->geolocation=$this->geolocation;
+    					$job->locality=$this->locality;
+    					$job->address=$this->address;
+    					$job->tel=$this->tel;
+    					$job->mobile=$this->mobile;
+    					$job->email=$this->email;
+    					$job->requests=$this->requests;
+    					$job->creation_time=$this->creation_time;
+    					if($job->image) rename($paths->shop_image->dir.$job->image, $paths->job_image->dir.$job->image);
+
+              foreach ($this->all_contracts as $contract) {
+    						$contract->id_page = $job->id;
+    						$contract->page_type = "job";
+    					}
+    					foreach ($this->categories as $category) {
+    						$job->assign_to_category($category);
+    					}
+
+              foreach ($this->products as $product) {
+    						$portfolio=portfolio::create($job);
+    						$portfolio->name=$product->name;
+    						$portfolio->image=$product->image;
+    						$portfolio->description=$product->description;
+    						$portfolio->creation_time=$product->creation_time;
+    						if($portfolio->image) rename($paths->product_image->dir.$portfolio->image, $paths->portfolio_image->dir.$portfolio->image);
+    					}
+
+              foreach ($this->offers as $offer) {
+    						$offer->id_page = $job->id;
+    						$offer->page_type = "job";
+    					}
+
+    					$this->delete();
+    					break;
+    				case 'company':
+    					$company=company::create($this->admin);
+              $seat=company_seat::create($company);
+    					$company->name=$this->name;
+    					$company->logo=$this->image;
+              $company->cover=$this->cover;
+    					$company->description=$this->description;
+    					$company->url=$this->url;
+    					$seat->geolocation=$this->geolocation;
+    					$seat->locality=$this->locality;
+    					$seat->address=$this->address;
+    					$seat->tel=$this->tel;
+    					$seat->mobile=$this->mobile;
+    					$seat->email=$this->email;
+    					$company->requests=$this->requests;
+    					$company->creation_time=$this->creation_time;
+              $seat->creation_time=$this->creation_time;
+    					if($company->logo) rename($paths->shop_image->dir.$company->logo, $paths->company_logo->dir.$company->logo);
+              if($company->cover) rename($paths->shop_cover->dir.$company->cover, $paths->company_cover->dir.$company->cover);
+
+              foreach ($this->all_contracts as $contract) {
+    						$contract->id_page = $company->id;
+    						$contract->page_type = "company";
+    					}
+    					foreach ($this->categories as $category) {
+    						$company->assign_to_category($category);
+    					}
+
+              foreach ($this->products as $product) {
+    						$product->id_page = $company->id;
+    						$product->page_type = "company";
+    					}
+
+              foreach ($this->offers as $offer) {
+    						$offer->id_page = $company->id;
+    						$offer->page_type = "company";
+    					}
+
+    					$this->delete();
+    					break;
+    			}
+    		}
 
         public static function get_all(){
             global $db;

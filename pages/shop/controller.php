@@ -155,6 +155,12 @@
 			$product->image=$name;
 
 			die("success");
+		}elseif (isset($_POST["remove_me"])) {
+			$shop->delete();
+			die("success");
+		}elseif (isset($_POST["transform"])) {
+			$shop->transform_to($_POST["transform"]);
+			die("success");
 		}
 
 		$available_categories = array();

@@ -35,8 +35,13 @@
                     break;
                     case "company":
                         return new company($this->id_company);
+
+                    case 'locality':
+                      return new locality($this->id_locality);
+                    break;
+
                     default:
-                        $q=$db->query("select ".$name." from company_seat where (id='".$this->id."')");
+                        $q=$db->query("select ".$name." from company_seat where (id='".$this->id."')") or die($db->error);
 			            $r=$q->fetch_row();
                         return $r[0];
                     break;

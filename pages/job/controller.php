@@ -219,6 +219,12 @@
 					die(json_encode(array('status' => 'success')));
 				break;
 			}
+		}elseif (isset($_POST["remove_me"])) {
+			$job->delete();
+			die("success");
+		}elseif (isset($_POST["transform"])) {
+			$job->transform_to($_POST["transform"]);
+			die("success");
 		}
 
 		$available_categories = array();
