@@ -68,7 +68,7 @@
           break;
           case "sub_categories":
             $list = array();
-            $q=$db->query("select id from category where (id_parent='".$this->id."')");
+            $q=$db->query("select id from category where (id_parent='".$this->id."') ORDER BY name");
             while($r=$q->fetch_row()) $list[] = new category($r[0]);
             return $list;
           break;
@@ -152,7 +152,7 @@
     public static function get_roots(){
       global $db;
       $rslt=array();
-      $q=$db->query("select id from category where id_parent is NULL");
+      $q=$db->query("select id from category where id_parent is NULL ORDER BY name");
       while ($r=$q->fetch_row()) $rslt[] = new category($r[0]);
       return $rslt;
     }

@@ -171,6 +171,8 @@
 		}else $title="Désolé, aucun résultat pour cette combinaison";
 	}else $empty=true;
 
+	shuffle($rslt);
+
 	if(isset($_GET["fetchdata"])){
 		$a=json_encode(array("title"=>$title, "rslt"=>$rslt, "empty"=>$empty));
 		if (json_last_error() == JSON_ERROR_UTF8){
