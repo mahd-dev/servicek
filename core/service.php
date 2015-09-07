@@ -40,11 +40,15 @@
                         return $list;
                     break;
                     case "is_contracted":
-                        return $this->page->is_contracted;
+                        $p = $this->page;
+                        if($p) return $p->is_contracted;
+                        else return false;
                     break;
 
                     case 'url':
-                      return $this->page->url.'/service/'.$this->id;
+                      $p = $this->page;
+                      if($p) return $p->url.'/service/'.$this->id;
+                      else return "404";
                     break;
 
                     default:

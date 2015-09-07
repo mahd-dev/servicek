@@ -41,11 +41,15 @@ page_script({
 			if(b.attr("data-description")!="") m.find(".description").text(b.attr("data-description")).show();
 			else m.find(".description").hide();
 
-			if(b.attr("data-sale-price")!="") m.find(".sale_price>.price_val").text(b.attr("data-sale-price")).show();
-			else m.find(".sale_price").hide();
+			if(b.attr("data-sale-price")!="") {
+				m.find(".sale_price>.price_val").text(b.attr("data-sale-price"));
+				m.find(".sale_price").show();
+			} else m.find(".sale_price").hide();
 
-			if(b.attr("data-rent-price")!="") m.find(".rent_price>.price_val").text(b.attr("data-rent-price"));
-			else m.find(".rent_price").hide();
+			if(b.attr("data-rent-price")!="") {
+				m.find(".rent_price>.price_val").text(b.attr("data-rent-price"));
+				m.find(".rent_price").show();
+			} else m.find(".rent_price").hide();
 
 			history.pushState(undefined, document.title, b.attr("data-url"));
 			m.find(".fb-like").attr("data-href", b.attr("data-url"));
