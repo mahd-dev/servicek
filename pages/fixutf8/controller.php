@@ -1,7 +1,10 @@
 <?php
 
-  function escapestr($value){
+  function escapestr($value, $url = false){
     global $db;
+    if($url){
+      $value = str_replace(array(" ", ":", "/", "\\", "&", "\"", "'", "(", ")", "-", "_", "", "", "=", "*", "°", "+", "~", "¬", "¹", "#", "{", "}", "[", "]", "|", "`", "^", "@", "<", ">", ",", ".", ":", "!", "%", "$", "?", "§"), "", str_replace(array("é", "è"), "e", str_replace(array("à", "â", "ä"), "a", str_replace(array("à", "â", "ä"), "a", str_replace(array("ç"), "c", str_replace(array("ù"), "u", str_replace(array("ô", "ö"), "o", strtolower($value))))))));
+    }
     return ($value===null?"NULL":"'".$db->real_escape_string(urldecode(Encoding::fixUTF8($value)))."'");
   }
 
@@ -9,13 +12,13 @@
   while($r=$q->fetch_row()) $db->query("update category set name=".escapestr($r[1])." where id=".$r[0]);
 
   $q=$db->query("select id, name, slogan, description, url from company");
-  while($r=$q->fetch_row()) $db->query("update company set name=".escapestr($r[1]).", slogan=".escapestr($r[2]).", description=".escapestr($r[3]).", url=".escapestr($r[4])." where id=".$r[0]);
+  while($r=$q->fetch_row()) $db->query("update company set name=".escapestr($r[1]).", slogan=".escapestr($r[2]).", description=".escapestr($r[3]).", url=".escapestr($r[4], true)." where id=".$r[0]);
 
   $q=$db->query("select id, name, address, email from company_seat");
   while($r=$q->fetch_row()) $db->query("update company_seat set name=".escapestr($r[1]).", address=".escapestr($r[2]).", email=".escapestr($r[3])." where id=".$r[0]);
 
   $q=$db->query("select id, name, description, url, address, email from job");
-  while($r=$q->fetch_row()) $db->query("update job set name=".escapestr($r[1]).", description=".escapestr($r[2]).", url=".escapestr($r[3]).", address=".escapestr($r[4]).", email=".escapestr($r[5])." where id=".$r[0]);
+  while($r=$q->fetch_row()) $db->query("update job set name=".escapestr($r[1]).", description=".escapestr($r[2]).", url=".escapestr($r[3], true).", address=".escapestr($r[4]).", email=".escapestr($r[5])." where id=".$r[0]);
 
   $q=$db->query("select id, title from job_cv");
   while($r=$q->fetch_row()) $db->query("update job_cv set title=".escapestr($r[1])." where id=".$r[0]);
@@ -39,5 +42,5 @@
   while($r=$q->fetch_row()) $db->query("update service set name=".escapestr($r[1]).", description=".escapestr($r[2])." where id=".$r[0]);
 
   $q=$db->query("select id, name, description, url, address, email from shop");
-  while($r=$q->fetch_row()) $db->query("update shop set name=".escapestr($r[1]).", description=".escapestr($r[2]).", url=".escapestr($r[3]).", address=".escapestr($r[4]).", email=".escapestr($r[5])." where id=".$r[0]);
+  while($r=$q->fetch_row()) $db->query("update shop set name=".escapestr($r[1]).", description=".escapestr($r[2]).", url=".escapestr($r[3], true).", address=".escapestr($r[4]).", email=".escapestr($r[5])." where id=".$r[0]);
 ?>
