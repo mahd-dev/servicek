@@ -116,9 +116,19 @@
 			if(isset($url[1]) && $url[1] == $db_password) {
 				if(isset($url[2])) $_GET["from"]=$url[2];
 				if(isset($url[3])) $_GET["to"]=$url[3];
-				die(include"maintenance/locality_merge/controller.php");break;
+				die(include"maintenance/locality_merge/controller.php");
 			}
+			break;
+		case 'help':
+			switch (strtolower($url[1])) {
+				case 'mail-config':
+					if(isset($url[2])) $_GET["address"]=$url[2];
+					$req_page="help/mailconfig/controller.php";
+				break;
 
+				default: $req_page="pages/404/controller.php"; break;
+			}
+			break;
 		case "sitemap.xml":
 			die(include"seo/sitemap.php");break;
 		case "robots.txt":

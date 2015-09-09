@@ -29,7 +29,7 @@
 		<div class="hidden-xs">
 			<h4>Autres méthodes :</h4>
 			<a href="http://webmail.servicek.net" target="_blank">Utiliser le Webmail</a><br>
-			<a href="http://help.servicek.net/mail-app-config" target="_blank">Configurer une application</a>
+			<a href="/help/mail-config/<?php echo $page->url; ?>" target="_blank">Configurer une application</a>
 		</div>
 	</div>
 	<div class="profile-content col-md-9 col-sm-8">
@@ -90,7 +90,7 @@
 		<div class="visible-xs-block">
 			<h4>Autres méthodes :</h4>
 			<a href="http://webmail.servicek.net" target="_blank">Utiliser le Webmail</a><br>
-			<a href="http://help.servicek.net/mail-app-config" target="_blank">Configurer une application</a>
+			<a href="/help/mail-config/<?php echo $page->url; ?>" target="_blank">Configurer une application</a>
 		</div>
 
 	</div>
