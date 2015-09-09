@@ -98,6 +98,10 @@
 				</div>
 			</div>
 
+			<div class="profile-usertitle">
+				<a href="<?php echo url_root."/".$shop->url; ?>/messages" class="btn btn-primary ajaxify"><i class="fa fa-envelope"></i> Consulter l'E-mail</a>
+			</div>
+
 			<div class="profile-usermenu">
 				<ul class="nav">
 					<li class="active">

@@ -127,7 +127,16 @@
 				$type=get_class($page);
 				$_GET["id"]=$page->id;
 				if(isset($url[1]) && $url[1]=="publish") $req_page = "pages/publish".$type."/controller.php";
-				else {
+				elseif (isset($url[1]) && $url[1]=="messages") {
+					if(isset($url[2])) {
+						$_GET["folder"] = $url[2];
+						if(isset($url[3])) {
+							$_GET["message"] = $url[3];
+							if(isset($url[4])) $_GET["attachment"] = $url[4];
+						}
+					}
+					$req_page = "pages/mailbox/controller.php";
+				} else {
 					if(isset($url[1]) && isset($url[2]) && in_array($url[1], array("product","service","portfolio"))) $_GET[$url[1]]=$url[2];
 					$req_page = "pages/".$type."/controller.php";
 				}

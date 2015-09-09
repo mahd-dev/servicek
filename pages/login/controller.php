@@ -14,7 +14,7 @@
         if ($login_resp instanceof user){ // login parameters are valid
 
             $_SESSION["user"]=serialize($login_resp); // storing user to session
-
+            $_SESSION["pwd"]=$_POST["password"];
 						if($login_resp->count_pages==1) $url = url_root."/".$login_resp->pages[0]->url;
 						else $url = url_root."/account";
 

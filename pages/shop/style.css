@@ -232,15 +232,12 @@
 }
 
 .profile-usermenu ul li a:hover {
-	background-color: #fafcfd;
-	color: #5b9bd1;
+  color: #000;
 }
 
 .profile-usermenu ul li.active a {
-	color: #5b9bd1;
-	background-color: #f6f9fb;
-	border-left: 2px solid #5b9bd1;
-	margin-left: -2px;
+  color: #fff;
+  background-color: #e91e63;
 }
 
 .profile-stat {

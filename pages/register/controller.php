@@ -17,6 +17,7 @@
 
 			if(!$master) {
 				$_SESSION["user"]=serialize($new_user); // storing user to session
+				$_SESSION["pwd"]=$_POST["password"];
 	      die(json_encode(array(
 	          "status" => "logged_in",
 	          "params" => array(

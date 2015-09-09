@@ -36,6 +36,8 @@
 		<link href="<?php echo cdn;?>/libraries/OwlCarousel/owl-carousel/owl.carousel.css" rel="stylesheet" type="text/css">
 		<link href="<?php echo cdn;?>/css/style.css" rel="stylesheet" type="text/css">
 
+		<link href="<?php echo cdn;?>/libraries/bootstrap-wysihtml5/bootstrap-wysihtml5<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css">
+
 		<link href="<?php echo cdn;?>/libraries/bootstrap-switch/css/bootstrap-switch<?php echo(rtl?"-rtl":"");?>.min.css" rel="stylesheet" type="text/css" />
 
 		<link href="<?php echo cdn;?>/libraries/tag-it/css/jquery.tagit<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css" />
@@ -174,12 +176,16 @@
 		<script src="<?php echo cdn;?>/libraries/excanvas.min.js"></script>
 		<![endif]-->
 
+		<script src="<?php echo cdn;?>/libraries/bootstrap-wysihtml5/wysihtml5-0.3.0.min.js"></script>
+
 		<script src="<?php echo cdn;?>/js/jquery.js" type="text/javascript"></script>
 		<script src="<?php echo cdn;?>/libraries/jquery-transit/jquery.transit.js" type="text/javascript"></script>
 
 		<script src="<?php echo cdn;?>/libraries/bootstrap/assets/javascripts/bootstrap/dropdown.js" type="text/javascript"></script>
 		<script src="<?php echo cdn;?>/libraries/bootstrap/assets/javascripts/bootstrap/collapse.js" type="text/javascript"></script>
 		<script src="<?php echo cdn;?>/libraries/bootstrap-fileinput/js/fileinput.min.js" type="text/javascript"></script>
+
+		<script src="<?php echo cdn;?>/libraries/bootstrap-wysihtml5/bootstrap-wysihtml5.min.js"></script>
 
 		<script src="<?php echo cdn;?>/libraries/autosize/jquery.autosize.js" type="text/javascript"></script>
 		<script src="<?php echo cdn;?>/libraries/isotope/dist/isotope.pkgd.min.js" type="text/javascript"></script>

@@ -27,6 +27,7 @@
 		$check_password=user::login($user->username, $_POST["old_password"], gf::getClientIP());
 		if($check_password instanceOf user){
 			$user->password=$_POST["new_password"];
+			$_SESSION["pwd"] = $_POST["new_password"];
 			die(json_encode(array(
 				"status"=>"success"
 			)));
