@@ -31,24 +31,46 @@ page_script({
 
 		$("#job_submit_form input[name=name]").change(function(event) {
 			if(!$("#job_submit_form input[name=url]").val()){
-				$.post(location.href, { pick_url: $(this).val() }, function(rslt) {
-					$("#job_submit_form input[name=url]").val(rslt);
-				});
+					$("#job_submit_form input[name=url]").val($(this).val()).trigger('change');
 			}
 		});
 		$("#shop_submit_form input[name=name]").change(function(event) {
 			if(!$("#shop_submit_form input[name=url]").val()){
-				$.post(location.href, { pick_url: $(this).val() }, function(rslt) {
-					$("#shop_submit_form input[name=url]").val(rslt);
-				});
+					$("#shop_submit_form input[name=url]").val($(this).val()).trigger('change');
 			}
 		});
 		$("#company_submit_form input[name=name]").change(function(event) {
 			if(!$("#company_submit_form input[name=url]").val()){
-				$.post(location.href, { pick_url: $(this).val() }, function(rslt) {
-					$("#company_submit_form input[name=url]").val(rslt);
-				});
+					$("#company_submit_form input[name=url]").val($(this).val()).trigger('change');
 			}
+		});
+
+		$("#job_submit_form input[name=url]").change(function(event) {
+			$.post(location.href, { pick_url: $(this).val() }, function(rslt) {
+				$("#job_submit_form input[name=url]").val(rslt);
+				$("#job_submit_form .url-help .web").text(rslt);
+				$("#job_submit_form .url-help .mail").text(rslt);
+				if(rslt) $("#job_submit_form .url-help").show();
+				else $("#job_submit_form .url-help").hide();
+			});
+		});
+		$("#shop_submit_form input[name=url]").change(function(event) {
+			$.post(location.href, { pick_url: $(this).val() }, function(rslt) {
+				$("#shop_submit_form input[name=url]").val(rslt);
+				$("#shop_submit_form.url-help .web").text(rslt);
+				$("#shop_submit_form.url-help .mail").text(rslt);
+				if(rslt) $("#shop_submit_form .url-help").show();
+				else $("#shop_submit_form .url-help").hide();
+			});
+		});
+		$("#company_submit_form input[name=url]").change(function(event) {
+			$.post(location.href, { pick_url: $(this).val() }, function(rslt) {
+				$("#company_submit_form input[name=url]").val(rslt);
+				$("#company_submit_form .url-help .web").text(rslt);
+				$("#company_submit_form .url-help .mail").text(rslt);
+				if(rslt) $("#company_submit_form .url-help").show();
+				else $("#company_submit_form .url-help").hide();
+			});
 		});
 
 		// register_form

@@ -32,10 +32,16 @@
 	    header('Content-Length: ' . $attachment["size"]);
 			die($attachment["content"]);
 		}else{
-			$msg = $imap->getMessage(intval($_GET["message"]));
+			$msg = $imap->getBody(intval($_GET["message"]));
 			$imap->setUnseenMessage(intval($_GET["message"]));
 			die(($msg["html"]?$msg["html"]:$msg["body"]));
 		}
+
+	}elseif(isset($_POST["remove_message"])){
+		$imap->selectFolder($_POST["folder"]);
+		$imap->deleteMessage($_POST["remove_message"]);
+		die(json_encode(array("status"=>"success")));
+
 	}elseif (isset($_POST["message"])) {
 
 		chdir(__DIR__);

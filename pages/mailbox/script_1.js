@@ -43,6 +43,7 @@ page_script({
 
 		$(".messages-list tbody tr").live("click", function() {
 			var message = current_folder[$(this).attr("data-id")];
+			$(".message-details").attr("data-id", message.id);
 			$(".message-details .from").text(message.from);
 			$(".message-details .to").text(message.to);
 			$(".message-details .subject").text(message.subject);
@@ -65,6 +66,27 @@ page_script({
 			$(".messages-list").show();
 			$(".message-details").hide();
 			$(".message-details iframe").attr("src", "");
+		});
+
+		$(".message-details .delete").click(function () {
+			$.post(location.href, {remove_message: $(".message-details").attr("data-id"), folder: $(".folders .active a").attr("data-folder")}, function(rslt) {
+				try{
+          parsed=JSON.parse(rslt);
+          if (parsed.status == "success") {
+						$(".folders .active a").trigger("click");
+					}else{
+						console.log(rslt);
+					}
+				}catch(ex){
+					console.log(rslt);
+				}
+			});
+		});
+
+		$(".message-details .reply").click(function () {
+			$("#message_form [name=email]").val($(".message-details .from").text().substring($(".message-details .from").text().lastIndexOf("<")+1,$(".message-details .from").text().lastIndexOf(">")) + ";");
+			$("#message_form [name=subject]").val("Re: " + $(".message-details .subject").text());
+			$("#message_modal").modal('show');
 		});
 
 		$("#message_form").ajaxForm({

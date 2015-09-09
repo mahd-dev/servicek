@@ -105,11 +105,12 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<div class="input-group">
-										<span class="input-group-addon"><?php echo url_root."/";?></span>
-										<input type="text" class="form-control" name="url" placehoder="Lien électronique" data-msg-required="Ce champ est obligatoire" data-msg-remote="Ce lien n'est pas disponible"/>
-									</div>
+									<input type="text" class="form-control" name="url" placeholder="Adresse servicek" data-msg-required="Ce champ est obligatoire" data-msg-remote="Ce lien n'est pas disponible"/>
 									<div class="error_msg"></div>
+									<div class="url-help" style="display:none;">
+										Votre espace sur servicek sera : <b><?php echo url_root."/";?><span class="web"></span></b><br>
+										Votre adresse e-mail professionnelle sera : <b><span class="mail"></span>@servicek.net</b>
+									</div>
 								</div>
 								<div class="form-group">
 									<div class="input-group">
@@ -152,11 +153,12 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<div class="input-group">
-										<span class="input-group-addon"><?php echo url_root."/";?></span>
-										<input type="text" class="form-control" name="url" placehoder="Lien électronique" data-msg-required="Ce champ est obligatoire" data-msg-remote="Ce lien n'est pas disponible"/>
-									</div>
+									<input type="text" class="form-control" name="url" placeholder="Adresse servicek" data-msg-required="Ce champ est obligatoire" data-msg-remote="Ce lien n'est pas disponible"/>
 									<div class="error_msg"></div>
+									<div class="url-help" style="display:none;">
+										Votre espace sur servicek sera : <b><?php echo url_root."/";?><span class="web"></span></b><br>
+										Votre adresse e-mail professionnelle sera : <b><span class="mail"></span>@servicek.net</b>
+									</div>
 								</div>
 								<div class="form-group">
 									<div class="input-group">
@@ -203,11 +205,12 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<div class="input-group">
-										<span class="input-group-addon"><?php echo url_root."/";?></span>
-										<input type="text" class="form-control" name="url" placehoder="Lien électronique" data-msg-required="Ce champ est obligatoire" data-msg-remote="Ce lien n'est pas disponible"/>
-									</div>
+									<input type="text" class="form-control" name="url" placeholder="Adresse servicek" data-msg-required="Ce champ est obligatoire" data-msg-remote="Ce lien n'est pas disponible"/>
 									<div class="error_msg"></div>
+									<div class="url-help" style="display:none;">
+										Votre espace sur servicek sera : <b><?php echo url_root."/";?><span class="web"></span></b><br>
+										Votre adresse e-mail professionnelle sera : <b><span class="mail"></span>@servicek.net</b>
+									</div>
 								</div>
 								<div class="form-group">
 									<div class="input-group">

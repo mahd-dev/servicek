@@ -114,7 +114,7 @@
 			    <fieldset>
 						<div class="form-group">
 							Destinations :
-              <input type="email" class="form-control" name="email" required>
+              <input type="text" class="form-control" name="email" placeholder="destination_1@exemple.com; destination_2@exemple.com;" required>
 		        </div>
 		        <div class="form-group">
 							Sujet :

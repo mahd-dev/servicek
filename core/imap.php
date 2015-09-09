@@ -579,7 +579,7 @@ class imap {
      * @return string email body
      * @param $uid message id
      */
-    private function getBody($uid) {
+    function getBody($uid) {
         $body = $this->get_part($this->imap, $uid, "TEXT/HTML");
         $html = true;
         // if HTML body is empty, try getting text body
