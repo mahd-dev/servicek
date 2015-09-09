@@ -45,7 +45,7 @@
 				$sc_rslt.=localities($sc);
 			}
 			if($sc_rslt){
-				$rslt.='<li>';
+				$rslt.='<li data-id="'.$c->id.'">';
 				$rslt.='<div class="element">';
 				$rslt.='<div class="checkbox"><label><input type="checkbox"'.($lo_list && in_array($c, $lo_list)?" checked":"").' data-id="'.$c->id.'"> '.$c->long_name.'</label></div>';
 				$rslt.='<a class="dropdown-toggle btn btn-flat pull-right"><span class="caret"></span></a>';
@@ -55,7 +55,7 @@
 				$rslt.='</ul>';
 				$rslt.='</li>';
 			}elseif ($has_pages) {
-				$rslt.='<li>';
+				$rslt.='<li data-id="'.$c->id.'">';
 				$rslt.='<div class="element">';
 				$rslt.='<div class="checkbox"><label><input type="checkbox"'.($lo_list && in_array($c, $lo_list)?" checked":"").' data-id="'.$c->id.'"> '.$c->long_name.'</label></div>';
 				$rslt.='</div>';

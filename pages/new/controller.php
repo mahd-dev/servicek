@@ -1,7 +1,7 @@
 <?php
 
 	if(isset($_POST["pick_url"])){
-		$_POST["pick_url"] = str_replace(array(" ", ":", "/", "\\", "&", "\"", "'", "(", ")", "-", "_", "", "", "=", "*", "°", "+", "~", "¬", "¹", "#", "{", "}", "[", "]", "|", "`", "^", "@", "<", ">", ",", ".", ":", "!", "%", "$", "?", "§"), "", str_replace(array("é", "è", "ê", "ë"), "e", str_replace(array("ï", "î"), "i", str_replace(array("à", "â", "ä"), "a", str_replace(array("ç"), "c", str_replace(array("ù"), "u", str_replace(array("ô", "ö"), "o", strtolower($_POST["pick_url"]))))))));
+		$_POST["pick_url"] = str_replace(array(" ", ":", "/", "\\", "&", "\"", "'", "(", ")", "-", "_", "", "", "=", "*", "°", "+", "~", "¬", "¹", "#", "{", "}", "[", "]", "|", "`", "^", "@", "<", ">", ",", ".", ":", "!", "%", "$", "?", "§"), "", str_replace(array("é", "è", "ê", "ë"), "e", str_replace(array("ï", "î"), "i", str_replace(array("à", "â", "ä", "Ã"), "a", str_replace(array("ç"), "c", str_replace(array("ù"), "u", str_replace(array("ô", "ö"), "o", strtolower($_POST["pick_url"]))))))));
 		$i="";
 		while (!gf::check_url($_POST["pick_url"].$i)) {
 			$i++;
