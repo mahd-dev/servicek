@@ -3,7 +3,7 @@
   function escapestr($value, $url = false){
     global $db;
     if($url){
-      $value = str_replace(array(" ", ":", "/", "\\", "&", "\"", "'", "(", ")", "-", "_", "", "", "=", "*", "°", "+", "~", "¬", "¹", "#", "{", "}", "[", "]", "|", "`", "^", "@", "<", ">", ",", ".", ":", "!", "%", "$", "?", "§"), "", str_replace(array("é", "è"), "e", str_replace(array("à", "â", "ä"), "a", str_replace(array("à", "â", "ä"), "a", str_replace(array("ç"), "c", str_replace(array("ù"), "u", str_replace(array("ô", "ö"), "o", strtolower($value))))))));
+      $value = str_replace(array(" ", ":", "/", "\\", "&", "\"", "'", "(", ")", "-", "_", "", "", "=", "*", "°", "+", "~", "¬", "¹", "#", "{", "}", "[", "]", "|", "`", "^", "@", "<", ">", ",", ".", ":", "!", "%", "$", "?", "§"), "", str_replace(array("é", "è", "ê", "ë"), "e", str_replace(array("ï", "î"), "i", str_replace(array("à", "â", "ä"), "a", str_replace(array("ç"), "c", str_replace(array("ù"), "u", str_replace(array("ô", "ö"), "o", strtolower($value))))))));
     }
     return ($value===null?"NULL":"'".$db->real_escape_string(urldecode(Encoding::fixUTF8($value)))."'");
   }
