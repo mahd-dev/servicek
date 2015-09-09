@@ -107,16 +107,16 @@
 		break;
 
 		case "setlocations":
-			if(isset($url[1]) && $url[1] == $db_password) die(include"pages/setlocations/controller.php");break;
+			if(isset($url[1]) && $url[1] == $db_password) die(include"maintenance/setlocations/controller.php");break;
 
 		case "fixutf8":
-			if(isset($url[1]) && $url[1] == $db_password) die(include"pages/fixutf8/controller.php");break;
+			if(isset($url[1]) && $url[1] == $db_password) die(include"maintenance/fixutf8/controller.php");break;
 
 		case "locality_merge":
 			if(isset($url[1]) && $url[1] == $db_password) {
 				if(isset($url[2])) $_GET["from"]=$url[2];
 				if(isset($url[3])) $_GET["to"]=$url[3];
-				die(include"pages/locality_merge/controller.php");break;
+				die(include"maintenance/locality_merge/controller.php");break;
 			}
 
 		case "sitemap.xml":

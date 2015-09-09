@@ -84,8 +84,10 @@
 		$mail->Body    = $_POST["message"];
 
 		if(!$mail->send()) die($mail->ErrorInfo);
-		else die(json_encode(array("status"=>"success")));
-
+		else {
+			$imap->saveMessageInSent($mail->createHeader(), $mail->Body);
+			die(json_encode(array("status"=>"success")));
+		}
 	}
 
 	$folders = $imap->getFolders();

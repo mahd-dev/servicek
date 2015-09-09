@@ -9,7 +9,7 @@
 				<ul class="nav folders">
 					<?php foreach (array_reverse($folders) as $folder): ?>
 						<li<?php if(strtolower($folder)=="inbox"){ ?> class="active"<?php $f=0; } ?>>
-							<a href="#inbox" data-toggle="tab" data-folder="<?php echo $folder; ?>">
+							<a href="#" data-toggle="tab" data-folder="<?php echo $folder; ?>">
 								<i class="icon-badge"></i>
 								<?php
 									switch (strtolower($folder)) {
