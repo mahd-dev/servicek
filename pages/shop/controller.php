@@ -5,6 +5,8 @@
 		if (!$shop->isvalid) {include __DIR__."/../404/controller.php";goto skip_this_page;}
 	}
 
+	$is_admin_level = ($user!=null && !$user->is_master && $page->admin==$user);
+
 	if(isset($_POST["email"]) && isset($_POST["subject"]) && isset($_POST["message"])){
 		$headers  = 'MIME-Version: 1.0'."\r\n";
     $headers .= 'Content-type: text/html; charset=utf-8'."\r\n";

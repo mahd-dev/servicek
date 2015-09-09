@@ -101,9 +101,11 @@
 				</div>
 			</div>
 
+			<?php if ($is_admin_level): ?>
 			<div class="profile-usertitle">
 				<a href="<?php echo url_root."/".$company->url; ?>/messages" class="btn btn-primary ajaxify"><i class="fa fa-envelope"></i> Consulter l'E-mail</a>
 			</div>
+			<?php endif; ?>
 
 			<div class="profile-usermenu">
 				<ul class="nav">
@@ -121,10 +123,10 @@
 					</li>
 				</ul>
 			</div>
-
 			<div class="profile-usertitle">
 				<div class="fb-like" data-href="<?php echo url_root."/".$company->url; ?>" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 			</div>
+
 		</div>
 
 		<div class="info portlet light box">

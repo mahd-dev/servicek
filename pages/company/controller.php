@@ -5,6 +5,8 @@
 		if (!$company->isvalid) {include __DIR__."/../404/controller.php";goto skip_this_page;}
 	}
 
+	$is_admin_level = ($user!=null && !$user->is_master && $page->is_assigned_to_admin($user));
+
 	$s=$company->seats[0];
 
 	if(isset($_POST["email"]) && isset($_POST["subject"]) && isset($_POST["message"])){
