@@ -8,6 +8,10 @@
 	$is_admin_level = ($user!=null && !$user->is_master && $page->admin==$user);
 
 	if(isset($_POST["email"]) && isset($_POST["subject"]) && isset($_POST["message"])){
+
+		chdir(__DIR__);
+		include_once '../../core/PHPMailer/PHPMailerAutoload.php';
+		
 		$mail = new PHPMailer;
 
 		$mail->isSMTP();

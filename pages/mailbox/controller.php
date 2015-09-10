@@ -44,6 +44,9 @@
 
 	}elseif (isset($_POST["message"])) {
 
+		chdir(__DIR__);
+		include_once '../../core/PHPMailer/PHPMailerAutoload.php';
+
 		$mail = new PHPMailer;
 
 		$mail->isSMTP();
