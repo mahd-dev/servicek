@@ -63,7 +63,6 @@
 					</div>
 				</div>
 			</div>
-
 		<?php }?>
 
 		<?php foreach ($ps_organized as $item) { $c = $item["category"]; ?>
@@ -202,7 +201,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title">Envoyez un messag à <?php echo $company->name; ?></h4>
+        <h4 class="modal-title">Envoyer un message à <b><?php echo $company->url; ?>@servicek.net</b></h4>
       </div>
       <div class="modal-body">
 				<form id="message_form" method="post">
@@ -214,19 +213,26 @@
 					</div>
 			    <fieldset>
 						<div class="form-group">
-              <input type="email" class="form-control" name="email" placeholder="E-mail" required>
+							<b>E-mail :</b>
+              <input type="email" class="form-control" name="email" required>
 		        </div>
 		        <div class="form-group">
-              <input type="text" class="form-control" name="subject" placeholder="Sujet" required>
+							<b>Sujet :</b>
+              <input type="text" class="form-control" name="subject" required>
 		        </div>
+						<div class="form-group">
+							<b>Fichiers en attachement :</b>
+							<input type="file" name="attachments[]" multiple="">
+						</div>
 		        <div class="form-group">
-              <textarea class="form-control" rows="10" name="message" style="max-width:100%;" placeholder="Message" required></textarea>
+							<b>Message :</b>
+							<textarea class="form-control" rows="10" name="message" id="message" style="max-width:100%;" required></textarea>
 		        </div>
 			    </fieldset>
 				</form>
       </div>
       <div class="modal-footer">
-        <button type="reset" form="message_form" class="btn btn-default" data-dismiss="modal">Annuler</button>
+        <button type="reset" form="message_form" class="btn btn-default" data-dismiss="modal">Fermer</button>
         <button type="submit" form="message_form" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Envoyer</button>
       </div>
     </div>

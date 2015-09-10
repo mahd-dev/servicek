@@ -87,7 +87,7 @@
 		<div class="page-wrapper">
 			<div class="header header-large">
 				<div class="container">
-					<div class="pace-container"></div>
+					<!-- <div class="pace-container"></div> -->
 					<div class="header-inner">
 						<div class="header-top">
 							<ul class="nav nav-pills top-menu">
@@ -106,8 +106,8 @@
 							</ul>
 
 							<ul class="nav nav-pills">
-								<li><a href="<?php echo url_root;?>" class="ajaxify">Actualités</a></li>
-								<li><a href="<?php echo url_root;?>/about" class="ajaxify">A propos</a></li>
+								<li><a href="<?php echo url_root;?>" class="ajaxify">Accueil</a></li>
+								<!-- <li><a href="<?php echo url_root;?>/about" class="ajaxify">A propos</a></li> -->
 								<li><a href="<?php echo url_root;?>/contact" class="ajaxify">Contact</a></li>
 								<li class="hidden-xs"><a>|</a></li>
 							</ul>
@@ -119,6 +119,7 @@
 									<img src="<?php echo cdn;?>/img/logo<?php echo(rtl?"-rtl":"");?>.svg" alt="logo" class="logo-default">
 								</a>
 							</div>
+							<div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg></div>
 
 							<div class="header-search">
 								<form id="master_search_form" action="search">
@@ -176,16 +177,15 @@
 		<script src="<?php echo cdn;?>/libraries/excanvas.min.js"></script>
 		<![endif]-->
 
-		<script src="<?php echo cdn;?>/libraries/bootstrap-wysihtml5/wysihtml5-0.3.0.min.js"></script>
-
 		<script src="<?php echo cdn;?>/js/jquery.js" type="text/javascript"></script>
+		<script src="<?php echo cdn;?>/libraries/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 		<script src="<?php echo cdn;?>/libraries/jquery-transit/jquery.transit.js" type="text/javascript"></script>
 
-		<script src="<?php echo cdn;?>/libraries/bootstrap/assets/javascripts/bootstrap/dropdown.js" type="text/javascript"></script>
+		<!-- <script src="<?php echo cdn;?>/libraries/bootstrap/assets/javascripts/bootstrap/dropdown.js" type="text/javascript"></script> -->
 		<script src="<?php echo cdn;?>/libraries/bootstrap/assets/javascripts/bootstrap/collapse.js" type="text/javascript"></script>
 		<script src="<?php echo cdn;?>/libraries/bootstrap-fileinput/js/fileinput.min.js" type="text/javascript"></script>
 
-		<script src="<?php echo cdn;?>/libraries/bootstrap-wysihtml5/bootstrap-wysihtml5.min.js"></script>
+		<script src="<?php echo cdn;?>/libraries/ckeditor/ckeditor.js"></script>
 
 		<script src="<?php echo cdn;?>/libraries/autosize/jquery.autosize.js" type="text/javascript"></script>
 		<script src="<?php echo cdn;?>/libraries/isotope/dist/isotope.pkgd.min.js" type="text/javascript"></script>
@@ -197,13 +197,11 @@
 		<script src="<?php echo cdn;?>/libraries/jquery-google-map/markerclusterer.js" type="text/javascript"></script>
 		<script src="<?php echo cdn;?>/libraries/jquery-google-map/jquery-google-map.js" type="text/javascript"></script>
 
-		<!--<script src="<?php echo cdn;?>/js/app.js" type="text/javascript"></script>-->
 		<script src="<?php echo cdn;?>/js/map.js" type="text/javascript"></script>
 		<script src="<?php echo cdn;?>/js/map_markerwithlabel.js" type="text/javascript"></script>
 
 		<script src="<?php echo cdn;?>/libraries/jquery-migrate.min.js" type="text/javascript"></script>
 		<script src="<?php echo cdn;?>/libraries/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-		<script src="<?php echo cdn;?>/libraries/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 		<script src="<?php echo cdn;?>/libraries/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
 		<script src="<?php echo cdn;?>/libraries/jquery.blockui.min.js" type="text/javascript"></script>
 		<script src="<?php echo cdn;?>/libraries/jquery.cokie.min.js" type="text/javascript"></script>
@@ -215,8 +213,6 @@
 		<script src="<?php echo cdn;?>/libraries/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 
 		<script src="<?php echo cdn;?>/libraries/tag-it/js/tag-it<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
-
-		<script src="<?php echo cdn;?>/js/app<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 
 		<script src="<?php echo cdn;?>/libraries/bootstrap-editable/bootstrap-editable/js/bootstrap-editable<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 
@@ -239,11 +235,12 @@
 		<script src="<?php echo cdn;?>/libraries/bootstrap-materialdesign/js/ripples<?php if(!debug) echo ".min";?>.js" type="text/javascript" ></script>
 		<script src="<?php echo cdn;?>/libraries/bootstrap-materialdesign/js/material<?php if(!debug) echo ".min";?>.js" type="text/javascript" ></script>
 
+		<script src="<?php echo cdn;?>/js/app<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 		<script src="<?php echo url_root;?>/master/script_1<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 		<script>
 			jQuery(document).ready(function() {
-				$.material.init();
 				app.init();
+				$.material.init();
 			});
 		</script>
 		<script>

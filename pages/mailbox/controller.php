@@ -44,9 +44,6 @@
 
 	}elseif (isset($_POST["message"])) {
 
-		chdir(__DIR__);
-		require '../../core/PHPMailer/PHPMailerAutoload.php';
-
 		$mail = new PHPMailer;
 
 		$mail->isSMTP();

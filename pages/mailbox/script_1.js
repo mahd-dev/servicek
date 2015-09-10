@@ -1,7 +1,6 @@
 page_script({
 	init: function () {
 		// process search form submit event
-		$("#message_form [name=message]").wysihtml5();
 
 		var current_folder = [];
 
@@ -46,6 +45,7 @@ page_script({
 			$(".message-details").attr("data-id", message.id);
 			$(".message-details .from").text(message.from);
 			$(".message-details .to").text(message.to);
+			$(".message-details .reply_to").text(message.reply_to);
 			$(".message-details .subject").text(message.subject);
 			$(".message-details .date").text(message.date);
 			var att_list = $(".message-details .attachments .list");
@@ -84,13 +84,16 @@ page_script({
 		});
 
 		$(".message-details .reply").click(function () {
-			$("#message_form [name=email]").val($(".message-details .from").text().substring($(".message-details .from").text().lastIndexOf("<")+1,$(".message-details .from").text().lastIndexOf(">")) + ";");
+			$("#message_form [name=email]").val($(".message-details .reply_to").text().substring($(".message-details .reply_to").text().indexOf("<")+1,$(".message-details .reply_to").text().indexOf(">")) + ";");
 			$("#message_form [name=subject]").val("Re: " + $(".message-details .subject").text());
 			$("#message_modal").modal('show');
 		});
 
+		CKEDITOR.replace('message');
+
 		$("#message_form").ajaxForm({
 			beforeSubmit: function () {
+				CKEDITOR.instances.message.updateElement();
 				$(".loader", $("#message_modal")).show();
 				$(".success_msg", $("#message_form")).hide();
 				$(".unhandled_error", $("#message_form")).hide();

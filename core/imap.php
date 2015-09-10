@@ -203,6 +203,7 @@ class imap {
         $email = array(
             'to'       => isset($header->to) ? $this->arrayToAddress($header->to) : '',
             'from'     => $this->toAddress($header->from[0]),
+            'reply_to' => isset($header->reply_to) ? $this->arrayToAddress($header->reply_to) : $this->toAddress($header->from[0]),
             'date'     => $header->date,
             'subject'  => $subject,
             'uid'       => $uid,

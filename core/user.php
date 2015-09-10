@@ -12,7 +12,7 @@
 			if ($this->id != NULL) {
 				switch($name){
 					case "password":
-						$db->query("update user set ".$name."=".($value===null?"NULL":"ENCRYPT('".$db->real_escape_string($value)."')")." where (id='".$this->id."')");
+						$db->query("update user set ".$name."=".($value===null?"NULL":"ENCRYPT('".$db->real_escape_string($value)."')").", reset_password_token=NULL where (id='".$this->id."')");
 					break;
 					default :
 						$db->query("update user set ".$name."=".($value===null?"NULL":"'".$db->real_escape_string($value)."'")." where (id='".$this->id."')");
@@ -104,6 +104,25 @@
 			}else{
 				return NULL;
 			}
+		}
+
+		public function set_reset_password_token(){
+			$c_token = $this->reset_password_token;
+			if($c_token) return $c_token;
+			else{
+				$c_token = gf::generate_guid();
+				$this->reset_password_token = $c_token;
+				return $c_token;
+			}
+		}
+
+		public static function get_user_by_reset_password_token($reset_password_token){
+			global $db;
+			$q=$db->query("select id from user where (reset_password_token='".$reset_password_token."')");
+			if($q->num_rows==1){
+				$r=$q->fetch_row();
+				return new user($r[0]);
+			}else return null;
 		}
 
 		public static function get_admins(){

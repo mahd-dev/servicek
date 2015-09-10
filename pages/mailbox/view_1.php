@@ -70,6 +70,7 @@
 								<span class="pull-right">Envoyé le :<br><b><span class="date"></span></b></span>
 								De : <b><span class="from"></span></b> , à : <b><span class="to"></span></b><br>
 								Objet: <b><h3 class="subject"></h3></b>
+								<span class="reply_to hide"></span>
 							</div>
 							<div class="toolbar attachments">
 								Fichiers en attachement :<br>
@@ -113,26 +114,26 @@
 					</div>
 			    <fieldset>
 						<div class="form-group">
-							Destinations :
+							<b>Destinations :</b>
               <input type="text" class="form-control" name="email" placeholder="destination_1@exemple.com; destination_2@exemple.com;" required>
 		        </div>
 		        <div class="form-group">
-							Sujet :
-              <input type="text" class="form-control" name="subject" required>
+							<b>Sujet :</b>
+              <input type="text" name="subject" required>
 		        </div>
 						<div class="form-group">
-							Attachements :
-							<input type="file" class="form-control" name="attachments[]" multiple="">
+							<b>Fichiers en attachement :</b>
+							<input type="file" name="attachments[]" multiple="">
 						</div>
 		        <div class="form-group">
-							Message :
-              <textarea class="form-control" name="message" style="max-width:100%; min-height:300px;" required></textarea>
+							<b>Message :</b>
+              <textarea class="form-control" name="message" id="message" style="max-width:100%; min-height:300px;" required></textarea>
 		        </div>
 			    </fieldset>
 				</form>
       </div>
       <div class="modal-footer">
-        <button type="reset" form="message_form" class="btn btn-default" data-dismiss="modal">Annuler</button>
+        <button type="reset" form="message_form" class="btn btn-default" data-dismiss="modal">Fermer</button>
         <button type="submit" form="message_form" class="btn btn-primary"><img src="<?php echo cdn; ?>/img/loader.gif" class="loader" alt="" /> <i class="fa fa-paper-plane"></i> Envoyer</button>
       </div>
     </div>

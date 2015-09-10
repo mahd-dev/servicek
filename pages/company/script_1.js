@@ -92,9 +92,11 @@ page_script({
 			current_item = undefined;
 		});
 
+		CKEDITOR.replace('message');
 
 		$("#message_form").ajaxForm({
 			beforeSubmit: function () {
+				CKEDITOR.instances.message.updateElement();
 				$(".success_msg", $("#message_form")).hide();
 				$(".unhandled_error", $("#message_form")).hide();
 			},
