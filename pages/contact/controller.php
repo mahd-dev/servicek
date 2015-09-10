@@ -4,7 +4,7 @@
 
 		chdir(__DIR__);
 		include_once '../../core/PHPMailer/PHPMailerAutoload.php';
-		
+
 		$mail = new PHPMailer;
 
 		$mail->isSMTP();
@@ -41,7 +41,6 @@
 
 		if(!$mail->send()) die($mail->ErrorInfo);
 		else {
-			$imap->saveMessageInSent($mail->createHeader(), $mail->createBody());
 			die(json_encode(array("status"=>"success")));
 		}
 	}

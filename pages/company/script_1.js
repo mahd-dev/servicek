@@ -93,10 +93,10 @@ page_script({
 		});
 
 		CKEDITOR.replace('message');
+		CKEDITOR.instances.message.on('change', function() { CKEDITOR.instances.message.updateElement() });
 
 		$("#message_form").ajaxForm({
 			beforeSubmit: function () {
-				CKEDITOR.instances.message.updateElement();
 				$(".success_msg", $("#message_form")).hide();
 				$(".unhandled_error", $("#message_form")).hide();
 			},
