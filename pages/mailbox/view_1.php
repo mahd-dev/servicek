@@ -28,7 +28,7 @@
 		</div>
 		<div class="hidden-xs">
 			<h4>Autres méthodes :</h4>
-			<a href="http://webmail.servicek.net" target="_blank">Utiliser le Webmail</a><br>
+			<a href="http://webmail.servicek.net/?_user=<?php echo $page->url; ?>" target="_blank">Utiliser le Webmail</a><br>
 			<a href="/help/mail-config/<?php echo $page->url; ?>" target="_blank">Configurer une application</a>
 		</div>
 	</div>
@@ -89,7 +89,7 @@
 
 		<div class="visible-xs-block">
 			<h4>Autres méthodes :</h4>
-			<a href="http://webmail.servicek.net" target="_blank">Utiliser le Webmail</a><br>
+			<a href="http://webmail.servicek.net/?_user=<?php echo $page->url; ?>" target="_blank">Utiliser le Webmail</a><br>
 			<a href="/help/mail-config/<?php echo $page->url; ?>" target="_blank">Configurer une application</a>
 		</div>
 
