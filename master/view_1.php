@@ -87,7 +87,7 @@
 		<div class="page-wrapper">
 			<div class="header header-large">
 				<div class="container">
-					<!-- <div class="pace-container"></div> -->
+					<div class="pace-container hide"></div>
 					<div class="header-inner">
 						<div class="header-top">
 							<ul class="nav nav-pills top-menu">
