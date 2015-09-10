@@ -50,7 +50,6 @@
 
 		if(!$mail->send()) die($mail->ErrorInfo);
 		else {
-			$imap->saveMessageInSent($mail->createHeader(), $mail->createBody());
 			die(json_encode(array("status"=>"success")));
 		}
 	}
