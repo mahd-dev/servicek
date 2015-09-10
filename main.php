@@ -9,7 +9,7 @@
 				include_once 'core/ogp/open-graph-protocol.php';
 				break;
 			case 'PHPMailer':
-				include_once 'PHPMailer/PHPMailerAutoload.php';
+				include_once 'core/PHPMailer/PHPMailerAutoload.php';
 				break;
 			default:
 				include_once 'core/'.$class_name.'.php';
