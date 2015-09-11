@@ -59,7 +59,7 @@
 					<p class="margin-bottom-30">
 						<strong><h5>Email :</h5></strong><br>
 						<?php $p_email = $job->url."@servicek.net"; $s_email = $job->email; ?>
-						<a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a>
+						<a href="mailto:<?php echo $p_email; ?>"><?php echo $p_email; ?></a>
 						<?php if ($p_email!=$s_email): ?>
 							<br>
 							<a href="mailto:<?php echo $s_email;?>"><?php echo $s_email;?></a>

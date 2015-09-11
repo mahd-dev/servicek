@@ -39,7 +39,7 @@
 			<p class="margin-bottom-10">
 				<strong>Email:</strong><br>
 				<?php $p_email = $shop->url."@servicek.net"; $s_email = $shop->email; ?>
-				<a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a>
+				<a href="mailto:<?php echo $p_email; ?>"><?php echo $p_email; ?></a>
 				<?php if ($p_email!=$s_email): ?>
 					<br>
 					<a href="mailto:<?php echo $s_email;?>"><?php echo $s_email;?></a>
