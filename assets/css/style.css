@@ -2663,6 +2663,9 @@ select.select2 {
   overflow: hidden;
   position: relative;
 }
+.property-box-image>div {
+  background-color: #fff;
+}
 .property-box-image:before {
   color: rgba(0, 0, 0, 0.2);
   content: "\f0c1";
