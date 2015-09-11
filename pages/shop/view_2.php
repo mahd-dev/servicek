@@ -99,8 +99,22 @@
 			</div>
 
 			<?php if ($is_admin_level): ?>
+				<?php
+					$address = $shop->url."@servicek.net";
+
+					$mailbox = 'servicek.net';
+					$username = $address;
+					$password = $_SESSION["pwd"];
+					$encryption = 'tls';
+
+					$imap = new imap($mailbox, $username, $password, $encryption);
+
+					if($imap->isConnected()===false) die($imap->getError());
+
+					$unreadMessages = $imap->countUnreadMessages();
+				?>
 				<div class="profile-usertitle">
-					<a href="<?php echo url_root."/".$shop->url; ?>/messages" class="btn btn-primary ajaxify"><i class="fa fa-envelope"></i> Consulter l'E-mail</a>
+					<a href="<?php echo url_root."/".$shop->url; ?>/messages" class="btn btn-primary ajaxify messages"><i class="fa fa-envelope"></i> Consulter l'E-mail<?php if(){ ?> <span class="badge"><?php echo $unreadMessages; ?></span><?php } ?></a>
 				</div>
 			<?php endif; ?>
 

@@ -309,6 +309,8 @@ page_script({
 			});
 		});
 
+		if($(".messages .badge").length) $(".messages").pulsate({color: "#e91e63",repeat: 3});
+
 		window.fbAsyncInit();
 	}
 });
