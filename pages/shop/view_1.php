@@ -38,8 +38,12 @@
 			</p>
 			<p class="margin-bottom-10">
 				<strong>Email:</strong><br>
-				<a href="mailto:<?php echo $company->url."@servicek.net"; ?>"><?php echo $company->url."@servicek.net"; ?></a><br>
-				<a href="mailto:<?php echo $shop->email;?>"><?php echo $shop->email;?></a>
+				<?php $p_email = $shop->url."@servicek.net"; $s_email = $shop->email; ?>
+				<a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a>
+				<?php if ($p_email!=$s_email): ?>
+					<br>
+					<a href="mailto:<?php echo $s_email;?>"><?php echo $s_email;?></a>
+				<?php endif; ?>
 			</p>
 		</div>
 		<div class="map_portlet portlet light">

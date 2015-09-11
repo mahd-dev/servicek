@@ -58,8 +58,12 @@
 					</p>
 					<p class="margin-bottom-30">
 						<strong><h5>Email :</h5></strong><br>
-						<a href="mailto:<?php echo $company->url."@servicek.net"; ?>"><?php echo $company->url."@servicek.net"; ?></a><br>
-						<a href="mailto:<?php echo $job->email;?>"><?php echo $job->email;?></a>
+						<?php $p_email = $job->url."@servicek.net"; $s_email = $job->email; ?>
+						<a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a>
+						<?php if ($p_email!=$s_email): ?>
+							<br>
+							<a href="mailto:<?php echo $s_email;?>"><?php echo $s_email;?></a>
+						<?php endif; ?>
 					</p>
 
 				</div>
