@@ -2867,7 +2867,7 @@ body .jumbotron-material-blue-grey,
   color: rgba(255, 255, 255, 0.84);
   -webkit-transition: background-color 0.2s ease, box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
           transition: background-color 0.2s ease, box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-  outline: none !important;
+  /*outline: none !important;*/
 }
 .btn:hover:not(.btn-link):not(.btn-flat):not(.btn-fab) {
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
