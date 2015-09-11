@@ -113,7 +113,7 @@
 					$unreadMessages = $imap->countUnreadMessages();
 				?>
 				<div class="profile-usertitle">
-					<a href="<?php echo url_root."/".$job->url; ?>/messages" class="btn btn-primary ajaxify messages"><i class="fa fa-envelope"></i> Consulter l'E-mail<?php if(){ ?> <span class="badge"><?php echo $unreadMessages; ?></span><?php } ?></a>
+					<a href="<?php echo url_root."/".$job->url; ?>/messages" class="btn btn-primary ajaxify messages"><i class="fa fa-envelope"></i> Consulter l'E-mail<?php if($unreadMessages){ ?> <span class="badge"><?php echo $unreadMessages; ?></span><?php } ?></a>
 				</div>
 			<?php endif; ?>
 
