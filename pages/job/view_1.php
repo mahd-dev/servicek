@@ -57,8 +57,9 @@
 						<?php echo $job->mobile;?>
 					</p>
 					<p class="margin-bottom-30">
-						<strong><h5>Email :</h5></strong>
-						<?php echo $job->email;?>
+						<strong><h5>Email :</h5></strong><br>
+						<a href="mailto:<?php echo $company->url."@servicek.net"; ?>"><?php echo $company->url."@servicek.net"; ?></a><br>
+						<a href="mailto:<?php echo $job->email;?>"><?php echo $job->email;?></a>
 					</p>
 
 				</div>

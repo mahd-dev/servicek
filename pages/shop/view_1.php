@@ -37,7 +37,9 @@
 				<strong>Portable:</strong> <?php echo $shop->mobile; ?>
 			</p>
 			<p class="margin-bottom-10">
-				<strong>Email:</strong> <?php echo $shop->email; ?>
+				<strong>Email:</strong><br>
+				<a href="mailto:<?php echo $company->url."@servicek.net"; ?>"><?php echo $company->url."@servicek.net"; ?></a><br>
+				<a href="mailto:<?php echo $shop->email;?>"><?php echo $shop->email;?></a>
 			</p>
 		</div>
 		<div class="map_portlet portlet light">
