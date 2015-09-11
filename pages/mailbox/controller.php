@@ -32,9 +32,9 @@
 	    header('Content-Length: ' . $attachment["size"]);
 			die($attachment["content"]);
 		}else{
-			$msg = $imap->getBody(intval($_GET["message"]));
+			$msg = $imap->getBody(intval($_GET["message"]))['body'];
 			$imap->setUnseenMessage(intval($_GET["message"]));
-			die(($msg["html"]?$msg["html"]:$msg["body"]));
+			die($msg);
 		}
 
 	}elseif(isset($_POST["remove_message"])){
