@@ -119,7 +119,7 @@
 		        </div>
 		        <div class="form-group">
 							<b>Sujet :</b>
-              <input type="text" name="subject" required>
+              <input type="text" class="form-control" name="subject" required>
 		        </div>
 						<div class="form-group">
 							<b>Fichiers en attachement :</b>
@@ -134,7 +134,10 @@
       </div>
       <div class="modal-footer">
         <button type="reset" form="message_form" class="btn btn-default" data-dismiss="modal">Fermer</button>
-        <button type="submit" form="message_form" class="btn btn-primary"><img src="<?php echo cdn; ?>/img/loader.gif" class="loader" alt="" /> <i class="fa fa-paper-plane"></i> Envoyer</button>
+        <button type="submit" form="message_form" class="btn btn-primary">
+					<div class="loader btn-loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg></div>
+					<i class="fa fa-paper-plane"></i> Envoyer
+				</button>
       </div>
     </div>
   </div>

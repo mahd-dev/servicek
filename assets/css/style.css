@@ -3894,6 +3894,16 @@ select.select2 {
   }
 }
 
-.pace-done .loader{
+.pace-done .loader.global{
+  display: none;
+}
+
+.loader.btn-loader{
+  position: absolute;
+  zoom: 0.5;
+  width: 0;
+  height: 0;
+  top: -15px;
+  left: -20px;
   display: none;
 }

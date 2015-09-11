@@ -45,6 +45,7 @@
 
 		$mail->Subject = $_POST["subject"];
 		$mail->Body    = $_POST["message"];
+		$mail->AltBody = strip_tags(str_replace(array("</p>"), "\r\n", str_replace(array("<br>", "</br>", "<br/>"), "\r\n", $_POST["message"])));
 
 		if(!$mail->send()) die($mail->ErrorInfo);
 		else {

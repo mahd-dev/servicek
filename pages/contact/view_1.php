@@ -86,7 +86,10 @@
 										<textarea class="form-control" rows="10" name="message" id="message" style="max-width:100%;" required></textarea>
 					        </div>
 						    </fieldset>
-				        <button type="submit" form="message_form" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Envoyer</button>
+				        <button type="submit" form="message_form" class="btn btn-primary">
+									<div class="loader btn-loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg></div>
+									<i class="fa fa-paper-plane"></i> Envoyer
+								</button>
 							</form>
 						</div>
 					</div>

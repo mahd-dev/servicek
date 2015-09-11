@@ -119,7 +119,7 @@
 									<img src="<?php echo cdn;?>/img/logo<?php echo(rtl?"-rtl":"");?>.svg" alt="logo" class="logo-default">
 								</a>
 							</div>
-							<div class="loader"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg></div>
+							<div class="loader global"><svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg></div>
 
 							<div class="header-search">
 								<form id="master_search_form" action="search">

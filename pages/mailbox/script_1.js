@@ -94,12 +94,12 @@ page_script({
 
 		$("#message_form").ajaxForm({
 			beforeSubmit: function () {
-				$(".loader", $("#message_modal")).show();
+				$(".btn-loader", $("#message_modal")).show();
 				$(".success_msg", $("#message_form")).hide();
 				$(".unhandled_error", $("#message_form")).hide();
 			},
 			success: function (rslt) {
-				$(".loader", $("#message_modal")).hide();
+				$(".btn-loader", $("#message_modal")).hide();
 				try{
           parsed=JSON.parse(rslt);
           if (parsed.status == "success") {
