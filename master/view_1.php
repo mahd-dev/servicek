@@ -34,7 +34,7 @@
 		<link href="<?php echo cdn;?>/libraries/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">
 		<link href="<?php echo cdn;?>/libraries/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet" type="text/css">
 		<link href="<?php echo cdn;?>/libraries/OwlCarousel/owl-carousel/owl.carousel.css" rel="stylesheet" type="text/css">
-		<link href="<?php echo cdn;?>/css/style.css" rel="stylesheet" type="text/css">
+		<link href="<?php echo cdn;?>/css/style<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css">
 
 		<link href="<?php echo cdn;?>/libraries/bootstrap-wysihtml5/bootstrap-wysihtml5<?php if(!debug) echo ".min";?>.css" rel="stylesheet" type="text/css">
 
