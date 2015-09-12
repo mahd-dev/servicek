@@ -9,47 +9,45 @@
 					<div class="col-md-6">
 						<h3 class="form-section">Informations de contact</h3>
 						<div class="box">
-							<address>
-								<table>
-									<tbody>
-										<tr>
-											<td><i class="fa fa-map-marker"></i></td>
-											<td>
-												<p>
-													<strong>Société tunisienne des services.</strong><br>
-													 Rue Imem Al Gazali<br>
-													 Kalaa Kebira 4060, Sousse, Tunisie
-												</p>
-											</td>
-										</tr>
-										<tr>
-											<td><i class="fa fa-phone"></i></td>
-											<td>
-												<p>
-													(+216) 73 35 00 73
-												</p>
-											</td>
-										</tr>
-										<tr>
-											<td><i class="fa fa-mobile" style="font-size:120%;"></i></td>
-											<td>
-												<p>
-													(+216) 97 83 11 97<br>
-													(+216) 55 99 78 57
-												</p>
-											</td>
-										</tr>
-										<tr>
-											<td><i class="fa fa-envelope"></i></td>
-											<td>
-												<p>
-													<a href="mailto:contact@servicek.net">contact@servicek.net</a>
-												</p>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							<br>
+							<table>
+								<tbody>
+									<tr>
+										<td><i class="fa fa-map-marker"></i></td>
+										<td>
+											<p>
+												<strong>Société tunisienne des services.</strong><br>
+												 Rue Imem Al Gazali<br>
+												 Kalaa Kebira 4060, Sousse, Tunisie
+											</p>
+										</td>
+									</tr>
+									<tr>
+										<td><i class="fa fa-phone"></i></td>
+										<td>
+											<p>
+												(+216) 73 35 00 73
+											</p>
+										</td>
+									</tr>
+									<tr>
+										<td><i class="fa fa-mobile" style="font-size:120%;"></i></td>
+										<td>
+											<p>
+												(+216) 97 83 11 97<br>
+												(+216) 55 99 78 57
+											</p>
+										</td>
+									</tr>
+									<tr>
+										<td><i class="fa fa-envelope"></i></td>
+										<td>
+											<p>
+												<a href="mailto:contact@servicek.net">contact@servicek.net</a>
+											</p>
+										</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 						<h3 class="form-section">Map</h3>
 						<div class="aspectratio-container aspect-4-3 fit-width box">

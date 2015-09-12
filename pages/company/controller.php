@@ -24,11 +24,11 @@
 		$mail->SMTPSecure = 'tls';
 		$mail->Port = 587;
 		$mail->SMTPOptions = array(
-		    'ssl' => array(
-		        'verify_peer' => false,
-		        'verify_peer_name' => false,
-		        'allow_self_signed' => true
-		    )
+	    'ssl' => array(
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true
+	    )
 		);
 
 		$mail->From = "no-reply@servicek.net";
@@ -37,13 +37,13 @@
 
 		$mail->addReplyTo($_POST["email"]);
 
+		$mail->isHTML(true);
+
 		if(isset($_FILES["attachments"])){
 			for ($i=0; $i < count($_FILES["attachments"]["name"]); $i++) {
 				$mail->addAttachment($_FILES["attachments"]["tmp_name"][$i], $_FILES["attachments"]["name"][$i]);
 			}
 		}
-
-		$mail->isHTML(true);
 
 		$mail->Subject = $_POST["subject"];
 		$mail->Body    = $_POST["message"];

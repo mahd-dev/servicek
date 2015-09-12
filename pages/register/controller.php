@@ -15,6 +15,45 @@
 			$new_user->email = $_POST["email"];
 			$new_user->mobile = $_POST["mobile"];
 
+			$validation_token = $new_user-set_email_validation_token();
+
+			chdir(__DIR__);
+			include_once '../../core/PHPMailer/PHPMailerAutoload.php';
+
+			$mail = new PHPMailer;
+
+			$mail->isSMTP();
+			$mail->Host = 'servicek.net';
+			$mail->SMTPAuth = true;
+			$mail->Username = "no-reply@servicek.net";
+			$mail->Password = $db_password;
+			$mail->SMTPSecure = 'tls';
+			$mail->Port = 587;
+			$mail->SMTPOptions = array(
+			    'ssl' => array(
+			        'verify_peer' => false,
+			        'verify_peer_name' => false,
+			        'allow_self_signed' => true
+			    )
+			);
+
+			$mail->From = "no-reply@servicek.net";
+			$mail->FromName = "servicek.net";
+			$mail->addAddress("contact@servicek.net");
+
+			$mail->addReplyTo("support@servicek.net");
+
+			$mail->isHTML(true);
+
+			$mail->Subject = "Validation de l'adresse sur servicek.net";
+
+			$body = "";
+
+			$mail->Body    = $body;
+			$mail->AltBody = strip_tags(str_replace(array("</p>"), "\r\n", str_replace(array("<br>", "</br>", "<br/>"), "\r\n", $body)));
+
+			$mail->send();
+
 			if(!$master) {
 				$_SESSION["user"]=serialize($new_user); // storing user to session
 				$_SESSION["pwd"]=$_POST["password"];

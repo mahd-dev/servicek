@@ -106,6 +106,25 @@
 			}
 		}
 
+		public function set_email_validation_token(){
+			$c_token = $this->email_validation_token;
+			if($c_token) return $c_token;
+			else{
+				$c_token = gf::generate_guid();
+				$this->email_validation_token = $c_token;
+				return $c_token;
+			}
+		}
+
+		public static function get_user_by_email_validation_token($email_validationd_token){
+			global $db;
+			$q=$db->query("select id from user where (email_validation_token='".$email_validation_token."')");
+			if($q->num_rows==1){
+				$r=$q->fetch_row();
+				return new user($r[0]);
+			}else return null;
+		}
+
 		public function set_reset_password_token(){
 			$c_token = $this->reset_password_token;
 			if($c_token) return $c_token;

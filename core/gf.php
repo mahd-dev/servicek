@@ -105,88 +105,110 @@
 
 			$rslt = array();
 
-			$q_company=$db->query("
+			$req_company="
 				SELECT id,
-				(((MATCH (name) AGAINST ('$q')) + (MATCH (slogan, description) AGAINST ('$q'))) / 2)
-				AS score
-    			FROM company WHERE (MATCH (name, slogan, description) AGAINST ('$q'))
-    		") or die("q_company : ".$db->error);
+					((IFNULL(approximate(IFNULL(name,''), '$q'),0) + IFNULL(approximate(CONCAT(IFNULL(slogan,''), IFNULL(description,'')),'$q'),0)) / 2)
+					AS score
+    			FROM company WHERE
+					(((IFNULL(approximate(IFNULL(name,''), '$q'),0) + IFNULL(approximate(CONCAT(IFNULL(slogan,''), IFNULL(description,'')), '$q'),0)) / 2) > 50)
+    		";
+				$q_company=$db->query($req_company) or die("req_company : ".$req_company."\r\n\r\n".$db->error);
 			while ($r=$q_company->fetch_row()) {
 				$e = new company($r[0]);
-				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => 1);
+				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => $r[1]);
 			}
 
-			$q_company_seat=$db->query("
-				SELECT id_company, MATCH (name, address, tel, mobile, email) AGAINST ('$q') AS score
-    			FROM company_seat WHERE MATCH (name, address, tel, mobile, email) AGAINST ('$q')
-			") or die("q_category : ".$db->error);
+			$req_company_seat="
+				SELECT id_company,
+					(IFNULL(approximate(CONCAT(IFNULL(name,''), IFNULL(address,''), IFNULL(tel,''), IFNULL(mobile,''), IFNULL(email,'')),'$q'),0))
+					AS score
+    			FROM company_seat WHERE
+					((IFNULL(approximate(CONCAT(IFNULL(name,''), IFNULL(address,''), IFNULL(tel,''), IFNULL(mobile,''), IFNULL(email,'')),'$q'),0)) > 50)
+			";
+			$q_company_seat=$db->query($req_company_seat) or die("req_category : ".$req_company_seat."\r\n\r\n".$db->error);
 			while ($r=$q_company_seat->fetch_row()) {
 				$c = new company($r[0]);
 				if($c->is_contracted) {
 					$ex = array_search($c, array_column($rslt, 'obj'));
-					if($ex!==false) $rslt[$ex]["score"] += 1;
-					else $rslt[] = array("obj" => $c, "score" => 1);
+					if($ex!==false) $rslt[$ex]["score"] += $r[1];
+					else $rslt[] = array("obj" => $c, "score" => $r[1]);
 				}
 			}
 
-			$q_shop=$db->query("
+			$req_shop="
 				SELECT id,
-				(((MATCH (name) AGAINST ('$q')) + (MATCH (description, address, tel, mobile, email) AGAINST ('$q'))) / 2)
-				AS score
-    			FROM shop WHERE MATCH (name, description, address, tel, mobile, email) AGAINST ('$q')
-			") or die("q_shop : ".$db->error);
+					((IFNULL(approximate(IFNULL(name,''), '$q'),0) + IFNULL(approximate(CONCAT(IFNULL(description,''), IFNULL(address,''), IFNULL(tel,''), IFNULL(mobile,''), IFNULL(email,'')),'$q'),0)) / 2)
+					AS score
+    			FROM shop WHERE
+					((IFNULL(approximate(CONCAT(IFNULL(name,''), IFNULL(description,''), IFNULL(address,''), IFNULL(tel,''), IFNULL(mobile,''), IFNULL(email,'')),'$q'),0)) > 50)
+			";
+			$q_shop=$db->query($req_shop) or die("req_shop : ".$req_shop."\r\n\r\n".$db->error);
 			while ($r=$q_shop->fetch_row()) {
 				$e = new shop($r[0]);
-				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => 1);
+				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => $r[1]);
 			}
 
-			$q_job=$db->query("
+			$req_job="
 				SELECT id,
-				(((MATCH (name) AGAINST ('$q')) + (MATCH (description, address, tel, mobile, email) AGAINST ('$q'))) / 2)
-				AS score
-    			FROM job WHERE MATCH (name, description, address, tel, mobile, email) AGAINST ('$q')
-			") or die("q_job : ".$db->error);
+					((IFNULL(approximate(IFNULL(name,''), '$q'),0) + IFNULL(approximate(CONCAT(IFNULL(description,''), IFNULL(address,''), IFNULL(tel,''), IFNULL(mobile,''), IFNULL(email,'')),'$q'),0)) / 2)
+					AS score
+					FROM job WHERE
+    			((IFNULL(approximate(CONCAT(IFNULL(name,''), IFNULL(description,''), IFNULL(address,''), IFNULL(tel,''), IFNULL(mobile,''), IFNULL(email,'')),'$q'),0)) > 50)
+			";
+			$q_job=$db->query($req_job) or die("req_job : ".$req_job."\r\n\r\n".$db->error);
 			while ($r=$q_job->fetch_row()) {
 				$e = new job($r[0]);
-				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => 1);
+				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => $r[1]);
 			}
 
-			$q_product=$db->query("
-				SELECT id, MATCH (name, description) AGAINST ('$q') AS score
-    			FROM product WHERE MATCH (name, description) AGAINST ('$q')
-			") or die("q_product : ".$db->error);
+			$req_product="
+				SELECT id,
+					(IFNULL(approximate(IFNULL(CONCAT(IFNULL(name,''), IFNULL(description,'')),'aa'),'$q'),0))
+					AS score
+    			FROM product WHERE
+					((IFNULL(approximate(IFNULL(CONCAT(IFNULL(name,''), IFNULL(description,'')),'aa'),'$q'),0)) > 50)
+			";
+			$q_product=$db->query($req_product) or die("req_product : ".$req_product."\r\n\r\n".$db->error);
 			while ($r=$q_product->fetch_row()) {
 				$e = new product($r[0]);
-				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => 1);
+				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => $r[1]);
 			}
 
-			$q_service=$db->query("
-				SELECT id, MATCH (name, description) AGAINST ('$q') AS score
-    			FROM service WHERE MATCH (name, description) AGAINST ('$q')
-			") or die("q_service : ".$db->error);
+			$req_service="
+				SELECT id,
+					(IFNULL(approximate(CONCAT(IFNULL(name,''), IFNULL(description,'')),'$q'),0))
+					AS score
+					FROM service WHERE
+					((IFNULL(approximate(CONCAT(IFNULL(name,''), IFNULL(description,'')),'$q'),0)) > 50)
+			";
+			$q_service=$db->query($req_service) or die("req_service : ".$req_service."\r\n\r\n".$db->error);
 			while ($r=$q_service->fetch_row()) {
 				$e = new service($r[0]);
-				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => 1);
+				if($e->is_contracted) $rslt[] = array("obj" => $e, "score" => $r[1]);
 			}
 
-			$q_category=$db->query("
-				SELECT id, MATCH (name) AGAINST ('$q') AS score
-    			FROM category WHERE MATCH (name) AGAINST ('$q')
-			") or die("q_category : ".$db->error);
+			$req_category="
+			SELECT id,
+				(IFNULL(approximate(IFNULL(name,''),'$q'),0))
+				AS score
+				FROM product WHERE
+				((IFNULL(approximate(IFNULL(name,''),'$q'),0)) > 50)
+			";
+			$q_category=$db->query($req_category) or die("req_category : ".$req_category."\r\n\r\n".$db->error);
 			while ($r=$q_category->fetch_row()) {
 				$c = new category($r[0]);
 				foreach($c->childrens as $child){
 					if($child->is_contracted){
 						$ex = array_search($child, array_column($rslt, 'obj'));
-						if($ex!==false) $rslt[$ex]["score"] += 1;
-						else $rslt[] = array("obj" => $child, "score" => 1);
+						if($ex!==false) $rslt[$ex]["score"] += $r[1];
+						else $rslt[] = array("obj" => $child, "score" => $r[1]);
 					}
 				}
 
 			}
 
 			usort($rslt, function($a, $b) {
-			    return $a['score'] - $b['score'];
+			    return $b['score'] - $a['score'];
 			});
 
 			return $rslt;
