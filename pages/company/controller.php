@@ -20,7 +20,7 @@
 		$mail->Host = 'servicek.net';
 		$mail->SMTPAuth = true;
 		$mail->Username = "no-reply@servicek.net";
-		$mail->Password = $db_password;
+		$mail->Password = $smtp_noreply_password;
 		$mail->SMTPSecure = 'tls';
 		$mail->Port = 587;
 		$mail->SMTPOptions = array(
