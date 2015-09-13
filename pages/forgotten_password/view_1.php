@@ -5,7 +5,7 @@
 		<h2 class="page-header center">Demande de réinitialisation<br>du mot de passe<br></h2>
 
 		<div class="alert alert-success success" style="display:none;">
-				Le ticket de réinitialisation du mot de passe vous a été envoyé avec succès, rendez-vous sur votre boite de réception de <span class="email"></span>.
+				Le ticket de réinitialisation du mot de passe vous a été envoyé avec succès, rendez-vous sur votre boite de réception.
 		</div>
 		<div class="box">
 			<form id="reset_form" method="post" role="form">
