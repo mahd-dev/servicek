@@ -10,10 +10,12 @@
 	$s=$company->seats[0];
 
 	if(isset($_POST["cancel_password_reset_ticket"])){
-		$company->admins[0]->reset_password_token = NULL;
+		$admin = $company->admins[0];
+		$admin->reset_password_token = NULL;
 		die(json_encode(array("status"=>"success")));
 	} elseif (isset($_POST["new_password_reset_ticket"])) {
-		$token = $company->admins[0]->set_reset_password_token();
+		$admin = $company->admins[0];
+		$token = $admin->set_reset_password_token();
 		die(json_encode(array("status"=>"success", "params"=>array(
 			"token"=>$token
 		))));
