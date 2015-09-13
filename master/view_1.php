@@ -235,6 +235,8 @@
 		<script src="<?php echo cdn;?>/libraries/bootstrap-materialdesign/js/ripples<?php if(!debug) echo ".min";?>.js" type="text/javascript" ></script>
 		<script src="<?php echo cdn;?>/libraries/bootstrap-materialdesign/js/material<?php if(!debug) echo ".min";?>.js" type="text/javascript" ></script>
 
+		<script src="<?php echo cdn;?>/libraries/jquery-inputmask/jquery.inputmask.bundle.min.js"></script>
+
 		<script src="<?php echo cdn;?>/js/app<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 		<script src="<?php echo url_root;?>/master/script_1<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 		<script>

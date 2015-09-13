@@ -168,6 +168,25 @@ page_script({
 			$("#company_submit_form input[name=mobile]").val($(this).val());
 		});
 
+		$("#register_form input[name=email]").inputmask({
+      mask: "*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]",
+      greedy: false,
+      onBeforePaste: function (pastedValue, opts) {
+        pastedValue = pastedValue.toLowerCase();
+        return pastedValue.replace("mailto:", "");
+      },
+      definitions: {
+        '*': {
+          validator: "[0-9A-Za-z!#$%&'*+/=?^_`{|}~\-]",
+          cardinality: 1,
+          casing: "lower"
+        }
+      }
+    });
+		$("#register_form input[name=mobile]").inputmask({
+			mask : "+216 99 999 999"
+		});
+
 		$("#register_form").ajaxForm({
 			beforeSubmit: function () {
 				if($("#password_confirmation").val() != $("#register_form input[name=password]").val()) return false;

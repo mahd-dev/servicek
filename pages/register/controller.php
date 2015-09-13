@@ -67,12 +67,7 @@
 		}else die(json_encode(array("status"=>"username_exists")));
 	}
 
-	// definig SEO parameters
-	// ...
-
-	// select and display right view
-	// ...
-	include "view_1.php";
-
+	include __DIR__."/../new/controller.php";
+	
 	skip_this_page:
 ?>

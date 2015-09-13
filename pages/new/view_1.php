@@ -13,7 +13,7 @@
 								<input type="text" class="form-control" placeholder="Nom et prénom" name="displayname" required>
 							</div>
 							<div class="form-group">
-								<input type="email" class="form-control" placeholder="E-mail" name="email" required>
+								<input type="text" class="form-control" placeholder="E-mail" name="email" required>
 							</div>
 							<div class="form-group">
 								<input type="tel" class="form-control" placeholder="Téléphone" name="mobile" required>
