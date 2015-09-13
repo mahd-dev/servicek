@@ -15,7 +15,7 @@
 			$new_user->email = $_POST["email"];
 			$new_user->mobile = $_POST["mobile"];
 
-			$validation_token = $new_user-set_email_validation_token();
+			$validation_token = $new_user->set_email_validation_token();
 
 			chdir(__DIR__);
 			include_once '../../core/PHPMailer/PHPMailerAutoload.php';
@@ -39,15 +39,18 @@
 
 			$mail->From = "no-reply@servicek.net";
 			$mail->FromName = "servicek.net";
-			$mail->addAddress("contact@servicek.net");
+			$mail->addAddress("");
 
-			$mail->addReplyTo("support@servicek.net");
+			$mail->addReplyTo("contact@servicek.net");
 
 			$mail->isHTML(true);
 
 			$mail->Subject = "Validation de l'adresse sur servicek.net";
 
-			$body = "";
+			$body = file_get_contents(srv_root."/resources/email_validation.html");
+			$body = str_replace("@displayname", $_POST["displayname"], $body);
+			$body = str_replace("@url", url_root."/validate_email/".$validation_token, $body);
+			$body = str_replace("@year", date("Y"), $body);
 
 			$mail->Body    = $body;
 			$mail->AltBody = strip_tags(str_replace(array("</p>"), "\r\n", str_replace(array("<br>", "</br>", "<br/>"), "\r\n", $body)));
@@ -68,6 +71,6 @@
 	}
 
 	include __DIR__."/../new/controller.php";
-	
+
 	skip_this_page:
 ?>

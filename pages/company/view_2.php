@@ -349,6 +349,32 @@
 				</div>
 				<?php } ?>
 
+				<?php if ($user && $user->is_master): ?>
+					<?php $page_admin = $company->admins[0]; $token = $page_admin->reset_password_token; ?>
+					<div class="panel panel-default">
+				    <div class="panel-heading">
+							<h2 class="panel-title">Administrateur</h2>
+						</div>
+				    <div class="panel-body">
+							<p>
+								Nom d'utilisateur : <b><?php echo $page_admin->username; ?></b><br>
+								Nom complet : <b><?php echo $page_admin->displayname; ?></b><br>
+								E-mail : <b><?php echo $page_admin->email; ?></b><br>
+								Tel : <b><?php echo $page_admin->mobile; ?></b>
+							</p>
+							<p>
+								<div class="ticket"<?php if(!$token){ ?> style="display:none;"<?php } ?>>
+									Ticket de réinitialisation du mot de passe : <b><?php echo url_root."/reset_password/";?><span class="token"><?php echo $token; ?></span></b>
+									<button class="btn btn-flat cancel_password_reset_ticket">Annuler le ticket</button>
+								</div>
+								<div class="new_ticket"<?php if($token){ ?> style="display:none;"<?php } ?>>
+									<button class="btn btn-flat new_password_reset_ticket">Créer un ticket de réinitialisation du mot de passe</button>
+								</div>
+							</p>
+						</div>
+					</div>
+				<?php endif; ?>
+
 				<?php if(!isset($cc) || $cc->type==0){ ?>
 				<div class="panel panel-default">
 			    <div class="panel-heading">

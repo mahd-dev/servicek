@@ -27,7 +27,10 @@
 						<div class="form-group">
 							<input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
 						</div>
+						<div>
 							<button type="submit" class="btn btn-primary btn-raised"><i class="icon-check"></i> Se connecter</button>
+							<a href="<?php echo url_root;?>/forgotten_password" class="ajaxify pull-right" style="margin-top: 18px;">Mot de passe oubliée</a>
+						</div>
 					</form>
 				</div>
 	</div>

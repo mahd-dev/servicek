@@ -414,16 +414,12 @@ var app = function() {
         error: function(xhr, ajaxOptions, thrownError) {}
       });
     },
-    logout: function(newURL, loadURL) {
+    logout: function(go_to) {
       $(".top-menu .user-btn").hide();
       $(".top-menu .login-btn").show();
       $(".top-menu .user-btn .username").text("");
 
-      if (loadURL == true) Layout.ajaxify(newURL);
-      else {
-        var newURL = (newURL === undefined ? document.origin : newURL);
-        history.replaceState(null, document.title, newURL);
-      }
+      app.ajaxify(go_to === undefined ? location.href : go_to);
     }
   };
 

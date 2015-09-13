@@ -7,6 +7,16 @@
 
 	$is_admin_level = ($user!=null && !$user->is_master && $page->admin==$user);
 
+	if(isset($_POST["cancel_password_reset_ticket"])){
+		$job->admin->reset_password_token = NULL;
+		die(json_encode(array("status"=>"success")));
+	} elseif (isset($_POST["new_password_reset_ticket"])) {
+		$token = $job->admin->set_reset_password_token();
+		die(json_encode(array("status"=>"success", "params"=>array(
+			"token"=>$token
+		))));
+	}
+
 	if(isset($_POST["email"]) && isset($_POST["subject"]) && isset($_POST["message"])){
 
 		chdir(__DIR__);

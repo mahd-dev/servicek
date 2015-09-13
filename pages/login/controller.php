@@ -12,7 +12,7 @@
         $login_resp=user::login($_POST["username"], $_POST["password"], gf::getClientIP()); // checking login parameters
 
         if ($login_resp instanceof user){ // login parameters are valid
-
+            $login_resp->reset_password_token = NULL;
             $_SESSION["user"]=serialize($login_resp); // storing user to session
             $_SESSION["pwd"]=$_POST["password"];
 						if($login_resp->count_pages==1) $url = url_root."/".$login_resp->pages[0]->url;

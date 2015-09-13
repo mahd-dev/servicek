@@ -43,7 +43,7 @@ page_script({
                         $("#login_form input[name=newpassword]").val("");
                         $("#login_form input[name=newpassword]").focus();
                     } else if (parsed.status == "not_logged_in") {
-                        app.logout(location.origin + "/login", true);
+                        app.logout(location.origin + "/login");
                     } else if (parsed.status == "old_password_error") {
                         $(".old_password_error .remaining_attempts").text(parsed.params.remaining_attempts);
                         $(".old_password_error").show();

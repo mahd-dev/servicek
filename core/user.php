@@ -28,6 +28,11 @@
 					case "id":
 						return $this->id;
 					break;
+					case "isvalid":
+						$q=$db->query("select count(*) from user where (id='".$this->id."')");
+						$r=$q->fetch_row();
+						return $r[0]==1;
+					break;
 					case "is_master":
 						return $this->type=="master";
 					break;
@@ -107,22 +112,28 @@
 		}
 
 		public function set_email_validation_token(){
-			$c_token = $this->email_validation_token;
-			if($c_token) return $c_token;
-			else{
-				$c_token = gf::generate_guid();
-				$this->email_validation_token = $c_token;
-				return $c_token;
-			}
+			$c_token = gf::generate_guid();
+			$this->email_validation_token = $c_token;
+			return $c_token;
 		}
 
-		public static function get_user_by_email_validation_token($email_validationd_token){
+		public static function get_by_email_validation_token($email_validation_token){
 			global $db;
 			$q=$db->query("select id from user where (email_validation_token='".$email_validation_token."')");
 			if($q->num_rows==1){
 				$r=$q->fetch_row();
 				return new user($r[0]);
 			}else return null;
+		}
+
+		public static function get_by_email($email){
+			global $db;
+			$list = array();
+			$q=$db->query("select id from user where (email='".$email."')");
+			while($r=$q->fetch_row()){
+				$list[] = new user($r[0]);
+			}
+			return $list;
 		}
 
 		public function set_reset_password_token(){
@@ -135,7 +146,7 @@
 			}
 		}
 
-		public static function get_user_by_reset_password_token($reset_password_token){
+		public static function get_by_reset_password_token($reset_password_token){
 			global $db;
 			$q=$db->query("select id from user where (reset_password_token='".$reset_password_token."')");
 			if($q->num_rows==1){

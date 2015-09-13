@@ -20,6 +20,9 @@
 		"product",
 		"service",
 		"post",
+		"validate_email",
+		"reset_password",
+		"forgotten_password",
 		"help",
 		"sitemap.xml",
 	);
@@ -104,6 +107,19 @@
     case "post":
 			if(isset($url[1])) $_GET["id"]=$url[1];
 			$req_page = "pages/post/controller.php";
+		break;
+
+		case 'validate_email':
+			if(isset($url[1])) $_GET["token"]=$url[1];
+			$req_page = "pages/validate_email/controller.php";
+		break;
+		case 'reset_password':
+			if(isset($url[1])) $_GET["token"]=$url[1];
+			if(isset($url[2])) $_GET["email_validation_token"]=$url[1];
+			$req_page = "pages/reset_password/controller.php";
+		break;
+		case 'forgotten_password':
+			$req_page = "pages/forgotten_password/controller.php";
 		break;
 
 		case "setlocations":

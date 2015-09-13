@@ -422,6 +422,35 @@ page_script({
 
 		if($(".messages .badge").length) $(".messages").pulsate({color: "#e91e63",repeat: 3});
 
+		$(".ticket .cancel_password_reset_ticket").click(function (e) {
+			$.post(location.href, {"cancel_password_reset_ticket": true}, function (rslt) {
+				try{
+					var parsed = JSON.parse(rslt);
+					if(parsed.status=="success"){
+						$(".ticket").hide();
+						$(".new_ticket").show();
+						$(".ticket .token").text("");
+					}else console.log(rslt);
+				}catch(ex){
+					console.log(rslt);
+				}
+			});
+		});
+		$(".new_ticket .new_password_reset_ticket").click(function (e) {
+			$.post(location.href, {"new_password_reset_ticket": true}, function (rslt) {
+				try{
+					var parsed = JSON.parse(rslt);
+					if(parsed.status=="success"){
+						$(".ticket .token").text(parsed.params.token);
+						$(".new_ticket").hide();
+						$(".ticket").show();
+					}else console.log(rslt);
+				}catch(ex){
+					console.log(rslt);
+				}
+			});
+		});
+
 		window.fbAsyncInit();
 	}
 });
