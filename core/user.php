@@ -101,7 +101,7 @@
 					break;
 
 					default:
-						$q=$db->query("select ".$name." from user where (id='".$this->id."')");
+						$q=$db->query("select ".$name." from user where (id='".$this->id."')") or die($db->error);
 						$r=$q->fetch_row();
 						return $r[0];
 					break;
