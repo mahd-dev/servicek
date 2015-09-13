@@ -5,6 +5,7 @@
   }
 
 	function sendmail($account){
+		global $smtp_noreply_password;
 		chdir(__DIR__);
 		include_once '../../core/PHPMailer/PHPMailerAutoload.php';
 
