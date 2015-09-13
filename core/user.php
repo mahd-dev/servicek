@@ -137,13 +137,9 @@
 		}
 
 		public function set_reset_password_token(){
-			$c_token = $this->reset_password_token;
-			if($c_token) return $c_token;
-			else{
-				$c_token = gf::generate_guid();
-				$this->reset_password_token = $c_token;
-				return $c_token;
-			}
+			$c_token = gf::generate_guid();
+			$this->reset_password_token = $c_token;
+			return $c_token;
 		}
 
 		public static function get_by_reset_password_token($reset_password_token){

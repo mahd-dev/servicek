@@ -6,6 +6,8 @@
 
 	function sendmail($account){
 		global $smtp_noreply_password;
+
+		$validation_token = $account->set_reset_password_token();
 		chdir(__DIR__);
 		include_once '../../core/PHPMailer/PHPMailerAutoload.php';
 
