@@ -42,7 +42,7 @@
 		$body = str_replace("@displayname", $account->displayname, $body);
 		$body = str_replace("@username", $account->username, $body);
 		$email_validation_token = $account->email_validation_token;
-		$body = str_replace("@url", url_root."/validate_email/".$validation_token.($email_validation_token?"/".$email_validation_token:""), $body);
+		$body = str_replace("@url", url_root."/reset_password/".$validation_token.($email_validation_token?"/".$email_validation_token:""), $body);
 		$body = str_replace("@year", date("Y"), $body);
 
 		$mail->Body    = $body;
