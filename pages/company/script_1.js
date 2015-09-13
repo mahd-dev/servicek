@@ -28,7 +28,7 @@ page_script({
 
 		var current_item = undefined;
 
-		$(".ps").click(function () {
+		$(".ps").click(function (e) {
 			var b = $(this);
 			current_item = b.parent().parent();
 			var m = $("#show_ps");
@@ -51,7 +51,7 @@ page_script({
 				m.find(".rent_price").show();
 			} else m.find(".rent_price").hide();
 
-			history.pushState(undefined, document.title, b.attr("data-url"));
+			if(e.originalEvent) history.pushState(undefined, document.title, b.attr("data-url"));
 			m.find(".fb-like").attr("data-href", b.attr("data-url"));
 			m.find(".fb-comments").attr("data-href", b.attr("data-url"));
 			window.fbAsyncInit();

@@ -11,7 +11,7 @@ page_script({
 
 		var current_item = undefined;
 
-		$(".po").click(function () {
+		$(".po").click(function (e) {
 			var b = $(this);
 			current_item = b.parent();
 			var m = $("#show_po");
@@ -24,7 +24,7 @@ page_script({
 			if(b.attr("data-description")!="") m.find(".description").text(b.attr("data-description")).show();
 			else m.find(".description").hide();
 
-			history.pushState(undefined, document.title, b.attr("data-url"));
+			if(e.originalEvent) history.pushState(undefined, document.title, b.attr("data-url"));
 			m.find(".fb-like").attr("data-href", b.attr("data-url"));
 			m.find(".fb-comments").attr("data-href", b.attr("data-url"));
 			window.fbAsyncInit();
