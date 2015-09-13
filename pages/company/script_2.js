@@ -422,8 +422,10 @@ page_script({
 
 		if($(".messages .badge").length) $(".messages").pulsate({color: "#e91e63",repeat: 3});
 
-		$(".ticket .cancel_password_reset_ticket").click(function (e) {
+		$(".ticket .cancel_password_reset_ticket").live("click", function (e) {
+			console.log("ok");
 			$.post(location.href, {"cancel_password_reset_ticket": true}, function (rslt) {
+				console.log(rslt);
 				try{
 					var parsed = JSON.parse(rslt);
 					if(parsed.status=="success"){
@@ -436,8 +438,10 @@ page_script({
 				}
 			});
 		});
-		$(".new_ticket .new_password_reset_ticket").click(function (e) {
+		$(".new_ticket .new_password_reset_ticket").live("click", function (e) {
+			console.log("ok");
 			$.post(location.href, {"new_password_reset_ticket": true}, function (rslt) {
+				console.log(rslt);
 				try{
 					var parsed = JSON.parse(rslt);
 					if(parsed.status=="success"){
