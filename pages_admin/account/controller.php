@@ -13,7 +13,53 @@
 				}
 				$user->displayname=$_POST["value"];
 			break;
-			case "email":$user->email=$_POST["value"];break;
+			case "email":
+				$user->email=$_POST["value"];
+
+				$validation_token = $user->set_email_validation_token();
+
+				chdir(__DIR__);
+				include_once '../../core/PHPMailer/PHPMailerAutoload.php';
+
+				$mail = new PHPMailer;
+
+				$mail->isSMTP();
+				$mail->Host = 'servicek.net';
+				$mail->SMTPAuth = true;
+				$mail->Username = "no-reply@servicek.net";
+				$mail->Password = $smtp_noreply_password;
+				$mail->SMTPSecure = 'tls';
+				$mail->Port = 587;
+				$mail->SMTPOptions = array(
+				    'ssl' => array(
+				        'verify_peer' => false,
+				        'verify_peer_name' => false,
+				        'allow_self_signed' => true
+				    )
+				);
+
+				$mail->From = "no-reply@servicek.net";
+				$mail->FromName = "servicek.net";
+				$mail->addAddress("");
+
+				$mail->addReplyTo("contact@servicek.net");
+
+				$mail->isHTML(true);
+
+				$mail->Subject = "Validation de l'adresse sur servicek.net";
+
+				$body = file_get_contents(srv_root."/resources/email_validation.html");
+				$body = str_replace("@displayname", $user->displayname, $body);
+				$body = str_replace("@url", url_root."/validate_email/".$validation_token, $body);
+				$body = str_replace("@year", date("Y"), $body);
+
+				$mail->Body    = $body;
+				$mail->AltBody = strip_tags(str_replace(array("</p>"), "\r\n", str_replace(array("<br>", "</br>", "<br/>"), "\r\n", $body)));
+
+				$mail->send();
+
+
+			break;
 			case "mobile":$user->mobile=$_POST["value"];break;
 		}
 		die("success");
