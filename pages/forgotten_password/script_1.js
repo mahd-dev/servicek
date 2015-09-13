@@ -12,7 +12,7 @@ page_script({
 
 				try{
 					parsed=JSON.parse(rslt);
-					if ( parsed.status == "logged_in" ) {
+					if ( parsed.status == "success" ) {
 						$("#reset_form input[name=email]").val("");
 						$("#reset_form .input_accounts").hide();
 						$("#reset_form .input_accounts select").empty();
