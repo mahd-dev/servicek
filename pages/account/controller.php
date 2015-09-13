@@ -43,7 +43,7 @@
 
 				$mail->From = "no-reply@servicek.net";
 				$mail->FromName = "servicek.net";
-				$mail->addAddress("");
+				$mail->addAddress($_POST["value"]);
 
 				$mail->addReplyTo("contact@servicek.net");
 
