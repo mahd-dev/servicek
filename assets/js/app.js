@@ -418,8 +418,7 @@ var app = function() {
       $(".top-menu .user-btn").hide();
       $(".top-menu .login-btn").show();
       $(".top-menu .user-btn .username").text("");
-
-      app.ajaxify(go_to === undefined ? location.href : go_to);
+      app.ajaxify(go_to === undefined ? (location.href.indexOf("logout")>0?location.origin : location.href) : go_to);
     }
   };
 
