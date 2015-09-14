@@ -33,12 +33,10 @@ page_script({
 		$("#reset_form input[name=password]").change(check_password_confirmation);
 		$("#password_confirmation").change(check_password_confirmation);
 
-		$("#reset_form").ajaxForm({
-			beforeSubmit: function () {
-				if($("#password_confirmation").val() != $("#reset_form input[name=password]").val()) return false;
-			},
-			success: function (rslt) {
-
+		$("#reset_form").submit(function (e) {
+			e.preventDefault();
+			if($("#password_confirmation").val() != $("#reset_form input[name=password]").val()) return false;
+			$.post(location.href, $(this).serialize(), function(rslt) {
 				try{
 					parsed=JSON.parse(rslt);
 					if ( parsed.status == "logged_in" ) {
@@ -62,12 +60,8 @@ page_script({
 					console.log(rslt);
 					$(".unhandled_error").show();
 				}
-
-			},
-			error: function () {
-				console.log(rslt);
-				$(".unhandled_error").show();
-			}
+			});
+			return false;
 		});
 	}
 });
