@@ -8,7 +8,7 @@
 			<h4>
 				Nom d'utilisateur: <b><?php echo $new_user->username; ?></b>
 			</h4>
-			<form id="reset_form" method="post" role="form">
+			<form id="reset_form" method="post">
 				<div class="form-body margin-bottom-20">
 
 					<div class="form-group">
@@ -42,6 +42,7 @@
 	</div>
 </div>
 
-<script src="<?php echo url_root;?>/pages/login/logout<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
 <!-- custom page script -->
 <script src="<?php echo url_root;?>/pages/reset_password/script_1<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
+
+<script src="<?php echo url_root;?>/pages/login/logout<?php if(!debug) echo ".min";?>.js" type="text/javascript"></script>
