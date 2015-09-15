@@ -107,7 +107,7 @@
 
 			$req_company="
 				SELECT id,
-					((IFNULL(approximate(IFNULL(name,''), '$q'),0) + IFNULL(approximate(CONCAT(IFNULL(slogan,''), IFNULL(description,'')),'$q'),0)) / 2)
+					(((IFNULL(approximate(IFNULL(name,''), '$q'),0) * 3) + IFNULL(approximate(CONCAT(IFNULL(slogan,''), IFNULL(description,'')),'$q'),0)) / 4)
 					AS score
     			FROM company WHERE
 					(((IFNULL(approximate(IFNULL(name,''), '$q'),0) + IFNULL(approximate(CONCAT(IFNULL(slogan,''), IFNULL(description,'')), '$q'),0)) / 2) > 50)
@@ -137,7 +137,7 @@
 
 			$req_shop="
 				SELECT id,
-					((IFNULL(approximate(IFNULL(name,''), '$q'),0) + IFNULL(approximate(CONCAT(IFNULL(description,''), IFNULL(address,''), IFNULL(tel,''), IFNULL(mobile,''), IFNULL(email,'')),'$q'),0)) / 2)
+					(((IFNULL(approximate(IFNULL(name,''), '$q'),0) * 3) + IFNULL(approximate(CONCAT(IFNULL(description,''), IFNULL(address,''), IFNULL(tel,''), IFNULL(mobile,''), IFNULL(email,'')),'$q'),0)) / 4)
 					AS score
     			FROM shop WHERE
 					((IFNULL(approximate(CONCAT(IFNULL(name,''), IFNULL(description,''), IFNULL(address,''), IFNULL(tel,''), IFNULL(mobile,''), IFNULL(email,'')),'$q'),0)) > 50)
@@ -150,7 +150,7 @@
 
 			$req_job="
 				SELECT id,
-					((IFNULL(approximate(IFNULL(name,''), '$q'),0) + IFNULL(approximate(CONCAT(IFNULL(description,''), IFNULL(address,''), IFNULL(tel,''), IFNULL(mobile,''), IFNULL(email,'')),'$q'),0)) / 2)
+					(((IFNULL(approximate(IFNULL(name,''), '$q'),0) * 3) + IFNULL(approximate(CONCAT(IFNULL(description,''), IFNULL(address,''), IFNULL(tel,''), IFNULL(mobile,''), IFNULL(email,'')),'$q'),0)) / 4)
 					AS score
 					FROM job WHERE
     			((IFNULL(approximate(CONCAT(IFNULL(name,''), IFNULL(description,''), IFNULL(address,''), IFNULL(tel,''), IFNULL(mobile,''), IFNULL(email,'')),'$q'),0)) > 50)
