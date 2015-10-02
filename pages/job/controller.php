@@ -273,6 +273,16 @@
 		}elseif (isset($_POST["transform"])) {
 			$job->transform_to($_POST["transform"]);
 			die("success");
+		}elseif (isset($_POST["new_category"])) {
+			$new_category = category::create();
+			$new_category->name = $_POST["new_category"];
+			$new_category->service = 1;
+			$new_category->product = 1;
+			$new_category->portfolio = 1;
+			$new_category->parent = $job->categories[0];
+			die(json_encode(array("status"=>"success",
+				"params"=>array("id"=>$new_category->id, "text"=>$_POST["new_category"])
+			)));
 		}
 
 		$available_categories = array();

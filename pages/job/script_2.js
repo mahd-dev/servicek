@@ -20,13 +20,36 @@ page_script({
    	}
 
 		$(".portfolio_editable").editable({mode:"popup", params:function (p) { p.element="portfolio"; return p; }});
+		var new_portfolio_categories = [];
+		var new_portfolio_categories_getSource = function () {
+			var data = JSON.parse($("input[name=available_portfolio_categories]").val());
+			Array.prototype.push.apply(data, new_portfolio_categories);
+			return data;
+		};
+
 		$(".portfolio_categories_editable").editable({
 			mode:"popup",
+			autotext : 'always',
 			params:function (p) { p.element="portfolio"; return p; },
-			source: JSON.parse($("input[name=available_portfolio_categories]").val()),
+			source: new_portfolio_categories_getSource(),
+			display: function(value, sourceData) {
+				console.log(value);
+	       //display checklist as comma-separated values
+	       var html = [],
+	           checked = $.fn.editableutils.itemsByValue(value, new_portfolio_categories_getSource(), 'id');
+	       if(checked.length) {
+	           $.each(checked, function(i, v) { html.push($.fn.editableutils.escape(v.text)); });
+	           $(this).html(html.join(', '));
+	       } else {
+	           $(this).empty();
+	       }
+	    },
 			select2: {
-           multiple: true
-        }
+         multiple: true,
+				 query: function(options){
+		 		  options.callback({ results : new_portfolio_categories_getSource() });
+		 		}
+      }
 		});
 
 		$(".skill_editable").editable({ params:function (p) { p.element="skill"; return p; }});
@@ -438,6 +461,25 @@ page_script({
 					console.log(rslt);
 				}
 			});
+		});
+
+		$("#add_category_form").ajaxForm({
+			success: function (rslt) {
+				try{
+          parsed=JSON.parse(rslt);
+          if (parsed.status == "success") {
+						new_portfolio_categories.push({id: parsed.params.id, text: parsed.params.text});
+						$("#add_category_modal").modal('hide');
+      		} else {
+          	console.log(rslt);
+          }
+	      }catch(ex){
+	        console.log(rslt);
+	      }
+			}
+		});
+		$("#add_category_form").on("hide.bs.modal", function () {
+			$("#add_category_form")[0].reset();
 		});
 
 		window.fbAsyncInit();

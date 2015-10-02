@@ -22,15 +22,38 @@ page_script({
     }
 		$(".seat_editable").editable({params:function (p) { p.element="seat"; return p; }});
 		$(".product_editable").editable({mode:"popup", params:function (p) { p.element="product"; return p; }});
+
+		var new_product_categories = [];
+		var new_product_categories_getSource = function () {
+			var data = JSON.parse($("input[name=available_product_categories]").val());
+			Array.prototype.push.apply(data, new_product_categories);
+			return data;
+		};
+
 		$(".product_categories_editable").editable({
 			mode:"popup",
+			autotext : 'always',
 			params:function (p) { p.element="product"; return p; },
-			source: JSON.parse($("input[name=available_product_categories]").val()),
+			source: new_product_categories_getSource(),
+			display: function(value, sourceData) {
+				console.log(value);
+	       //display checklist as comma-separated values
+	       var html = [],
+	           checked = $.fn.editableutils.itemsByValue(value, new_product_categories_getSource(), 'id');
+	       if(checked.length) {
+	           $.each(checked, function(i, v) { html.push($.fn.editableutils.escape(v.text)); });
+	           $(this).html(html.join(', '));
+	       } else {
+	           $(this).empty();
+	       }
+	    },
 			select2: {
-         multiple: true
+         multiple: true,
+				 query: function(options){
+		 		  options.callback({ results : new_product_categories_getSource() });
+		 		}
       }
 		});
-
 
 		$(".new_product").click(function (e) {
 			$.ajax({
@@ -338,6 +361,25 @@ page_script({
 					console.log(rslt);
 				}
 			});
+		});
+
+		$("#add_category_form").ajaxForm({
+			success: function (rslt) {
+				try{
+          parsed=JSON.parse(rslt);
+          if (parsed.status == "success") {
+						new_product_categories.push({id: parsed.params.id, text: parsed.params.text});
+						$("#add_category_modal").modal('hide');
+      		} else {
+          	console.log(rslt);
+          }
+	      }catch(ex){
+	        console.log(rslt);
+	      }
+			}
+		});
+		$("#add_category_form").on("hide.bs.modal", function () {
+			$("#add_category_form")[0].reset();
 		});
 
 		window.fbAsyncInit();

@@ -241,8 +241,8 @@
 												</div>
 
 												<div class="caption">
-													<p>Description :<br><a class="service_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="textarea" ><?php echo $p->description; ?></a></p>
-													<p>Catégories :<br><a class="service_categories_editable" data-name="categories" data-pk="<?php echo $p->id; ?>" data-type="select2" data-value='<?php echo json_encode($services_categories_json);?>'></a></p>
+													<p>Description : <br><a class="service_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="textarea" ><?php echo $p->description; ?></a></p>
+													<p>Catégories : <a href="javascript:;" data-toggle="modal" data-target="#add_category_modal">Ajouter</a><br><a class="service_categories_editable" data-name="categories" data-pk="<?php echo $p->id; ?>" data-type="select2" data-value='<?php echo json_encode($services_categories_json);?>'></a></p>
 													<p>Prix : <a class="service_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number" ><?php echo $p->price; ?></a><sup> DNT</sup></p>
 													<div class="fb-like" data-href="<?php echo url_root."/".$p->url;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 												</div>
@@ -271,8 +271,8 @@
 												</div>
 
 												<div class="caption">
-													<p>Description :<br><a class="product_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="textarea" ><?php echo $p->description; ?></a></p>
-													<p>Catégories :<br><a class="product_categories_editable" data-name="categories" data-pk="<?php echo $p->id; ?>" data-type="select2" data-value='<?php echo json_encode($products_categories_json);?>'></a></p>
+													<p>Description : <br><a class="product_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="textarea" ><?php echo $p->description; ?></a></p>
+													<p>Catégories : <a href="javascript:;" data-toggle="modal" data-target="#add_category_modal">Ajouter</a><br><a class="product_categories_editable" data-name="categories" data-pk="<?php echo $p->id; ?>" data-type="select2" data-value='<?php echo json_encode($products_categories_json);?>'></a></p>
 													<p>Prix :<br>
 														<?php $price=$p->price; $rent_price=$p->rent_price;?>
 														<p><label><span><input type="checkbox" class="price_checkbox"<?php if($price!=null){?> checked<?php }?>></span>Vente </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="price" data-pk="<?php echo $p->id; ?>" data-type="number"<?php if($price==null){?> data-disabled='true'<?php }?>><?php echo $price; ?></a><sup class="unit"<?php if($price==null){?> style='display:none;'<?php }?>> DNT</sup></p>
@@ -452,8 +452,8 @@
 		</div>
 
 		<div class="caption">
-			<p>Description :<br><a class="service_editable description" data-name="description" data-pk="" data-type="textarea" ></a></p>
-			<p>Catégories :<br><a class="service_categories_editable" data-name="categories" data-type="select2" data-value='[]'></a></p>
+			<p>Description : <br><a class="service_editable description" data-name="description" data-pk="" data-type="textarea" ></a></p>
+			<p>Catégories : <a href="javascript:;" data-toggle="modal" data-target="#add_category_modal">Ajouter</a><br><a class="service_categories_editable" data-name="categories" data-type="select2" data-value='[]'></a></p>
 			<p>Prix : <a class="service_editable" data-name="price" data-pk="" data-type="number" ></a><sup> DNT</sup></p>
 			<div class="fb-like" data-href="<?php echo url_root;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 		</div>
@@ -474,8 +474,8 @@
 		</div>
 
 		<div class="caption">
-			<p>Description :<br><a class="product_editable description" data-name="description" data-pk="" data-type="textarea" ></a></p>
-			<p>Catégories :<br><a class="product_categories_editable" data-name="categories" data-type="select2" data-value='[]'></a></p>
+			<p>Description : <br><a class="product_editable description" data-name="description" data-pk="" data-type="textarea" ></a></p>
+			<p>Catégories : <a href="javascript:;" data-toggle="modal" data-target="#add_category_modal">Ajouter</a><br><a class="product_categories_editable" data-name="categories" data-type="select2" data-value='[]'></a></p>
 			<p>Prix :<br>
 				<p><label><span><input type="checkbox" class="price_checkbox" checked></span>Vente </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="price" data-pk="" data-type="number" ></a><sup class="unit"> DNT</sup></p>
 				<p><label><span><input type="checkbox" class="rent_price_checkbox"></span>Location </label>&nbsp;&nbsp;&nbsp;&nbsp;<a class="product_editable" data-name="rent_price" data-pk="" data-type="number" data-disabled='true'></a><sup class="unit" style='display:none;'> DNT</sup></p>
@@ -492,6 +492,28 @@
 				<div class="aspectratio-container aspect-4-3 fit-width">
 					<div class="map-canvas aspectratio-content" data-pk="<?php echo $s->id;?>" data-longitude="<?php echo $geolocation->longitude;?>" data-latitude="<?php echo $geolocation->latitude;?>"></div>
 				</div>
+      </div>
+    </div>
+	</div>
+</div>
+
+<div class="modal fade" id="add_category_modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+      <div class="modal-body">
+				<p>Si vous ne trouvez pas une catégorie convenable a vos produits ou services, ajoutez la en utilisant ce formulaire, et sélectionnez la dans les produits et les services corresopndants</p>
+				<form id="add_category_form" method="post">
+					<fieldset>
+						<div class="form-group">
+							<b>Nom de nouvelle catégorie :</b>
+              <input type="text" class="form-control" name="new_category" required>
+		        </div>
+					</fieldset>
+				</form>
+      </div>
+			<div class="modal-footer">
+        <button type="reset" form="add_category_form" class="btn btn-default" data-dismiss="modal">Fermer</button>
+        <button type="submit" form="add_category_form" class="btn btn-primary">Ajouter</button>
       </div>
     </div>
 	</div>
