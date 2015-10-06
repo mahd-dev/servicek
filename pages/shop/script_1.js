@@ -54,7 +54,7 @@ page_script({
 			if(e.originalEvent) history.pushState(undefined, document.title, b.attr("data-url"));
 			m.find(".fb-like").attr("data-href", b.attr("data-url"));
 			m.find(".fb-comments").attr("data-href", b.attr("data-url"));
-			window.fbAsyncInit();
+			/*window.fbAsyncInit();*/
 
 			m.modal("show");
 		});
@@ -140,7 +140,7 @@ page_script({
 	    });
 		});
 
-		window.fbAsyncInit();
+		/*window.fbAsyncInit();*/
 
 	}
 });

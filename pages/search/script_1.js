@@ -32,6 +32,6 @@ page_script({
 			app.ajaxify(location.origin + "/search?q=" + $(this).find(".query").val());
 		});
 		
-		window.fbAsyncInit();
+		/*window.fbAsyncInit();*/
 	}
 });

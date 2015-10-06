@@ -63,7 +63,7 @@ page_script({
 							itm.find('.content-text').text(el.content);
 							itm.appendTo('.items_container').show();
 						});
-						window.fbAsyncInit();
+						/*window.fbAsyncInit();*/
 					}
 					if(p.empty) $(".home").show();
 					else $(".home").hide();

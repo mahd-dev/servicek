@@ -87,7 +87,7 @@ page_script({
 								$(".price_checkbox", new_element).change(price_checkbox);
 								$(".rent_price_checkbox", new_element).change(rent_price_checkbox);
 								$(".fb-like", new_element).attr("data-href", p.url);
-								window.fbAsyncInit();
+								/*window.fbAsyncInit();*/
 
 								//app.scrollTo(new_element, -200);
 								$($(".thumbnail", new_element)[0]).pulsate({color: "#399bc3",repeat: 2});
@@ -482,6 +482,6 @@ page_script({
 			$("#add_category_form")[0].reset();
 		});
 
-		window.fbAsyncInit();
+		/*window.fbAsyncInit();*/
 	}
 });
