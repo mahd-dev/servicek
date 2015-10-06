@@ -67,7 +67,7 @@
 	</head>
 
 	<body>
-		<script>
+		<!-- <script>
 			window.fbAsyncInit = function() {
 				FB.init({
 					appId      : '1667630103469608',
@@ -83,7 +83,7 @@
 				js.src = "//connect.facebook.net/fr_FR/sdk.js";
 				fjs.parentNode.insertBefore(js, fjs);
 			}(document, 'script', 'facebook-jssdk'));
-		</script>
+		</script> -->
 		<div class="page-wrapper">
 			<div class="header header-large">
 				<div class="container">
