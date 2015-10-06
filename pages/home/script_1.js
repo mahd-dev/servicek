@@ -52,6 +52,8 @@ page_script({
 			$.get("/",$.param(params), function (r) {
 				try {
 					var p = JSON.parse(r);
+					if(p.empty) $(".home").show();
+					else $(".home").hide();
 					$(".filter-title").text(p.title);
 					if(p.rslt.length){
 						p.rslt.forEach(function(el) {
@@ -65,9 +67,7 @@ page_script({
 						});
 						/*window.fbAsyncInit();*/
 					}
-					if(p.empty) $(".home").show();
-					else $(".home").hide();
-					
+
 				} catch (e) {
 					console.log(r);
 				}
