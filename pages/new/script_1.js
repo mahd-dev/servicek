@@ -183,9 +183,7 @@ page_script({
         }
       }
     });
-		$("#register_form input[name=mobile]").inputmask({
-			mask : "+216 99 999 999"
-		});
+		$("#register_form input[name=mobile]").inputmask({ "mask": "9", "repeat": 25, "greedy": false });
 
 		$("#register_form").ajaxForm({
 			beforeSubmit: function () {
