@@ -250,7 +250,7 @@
 
 			<div class="tab-pane" id="config_tab">
 
-				<?php if(isset($cc) && $cc->type!=0){ ?>
+				<?php if(isset($cc)){ ?>
 				<div class="panel panel-default">
 			    <div class="panel-heading">
 						<h2 class="panel-title">Contrat actuel</h2>
@@ -260,16 +260,19 @@
 					    <div class="list-group-item">
 				        <div class="row-content">
 			            <h4 class="list-group-item-heading">
-										Numéro <?php echo $cc->id; ?>, durée
+										Numéro <?php echo $cc->id; ?>
 										<?php switch ($cc->type) {
+											case 0:
+												echo ", contrat de test";
+												break;
 											case 1:
-												echo "6 mois";
+												echo ", durée 6 mois";
 												break;
 											case 2:
-												echo "1 an";
+												echo ", durée 1 an";
 												break;
 											case 3:
-												echo "3 ans";
+												echo ", durée 3 ans";
 												break;
 										} ?>
 									</h4>
@@ -280,7 +283,7 @@
 									<p class="list-group-item-text">
 										<?php $ag = $cc->agent; if($ag){ ?>
 										Paiement effectué manuellement via l'agent <?php echo $ag->displayname; ?> au totalité de <?php echo $cc->amount; ?><sup>DT</sup>
-										<?php }else{
+										<?php }else if($cc->payment_from){
 											echo "Paiement effectué enligne via une carte ";
 											switch ($cc->payment_from) {
 												case 'e_dinar_smart_tunisian_post':
