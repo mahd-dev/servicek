@@ -26,6 +26,7 @@
   transform: scale(1.06);
 }
 .property-box-content>h3{
+	height: 3ex;
 	margin: 0 0 15px;
 	white-space: nowrap;
 	overflow: hidden;
