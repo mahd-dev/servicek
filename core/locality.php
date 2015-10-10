@@ -116,7 +116,25 @@
       if(isset($resp) && $resp){
         $parent = null;
         foreach (array_reverse($resp) as $comp) {
-          if(!is_numeric($comp->short_name) && (!$parent || ($comp->short_name != $parent->short_name))){
+          $comp->short_name = str_replace(array(":", "/", "\\", "&", "\"", "'", "(", ")", "-", "=", "*", "°", "+", "~", "¬", "¹", "#", "{", "}", "[", "]", "|", "`", "^", "@", "<", ">", ",", ".", ":", "!", "%", "$", "?", "§"), "", str_replace(array("é", "è", "ê", "ë"), "e", str_replace(array("ï", "î"), "i", str_replace(array("à", "â", "ä", "Ã"), "a", str_replace(array("ç"), "c", str_replace(array("ù"), "u", str_replace(array("ô", "ö"), "o", strtolower(str_replace(array("Gouvernorat de l'", "Gouvernorat de "), "", $comp->short_name)))))))));
+          $comp->long_name = str_replace(array("Gouvernorat de l'", "Gouvernorat de "), "", $comp->long_name);
+          if(!$parent) $friends = locality::get_roots();
+          else $friends = $parent->childrens;
+          $exist = false;
+          foreach ($friends as $fr) {
+            if($fr->short_name==$comp->short_name){
+              $parent = $fr;
+              $exist = true;
+              break;
+            }
+          }
+          $tmp_parent = $parent;
+          while(!$exist && $tmp_parent){
+            if($tmp_parent->short_name==$comp->short_name){
+              $exist = true;
+            }else $tmp_parent = $tmp_parent->parent;
+          }
+          if(!$exist && !is_numeric($comp->short_name) && (!$parent || ($comp->short_name != $parent->short_name))){
             $parent = locality::create($comp->short_name, $comp->long_name, $parent);
           }
         }
@@ -145,18 +163,12 @@
 
     public static function create($short_name, $long_name, $parent=null){
       global $db;
-      $q=$db->query("select id from locality where (id_parent".($parent?" = '".$parent->id."'":" is NULL")." and short_name='".$db->real_escape_string($short_name)."')");
-      if($q->num_rows==1){
-        $r=$q->fetch_row();
-        return new locality($r[0]);
+      if($parent){
+        $db->query("insert into locality(id_parent, short_name, long_name) values('".$parent->id."', '".$db->real_escape_string($short_name)."', '".$db->real_escape_string($long_name)."')");
       }else{
-        if($parent){
-          $db->query("insert into locality(id_parent, short_name, long_name) values('".$parent->id."', '".$db->real_escape_string($short_name)."', '".$db->real_escape_string($long_name)."')");
-        }else{
-          $db->query("insert into locality(short_name, long_name) values('".$db->real_escape_string($short_name)."', '".$db->real_escape_string($long_name)."')");
-        }
-        return new locality($db->insert_id);
+        $db->query("insert into locality(short_name, long_name) values('".$db->real_escape_string($short_name)."', '".$db->real_escape_string($long_name)."')");
       }
+      return new locality($db->insert_id);
     }
 
     public function delete(){
