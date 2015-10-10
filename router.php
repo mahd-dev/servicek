@@ -123,10 +123,10 @@
 		break;
 
 		case "setlocations":
-			if(isset($url[1]) && $url[1] == $db_password) die(include"maintenance/setlocations/controller.php");break;
+			die(include"maintenance/setlocations/controller.php");break;
 
 		case "fixutf8":
-			if(isset($url[1]) && $url[1] == $db_password) die(include"maintenance/fixutf8/controller.php");break;
+			die(include"maintenance/fixutf8/controller.php");break;
 
 		case "locality_merge":
 			if(isset($url[1]) && $url[1] == $db_password) {
