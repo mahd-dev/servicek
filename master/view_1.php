@@ -63,10 +63,19 @@
 				else document.addEventListener('DOMContentLoaded', sc.init, false);
 			}
 		</script>
-
+		<style>
+			.page-wrapper{
+				opacity: 0;
+				-webkit-transition: opacity 1s ease-in-out;
+			  -moz-transition: opacity 1s ease-in-out;
+			  -ms-transition: opacity 1s ease-in-out;
+			  -o-transition: opacity 1s ease-in-out;
+			  transition: opacity 1s ease-in-out;
+			}
+		</style>
 	</head>
 
-	<body>
+	<body class="not-ready">
 		<!-- <script>
 			window.fbAsyncInit = function() {
 				FB.init({
@@ -84,6 +93,12 @@
 				fjs.parentNode.insertBefore(js, fjs);
 			}(document, 'script', 'facebook-jssdk'));
 		</script> -->
+
+		<div class="preloader global">
+			<svg class="circular"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg>
+			<img class="loader-logo" src="<?php echo cdn;?>/img/minilogo.svg"/>
+		</div>
+
 		<div class="page-wrapper">
 			<div class="header header-large">
 				<div class="container">
