@@ -21,9 +21,17 @@ page_script({
 
 		$(".portfolio_editable").editable({mode:"popup", params:function (p) { p.element="portfolio"; return p; }});
 		var new_portfolio_categories = [];
-		var new_portfolio_categories_getSource = function () {
+		var new_portfolio_categories_getSource = function (q) {
 			var data = JSON.parse($("input[name=available_portfolio_categories]").val());
 			Array.prototype.push.apply(data, new_portfolio_categories);
+			if(q){
+				for (var i = 0; i < data.length; i++) {
+					if(data.hasOwnProperty(i) && data[i].text.indexOf(q)==-1) {
+						data.splice(i, 1);
+						if(i || data.length) i--;
+					}
+				}
+			}
 			return data;
 		};
 
@@ -47,7 +55,7 @@ page_script({
 			select2: {
          multiple: true,
 				 query: function(options){
-		 		  options.callback({ results : new_portfolio_categories_getSource() });
+		 		  options.callback({ results : new_portfolio_categories_getSource(options.term) });
 		 		}
       }
 		});
@@ -480,6 +488,9 @@ page_script({
 		});
 		$("#add_category_form").on("hide.bs.modal", function () {
 			$("#add_category_form")[0].reset();
+		});
+		$(".clear_value").live("click", function () {
+			$($(this).parent()[0]).children('[data-name="categories"]').editable("setValue", []);
 		});
 
 		/*window.fbAsyncInit();*/

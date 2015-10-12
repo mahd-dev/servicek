@@ -23,19 +23,25 @@ page_script({
 		$(".seat_editable").editable({params:function (p) { p.element="seat"; return p; }});
 		$(".product_editable").editable({mode:"popup", params:function (p) { p.element="product"; return p; }});
 		var new_product_categories = [];
-		var new_product_categories_getSource = function () {
+		var new_product_categories_getSource = function (q) {
 			var data = JSON.parse($("input[name=available_product_categories]").val());
 			Array.prototype.push.apply(data, new_product_categories);
+			if(q){
+				for (var i = 0; i < data.length; i++) {
+					if(data.hasOwnProperty(i) && data[i].text.indexOf(q)==-1) {
+						data.splice(i, 1);
+						if(i || data.length) i--;
+					}
+				}
+			}
 			return data;
 		};
 
 		$(".product_categories_editable").editable({
 			mode:"popup",
-			autotext : 'always',
 			params:function (p) { p.element="product"; return p; },
 			source: new_product_categories_getSource(),
 			display: function(value, sourceData) {
-				console.log(value);
 	       //display checklist as comma-separated values
 	       var html = [],
 	           checked = $.fn.editableutils.itemsByValue(value, new_product_categories_getSource(), 'id');
@@ -49,25 +55,31 @@ page_script({
 			select2: {
          multiple: true,
 				 query: function(options){
-		 		  options.callback({ results : new_product_categories_getSource() });
+		 		  options.callback({ results : new_product_categories_getSource(options.term) });
 		 		}
       }
 		});
 		$(".service_editable").editable({mode:"popup", params:function (p) { p.element="service"; return p; }});
 		var new_service_categories = [];
-		var new_service_categories_getSource = function () {
+		var new_service_categories_getSource = function (q) {
 			var data = JSON.parse($("input[name=available_service_categories]").val());
 			Array.prototype.push.apply(data, new_service_categories);
+			if(q){
+				for (var i = 0; i < data.length; i++) {
+					if(data.hasOwnProperty(i) && data[i].text.indexOf(q)==-1) {
+						data.splice(i, 1);
+						if(i || data.length) i--;
+					}
+				}
+			}
 			return data;
 		};
 
 		$(".service_categories_editable").editable({
 			mode:"popup",
-			autotext : 'always',
 			params:function (p) { p.element="service"; return p; },
 			source: new_service_categories_getSource(),
 			display: function(value, sourceData) {
-				console.log(value);
 	       //display checklist as comma-separated values
 	       var html = [],
 	           checked = $.fn.editableutils.itemsByValue(value, new_service_categories_getSource(), 'id');
@@ -81,8 +93,12 @@ page_script({
 			select2: {
          multiple: true,
 				 query: function(options){
-		 		  options.callback({ results : new_service_categories_getSource() });
-		 		}
+		 		  options.callback({ results : new_service_categories_getSource(options.term) });
+		 		},
+				formatSelection: function (item) {
+					console.log(item);
+					return item.text;
+				}
       }
 		});
 
@@ -508,6 +524,7 @@ page_script({
           if (parsed.status == "success") {
 						new_product_categories.push({id: parsed.params.id, text: parsed.params.text});
 						new_service_categories.push({id: parsed.params.id, text: parsed.params.text});
+
 						$("#add_category_modal").modal('hide');
       		} else {
           	console.log(rslt);
@@ -519,6 +536,9 @@ page_script({
 		});
 		$("#add_category_form").on("hide.bs.modal", function () {
 			$("#add_category_form")[0].reset();
+		});
+		$(".clear_value").live("click", function () {
+			$($(this).parent()[0]).children('[data-name="categories"]').editable("setValue", []);
 		});
 
 		/*window.fbAsyncInit();*/

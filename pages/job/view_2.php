@@ -202,7 +202,7 @@
 
 									<div class="caption">
 										<p>Description : <br><a class="portfolio_editable" data-name="description" data-pk="<?php echo $p->id; ?>" data-type="textarea" ><?php echo $p->description; ?></a></p>
-										<p>Catégories : <a href="javascript:;" data-toggle="modal" data-target="#add_category_modal">Ajouter</a><br><a class="portfolio_categories_editable" data-name="categories" data-pk="<?php echo $p->id; ?>" data-type="select2" data-value='<?php echo json_encode($portfolio_categories_json);?>'></a></p>
+										<p>Catégories : <a href="javascript:;" data-toggle="modal" data-target="#add_category_modal">Ajouter</a><br><a class="portfolio_categories_editable" data-name="categories" data-pk="<?php echo $p->id; ?>" data-type="select2" data-value='<?php echo json_encode($portfolio_categories_json);?>'></a> | <a href="javascript:;" class="clear_value">Supprimer</a></p>
 										<div class="fb-like" data-href="<?php echo url_root."/".$p->url;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 									</div>
 								</div>
@@ -457,7 +457,7 @@
 
 		<div class="caption">
 			<p>Description : <br><a class="portfolio_editable description" data-name="description" data-pk="" data-type="textarea" ></a></p>
-			<p>Catégories : <a href="javascript:;" data-toggle="modal" data-target="#add_category_modal">Ajouter</a><br><a class="portfolio_categories_editable" data-name="categories" data-type="select2" data-value='[]'></a></p>
+			<p>Catégories : <a href="javascript:;" data-toggle="modal" data-target="#add_category_modal">Ajouter</a><br><a class="portfolio_categories_editable" data-name="categories" data-type="select2" data-value='[]'></a> | <a href="javascript:;" class="clear_value">Supprimer</a></p>
 			<div class="fb-like" data-href="<?php echo url_root;?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
 		</div>
 	</div>
