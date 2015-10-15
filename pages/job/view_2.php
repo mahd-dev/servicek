@@ -532,6 +532,28 @@
 	</div>
 </div>
 
+<div class="modal fade" id="add_category_modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+      <div class="modal-body">
+				<p>Si vous ne trouvez pas une catégorie convenable aux éléments de votre portefeuille, ajoutez la en utilisant ce formulaire, et sélectionnez la dans les élément du portefeuille corresopndants</p>
+				<form id="add_category_form" method="post">
+					<fieldset>
+						<div class="form-group">
+							<b>Nom de nouvelle catégorie :</b>
+              <input type="text" class="form-control" name="new_category" required>
+		        </div>
+					</fieldset>
+				</form>
+      </div>
+			<div class="modal-footer">
+        <button type="reset" form="add_category_form" class="btn btn-default" data-dismiss="modal">Fermer</button>
+        <button type="submit" form="add_category_form" class="btn btn-primary">Ajouter</button>
+      </div>
+    </div>
+	</div>
+</div>
+
 <input type="hidden" name="available_portfolio_categories" value='<?php echo str_replace("'", "\u0027", json_encode($available_portfolio_categories));?>'>
 
 <!-- custom page script -->
