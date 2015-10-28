@@ -8,6 +8,7 @@
 		"",
 		"about",
 		"contact",
+		"commercial",
 		"search",
 		"login",
 		"logout",

@@ -66,6 +66,10 @@
 	}
 ?>
 
+<div class="hidden-md hidden-lg">
+	<img src="/assets/img/home/home_1.svg" width="100%" alt="" />
+</div>
+
 <div class="row">
 	<div class="col-md-3 col-sm-6">
 		<div class="type box">
@@ -74,6 +78,7 @@
 			<div class="togglebutton"><label><input type="checkbox"<?php echo (isset($_GET["co"]) && $_GET["co"]?" checked": "") ?> class="company"> Société</label></div>
 		</div>
 		<div class="categories tree box">
+			<img src="/assets/img/home/home_3.svg" class="help" alt="" />
 			<h3 class="tree-title">Catégories</h3>
 			<ul>
 				<?php foreach (category::get_roots() as $c){
@@ -85,6 +90,7 @@
 	</div>
 	<div class="col-md-3 col-sm-6 col-md-push-6">
 		<div class="localities tree box">
+			<img src="/assets/img/home/home_2.svg" class="help" alt="" />
 			<h3 class="tree-title">Adresses</h3>
 			<ul>
 				<?php
@@ -105,29 +111,23 @@
 	</div>
 	<div class="col-md-6 col-md-pull-3 col-sm-12" style="float:left;">
 		<div class="home hidden-xs hidden-sm"<?php if(!$empty) echo ' style="display:none;"'; ?>>
-			<div id="myCarousel" class="carousel slide" data-ride="carousel">
-
-			  <div class="carousel-inner" role="listbox">
-
-					<div class="item active">
-			      <img src="/assets/img/home/flyer1-1.png" alt="">
-			    </div>
-			    <div class="item">
-			      <img src="/assets/img/home/flyer1-2.png" alt="">
-			    </div>
-
-			  </div>
-
-			  <!-- Left and right controls -->
-			  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-			    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-			    <span class="sr-only">Précédent</span>
-			  </a>
-			  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-			    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-			    <span class="sr-only">Suivant</span>
-			  </a>
+			<img src="/assets/img/home/home_1.svg" width="100%" alt="" />
+			<h2 style="color:#1e88e5;">Servicek était un rêve, maintenant est devenu une réalité grâce à</h2>
+			<div class="row" style="text-align:center;">
+				<div class="col-sm-6">
+					<h3 style="color:#1e88e5;">Idée</h3>
+					<a href="/about" class="ajaxify">
+						<img src="/assets/img/home/logo.svg" alt="" style="max-height:100px;max-width:200px;" />
+					</a>
+				</div>
+				<div class="col-sm-6">
+					<h3 style="color:#1e88e5;">Développement</h3>
+					<a href="http://mahd.company" target="_blank">
+						<img src="/assets/img/home/mahd.svg" alt="" style="max-height:100px;max-width:150px;" />
+					</a>
+				</div>
 			</div>
+			<a class="btn btn-primary btn-raised" data-toggle="modal" data-target="#be_partner" style="margin-top:50px;"><i class="fa fa-thumbs-up"></i> Donner un coup de pouce à servicek</a>
 		</div>
 
 		<div class="results">
@@ -180,6 +180,21 @@
 			</div>
 		</div>
 	</a>
+</div>
+
+<div class="modal fade" id="be_partner">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1>Devenir Partenaire</h1>
+			</div>
+      <div class="modal-body">
+				<p>Servicek est un startup, portant des idées innovantes au commerce.</p>
+				<p>Si vous aimer ce projet, donnez-le un petit coup de pouce ;)</p>
+				<a href="/contact" class="btn btn-primary btn-raised ajaxify">Contacter servicek</a>
+      </div>
+    </div>
+	</div>
 </div>
 
 <!-- custom page scripts -->

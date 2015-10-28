@@ -172,7 +172,7 @@
 								<?php echo date('Y');?> &copy; <a href="<?php echo url_root;?>/about" class="ajaxify">Société tunisienne des services</a>, Tout droits réservés.
 							</div>
 							<div class="footer-bottom-right">
-								Developed with Love <i class="fa fa-heart-o" style="font-size:90%;color:#E91E63;"></i> , by <a href="http://mahd.tn" target="_blank">mahd</a>
+								Developed with Love <i class="fa fa-heart-o" style="font-size:90%;color:#E91E63;"></i> , by <a href="http://mahd.company" target="_blank">mahd</a>
 							</div>
 						</div>
 					</div>
